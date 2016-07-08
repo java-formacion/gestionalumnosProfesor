@@ -25,7 +25,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 	if (session!=null){
 		%>
 		<div name="logout" id="logout" class="col-xs-12 col-md-5">
-                    <button href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-lg btn-primary btn-block btn-logout" type="submit" >Logout</button>
+                    <button href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-lg btn-primary btn-block btn-logout" class="close" type="submit" >Logout</button>
         </div>
                 
 		<%
