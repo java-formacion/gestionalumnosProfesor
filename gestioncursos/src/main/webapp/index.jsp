@@ -31,14 +31,15 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<%
 	}
 	%>
-    <jsp:include page="includes/mensajes.jsp"/>
+
     <div class="container">
-        
+    
         <div class="card card-container col-xs-12 col-md-5">
-        
+        	  
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
+            <jsp:include page="includes/mensajes.jsp"/> 
             <form action="<%=Constantes.SERVLET_LOGIN %>" method='post' class="form-signin" >
                 <span id="reauth-email" ></span>
                 <input name="<%=Constantes.PAR_USER %>" type="email" id="<%=Constantes.PAR_USER %>" placeholder="Email address" class="form-control" required autofocus>

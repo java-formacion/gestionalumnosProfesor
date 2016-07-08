@@ -12,10 +12,6 @@ if (mensaje==null){
 %>    
   <% if (mensaje!=null){%>
 	  <div class="alert alert-<%=mensaje.getType() %>" role="alert">
-		<button class="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<%=
-		
-		mensaje.getMsg() %>
-
+		<button class="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;<%=mensaje.getMsg() %></span></button>
 	</div>	   
  <% }%> 
