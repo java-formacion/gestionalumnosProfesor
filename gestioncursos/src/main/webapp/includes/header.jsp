@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -60,5 +61,26 @@
 					</ul>
 				</li>
 			</ul>
+		<% Usuario usuario = (Usuario) request.getAttribute("usuario");
+			if(usuario==null){
+				usuario = (Usuario) session.getAttribute("usuario");
+		}
+		%>
+		<% if (usuario != null) { %>
+			   <ul class="nav navbar-top-links navbar-right">
+                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                       <i class="fa fa-user fa-fw"></i>  <%=usuario.getUserName() %><i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Ajustes</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+          <%} %>
 			</div>
 		</nav>
