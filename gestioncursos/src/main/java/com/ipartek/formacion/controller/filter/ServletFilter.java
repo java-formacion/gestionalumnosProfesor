@@ -44,8 +44,10 @@ public class ServletFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		String uri = req.getContextPath();
-		if(!uri.contains(Constantes.SERVLET_LOGIN))
+		String url = req.getServletPath();
+
+		url.equals("/"+Constantes.SERVLET_LOGIN);
+		if(!url.contains(Constantes.SERVLET_LOGIN))
 		{
 			if(checkSession(req)){//tiene una session valida
 				chain.doFilter(request, response);
