@@ -61,9 +61,9 @@
 					</ul>
 				</li>
 			</ul>
-		<% Usuario usuario = (Usuario) request.getAttribute("usuario");
+		<% Usuario usuario = (Usuario) request.getAttribute(Constantes.ATT_USUARIO);
 			if(usuario==null){
-				usuario = (Usuario) session.getAttribute("usuario");
+				usuario = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
 		}
 		%>
 		<% if (usuario != null) { %>

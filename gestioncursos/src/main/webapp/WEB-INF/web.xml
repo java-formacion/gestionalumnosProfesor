@@ -63,4 +63,13 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>ServletFilter</display-name>
+    <filter-name>ServletFilter</filter-name>
+    <filter-class>com.ipartek.formacion.controller.filter.ServletFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ServletFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
 </web-app>
