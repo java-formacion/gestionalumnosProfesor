@@ -23,6 +23,8 @@ public class Constantes {
 	public final static String ATT_LISTA_DURACION_MODULO="listado_duracion";
 	public final static String ATT_LISTA_TIPO_CURSO="listado_tipocurso";
 	
+	public final static String ATT_USUARIO="listado_usuarios";
+	
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
 	

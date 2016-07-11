@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 				usuario.setUser(user);
 				usuario.setNick("Stukov");
 				createSession(request);
-				session.setAttribute("usuario", usuario);
+				session.setAttribute(Constantes.ATT_USUARIO, usuario);
 				System.out.println("FUNCIONA!");
 				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
 				try {
@@ -92,7 +92,7 @@ public class LoginServlet extends HttpServlet {
 		session = request.getSession(true);
 		/* 
 		 * getSession(True) Si la sesion no existe la crea, si existe te la coge
-		 * getSession(false) Te coge la session activa, no crea una nueva. Si no existe sigues sin sesion
+		 * getSession(false) Te coge la session activa, no crea una nueva. Si no existe sigues sin session
 		 */
 		session.setMaxInactiveInterval(60*60*15);// en milisegundos, 15 minutos. Es un autologout
 		
