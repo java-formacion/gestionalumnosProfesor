@@ -45,9 +45,9 @@ public class ServletFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		String uri = req.getContextPath(); //devuelve la ruta donde esta el contexto de la aplicacion (en el servidor)
+		String uri = req.getServletPath(); //devuelve la ruta donde esta el contexto de la aplicacion (en el servidor)
 
-		if(uri.contains(Constantes.SERVLET_ALUMNOS))
+		if(!uri.contains(Constantes.SERVLET_ALUMNOS))
 		{
 			if(checkSession(req))//sesion valida, continuar hacia delante
 			{
@@ -56,6 +56,7 @@ public class ServletFilter implements Filter {
 			else
 			{
 				//sin sesion valida por lo que se se redirige a la pagina inicial
+				
 				res.sendRedirect("index.jsp");
 			}
 		}
