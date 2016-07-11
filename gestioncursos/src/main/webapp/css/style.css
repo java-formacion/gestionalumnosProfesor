@@ -1,0 +1,24 @@
+main>div.row {
+	margin-top: 20px;
+}
+
+div>form {
+	margin: 20px 0;
+}
+
+
+/* Sticky Footer */
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	margin-bottom: -60px;
+}
+
+footer {
+	position: absolute;
+	height: 60px;
+	bottom: 0;
+}
