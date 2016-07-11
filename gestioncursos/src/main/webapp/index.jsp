@@ -5,6 +5,9 @@
 <jsp:include page="includes/header.jsp" />
 <main>
 <div class="row">
+	<div class="col-xs-12">
+		<jsp:include page="includes/mensaje.jsp" />
+	</div>
 	<div class=" col-md-9">
 		<h3>Bienvenido a la página de gestión de Alumnos de Ipartek</h3>
 	</div>
@@ -48,7 +51,6 @@
 		</div>
 	</aside>
 	<%
-	
 		}
 	%>
 </div>

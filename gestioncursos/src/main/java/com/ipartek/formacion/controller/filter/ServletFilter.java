@@ -42,7 +42,9 @@ public class ServletFilter implements Filter {
 		HttpServletRequest auxRequest = (HttpServletRequest) request;
 		HttpServletResponse auxResponse = (HttpServletResponse) response;
 		auxRequest.setCharacterEncoding("UTF-8");
-		if (checkSession(auxRequest)) {
+		String uri = auxRequest.getRequestURI();
+		// auxRequest.getRequestURI().contains("login")
+		if (checkSession(auxRequest) || uri.contains(Constantes.SERVLET_LOGIN)) {
 			chain.doFilter(request, response);
 		} else {
 			auxResponse.sendRedirect("index.jsp");

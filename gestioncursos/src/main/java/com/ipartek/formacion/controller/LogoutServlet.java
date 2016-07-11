@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.pojo.Mensaje;
+
 /**
  * Servlet implementation class LogoutServlet
  */
@@ -31,8 +33,8 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		deleteSession(request);
-		response.sendRedirect("index.jsp");
+		doProcess(request, response);
+
 	}
 
 	/**
@@ -41,13 +43,23 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		doProcess(request, response);
 	}
 
-	private void deleteSession(HttpServletRequest request) {
+	private void doProcess(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
 		session = request.getSession(false);
-		session.invalidate();
+		if (session != null
+				&& session.getAttribute(Constantes.ATT_USUARIO) != null) {
+			session.invalidate();
+			Mensaje mensaje = new Mensaje();
+			mensaje.setMsg("¡Te has desconectado con exito!");
+			mensaje.setTipo(Mensaje.MSG_TYPE_SUCCESS);
+			session =  request.getSession();
+			session.setAttribute(Constantes.MSG_EXITO, mensaje);
+		}
+		response.sendRedirect("index.jsp");
+
 	}
 
 }

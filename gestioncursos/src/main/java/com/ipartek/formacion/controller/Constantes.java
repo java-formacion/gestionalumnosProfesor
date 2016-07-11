@@ -47,6 +47,7 @@ public class Constantes {
 	public final static String JSP_INDEX = "/index.jsp";
 	
 	public final static String MSG_ERROR = "error";
+	public final static String MSG_EXITO = "mensaje";
 
 	public final static String SERVLET_CURSOS = "cursos.do";
 	public final static String SERVLET_ALUMNOS = "alumnos.do";
