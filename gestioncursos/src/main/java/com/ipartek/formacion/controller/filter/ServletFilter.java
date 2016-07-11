@@ -44,13 +44,19 @@ public class ServletFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		if(checkSession(req)){//tiene una session valida
+		String uri = req.getContextPath();
+		if(!uri.contains(Constantes.SERVLET_LOGIN))
+		{
+			if(checkSession(req)){//tiene una session valida
+				chain.doFilter(request, response);
+			}else{//no tiene una session valida
+				//
+				res.sendRedirect("index.jsp");
+			}
+			// pass the request along the filter chain
+		}else{
 			chain.doFilter(request, response);
-		}else{//no tiene una session valida
-			//
-			res.sendRedirect("index.jsp");
 		}
-		// pass the request along the filter chain
 
 	}
 	private boolean checkSession(HttpServletRequest req) {
