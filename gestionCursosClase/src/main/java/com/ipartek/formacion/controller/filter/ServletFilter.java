@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -44,15 +45,23 @@ public class ServletFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		
-		if(checkSession(req))//sesion valida, continuar hacia delante
+		String uri = req.getContextPath(); //devuelve la ruta donde esta el contexto de la aplicacion (en el servidor)
+
+		if(uri.contains(Constantes.SERVLET_ALUMNOS))
 		{
-			chain.doFilter(request, response);
+			if(checkSession(req))//sesion valida, continuar hacia delante
+			{
+				chain.doFilter(request, response);
+			}
+			else
+			{
+				//sin sesion valida por lo que se se redirige a la pagina inicial
+				res.sendRedirect("index.jsp");
+			}
 		}
 		else
 		{
-			//sin sesion valida por lo que se se redirige a la pagina inicial
-			res.sendRedirect("index.jsp");
+			
 		}
 		// pass the request along the filter chain
 		//chain.doFilter(request, response);
@@ -63,12 +72,21 @@ public class ServletFilter implements Filter {
 		// TODO Auto-generated method stub
 		boolean correcto = false; 
 		
+		/*La url no da la ip
+		 * URI = http://localhost:8080/gestioncursos
+		 * URL = gestioncursos
+		 */
 		HttpSession session = req.getSession(false); //false para que no cree la sesion si esta no existe
+		
 		if(session !=null && session.getAttribute(Constantes.ATT_USUARIO)!=null)
 		{
-			correcto = true;
+			correcto = true;	
+			
 		}
+		
 		return correcto;
+		
+		
 	}
 
 	/**
