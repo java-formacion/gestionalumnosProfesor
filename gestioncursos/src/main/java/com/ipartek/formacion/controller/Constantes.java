@@ -16,6 +16,8 @@ public class Constantes {
 	public final static String ATT_DURACION="duracion";
 	public final static String ATT_MENSAJE ="mensaje";
 	
+	public final static String ATT_USUARIO="usuario";
+	
 		
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
