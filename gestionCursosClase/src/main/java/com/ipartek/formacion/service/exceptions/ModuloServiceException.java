@@ -11,8 +11,8 @@ public class ModuloServiceException extends Exception{
 	private String mensaje;
 	public ModuloServiceException(int codigo, String mensaje) {
 		super(mensaje);
-		this.codigo = codigo;
-		this.mensaje = mensaje;
+		this.setCodigo(codigo);
+		this.setMensaje(mensaje);
 	}
 	public ModuloServiceException(String message, Throwable cause,
 			boolean enableSuppression, boolean writableStackTrace) {
@@ -30,6 +30,18 @@ public class ModuloServiceException extends Exception{
 	public ModuloServiceException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
+	}
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public String getMensaje() {
+		return mensaje;
+	}
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 }

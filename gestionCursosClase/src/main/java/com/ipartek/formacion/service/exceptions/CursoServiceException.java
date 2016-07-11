@@ -7,25 +7,37 @@ public class CursoServiceException extends Exception{
 	private String mensaje;
 	public CursoServiceException(int codigo, String mensaje) {
 		super(mensaje);
-		this.codigo = codigo;
-		this.mensaje = mensaje;
+		this.setCodigo(codigo);
+		this.setMensaje(mensaje);
 	}
-	public CursoServiceException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
+	public CursoServiceException(final String message, final Throwable cause,
+		final boolean enableSuppression,final boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
-	public CursoServiceException(String message, Throwable cause) {
+	public CursoServiceException(final String message,final Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
-	public CursoServiceException(String message) {
+	public CursoServiceException(final String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-	public CursoServiceException(Throwable cause) {
+	public CursoServiceException(final Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
+	}
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public String getMensaje() {
+		return mensaje;
+	}
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 }

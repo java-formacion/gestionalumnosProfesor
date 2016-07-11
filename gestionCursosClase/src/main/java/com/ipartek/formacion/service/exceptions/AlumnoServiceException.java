@@ -11,19 +11,19 @@ public class AlumnoServiceException extends Exception{
 		this.mensaje = mensaje;
 	}
 	public AlumnoServiceException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
+		final boolean enableSuppression,final boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
-	public AlumnoServiceException(String message, Throwable cause) {
+	public AlumnoServiceException(final String message, final Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
-	public AlumnoServiceException(String message) {
+	public AlumnoServiceException(final String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-	public AlumnoServiceException(Throwable cause) {
+	public AlumnoServiceException(final Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
@@ -32,5 +32,13 @@ public class AlumnoServiceException extends Exception{
 		// TODO Auto-generated method stub
 		return this.mensaje;
 	}
+	
+	public final int getCodigo() {
+        return codigo;
+    }
+
+    public final void setCodigo(final int codigo) {
+        this.codigo = codigo;
+    }
 	
 }

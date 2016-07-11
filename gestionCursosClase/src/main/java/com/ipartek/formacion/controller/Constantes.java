@@ -1,5 +1,7 @@
 package com.ipartek.formacion.controller;
 
+import com.ipartek.formacion.pojo.DuracionModulo;
+
 public class Constantes {
 	private Constantes() {}
 	
@@ -12,6 +14,8 @@ public class Constantes {
 	
 	public final static String ATT_LISTADO_MODULOS = "listado_modulos";
 	public final static String ATT_MODULO = "modulos";
+	public final static String ATT_LISTA_DURACION_MODULO = "listado_duracion";
+	public final static String ATT_MENSAJE = "MENSAJE";
 	
 	public final static String ATT_USUARIO = "usuario";
 		
@@ -24,10 +28,24 @@ public class Constantes {
 	public final static String PAR_DIA = "dia";
 	public final static String PAR_YEAR = "year";
 	public final static String PAR_FECHA= "fecha";	
+	public final static String PAR_LISTADO_MODULOS ="codigos_modulos";
+	public final static String PAR_LISTADO_ALUMNOS="codigos_alumnos";
+	public final static String PAR_GENERO="genero";
+	public final static String PAR_IDIOMA ="idioma";
+	public final static String PAR_CURSO ="curso";
+	public final static String PAR_DURACION ="duracion";
+	public final static String PAR_TIPOCURSO ="tipo_curso";
+	public final static String PAR_REFERENCIA="referencia";
+	public final static String PAR_USERNAME ="username";
+	public final static String PAR_PASSWORD ="password";
+	
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";
 	public final static String SERVLET_MODULOS ="modulos.do";
+	public final static String SERVLET_LOGIN ="login.do";
 	
+	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
+
 	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
 	public final static String JSP_CURSO ="/cursos/curso.jsp";
 	

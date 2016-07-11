@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.ipartek.formacion.controller.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.AlumnoService;
 import com.ipartek.formacion.service.AlumnoServiceImp;
 import com.ipartek.formacion.service.CursoService;
 import com.ipartek.formacion.service.CursoServiceImp;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class AlumnoServlet
@@ -26,6 +28,7 @@ public class AlumnoServlet extends HttpServlet {
 	 private int id = -1, operacion = -1;
 	 private RequestDispatcher rd = null;
 	 private AlumnoService aService = new AlumnoServiceImp();
+	 private CursoService cService = new CursoServiceImp();
 	 private List<Alumno> alumnos = null;
 	 private Alumno alumno = null;   
 
@@ -35,6 +38,8 @@ public class AlumnoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			recogerId(request);
+			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
+			
 			if(id<0)
 			{//redireccion a un create
 				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
@@ -70,10 +75,14 @@ public class AlumnoServlet extends HttpServlet {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		recogerId(request);
 		try {
-			operacion = Integer.parseInt(op);
-			recogerDatosAlumno(request);
+			if(Util.tryParseInt(op)){
+				operacion = Integer.parseInt(op);
+			}
+			recogerId(request);
+			//recogerDatosAlumno(request);
 			switch (operacion) {
 			case Constantes.OP_CREATE:
+				recogerDatosAlumno(request);
 				aService.createAlumno(alumno);
 				break;
 			case Constantes.OP_DELETE:
@@ -83,13 +92,18 @@ public class AlumnoServlet extends HttpServlet {
 				
 				break;
 			case Constantes.OP_UPDATE:
+				recogerDatosAlumno(request);
 				aService.update(alumno);
 				break;
 			default:
 				break;
 			}
+			getAll(request);
 		} catch (NumberFormatException e) {
 			// TODO: handle exception
+			
+		} catch(NullPointerException e){
+			
 		} catch (CandidatoException e){
 		
 			AlumnoError aError;
@@ -105,8 +119,7 @@ public class AlumnoServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e){
-			getAll(request);
-			
+	
 		}
 		rd.forward(request, response);
 	}
@@ -126,10 +139,23 @@ public class AlumnoServlet extends HttpServlet {
 	private void recogerDatosAlumno(HttpServletRequest request) throws CandidatoException {
 		// TODO Auto-generated method stub
 		alumno = new Alumno();
-		alumno.setNombre(request.getParameter(Constantes.PAR_NOMBRE));
-		alumno.setApellidos(request.getParameter(Constantes.PAR_APELLIDOS));
-		alumno.setDni(request.getParameter(Constantes.PAR_DNI));
+		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
+		String dni = request.getParameter(Constantes.PAR_DNI);
+		String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
+		String[] idiomas = request.getParameterValues(Constantes.PAR_IDIOMA);
+		List<Idioma> idi = Util.parseIdioma(idiomas);
+		String idCurso = request.getParameter(Constantes.PAR_CURSO);
+		String genero = request.getParameter(Constantes.PAR_GENERO);
+		Curso curso = new Curso();
+		curso.setCodigo(Integer.parseInt(idCurso));
 		alumno.setCodigo(id);
+		alumno.setNombre(nombre);
+		alumno.setApellidos(apellidos);
+		alumno.setDni(dni);
+		alumno.setIdiomas(idi);
+		alumno.setCurso(curso);
+		alumno.setGenero(Util.parseGenero(genero));
+		
 	}
 
 	private void recogerId(HttpServletRequest request) {

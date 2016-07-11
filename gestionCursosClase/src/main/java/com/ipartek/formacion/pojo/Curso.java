@@ -9,6 +9,8 @@ public class Curso {
 	private String nombre;
 	private Map<Integer,Modulo>modulos;
 	private Map<String,Alumno>alumnos;
+	private TipoCurso tipo;
+	private String referencia;
 	/*Mapa de Alumnos dni (String)
 	 * ServiceCurso(I) ---> Imp darDeAlta (int codigo,Alumno alumno) void
 	 * 					---> Imp darDeBaja	(int codigo,String dni) void
@@ -20,6 +22,8 @@ public class Curso {
 		setNombre("");
 		modulos = new HashMap<Integer,Modulo>();
 		alumnos = new HashMap<String, Alumno>();
+		setTipo(TipoCurso.LANBIDE);
+		setReferencia("");
 	}
 	
 	public Map<String, Alumno> getAlumnos() {
@@ -49,5 +53,21 @@ public class Curso {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public TipoCurso getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoCurso tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 }

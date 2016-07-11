@@ -1,16 +1,27 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.pojo.Modulo;
+import com.ipartek.formacion.pojo.TipoCurso;
+import com.ipartek.formacion.service.AlumnoService;
+import com.ipartek.formacion.service.AlumnoServiceImp;
 import com.ipartek.formacion.service.CursoService;
 import com.ipartek.formacion.service.CursoServiceImp;
+import com.ipartek.formacion.service.ModuloService;
+import com.ipartek.formacion.service.ModuloServiceImp;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class CursoServlet
@@ -18,9 +29,11 @@ import com.ipartek.formacion.service.CursoServiceImp;
 public class CursoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static CursoService cService = new CursoServiceImp();
+	private AlumnoService aService = AlumnoServiceImp.getInstance();
+	private ModuloService  mService = new ModuloServiceImp();
 	private List<Curso> cursos= null;
 	private Curso curso = null;
-	private RequestDispatcher rwd = null;
+	private RequestDispatcher rd = null;
 	private int id = -1;
 	private int operacion = -1;
        
@@ -33,9 +46,11 @@ public class CursoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {		
 			recogerId(request);
+			request.setAttribute(Constantes.ATT_LISTADO_MODULOS, mService.getAll());
+			request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, aService.getAll());
 			if(id<0)
 			{
-				rwd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+				rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
 			}
 			else
 			{
@@ -46,19 +61,19 @@ public class CursoServlet extends HttpServlet {
 			// TODO: handle exception
 			getAll(request);
 		}
-		rwd.forward(request, response);
+		rd.forward(request, response);
 	}
 
 	private void getById(HttpServletRequest request) {
 		curso = cService.getById(id);
 		request.setAttribute(Constantes.ATT_CURSO, curso);
-		rwd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+		rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
 	}
 
 	private void getAll(HttpServletRequest request) {
 		cursos = cService.getAll();
 		request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cursos);
-		rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
+		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
 	}
 
 	/**
@@ -70,14 +85,14 @@ public class CursoServlet extends HttpServlet {
 		try{
 			
 			operacion = Integer.parseInt(op);
-			recogerId(request);
+			
 			switch(operacion){
 				case Constantes.OP_CREATE:
 					recogerDatos(request);
 					cService.create(curso);
 					break;
 				case Constantes.OP_DELETE:
-System.out.println(id);					
+				
 					cService.delete(id);
 					break;
 				case Constantes.OP_UPDATE:
@@ -90,7 +105,7 @@ System.out.println(id);
 		}
 		
 		getAll(request);
-		rwd.forward(request, response);
+		rd.forward(request, response);
 	}
 
 	private void recogerDatos(HttpServletRequest request) {
@@ -99,11 +114,46 @@ System.out.println(id);
 		curso.setCodigo(id);
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		curso.setNombre(nombre);
+		String codTipocurso = request.getParameter(Constantes.PAR_TIPOCURSO);
+		TipoCurso tipo = Util.parseTipoCurso(codTipocurso);
+		curso.setTipo(tipo);
+		//metodo para cargar el mapa de alumnos
+		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
+		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
+		curso.setAlumnos(alumnos);
+		//metodo para cargar el mapa de modulos
+		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
+		Map<Integer,Modulo> modulos = getModulos(codModulos);
+		curso.setModulos(modulos);
 	}
 	
 	private void recogerId(HttpServletRequest request) {
 		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
 		
+	}
+	
+	private Map<Integer, Modulo> getModulos(String[] codModulos) {
+		Map<Integer,Modulo> modulos = null;
+		modulos = new HashMap<Integer, Modulo>();
+		for(String codModulo: codModulos){
+			Modulo modulo = null;
+			int codigo = Integer.parseInt(codModulo);
+			modulo = mService.getById(codigo);
+			modulos.put(modulo.getCodigo(), modulo);
+		}
+		return modulos;
+	}
+
+	private Map<String, Alumno> getAlumnos(String[] codAlumnos) {
+		Map<String, Alumno> alumnos = null;
+		alumnos = new HashMap<String, Alumno>();
+		for (String codAlumno : codAlumnos) {
+			Alumno alumno = null;
+			int codigo = Integer.parseInt(codAlumno);
+			alumno = aService.getById(codigo);
+			alumnos.put(alumno.getDni(), alumno);
+		}
+		return alumnos;
 	}
 
 }

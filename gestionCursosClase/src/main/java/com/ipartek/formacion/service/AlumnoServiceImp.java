@@ -10,8 +10,11 @@ import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.exceptions.AlumnoServiceException;
 
 public class AlumnoServiceImp implements AlumnoService{
+	
+	private static AlumnoServiceImp INSTANCE = null;
 	private List<Alumno> alumnos;
 	private static int i = 1;
+	
 	private void init() {
 		Alumno alumno = null;
 		try {
@@ -56,6 +59,20 @@ public class AlumnoServiceImp implements AlumnoService{
 	public AlumnoServiceImp(){
 		this.alumnos = new ArrayList<Alumno>();
 		init();
+	}
+	
+	public static AlumnoServiceImp getInstance(){
+		if(INSTANCE == null){
+			createInstance();
+		}
+		return INSTANCE;
+	}
+	
+	private synchronized static void createInstance() {
+		if(INSTANCE == null){
+			INSTANCE = new AlumnoServiceImp();
+		}
+		
 	}
 	
 	private static Curso crearCursoAlumno(){
@@ -133,6 +150,12 @@ public class AlumnoServiceImp implements AlumnoService{
 		}
 		
 		return alumno;
+	}
+	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		
+		throw new  CloneNotSupportedException();
 	}
 }
 

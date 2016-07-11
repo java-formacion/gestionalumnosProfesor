@@ -1,6 +1,8 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.Util;
@@ -27,6 +29,8 @@ public class Candidato {
 	protected Date fNacimiento;
 	protected String dni;
 	protected Double nota;
+	protected Genero genero;
+	protected List<Idioma> idiomas;
 	/**
 	 * @throws CandidatoException 
 	 * 
@@ -39,9 +43,28 @@ public class Candidato {
 		this.dni ="";
 		setfNacimiento(new Date());
 		setNota(0.0);
+		setGenero(Genero.MASCULINO);
+		List<Idioma>auxIdiomas = new ArrayList<Idioma>();
+		auxIdiomas.add(Idioma.CASTELLANO);
+		setIdiomas(auxIdiomas);
 
 	}
 	
+	public Genero getGenero() {
+		return genero;
+	}
+
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+
+	public List<Idioma> getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(List<Idioma> idiomas) {
+		this.idiomas = idiomas;
+	}
 
 	public int getCodigo() {
 		return codigo;

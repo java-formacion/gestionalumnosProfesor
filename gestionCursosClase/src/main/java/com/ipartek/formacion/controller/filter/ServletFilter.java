@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.junit.runner.Request;
-
 import com.ipartek.formacion.controller.Constantes;
 
 /**
@@ -44,10 +42,12 @@ public class ServletFilter implements Filter {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		
 		req.setCharacterEncoding("UTF-8");
-		String uri = req.getServletPath(); //devuelve la ruta donde esta el contexto de la aplicacion (en el servidor)
+		
+		String url = req.getServletPath(); //devuelve la ruta donde esta el contexto de la aplicacion (en el servidor)
 
-		if(!uri.contains(Constantes.SERVLET_ALUMNOS))
+		if(!url.contains(Constantes.SERVLET_LOGIN)) //o url.equals("/"+Constantes.SERVLET_LOGIN)
 		{
 			if(checkSession(req))//sesion valida, continuar hacia delante
 			{
@@ -62,7 +62,7 @@ public class ServletFilter implements Filter {
 		}
 		else
 		{
-			
+			chain.doFilter(request, response);
 		}
 		// pass the request along the filter chain
 		//chain.doFilter(request, response);
@@ -86,8 +86,6 @@ public class ServletFilter implements Filter {
 		}
 		
 		return correcto;
-		
-		
 	}
 
 	/**
