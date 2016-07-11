@@ -12,6 +12,7 @@ public class Constantes {
 	public final static String ATT_LISTADO_ALUMNOS ="listado_alumnos";
 	public final static String ATT_ALUMNO ="alumno";
 
+	public final static String ATT_USUARIO = "usuario";
 
 	public final static String ATT_LISTADO_MODULOS = "listado_modulos";
 	public final static String ATT_MODULO = "modulo";

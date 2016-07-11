@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
-		if("urko".equals(userName)&&"urko".equals(pass)){
+		if("anabel".equals(userName)&&"anabel".equals(pass)){
 			usuario = new Usuario();
 			usuario.setUserName(userName);
 			usuario.setUserPassword(pass);
