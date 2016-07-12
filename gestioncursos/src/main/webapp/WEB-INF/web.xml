@@ -68,4 +68,7 @@
     <filter-name>ServletFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
+  <listener>
+    <listener-class>com.ipartek.formacion.control.listener.InitListener</listener-class>
+  </listener>
 </web-app>

@@ -60,6 +60,7 @@ public class LoginServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else {
+				createSession(request);
 				System.out.println("Usuario o contraseña incorrectos!");
 				//rd  = request.getRequestDispatcher("index.jsp");
 				Mensaje mensaje = new Mensaje();

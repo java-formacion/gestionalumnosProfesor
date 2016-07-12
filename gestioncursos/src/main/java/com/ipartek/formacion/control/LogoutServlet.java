@@ -31,10 +31,8 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
 			session.invalidate();
-			
 		} 
 		response.sendRedirect("index.jsp");
-		
 	}
 
 
