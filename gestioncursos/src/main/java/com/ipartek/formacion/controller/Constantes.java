@@ -46,6 +46,7 @@ public class Constantes {
 	public final static String SERVLET_MODULOS ="modulos.do";
 	public final static String SERVLET_LOGIN ="login.do";
 	public final static String SERVLET_LOGOUT = "logout.do";
+	public final static String SERVLET_ADMIN = "admin.do";
 
 	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
 
