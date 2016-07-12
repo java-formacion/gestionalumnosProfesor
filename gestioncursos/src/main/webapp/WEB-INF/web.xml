@@ -79,6 +79,9 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/Logout.do</url-pattern>
+    <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>com.ipartek.formacion.controller.listener.initListener</listener-class>
+  </listener>
 </web-app>
