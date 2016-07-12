@@ -47,20 +47,29 @@ public class LoginServlet extends HttpServlet {
 		dummy.setPassword("asdfqwer");
 		dummy.setUser("admin");
 		usr=new Usuario();
+		
+		usr.setSessionId(session.getId());
 		usr.setUser(request.getParameter(Constantes.PAR_USER));
 		usr.setPassword(request.getParameter(Constantes.PAR_PASSWORD));
 		usr.setNickname("General");
 		if(dummy.getPassword().equals(usr.getPassword())&&dummy.getUser().equals(usr.getPassword())){
+			createSession(request);
+			session.setAttribute(Constantes.ATT_USUARIO, usr);
 			rwd=request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+			rwd.forward(request, response);
+			
+			
 			
 		}else {
-			rwd=request.getRequestDispatcher("index.jsp");
+			createSession(request);
+			
 			Mensaje msg=new Mensaje();
 			msg.setMsg("Usuario y/o contraseña incorrectos");
 			msg.setType(Mensaje.MSG_TYPE_DANGER);
-			request.setAttribute(Constantes.ATT_MENSAJE, msg);
+			session.setAttribute(Constantes.ATT_MENSAJE, msg);
+			response.sendRedirect(Constantes.JSP_INDEX);
 		}
-		rwd.forward(request, response);
+		
 	}
 
 	private void createSession(HttpServletRequest request){

@@ -43,11 +43,19 @@ public class ServletFilter implements Filter {
 		HttpServletResponse hsRespo=(HttpServletResponse)response;
 		
 		hsr.setCharacterEncoding("UTF-8");
-		if (checkSession(hsr)) {
+		String uri=hsr.getServletPath();
+		uri.equals("/"+Constantes.SERVLET_LOGIN);
+		
+		if (!uri.contains(Constantes.SERVLET_LOGIN)) {
+			if (checkSession(hsr)) {
+				chain.doFilter(request, response);
+			}else {
+				hsRespo.sendRedirect("index.jsp");
+			}
+		}else{
 			chain.doFilter(request, response);
-		}else {
-			hsRespo.sendRedirect("index.jsp");
 		}
+		
 		
 		
 		// pass the request along the filter chain

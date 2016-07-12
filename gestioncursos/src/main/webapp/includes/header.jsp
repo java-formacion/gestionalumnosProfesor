@@ -23,6 +23,12 @@
 	 <![endif]-->
 	</head>
 	<body class="container-fluid">
+	<%
+	boolean lOut=false;
+	String lOutS="hidden";
+	boolean lAdmin=false;
+	
+	%>
 	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1></header>
 	<nav class="navbar navbar-inverse" role="navigation">
 		  <!-- El logotipo y el icono que despliega el menú se agrupan
@@ -56,6 +62,11 @@
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
 					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="<%=Constantes.SERVLET_LOGOUT%>">
+						 <button type="<%=lOutS %>" id="btn-login"  class="btn btn-success">LogOut  </button>
+					</a>
 				</li>
 			</ul>
 			</div>

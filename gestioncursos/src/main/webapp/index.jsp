@@ -5,52 +5,46 @@
 		
 		Bienvenidos a la página de Gestión de Alumnos de Ipartek
 		<% String tEnviar = "Enviar";%>
-		<form action="<%=Constantes.SERVLET_LOGIN %>">
-		<jsp:include page="includes/mensaje.jsp"/>
-		<div class="form-group">
-					
-					
-					<div class="row">
-					<label class="col-xs-4"></label>
-					<label class="col-xs-1" for="<%=Constantes.PAR_USER%>">Usuario:</label>
-					<label class="col-xs-3">
-					<input type="text" class="form-control"
-						name="<%=Constantes.PAR_USER%>" 
-						id="<%=Constantes.PAR_USER%>" 
-						value=""
-						/>
-					
-					</label>
-					</div>
-					<div class="row">
-					
-					<label class="col-xs-4"></label>
-					<label class="col-xs-1" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
-					<label class="col-xs-3">					
-					<input type="text"  class="form-control"
-						name="<%=Constantes.PAR_PASSWORD%>" 
-						id="<%=Constantes.PAR_PASSWORD%>" 
-						value=""
-						/>
-						</label>
-					
-					</div>
-					<div class ="row">
-					<label class="col-xs-5">
-						</label>
-					<labelclass="col-xs-3"><button type="submit" class="btn btn-success col-xs-4">
-							<%=tEnviar %>
-						</button></label>
-					
-					
-					
-					</div>
-					
-					
-				</div>
-		
-		
-		</form>
+		<aside class="col-xs-12 col-md-5 panel">
+		<jsp:include page="includes/mensaje.jsp" />
+		<div class="panel panel-success">
+   
+   		<div class="panel-heading">
+       		<div class="panel-title"><h2>Login</h2></div>
+       
+   			</div>     
+
+   			<div class="panel-body">
+       			<form class="form-horizontal" action="<%=Constantes.SERVLET_LOGIN %>" method="post" role="form">
+           			<div class="input-group">
+           				<label class="sr-only" for="<%=Constantes.PAR_USER %>">Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input id="<%=Constantes.PAR_USER %>" name="<%=Constantes.PAR_USER %>" type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
+           			
+           			</div>
+		           <div class="input-group">
+		           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
+		            </div>
+		           <div class="input-group">
+						<div class="checkbox">
+			            	<label>  </label>
+								<input type="checkbox" value="1"> Recuerdame
+			            </div>
+                   </div>
+
+
+               <div class="form-group">
+                   <div class="col-xs-12 controls">
+                     <button type="submit" id="btn-login" class="btn btn-success">Aceptar  </button>
+                    
+
+                   </div>
+               </div>   
+           </form>     
+       </div><!--panel-body-->                     
+   </div>
+	</aside> 
 		
 					
 		

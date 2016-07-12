@@ -5,14 +5,18 @@ public class Usuario {
 	private String user;
 	private String password;
 	private String nickname;
+	private String sessionId;
 	
 	
+	
+
 	public Usuario() {
 		super();
 		
 		setUser("");
 		setPassword("");
 		setNickname("");
+		setSessionId("");
 	}
 	
 	public String getUser() {
@@ -35,7 +39,13 @@ public class Usuario {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 	
 	
 }

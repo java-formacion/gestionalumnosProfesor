@@ -17,6 +17,7 @@ public class Constantes {
 	public final static String ATT_MENSAJE ="mensaje";
 	
 	public final static String ATT_USUARIO="usuario";
+	public final static String ATT_LIST_USUARIO="lista_usuarios";
 	
 		
 	public final static String PAR_CODIGO= "codigo";
@@ -51,7 +52,9 @@ public class Constantes {
 	public final static String SERVLET_MODULOS="modulos.do";
 	public final static String SERVLET_LOGIN="logins.do";
 	public final static String SERVLET_LOGOUT="logouts.do";
+	public final static String SERVER_ADMIN="admins.do";
 	
+	public final static String JSP_INDEX="index.jsp";
 		
 	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
 	public final static String JSP_CURSO ="/cursos/curso.jsp";
