@@ -14,7 +14,7 @@
 		
 	if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null)	
 	{
-		
+		//Crear SERVLET administracion.do que muestre la lista de personas logueadas y permita desloguearlas manualmente
 	}
 	
 	
