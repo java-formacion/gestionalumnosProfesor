@@ -44,11 +44,13 @@ public class LoginServlet extends HttpServlet {
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
 
 			if ("password".equals(pass) && "Josu@josu.es".equals(user)){
+				
+				createSession(request);
 				usuario = new Usuario();
 				usuario.setPass(pass);
 				usuario.setUser(user);
 				usuario.setNick("Stukov");
-				createSession(request);
+				usuario.setSessionId(session.getId());
 				session.setAttribute(Constantes.ATT_USUARIO, usuario);
 				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
 				try {

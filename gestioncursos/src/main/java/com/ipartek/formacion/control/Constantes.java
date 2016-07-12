@@ -23,7 +23,8 @@ public class Constantes {
 	public final static String ATT_LISTA_DURACION_MODULO="listado_duracion";
 	public final static String ATT_LISTA_TIPO_CURSO="listado_tipocurso";
 	
-	public final static String ATT_USUARIO="listado_usuarios";
+	public final static String ATT_USUARIO="usuario";
+	public final static String ATT_LISTA_USUARIOS="listade_usuarios";
 	
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
@@ -53,7 +54,7 @@ public class Constantes {
 	public final static String SERVLET_MODULOS ="modulo.do";
 	public final static String SERVLET_LOGIN ="login.do";
 	public final static String SERVLET_LOGOUT ="logout.do";
-	
+	public final static String SERVLET_ADMIN ="administracion.do";
 	
 	public final static Horas[] LISTA_DURACION = {Horas.QUINCE,Horas.VEINTE,Horas.CUARENTAYCINCO,Horas.OCHENTA,Horas.NOVENTA};
 	public final static TipoCurso[] LISTA_TIPOCURSO = {TipoCurso.LANBIDE,TipoCurso.HOBETUZ,TipoCurso.TRIPARTITO};
@@ -66,6 +67,8 @@ public class Constantes {
 	
 	public final static String JSP_LISTADO_MODULOS ="/modulos/listadomodulo.jsp";
 	public final static String JSP_MODULO ="/modulos/modulo.jsp";
+	
+	public final static String JSP_ADMIN ="/administracion/admin.jsp";
 	
 	public final static int OP_CREATE = 0;
 	public final static int OP_READ = 1;

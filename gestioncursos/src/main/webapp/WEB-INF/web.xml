@@ -74,4 +74,14 @@
   <listener>
     <listener-class>com.ipartek.formacion.control.listener.SessionListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>AdministracionServlet</display-name>
+    <servlet-name>AdministracionServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.control.AdministracionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdministracionServlet</servlet-name>
+    <url-pattern>/administracion.do</url-pattern>
+  </servlet-mapping>
 </web-app>

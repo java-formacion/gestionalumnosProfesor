@@ -4,6 +4,7 @@ public class Usuario {
 	private String user=null;
 	private String pass=null;
 	private String nick=null;
+	private String sessionId=null;
 	public String getUser() {
 		return user;
 	}
@@ -32,13 +33,21 @@ public class Usuario {
 		setNick("");
 		setUser("");
 		setPass("");
+		setSessionId("");
 	}
 	
-	public Usuario(String user, String pass, String nick) {
+	public Usuario(String user, String pass, String nick, String sessionId) {
 		super();
 		setNick(nick);
 		setUser(user);
 		setPass(pass);
+		setSessionId(sessionId);
+	}
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 	
 	
