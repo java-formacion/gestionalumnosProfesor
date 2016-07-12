@@ -1,5 +1,10 @@
 package com.ipartek.formacion.controller.listener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -9,14 +14,20 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.controller.Constantes;
+import com.ipartek.formacion.pojo.Usuario;
+
 /**
  * Application Lifecycle Listener implementation class SessionListener
  *
  */
 public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener, HttpSessionActivationListener, HttpSessionBindingListener {
 	private final static Logger log = Logger.getLogger("ACCESOS");
+	private static int totalUsuarios = 0;
 
-
+	public static int getTotalUsiarios(){
+		return totalUsuarios;
+	}
 	/**
 	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
 	 */
@@ -53,18 +64,70 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 	 * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
 	 */
 	@Override
-	public void attributeAdded(HttpSessionBindingEvent arg0)  {
-		// TODO Auto-generated method stub
+	public void attributeAdded(HttpSessionBindingEvent se)  {
+		HttpSession session = se.getSession();
+		if(session.getAttribute(Constantes.ATT_USUARIO)!=null){
+			//Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+			//log.info(usuario.getUserName());
+			totalUsuarios++;
+			addUsuario(se);
+		}
 	}
 
+	private void addUsuario(HttpSessionBindingEvent se) {
+		Usuario user = null;
+		List<Usuario> usuarios = null;
+		HttpSession session = se.getSession();
+		ServletContext context = session.getServletContext();
+
+		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LIST_USUARIOS);
+
+		//si es la primera vez que se loguea alguien
+		if(usuarios == null){
+			usuarios = new ArrayList<Usuario>();
+		}
+		user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+		usuarios.add(user);
+		context.setAttribute(Constantes.ATT_LIST_USUARIOS, usuarios);
+		log.info(user.getUserName());
+	}
 	/**
 	 * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
 	 */
 	@Override
-	public void attributeRemoved(HttpSessionBindingEvent arg0)  {
-		// TODO Auto-generated method stub
+	public void attributeRemoved(HttpSessionBindingEvent se)  {
+		if(se.getName().equals(Constantes.ATT_USUARIO)){
+			//Usuario user = (Usuario) se.getValue();
+			totalUsuarios--;
+			removeUsuario(se);
+		}
 	}
 
+	private void removeUsuario(HttpSessionBindingEvent se) {
+		List<Usuario> usuarios = null;
+		HttpSession session = se.getSession();
+		ServletContext context = session.getServletContext();
+		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LIST_USUARIOS);
+		Usuario user = (Usuario) se.getValue();
+		if(removeList(usuarios,user)){
+			log.info("usuario deslogeado");
+		}
+
+	}
+
+	private boolean removeList(List<Usuario> usuarios, Usuario user) {
+		boolean encontrado = false;
+		int i = 0, len = usuarios.size();
+		while(i< len && encontrado==false){
+			if(usuarios.get(i).equals(user)){
+				encontrado = true;
+				usuarios.remove(i);
+			}
+			i++;
+		}
+
+		return encontrado;
+	}
 	/**
 	 * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
 	 */

@@ -42,11 +42,12 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
 		if("urko".equals(userName)&&"urko".equals(pass)){
+			createSession(request);
 			usuario = new Usuario();
 			usuario.setUserName(userName);
 			usuario.setUserPassword(pass);
 			usuario.setNickname("Profe");
-			createSession(request);
+			usuario.setSessionid(session.getId());
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rd.forward(request, response);
