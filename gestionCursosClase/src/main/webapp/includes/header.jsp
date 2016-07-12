@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 
 <!DOCTYPE html >
@@ -53,7 +54,22 @@
 	          				<li><a href="<%=Constantes.SERVLET_MODULOS%>"> Ver todos los Modulos</a></li>
 	          			</ul>
 					</li>
+					<%
+						if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null)
+						{
+							String nombreUser = null;
+							
+							Usuario user = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+							nombreUser = user.getNickname();
+							
+					%>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_LOGOUT%>"><%= nombreUser %></a>
+						<ul class="dropdown-menu">
+	          				<li><a href="<%=Constantes.SERVLET_LOGOUT%>">Logout</a></li>
+	          			</ul>
+					</li>
+					<%	} %>
 				</ul>
-				
 			</div>
+			
 	</nav>

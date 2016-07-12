@@ -10,11 +10,28 @@ import com.ipartek.formacion.service.exceptions.CursoServiceException;
 
 public class CursoServiceImp implements CursoService {
 
+	private static CursoServiceImp INSTANCE=null;
+	
 	private List<Curso> cursos;
-	private static int i = 1;
+	private static int i = 0;
 	public CursoServiceImp(){
 		init();
 	}
+	
+	public static CursoServiceImp getInstance(){
+		if (INSTANCE==null) {
+			INSTANCE=new CursoServiceImp();
+		}
+		return INSTANCE;
+	}
+	
+	private synchronized static void createInstance(){
+		if (INSTANCE==null) {
+			INSTANCE=new CursoServiceImp();
+		}
+	
+	}
+	
 	private void init() {
 		cursos = new ArrayList<Curso>();
 		Curso curso = new Curso();
@@ -72,9 +89,11 @@ public class CursoServiceImp implements CursoService {
 	public Curso update(Curso curso) {
 		try {
 			this.cursos.set(getIndex(curso.getCodigo()), curso);
+			System.out.println(curso.getNombre());
 		} catch (CursoServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("catch" + curso.getNombre());
 		}
 		return curso;
 	}

@@ -12,12 +12,10 @@
 	</div>
 	<% 
 		
-	if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null)	
+	if(session == null || session.getAttribute(Constantes.ATT_USUARIO) == null)	
 	{
 		//Crear SERVLET administracion.do que muestre la lista de personas logueadas y permita desloguearlas manualmente
-	}
-	
-	
+		
 	%>
 	<div class="col-xs-12 col-md-5 container ">
         <div class="wrapper">
@@ -37,6 +35,7 @@
    			</form>
   		</div>
     </div>
+    <% } %>
 </div>
 
 

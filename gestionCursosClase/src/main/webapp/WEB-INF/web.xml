@@ -66,7 +66,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout.do</url-pattern>
+    <url-pattern>/Logout.do</url-pattern>
   </servlet-mapping>
   <listener>
     <listener-class>com.ipartek.formacion.controller.listener.InitListener</listener-class>

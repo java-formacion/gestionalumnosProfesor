@@ -85,19 +85,21 @@ public class CursoServlet extends HttpServlet {
 		try{
 			
 			operacion = Integer.parseInt(op);
-			
+			System.out.println("operacion "+operacion);
 			switch(operacion){
 				case Constantes.OP_CREATE:
 					recogerDatos(request);
 					cService.create(curso);
 					break;
 				case Constantes.OP_DELETE:
-				
+					recogerId(request);
 					cService.delete(id);
 					break;
 				case Constantes.OP_UPDATE:
+					System.out.println("Update " + curso.getNombre());
 					recogerDatos(request);
 					cService.update(curso);
+					System.out.println(curso.getNombre());
 					break;
 			}
 		} catch (NumberFormatException e){
