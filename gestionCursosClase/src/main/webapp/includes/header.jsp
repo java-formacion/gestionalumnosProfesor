@@ -52,7 +52,7 @@
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>"> Modulos</a>
 						<ul class="dropdown-menu">
 	          				<li><a href="<%=Constantes.SERVLET_MODULOS%>"> Ver todos los Modulos</a></li>
-	          			</ul>
+	          			</ul> 
 					</li>
 					<%
 						if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null)
