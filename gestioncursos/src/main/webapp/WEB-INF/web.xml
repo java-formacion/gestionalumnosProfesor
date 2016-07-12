@@ -84,4 +84,7 @@
   <listener>
     <listener-class>com.ipartek.formacion.controller.listener.initListener</listener-class>
   </listener>
+  <listener>
+    <listener-class>com.ipartek.formacion.controller.listener.SessionListener</listener-class>
+  </listener>
 </web-app>
