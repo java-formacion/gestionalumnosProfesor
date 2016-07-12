@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.controller.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
@@ -25,19 +27,21 @@ import com.ipartek.formacion.service.Util;
  */
 public class AlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	 private int id = -1;
-	 private RequestDispatcher rd = null;
-	 private AlumnoService aService = AlumnoServiceImp.getInstance();
-	 private CursoService cService = new CursoServiceImp();
-	 private List<Alumno> alumnos = null;
-	 private Alumno alumno = null;   
-	 private int operacion = -1;
+	private int id = -1;
+	private RequestDispatcher rd = null;
+	private AlumnoService aService = AlumnoServiceImp.getInstance();
+	private CursoService cService = new CursoServiceImp();
+	private List<Alumno> alumnos = null;
+	private Alumno alumno = null;
+	private int operacion = -1;
+	private static final Logger log = Logger.getLogger(AlumnoServlet.class);
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-			
+
 			recogerId(request);
 			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
 			if(id < 0){//REDIGIRIMOS PARA UN CREATE
@@ -45,18 +49,18 @@ public class AlumnoServlet extends HttpServlet {
 			}else{//REDIGIMOS PARA UNA UPDATE
 				getById(request);
 			}
-			
+
 		}catch(Exception e){
 			getAll(request);
 		}
-		rd.forward(request, response); 
+		rd.forward(request, response);
 	}
 
 	private void recogerId(HttpServletRequest request) {
 		//if(Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
-			id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
 		//}
-		
+
 	}
 
 	private void getAll(HttpServletRequest request) {
@@ -74,13 +78,14 @@ public class AlumnoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		try {
 			if(Util.tryParseInt(op)){
 				operacion = Integer.parseInt(op);
 			}
-			
+
 			recogerId(request);
 			switch (operacion) {
 			case Constantes.OP_CREATE:
@@ -99,9 +104,9 @@ public class AlumnoServlet extends HttpServlet {
 			}
 			getAll(request);
 		} catch (NumberFormatException e){
-			
+
 		} catch(NullPointerException e){
-			
+
 		} catch(CandidatoException e){
 			try {
 				AlumnoError alumnoError = new AlumnoError();
@@ -113,12 +118,12 @@ public class AlumnoServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			
+
+
 		}
 		catch(Exception e){
-			
-			
+			log.error(e.getMessage());
+
 		}
 		rd.forward(request, response);
 	}
