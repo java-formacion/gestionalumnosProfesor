@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario = null;
 	private String alias = "imanol";
-	private String password = "123A";
+	private String password = "1111";
 	private RequestDispatcher rwd;
 	private HttpSession session = null;
 
@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 		if (alias.equals(usuario.getAlias())
 				&& password.equals(usuario.getPassword())) {
 			createSesion(request);
+			usuario.setIdSession(session.getId());
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rwd.forward(request, response);

@@ -71,19 +71,26 @@
 					+ "=" + Modulo.CODIGO_MODULO%>">Crear
 									Curso </a></li>
 						</ul></li>
+					<%
+						Usuario user = (Usuario) session
+								.getAttribute(Constantes.ATT_USUARIO);
+						if (user != null) {
+					%>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button" aria-haspopup="true" aria-expanded="false">ADMIN <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=Constantes.SERVLET_ADMIN%>">Ver Usuarios Conectados </a></li>
+
+						</ul></li>
+
 
 				</ul>
-				<%
-					Usuario user = (Usuario) session
-							.getAttribute(Constantes.ATT_USUARIO);
-					if (user != null) {
-				%>
+
 				<ul class="nav navbar-nav navbar-right">
 					<p class="navbar-text">
-							Signed in as <strong><%=user.getAlias()%></strong>
-						</p>
-					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn">Log
-							Out</a>
+						Signed in as <strong><%=user.getAlias()%></strong>
+					</p>
+					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn">Log Out</a>
 				</ul>
 				<%
 					}

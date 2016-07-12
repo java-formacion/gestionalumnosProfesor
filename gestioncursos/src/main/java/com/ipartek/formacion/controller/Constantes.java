@@ -4,6 +4,8 @@ public class Constantes {
 	private Constantes() {
 	}
 	public final static String ATT_USUARIO = "usuario";
+	public final static String ATT_LISTADO_USUARIOS = "listado_usuarios";
+
 
 	public final static String ATT_LISTADO_CURSOS = "listado_cursos";
 	public final static String ATT_CURSO = "curso";
@@ -31,12 +33,16 @@ public class Constantes {
 	public final static String PAR_MODULOS = "modulos";
 	public final static String PAR_REFERENCIA = "referencia";
 	
+	public final static String PAR_SESSION_ID = "idSession";
+	
 	public final static String PAR_USUARIO = "usuario";
 	public final static String PAR_PASSWORD = "password";
 	public final static String PAR_RECUERDA= "recuerda";
 
 	public final static String JSP_LISTADO_CURSOS = "/cursos/listado.jsp";
 	public final static String JSP_CURSO = "/cursos/curso.jsp";
+	
+	public final static String JSP_LISTADO_USUARIOS = "/administracion/listadoUsuarios.jsp";
 
 	public final static String JSP_LISTADO_ALUMNOS = "/alumnos/listado.jsp";
 	public final static String JSP_ALUMNO = "/alumnos/alumno.jsp";
@@ -54,6 +60,7 @@ public class Constantes {
 	public final static String SERVLET_MODULOS = "modulos.do";
 	public final static String SERVLET_LOGIN = "login.do";
 	public final static String SERVLET_LOGOUT = "logout.do";
+	public final static String SERVLET_ADMIN = "admin.do";
 
 	public final static int OP_CREATE = 0;
 	public final static int OP_READ = 1;

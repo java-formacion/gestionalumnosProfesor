@@ -2,22 +2,22 @@ package com.ipartek.formacion.pojo;
 
 public class Usuario {
 	public static final int ID_USUARIO = -1;
-	private int idUsuario;
+	private String sessionId;
 	private String alias;
 	private String password;
 
 	public Usuario() {
-		setIdUsuario(ID_USUARIO);
+		setIdSession("");
 		setAlias("");
 		setPassword("");
 	}
 
-	public int getIdUsuario() {
-		return idUsuario;
+	public String getIdSession() {
+		return sessionId;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdSession(String idUsuario) {
+		this.sessionId = idUsuario;
 	}
 
 	public String getAlias() {
@@ -35,7 +35,5 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 }

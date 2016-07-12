@@ -58,7 +58,6 @@ public class ServletFilter implements Filter {
 		if (session != null
 				&& session.getAttribute(Constantes.ATT_USUARIO) != null) {
 			existe = true;
-
 		}
 		return existe;
 

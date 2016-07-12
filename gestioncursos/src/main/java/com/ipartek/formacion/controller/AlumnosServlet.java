@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.controller.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
@@ -35,6 +37,7 @@ public class AlumnosServlet extends HttpServlet {
 	private int id = -1;
 	private int operacion = -1;
 	private RequestDispatcher rwd;
+	private static final Logger log = Logger.getLogger(AlumnosServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -51,8 +54,8 @@ public class AlumnosServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		try {		
-			
+		try {
+
 			recogerId(request);
 			if (this.id < 0) {
 				rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
@@ -72,15 +75,15 @@ public class AlumnosServlet extends HttpServlet {
 		request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cursos);
 	}
 
-	private void getById(HttpServletRequest request) {	
+	private void getById(HttpServletRequest request) {
 		alumno = aService.getById(id);
 		request.setAttribute(Constantes.ATT_ALUMNO, alumno);
 		rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
-		
+
 	}
 
 	private void getAll(HttpServletRequest request) {
-		
+
 		alumnos = aService.getAll();
 		request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, alumnos);
 		rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ALUMNOS);
@@ -192,14 +195,14 @@ public class AlumnosServlet extends HttpServlet {
 		// alumno.setCurso(curso);
 		// }
 		List<Idioma> idi = Util.parseIdioma(idiomas);
-		
+
 		alumno.setNombre(nombre);
-		alumno.setApellidos(apellidos);	
-		alumno.setDni(dni); //salta error NullPointerException
+		alumno.setApellidos(apellidos);
+		alumno.setDni(dni); // salta error NullPointerException
 		alumno.setfNacimiento(fecha);
 		alumno.setGenero(Util.parseGenero(genero));
 		alumno.setIdiomas(idi);
 		alumno.setCurso(curso);
-	
+
 	}
 }

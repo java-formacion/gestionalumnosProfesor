@@ -72,4 +72,20 @@
     <filter-name>ServletFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
+  <listener>
+    <listener-class>com.ipartek.formacion.controller.listener.InitListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.ipartek.formacion.controller.listener.SessionListener</listener-class>
+  </listener>
+  <servlet>
+    <description></description>
+    <display-name>AdministracionServlet</display-name>
+    <servlet-name>AdministracionServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.AdministracionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdministracionServlet</servlet-name>
+    <url-pattern>/admin.do</url-pattern>
+  </servlet-mapping>
 </web-app>
