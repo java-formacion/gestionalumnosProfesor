@@ -40,11 +40,14 @@ public class LoginServlet extends HttpServlet {
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
+		
 		if("julen".equals(userName)&&"julen".equals(pass)){
+			createSession(request);
 			usuario = new Usuario();
 			usuario.setUserName(userName);
 			usuario.setUserPassword(pass);
 			usuario.setNickname("JRC");
+			usuario.setSessionID(session.getId());
 			createSession(request);
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);

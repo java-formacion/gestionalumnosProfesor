@@ -5,11 +5,15 @@ public class Usuario {
 	private String userName;
 	private String userPassword;
 	private String nickname;
+	public String sessionID;
+
+	
 
 	public Usuario(){
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
+		setSessionID("");
 	}
 	
 	public String getUserName() {
@@ -29,5 +33,13 @@ public class Usuario {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	
+	public String getSessionID() {
+		return sessionID;
+	}
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
 	}
 }

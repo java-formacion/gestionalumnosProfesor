@@ -10,7 +10,15 @@
 	<div class="col-xs-12 col-md-7"> 
 		<h2>Bienvenidos a la página de gestión de alumnos de Ipartek</h2>
 	</div>
+	<% 
+		
+	if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null)	
+	{
+		
+	}
 	
+	
+	%>
 	<div class="col-xs-12 col-md-5 container ">
         <div class="wrapper">
     		<form class="form-signin" action="<%=Constantes.SERVLET_LOGIN%>" method="post" role="form">       

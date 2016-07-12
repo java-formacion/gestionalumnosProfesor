@@ -29,8 +29,7 @@ public class LogoutServlet extends HttpServlet {
 		doProcess(request,response);
 	}
 	
-	private void doProcess(HttpServletRequest request,
-		HttpServletResponse response) throws IOException {
+	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session =request.getSession(false);
 		if(session !=null&& session.getAttribute(Constantes.ATT_USUARIO)!=null){
 
