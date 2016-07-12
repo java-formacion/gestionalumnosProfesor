@@ -1,6 +1,7 @@
 package com.ipartek.formacion.pojo;
 
 public class Usuario {
+	private String sessionId;
 	private String userName;
 	private String userPassword;
 	private String nickname;
@@ -9,6 +10,17 @@ public class Usuario {
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
+	}
+
+	
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 
 
