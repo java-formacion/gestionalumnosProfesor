@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
 
@@ -20,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 	HttpSession session = null;
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
-	
+	private final static Logger log = Logger.getLogger(LoginServlet.class);
 	
 
     /**
@@ -48,20 +50,20 @@ public class LoginServlet extends HttpServlet {
 				usuario.setNick("Stukov");
 				createSession(request);
 				session.setAttribute(Constantes.ATT_USUARIO, usuario);
-				System.out.println("FUNCIONA!");
 				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
 				try {
 					rd.forward(request, response);
 				} catch (ServletException e) {
 				// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error(e.getMessage());
 				} catch (IOException e) {
 				// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error(e.getMessage());
 				}
 			} else {
 				createSession(request);
-				System.out.println("Usuario o contraseña incorrectos!");
 				//rd  = request.getRequestDispatcher("index.jsp");
 				Mensaje mensaje = new Mensaje();
 				mensaje.setMsg("Usuario y/o contraseña incorrecta");
@@ -73,6 +75,7 @@ public class LoginServlet extends HttpServlet {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					log.error(e.getMessage());
 				}
 			}
 

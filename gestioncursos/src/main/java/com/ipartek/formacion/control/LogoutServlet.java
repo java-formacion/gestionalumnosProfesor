@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 /**
  * Servlet implementation class LogoutServlet
  */
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger log = Logger.getLogger(LogoutServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()

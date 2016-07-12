@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.control.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
@@ -32,6 +34,8 @@ public class AlumnoServlet extends HttpServlet {
 	 private List<Alumno> alumnos = null;
 	 private Alumno alumno = null;   
 	 private int operacion = -1;
+	 private final static Logger log = Logger.getLogger(AlumnoServlet.class);
+	 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -95,11 +99,12 @@ public class AlumnoServlet extends HttpServlet {
 			}
 			getAll(request);
 		} catch (NumberFormatException e){
-			
+			log.error(e.getMessage());
 		} catch(NullPointerException e){
-			
+			log.error(e.getMessage());
 		} catch(CandidatoException e){
 			try {
+				log.error(e.getMessage());
 				AlumnoError alumnoError = new AlumnoError();
 				alumnoError = recogerDatosError(request);
 				alumnoError.setMensaje(e.getMessage());
@@ -108,12 +113,13 @@ public class AlumnoServlet extends HttpServlet {
 			} catch (CandidatoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.error(e1.getMessage());
 			}
 			
 			
 		}
 		catch(Exception e){
-			
+			log.error(e.getMessage());
 			
 		}
 		rd.forward(request, response);
