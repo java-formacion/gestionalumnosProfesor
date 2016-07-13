@@ -47,6 +47,8 @@ public class AdminServlet extends HttpServlet {
 		Mensaje m = new Mensaje();
 		if(session !=null){
 			session.invalidate();
+			sesiones.remove(sesionId);
+			context.setAttribute(Constantes.ATT_LISTADO_SESIONES, sesiones);
 			m.setMsg("Usuario Expulsado");
 			m.setType(Mensaje.MSG_TYPE_SUCCESS);
 		}else{
