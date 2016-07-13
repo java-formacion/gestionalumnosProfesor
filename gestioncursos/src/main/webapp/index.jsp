@@ -46,7 +46,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
                 <input name="<%=Constantes.PAR_PASSWORD %>" type="password" id="<%=Constantes.PAR_PASSWORD %>" class="form-control" placeholder="Password" required>
                 <div id="remember" class="checkbox">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input name="<%=Constantes.PAR_REMEMBER %>" id="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"> Remember me
                     </label>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >Sign in</button>

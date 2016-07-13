@@ -1,3 +1,4 @@
+</main>
 	<footer>
 		<div>
 			Página realizada por Ipartek Formación.

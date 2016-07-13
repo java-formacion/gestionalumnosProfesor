@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,14 +37,42 @@ public class LoginServlet extends HttpServlet {
 		doProcess(request,response);
 	}
 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
-		
+	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies =request.getCookies();
+		if (cookies!= null){
+			String nUsuario="",password="";
+			for (Cookie cookie: cookies){
+				if (cookie.getName().equals("usuario")){
+					nUsuario = cookie.getValue();
+				} else{
+					if (cookie.getName().equals("password")){
+						password = cookie.getValue();
+					}
+				}
+			}
+			if (!"".equals(nUsuario)&&!"".equals(password)){
+				createSession(request);
+				//TODO falta hacer la redireccion
+				Usuario usuario = null;
+				usuario = new Usuario();
+				usuario.setPass(password);
+				usuario.setUser(nUsuario);
+				usuario.setNick("Stukov");
+				usuario.setSessionId(session.getId());
+				session.setAttribute(Constantes.ATT_USUARIO, usuario);
+				rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+				rd.forward(request, response);
+			}
+			log.trace("cookies");
+		}
 		Usuario usuario = null;
 		
 		String user= request.getParameter(Constantes.PAR_USER);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
+		String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
+			
 
-			if ("password".equals(pass) && "Josu@josu.es".equals(user)){
+			if ("password".equals(pass) && "Josu@josu.es".equals(user) || "password".equals(pass) && "Hola@hola.es".equals(user) ){
 				
 				createSession(request);
 				usuario = new Usuario();
@@ -52,18 +81,17 @@ public class LoginServlet extends HttpServlet {
 				usuario.setNick("Stukov");
 				usuario.setSessionId(session.getId());
 				session.setAttribute(Constantes.ATT_USUARIO, usuario);
-				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
-				try {
-					rd.forward(request, response);
-				} catch (ServletException e) {
-				// TODO Auto-generated catch block
-					e.printStackTrace();
-					log.error(e.getMessage());
-				} catch (IOException e) {
-				// TODO Auto-generated catch block
-					e.printStackTrace();
-					log.error(e.getMessage());
+				if (checkboxes!=null && checkboxes.length==1){
+					Cookie cookieNombre = new Cookie("usuario", user);
+					Cookie cookiePassword = new Cookie("password", pass);
+					cookieNombre.setMaxAge(60*60*15);
+					cookiePassword.setMaxAge(60*60*15);
+					response.addCookie(cookieNombre);
+					response.addCookie(cookiePassword);
 				}
+				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
+				rd.forward(request, response);
+
 			} else {
 				createSession(request);
 				//rd  = request.getRequestDispatcher("index.jsp");

@@ -1,7 +1,9 @@
 package com.ipartek.formacion.control.listener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -65,23 +67,39 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
         	 //log.info("Usuario logueado: "+usuario.getUser()+" "+usuario.getPass()+" " +usuario.getNick());
         	 totalUsuario ++;
         	 addUsuario(arg0);
+        	 addSession(arg0);
          }
     }
-
+    private  void addSession(HttpSessionBindingEvent arg0){
+    	Map<String,HttpSession> sesiones = null;
+    	
+    	if (sesiones== null){
+			sesiones = new HashMap<String, HttpSession>();
+		}
+    	HttpSession session = arg0.getSession();
+    	ServletContext context = session.getServletContext();
+    	sesiones.put(session.getId(), session);
+    	context.setAttribute(Constantes.ATT_LISTA_SESIONES, sesiones);
+    	log.trace(sesiones.size());
+    	
+    }
 	private void addUsuario(HttpSessionBindingEvent arg0) {
 		Usuario usuario = null;
 		List <Usuario> usuarios = null;
 		HttpSession session = arg0.getSession();
-		ServletContext context = session.getServletContext();
-		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTA_USUARIOS);
+    	ServletContext context = session.getServletContext();
 		
+    	usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTA_USUARIOS);
 		//El array puede estar vacio y ser la primera persona que se loguea.
 		
 		if (usuarios == null){
 			usuarios = new ArrayList<Usuario>();
 		}
+		
+		
 		usuario = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
 		usuarios.add(usuario);
+		
 		context.setAttribute(Constantes.ATT_LISTA_USUARIOS, usuarios);
 		log.info("Usuario logueado: "+usuario.getUser()+" "+usuario.getPass()+" " +usuario.getNick());
 	}

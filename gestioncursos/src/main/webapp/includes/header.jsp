@@ -70,13 +70,13 @@
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>">Modificar modulo</a></li>
 					</ul>
 				</li>
-				<%if (session!=null){ %>
+				<%if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){ %>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ADMIN%>">
 						Administración
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=Constantes.JSP_ADMIN%>">Lista de usuarios conectados</a></li>
+						<li><a href="<%=Constantes.SERVLET_ADMIN%>">Lista de usuarios conectados</a></li>
 					</ul>
 				</li>
 				<%} %>
