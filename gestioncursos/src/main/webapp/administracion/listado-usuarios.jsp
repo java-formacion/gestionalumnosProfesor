@@ -14,6 +14,7 @@
 	
 	if(usuarios!=null){
 		%>
+	<jsp:include page="../includes/mensaje.jsp"/>
 		<div  class="row">
 			<div class="col-xs-4">Session Id</div>
 			<div class="col-xs-3">Nombre</div>
