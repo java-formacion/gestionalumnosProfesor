@@ -10,7 +10,7 @@
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header.jsp" %>
+<jsp:include page="../includes/header.jsp"/>
 <main class="">
 	<%
 		Alumno alumno = (Alumno) request.getAttribute(Constantes.ATT_ALUMNO);

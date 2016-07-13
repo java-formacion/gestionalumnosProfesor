@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header.jsp" %>
+<jsp:include page="../includes/header.jsp"/>
 <main>
 		<a class="btn btn-warning" href="index.jsp">Atras</a> 
 		<a class="btn btn-success"
