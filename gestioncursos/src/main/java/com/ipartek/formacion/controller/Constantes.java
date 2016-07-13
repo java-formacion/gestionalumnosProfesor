@@ -19,6 +19,7 @@ public class Constantes {
 	public final static String ATT_MENSAJE ="mensaje";
 	public final static String ATT_USUARIO ="usuario";
 	public final static String ATT_LISTA_USUARIOS ="lista_usuarios";
+	public final static String ATT_LISTA_SESIONES ="lista_sesiones";
 
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
@@ -40,12 +41,14 @@ public class Constantes {
 
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
+	public final static String PAR_SESSIONID ="sessionId";
 
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";
 	public final static String SERVLET_MODULOS ="modulos.do";
 	public final static String SERVLET_LOGIN ="login.do";
 	public final static String SERVLET_ADMINISTRACION ="administracion.do";
+	
 
 	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
 	
