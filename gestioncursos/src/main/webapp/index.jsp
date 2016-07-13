@@ -36,7 +36,7 @@
 
 					<div class="form-group">
 						<div class="checkbox">
-							<label> <input type="checkbox" value="<%=Constantes.PAR_RECUERDA%>" />Recuerdame
+							<label> <input type="checkbox" name="<%=Constantes.PAR_RECUERDA%>" />Recuerdame
 							</label>
 						</div>
 

@@ -22,18 +22,21 @@ public class Constantes {
 	public final static String PAR_NOMBRE = "nombre";
 	public final static String PAR_APELLIDOS = "apellidos";
 	public final static String PAR_DNI = "dni";
-	public final static String PAR_OPERACION = "operacion";
 	public final static String PAR_MES = "mes";
 	public final static String PAR_DIA = "dia";
 	public final static String PAR_ANYO = "anyo";
 	public final static String PAR_GENERO = "genero";
 	public final static String PAR_IDIOMA = "idioma";
 	public final static String PAR_CURSO = "curso_alumno";
+	
+	public final static String PAR_OPERACION = "operacion";
+
+	public final static String PAR_REFERENCIA = "referencia";
 	public final static String PAR_DURACION = "duracion";
+	
 	public final static String PAR_TIPO = "tipo";
 	public final static String PAR_ALUMNOS = "alumnos";
 	public final static String PAR_MODULOS = "modulos";
-	public final static String PAR_REFERENCIA = "referencia";
 	
 	public final static String PAR_SESSION_ID = "idSession";
 	

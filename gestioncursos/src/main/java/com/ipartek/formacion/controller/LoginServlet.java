@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,6 +56,11 @@ public class LoginServlet extends HttpServlet {
 			createSesion(request);
 			usuario.setIdSession(session.getId());
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
+			String[] checkbox = request
+					.getParameterValues(Constantes.PAR_RECUERDA);
+			if (checkbox != null && checkbox.length == 1) {
+				recordarUsuario(request, response);
+			}
 			rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rwd.forward(request, response);
 		} else {
@@ -66,6 +72,18 @@ public class LoginServlet extends HttpServlet {
 			log.error(mensaje.getMsg());
 			response.sendRedirect("index.jsp");
 		}
+
+	}
+
+	private void recordarUsuario(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Cookie cookieAlias = new Cookie("usuario", usuario.getAlias());
+		Cookie cookiePass = new Cookie("password", usuario.getPassword());
+		cookieAlias.setMaxAge(24 * 60 * 60);
+		cookiePass.setMaxAge(24 * 60 * 60);
+		response.addCookie(cookieAlias);
+		response.addCookie(cookiePass);
 
 	}
 
@@ -82,6 +100,23 @@ public class LoginServlet extends HttpServlet {
 		usuario = new Usuario();
 		usuario.setAlias(request.getParameter(Constantes.PAR_USUARIO));
 		usuario.setPassword(request.getParameter(Constantes.PAR_PASSWORD));
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			String nUsuario = "", password = "";
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("usuario")) {
+					nUsuario = cookie.getValue();
+				} else {
+					if (cookie.getName().equals("password")) {
+						password = cookie.getValue();
+					}
+				}
+			}
+			if(!"".equals(nUsuario) && !"".equals(password)){
+				createSesion(request);
+			}
+		}
+
 	}
 
 }
