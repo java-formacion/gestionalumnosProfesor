@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException {
 		HttpSession session =request.getSession(false);
 		if(session !=null&& session.getAttribute(Constantes.ATT_USUARIO)!=null){
-
+			session.removeAttribute(Constantes.ATT_USUARIO);
 			session.invalidate();
 
 

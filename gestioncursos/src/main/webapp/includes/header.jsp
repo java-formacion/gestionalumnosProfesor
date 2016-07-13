@@ -53,7 +53,7 @@
 					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_CURSOS%>">
 						Cursos
 					</a>
-					<ul>
+					<ul  class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_CURSOS%>">
 							Ver Cursos
@@ -67,10 +67,10 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="<%=Constantes.SERVLET_ALUMNOS%>">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
 						Alumnos
 					</a>
-					<ul>
+					<ul  class="dropdown-menu">
 						<li>
 							<a href="<%=Constantes.SERVLET_ALUMNOS%>">
 								Todos los alumnos
@@ -92,6 +92,19 @@
 							</a>
 						</li>
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
+						Administraci&oacute;n
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="<%=Constantes.SERVLET_ADMINISTRACION%>">
+								Ver Usuarios Conectados
+							</a>
+						</li>
+						
 					</ul>
 				</li>
 			</ul>
