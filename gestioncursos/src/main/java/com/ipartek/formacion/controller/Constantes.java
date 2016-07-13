@@ -15,6 +15,8 @@ public class Constantes {
 
 	public final static String ATT_LISTADO_MODULOS = "listado_modulos";
 	public final static String ATT_MODULO = "modulo";
+	
+	public final static String ATT_LISTADO_SESIONES = "listado_sesiones";
 
 	public final static String PAR_CODIGO = "codigo";
 	public final static String PAR_NOMBRE = "nombre";

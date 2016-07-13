@@ -15,6 +15,7 @@
 			<thead>
 				<th>Session ID</th>
 				<th>Alias</th>
+				<th>Desconectar Usuario</th>
 			</thead>
 			<tbody>
 				<%
@@ -23,10 +24,25 @@
 				<tr>
 					<td><%=user.getIdSession()%></td>
 					<td><%=user.getAlias()%></td>
-					<td><a
+					
+					<td  align="center">
+					<%
+							Usuario usuario = (Usuario) session
+										.getAttribute(Constantes.ATT_USUARIO);
+								if (!user.getIdSession().equals(usuario.getIdSession())) {
+						%>
+						<a
 						href="<%=Constantes.SERVLET_ADMIN + "?"
-						+ Constantes.PAR_SESSION_ID + "=" + user.getIdSession()%>"
-						class="btn btn-danger"><span class="fa fa-times"></span></a></td>
+							+ Constantes.PAR_SESSION_ID + "="
+							+ user.getIdSession()%>"
+						class="btn btn-danger"><span class="fa fa-times"></span></a> 
+							<%
+ 	}else{
+ 		out.write("Sesion Actual");
+ 	}
+ %>
+					</td>
+				
 				</tr>
 				<%
 					}

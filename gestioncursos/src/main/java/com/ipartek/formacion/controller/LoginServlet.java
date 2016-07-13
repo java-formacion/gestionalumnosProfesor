@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
 
@@ -17,6 +19,7 @@ import com.ipartek.formacion.pojo.Usuario;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger("ACCESOS");
 	private Usuario usuario = null;
 	private String alias = "imanol";
 	private String password = "1111";
@@ -60,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 			mensaje.setTipo(Mensaje.MSG_TYPE_ERROR);
 			createSesion(request);
 			session.setAttribute(Constantes.MSG_ERROR, mensaje);
+			log.error(mensaje.getMsg());
 			response.sendRedirect("index.jsp");
 		}
 

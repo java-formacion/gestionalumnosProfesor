@@ -88,9 +88,9 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<p class="navbar-text">
-						Signed in as <strong><%=user.getAlias()%></strong>
+						Identificado como <strong><%=user.getAlias()%></strong>
 					</p>
-					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn">Log Out</a>
+					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn">Cerrar Sesion</a>
 				</ul>
 				<%
 					}

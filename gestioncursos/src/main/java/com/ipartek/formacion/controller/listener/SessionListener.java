@@ -36,7 +36,6 @@ public class SessionListener implements HttpSessionListener,
 	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
 	 */
 	public void sessionCreated(HttpSessionEvent se) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -68,7 +67,21 @@ public class SessionListener implements HttpSessionListener,
 		if (se.getValue() instanceof Usuario) {
 			nUsuarios++;
 			addUser(se);
+			addSession(se);
 		}
+	}
+
+	private void addSession(HttpSessionBindingEvent se) {
+		Map<String, HttpSession> sesiones = null;
+		HttpSession session = se.getSession();
+		ServletContext context = session.getServletContext();
+		sesiones = (Map<String, HttpSession>) context
+				.getAttribute(Constantes.ATT_LISTADO_SESIONES);
+		if (sesiones == null) {
+			sesiones = new HashMap<String, HttpSession>();
+		}
+		sesiones.put(session.getId(), session);
+		context.setAttribute(Constantes.ATT_LISTADO_SESIONES, sesiones);
 	}
 
 	private void addUser(HttpSessionBindingEvent se) {
@@ -106,7 +119,6 @@ public class SessionListener implements HttpSessionListener,
 		users.remove(user.getIdSession());
 		context.setAttribute(Constantes.ATT_LISTADO_USUARIOS, users);
 		log.info(user.getAlias() + " se ha desconectado");
-		log.info("Usuarios conectados:" + users.size());
 	}
 
 	/**

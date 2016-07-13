@@ -26,11 +26,11 @@
 				<form method="POST" action="<%=Constantes.SERVLET_LOGIN%>">
 					<div class="form-group">
 						<input type="text" class="form-control" name="<%=Constantes.PAR_USUARIO%>"
-							placeholder="Usuario" />
+							placeholder="Usuario" value="imanol"/>
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>"
-							placeholder="Contraseña" />
+							placeholder="Contraseña" value="1111" />
 					</div>
 					<jsp:include page="includes/error.jsp" />
 
@@ -42,7 +42,7 @@
 
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary center-block">Log In</button>
+						<button type="submit" class="btn btn-primary center-block">Iniciar Sesión</button>
 					</div>
 
 				</form>

@@ -1,15 +1,28 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.Date;
+
 public class Usuario {
 	public static final int ID_USUARIO = -1;
 	private String sessionId;
 	private String alias;
 	private String password;
+	private Date fechaConexion;
 
 	public Usuario() {
 		setIdSession("");
 		setAlias("");
 		setPassword("");
+		setFechaConexion(new Date());
+
+	}
+
+	public Date getFechaConexion() {
+		return fechaConexion;
+	}
+
+	public void setFechaConexion(Date fechaConexion) {
+		this.fechaConexion = fechaConexion;
 	}
 
 	public String getIdSession() {
