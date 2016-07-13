@@ -53,11 +53,11 @@ public class InitListener implements ServletContextListener, ServletContextAttri
          
     	loadLog4j(sce);
     }
-
+    
 	private void loadLog4j(ServletContextEvent sce) {
 		
 		String ruta = sce.getServletContext().getRealPath("/");//lo tomamos que el acceso a la parte raiz de la app, que al juntarlo al web-inf de la siguiente fila, hacemos la ruta relativa entera
-		PropertyConfigurator.configure(ruta+PATH_LOG4J); //cargar fichero de properties que hemos creado previamente en WEB-INF
+		//PropertyConfigurator.configure(ruta+PATH_LOG4J); //cargar fichero de properties que hemos creado previamente en WEB-INF
 		
 		try{
 			

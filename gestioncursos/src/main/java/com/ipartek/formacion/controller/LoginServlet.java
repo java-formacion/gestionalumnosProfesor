@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +42,12 @@ public class LoginServlet extends HttpServlet {
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
-		if("anabel".equals(userName)&&"anabel".equals(pass)){
+		String[] checkBoxes = request.getParameterValues(Constantes.PAR_REMEMBER);
+		if(checkBoxes != null && checkBoxes.length==1){
+			Cookie cookieName = new Cookie("usuario", usuario.getUserName());
+			Cookie cookiePass = new Cookie("pass", usuario.getUserPassword());
+		}
+		if("anabel".equals(userName)&&"anabel".equals(pass) || "violeta".equals(userName)&&"violeta".equals(pass)){
 			createSession(request);
 			usuario = new Usuario();
 			usuario.setUserName(userName);
