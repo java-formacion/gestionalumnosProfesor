@@ -20,7 +20,7 @@
      	<div class="panel-heading"> <strong class="">Login</strong>
 		 </div>
 		 <div class="panel-body">
-		<form class="form-horizontal"  name="formu_login" method="post" action="<%=Constantes.SERVLET_LOGIN%>">
+		<form class="form-horizontal" name="formu_login" method="post" action="<%=Constantes.SERVLET_LOGIN%>">
 			<div class="form-group">
 			<div class="col-sm-3">	
 				<label for="<%=Constantes.PAR_ALIAS%>">USUARIO:</label>

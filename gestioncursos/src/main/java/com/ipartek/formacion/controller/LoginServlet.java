@@ -33,12 +33,14 @@ public class LoginServlet extends HttpServlet {
 		String pass = request.getParameter(Constantes.PAR_PASSWORD); //recojo el parametro contraseña
 		
 		if("marta".equals(usu) && ("marta".equals(pass))){
+			createSession(request); //creamos la sesion
 			usuario = new Usuario();
+			usuario.setIdSession(session.getId()); //guardo en el usuario, en una variable idSession el id de su sesion que me da session
 			usuario.setAlias(usu);
 			usuario.setPassword(pass);
+			usuario.setIdUsuario(1);
 			
-			createSession(request); //creamos la sesion
-			session.setAttribute("usuario", usuario); //guardo el objeto usuario
+			session.setAttribute(Constantes.ATT_USUARIO, usuario); //guardo el objeto usuario
 			
 			rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rwd.forward(request,response);

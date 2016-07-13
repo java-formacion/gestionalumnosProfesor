@@ -7,16 +7,30 @@ public class Usuario {
 	private int idUsuario;
 	private String alias;
 	private String password;
+	private String idSession;
 	
 	public Usuario() {
 		super();
 		setIdUsuario(CODIGO_USU);
 		setAlias("");
 		setPassword("");
+		setIdSession("");
 		
 	}
 	
 	
+
+	public String getIdSession() {
+		return idSession;
+	}
+
+
+
+	public void setIdSession(String idSession) {
+		this.idSession = idSession;
+	}
+
+
 
 	public int getIdUsuario() {
 		return idUsuario;

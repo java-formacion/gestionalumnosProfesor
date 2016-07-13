@@ -22,4 +22,21 @@ footer{
 	margin-right: 40px;
 }
 
+table {
+    border-collapse: collapse;
+    margin: 40px;
+    
+}
+
+table, th, td {
+    border: 2px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+#mensaje_conectados{
+	margin: 40px;
+}
+
+
 

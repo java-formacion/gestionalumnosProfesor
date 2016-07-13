@@ -41,12 +41,17 @@ public class ServletFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request; //NO ES LO MISMO HttpServletRequest  QUE  ServletRequest, POR ESO EL CASTIN
 		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		if(checkSession(req)){ //si existe una sesion (ha hecho login)
-			chain.doFilter(request, response); //si todo va bien hace esto
-		}else{ //no tiene una sesion válida
-			res.sendRedirect("index.jsp");
+		String uri = req.getServletPath();
+		if(!uri.contains(Constantes.SERVLET_LOGIN)){ //si la url desde la que se hace la petición no es login.do
+			
+			if(checkSession(req)){ //si existe una sesion (ha hecho login)
+				chain.doFilter(request, response); //si todo va bien hace esto
+			}else{ //no tiene una sesion válida
+				res.sendRedirect("index.jsp");
+			}
+		}else{
+			chain.doFilter(request, response); 
 		}
-		
 		
 		
 	}

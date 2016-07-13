@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.controller.exception.AlumnoError;
+import com.ipartek.formacion.controller.listener.InitListener;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Modulo;
@@ -34,6 +37,7 @@ public class AlumnosServlet extends HttpServlet {
     private RequestDispatcher rwd = null;
     private int id = -1;   
     private int operacion = -1;
+    private final static Logger log = Logger.getLogger(AlumnosServlet.class);
    
   //si recibo un paremetro hago getbyid,sino getall
   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -13,6 +13,8 @@ public class Constantes {
 	public final static String ATT_MODULO = "modulo";
 	
 	public final static String ATT_USUARIO ="usuario";
+	public final static String ATT_LIST_USUARIOS="usuarios";
+	public final static String ATT_LIST_SESIONES="sesiones";
 	
 	public final static String ERROR_LOGIN = "login_error";
 		
@@ -35,12 +37,14 @@ public class Constantes {
 	public final static String PAR_ID_USU="idUsuario";
 	public final static String PAR_ALIAS="alias";
 	public final static String PAR_PASSWORD="password";
+	public final static String PAR_SESSION_ID="idSession";
 	
 	public final static String SERVLET_CURSOS = "cursos.do";
 	public final static String SERVLET_ALUMNOS = "alumnos.do";
 	public final static String SERVLET_MODULOS = "modulos.do";
 	public final static String SERVLET_LOGIN = "login.do";
 	public final static String SERVLET_LOGOUT = "logout.do";
+	public final static String SERVLET_ADMIN = "administracion.do";
 	
 	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
 	public final static String JSP_CURSO ="/cursos/curso.jsp";
@@ -52,6 +56,8 @@ public class Constantes {
 	public final static String JSP_MODULO ="/modulos/modulo.jsp";
 	
 	public final static String JSP_INDEX ="/index.jsp";
+	
+	public final static String JSP_LISTADO_CONECTADOS ="/administracion/listadoConectados.jsp";
 	
 	//operaciones CRUD
 	public final static int OP_CREATE = 0;

@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -74,9 +75,14 @@
     	<%
 	if(session.getAttribute("usuario")!=null){
 	%>	
+		<div class="row">
+				<div class="pull-right">
+					<a href="<%=Constantes.SERVLET_ADMIN %>" class="btn btn-info">Administracion</a>
+				</div>
+	 	</div>
 	 	<div class="row">
 				<div class="pull-right">
-					<button type="submit" class="btn btn-success">Salir</button>
+					<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-success">Salir</a>
 				</div>
 	 	</div>
 	<% 
