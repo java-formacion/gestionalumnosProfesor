@@ -10,7 +10,7 @@
 			Bienvenidos a la pagina de Gestion de Alumnos de <span>Ipartek</span>.
 
 		</p>
-		<p>Esta apliación ha sido en conjunto de....</p>
+		<p>Esta aplicación ha sido en conjunto de....</p>
 		
 	</section>
 	<aside class="col-xs-12 col-md-5 panel">
@@ -37,7 +37,7 @@
 		           <div class="input-group">
 						<div class="checkbox">
 			            	<label>  </label>
-								<input type="checkbox" value="1"> Recuerdame
+								<input type="checkbox" value="1"> Recuérdame
 			            </div>
                    </div>
 

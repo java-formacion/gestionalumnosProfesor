@@ -4,15 +4,25 @@ public class Usuario {
 	private String userName;
 	private String userPassword;
 	private String nickname;
+	private String sessionId;
 
 	public Usuario(){
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
+		setSessionId("");
 	}
 
 
 
+
+	public String getSessionId() {
+		return sessionId;
+	}
+	
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 
 	public String getUserName() {
 		return userName;
