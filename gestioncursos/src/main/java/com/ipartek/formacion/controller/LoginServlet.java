@@ -1,13 +1,17 @@
 package com.ipartek.formacion.controller;
 
+import java.awt.Checkbox;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
@@ -19,6 +23,8 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher rd = null;
 	HttpSession session = null;
+	private static final Logger log = Logger.getLogger(LoginServlet.class);
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,9 +44,32 @@ public class LoginServlet extends HttpServlet {
 
 	private void doProcess(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		if(Cookies != null)
+		{
+			
+			String nUsuario="", passWord="";
+			for(Cookie cookie: cookies){
+				if (cookie.getName().equals(Constantes.cookie)){
+					nUsuario = cookie.getValue();
+				}else{
+					if (cookie.getName().equals(Constantes.cookie)){
+						passWord = cookie.getValue();
+					}
+				}
+			}
+			if(!"".equals(nUsuario)&&!"".equals(passWord)){
+				createSession(request);
+			rd = request.getRequestDispatcher(Constantes.JSP_INDEX);
+			rd.forward(request, response);
+
+			}
+			log.trace("Hay galletas");
+		}
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
+		String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER)
 		if(Constantes.LOGIN_NAME.equals(userName)&&Constantes.LOGIN_PASS.equals(pass)){
 			createSession(request);
 			usuario = new Usuario();
@@ -49,6 +78,14 @@ public class LoginServlet extends HttpServlet {
 			usuario.setNickname(Constantes.LOGIN_NICK);
 			usuario.setSessionid(session.getId());
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
+			if(checkboxes!=null && checkboxes.length==1){
+				Cookie cookieNombre = new Cookie("usuario",usuario);
+				Cookie cookiePass = new Cookie("pasword",usuario);
+				cookieNombre.setMaxAge(3600*24);
+				cookiePass.setMaxAge(60*60*24);
+				response.addCookie(cookieNombre);
+				response.addCookie(cookiePass);
+			}
 			rd = request.getRequestDispatcher(Constantes.JSP_INDEX);
 			rd.forward(request, response);
 		}else{
