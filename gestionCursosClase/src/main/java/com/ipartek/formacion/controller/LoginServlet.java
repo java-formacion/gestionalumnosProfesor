@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,9 +38,37 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null)
+		{
+			String username="", password="";
+			for(Cookie cookie: cookies)
+			{
+				if(cookie.getName().equals("cookieUsername"))
+				{
+					username = cookie.getValue();
+				}
+				else
+				{
+					if(cookie.getName().equals("cookiePassword"))
+					{
+						password = cookie.getValue();
+					}
+				}
+			}
+			if(!"".equals(username) && !"".equals(password))
+			{
+				createSession(request);
+				//TODO falta redireccionar
+			}
+		}
+		
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
+		//checboxes van siempre en array sea 1 o mas
+		String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
 		
 		if("julen".equals(userName)&&"julen".equals(pass)){
 			createSession(request);
@@ -50,6 +79,16 @@ public class LoginServlet extends HttpServlet {
 			usuario.setSessionID(session.getId());
 			createSession(request);
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
+			if(checkboxes != null && checkboxes.length==1)
+			{
+				Cookie cookieUsername = new Cookie(Constantes.ATT_USUARIO, usuario.getUserName());
+				Cookie cookiePassword = new Cookie(Constantes.ATT_PASSWORD, usuario.getUserPassword());
+				cookieUsername.setMaxAge(24*60*60);
+				cookiePassword.setMaxAge(24*60*60);
+				
+				response.addCookie(cookiePassword);
+				response.addCookie(cookieUsername);
+			}
 			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rd.forward(request, response);
 		}
@@ -81,6 +120,8 @@ public class LoginServlet extends HttpServlet {
 			}
 			
 		}
+		
+		
 
 	}
 	

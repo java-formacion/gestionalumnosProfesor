@@ -18,6 +18,7 @@ public class Constantes {
 	public final static String ATT_MENSAJE = "MENSAJE";
 	
 	public final static String ATT_USUARIO = "usuario";
+	public final static String ATT_PASSWORD = "password";
 	public final static String ATT_LIST_USUARIO = "usuarios";
 	public final static String PAR_ID_SESION = "idsesion";
 	public final static String ATT_SESIONES = "sesiones";
@@ -41,6 +42,7 @@ public class Constantes {
 	public final static String PAR_REFERENCIA="referencia";
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
+	public final static String PAR_REMEMBER = "recuerdame";
 	
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";

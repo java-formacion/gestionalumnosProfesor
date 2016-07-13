@@ -28,7 +28,7 @@
       			
       			<label class="checkbox">
       			
-        		<input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" value = "1"> Remember me
+        		<input type="checkbox" value="remember-me" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" value = "1"> Recuerdame
         		
       			</label>
       			<button id ="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
