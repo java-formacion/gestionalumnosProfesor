@@ -19,6 +19,8 @@ public class Constantes {
 	public final static String ATT_MODULO = "modulo";
 	public final static String ATT_LISTA_DURACION_MODULO="listado_duracion";
 	public final static String ATT_MENSAJE ="mensaje";
+	
+	public final static String ATT_SESIONES ="listado_sesiones";
 
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
@@ -40,6 +42,7 @@ public class Constantes {
 
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
+	public final static String PAR_IDSESSION = "idSession";
 
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";
@@ -59,7 +62,7 @@ public class Constantes {
 	public final static String JSP_LISTADO_MODULOS ="/modulos/listado.jsp";
 	public final static String JSP_MODULO ="/modulos/modulo.jsp";
 	
-	public final static String JSP_ADMIN = "/usuarios/admin.jsp";
+	public final static String JSP_ADMIN = "/administracion/listado_usuarios.jsp";
 
 	public final static int OP_CREATE = 0;
 	public final static int OP_READ = 1;

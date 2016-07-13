@@ -40,11 +40,11 @@ public class LogoutServlet extends HttpServlet {
 			
 		}
 		try {
-			response.sendRedirect("index.jsp");
+			/*
 			Mensaje mensaje = new Mensaje();
 			mensaje.setMsg("Ha expirado el tiempo de sesión");
 			mensaje.setType(mensaje.MSG_TYPE_DANGER);
-			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);*/
 			response.sendRedirect("index.jsp");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

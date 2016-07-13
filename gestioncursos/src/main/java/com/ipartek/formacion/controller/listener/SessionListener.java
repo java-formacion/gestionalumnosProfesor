@@ -1,7 +1,9 @@
 package com.ipartek.formacion.controller.listener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -67,8 +69,20 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
         	 //log.info("El usuario logeado es:"+usuario.getUserName());
         	 tUsuario++;
         	 addUsuario(se);
+        	 addSession(se);
          }
     }
+
+	private void addSession(HttpSessionBindingEvent se) {
+		Map<String, HttpSession> sesiones = null;	
+		if(sesiones == null){
+			sesiones = new HashMap<String, HttpSession>();
+		}
+		HttpSession session = se.getSession();
+		sesiones.put(session.getId(), session);
+		ServletContext servletContext = session.getServletContext();
+		servletContext.setAttribute(Constantes.ATT_SESIONES, sesiones);
+	}
 
 	private void addUsuario(HttpSessionBindingEvent se) {
 		
@@ -86,6 +100,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		}
 		usuario = (Usuario) hSession.getAttribute(Constantes.ATT_USUARIO);
 		usuarios.add(usuario);
+		
 		log.info(usuario.getUserName());
 		
 		//guardamos la lista en el contexto
