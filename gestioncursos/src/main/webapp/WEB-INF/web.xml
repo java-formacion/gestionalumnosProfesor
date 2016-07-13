@@ -82,7 +82,7 @@
     <url-pattern>/logout.do</url-pattern>
   </servlet-mapping>
   <listener>
-    <listener-class>com.ipartek.formacion.controller.listener.initListener</listener-class>
+    <listener-class>com.ipartek.formacion.controller.listener.InitListener</listener-class>
   </listener>
   <listener>
     <listener-class>com.ipartek.formacion.controller.listener.SessionListener</listener-class>

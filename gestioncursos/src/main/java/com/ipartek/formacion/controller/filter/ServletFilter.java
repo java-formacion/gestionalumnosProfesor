@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.controller.Constantes;
 
@@ -18,12 +19,6 @@ import com.ipartek.formacion.controller.Constantes;
  */
 public class ServletFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public ServletFilter() {
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see Filter#destroy()
@@ -54,7 +49,8 @@ public class ServletFilter implements Filter {
 	private boolean checkSession(HttpServletRequest req) {
 		
 		boolean comprobar = false;
-		if(req.getSession(false) != null && req.getAttribute(Constantes.ATT_USUARIO) != null){
+		HttpSession session = req.getSession(false);
+		if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null){
 			comprobar = true;
 		}
 		return comprobar;

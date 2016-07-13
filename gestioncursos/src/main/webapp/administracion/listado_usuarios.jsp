@@ -7,6 +7,9 @@
 
 <main>
 	<%
-	List<Usuario> usuarios = (List<Usuario>)getServletContext().getAttribute(Constantes.ATT_LIST_USUARIO);
+
+	ServletContext context = getServletContext();
+	List<Usuario> usuarios = (List<Usuario>)context.getAttribute(Constantes.ATT_LIST_USUARIO);
+	
 	 %>
 </main>

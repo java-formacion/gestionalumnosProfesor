@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 			usuario.setUserPassword(pass);
 			usuario.setNickname("Alumno");
 			usuario.setSessionId(session.getId());
-			session.setAttribute("usuario", usuario);
+			session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rd.forward(request, response);
 		}else{
