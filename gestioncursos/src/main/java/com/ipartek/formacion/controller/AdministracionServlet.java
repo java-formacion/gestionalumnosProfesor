@@ -54,7 +54,7 @@ public class AdministracionServlet extends HttpServlet {
 		Map<String, HttpSession> sesiones = (Map<String, HttpSession>) context
 				.getAttribute(Constantes.ATT_LISTADO_SESIONES);
 		HttpSession session = sesiones.get(sessionId);
-		if (session != null) {
+		if (session != null) { 
 			Usuario user = (Usuario) session
 					.getAttribute(Constantes.ATT_USUARIO);
 			session.invalidate();
