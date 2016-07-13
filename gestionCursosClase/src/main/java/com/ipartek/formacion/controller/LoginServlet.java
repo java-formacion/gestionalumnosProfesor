@@ -55,14 +55,31 @@ public class LoginServlet extends HttpServlet {
 		}
 		else
 		{
-			createSession(request);
+			if("user2".equals(userName)&&"user2".equals(pass))
+			{
+				createSession(request);
+				usuario = new Usuario();
+				usuario.setUserName(userName);
+				usuario.setUserPassword(pass);
+				usuario.setNickname("usr");
+				usuario.setSessionID(session.getId());
+				createSession(request);
+				session.setAttribute(Constantes.ATT_USUARIO, usuario);
+				rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+				rd.forward(request, response);
+			}
+			else
+			{
+				createSession(request);
+				
+				Mensaje mensaje = new Mensaje();
+				mensaje.setMsg("Usuario y/o contraseña incorrectos");
+				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
+				//request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+				session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+				response.sendRedirect("index.jsp");
+			}
 			
-			Mensaje mensaje = new Mensaje();
-			mensaje.setMsg("Usuario y/o contraseña incorrectos");
-			mensaje.setType(Mensaje.MSG_TYPE_DANGER);
-			//request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			response.sendRedirect("index.jsp");
 		}
 
 	}

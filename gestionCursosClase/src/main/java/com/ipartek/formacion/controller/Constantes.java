@@ -19,6 +19,8 @@ public class Constantes {
 	
 	public final static String ATT_USUARIO = "usuario";
 	public final static String ATT_LIST_USUARIO = "usuarios";
+	public final static String PAR_ID_SESION = "idsesion";
+	public final static String ATT_SESIONES = "sesiones";
 		
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE = "nombre";
@@ -45,6 +47,7 @@ public class Constantes {
 	public final static String SERVLET_MODULOS ="modulos.do";
 	public final static String SERVLET_LOGIN ="Login.do"; 
 	public final static String SERVLET_LOGOUT ="Logout.do"; 
+	public final static String SERVLET_ADMINISTRACION= "administracion.do";
 	
 	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
 
@@ -56,6 +59,8 @@ public class Constantes {
 	
 	public final static String JSP_LISTADO_MODULOS ="/modulos/listado.jsp";
 	public final static String JSP_MODULO = "/modulos/modulo.jsp";
+	
+	public final static String JSP_LISTADO_USUARIOS = "/administracion/listaUser.jsp";
 	
 	public final static int OP_CREATE = 0;
 	public final static int OP_READ = 1;

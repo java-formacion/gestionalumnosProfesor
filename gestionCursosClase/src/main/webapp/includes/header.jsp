@@ -66,7 +66,9 @@
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_LOGOUT%>"><%= nombreUser %></a>
 						<ul class="dropdown-menu">
 	          				<li><a href="<%=Constantes.SERVLET_LOGOUT%>">Logout</a></li>
+	          				<li><a href="<%=Constantes.SERVLET_ADMINISTRACION%>">Administración</a></li>
 	          			</ul>
+	          			
 					</li>
 					<%	} %>
 				</ul>
