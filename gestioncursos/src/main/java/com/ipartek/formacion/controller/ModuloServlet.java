@@ -1,10 +1,7 @@
 package com.ipartek.formacion.controller;
 
-import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.DuracionModulo;
 import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.service.CursoService;
-import com.ipartek.formacion.service.CursoServiceImp;
 import com.ipartek.formacion.service.ModuloService;
 import com.ipartek.formacion.service.ModuloServiceImp;
 import com.ipartek.formacion.service.Util;
