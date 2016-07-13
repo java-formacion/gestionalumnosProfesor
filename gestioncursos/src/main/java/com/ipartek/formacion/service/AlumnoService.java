@@ -24,13 +24,4 @@ public interface AlumnoService {
 	
 	public Alumno update(Alumno alumno);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -21,13 +21,21 @@ public class Constantes {
 	
 	public final static String ATT_LIST_USUARIOS = "lista_usuarios";
 	
+	public final static String ATT_LISTADO_SESIONES = "listado_sesiones";
+	
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
 	public final static String PAR_LISTADO_MODULOS = "codigos_modulos";
 	public final static String PAR_LISTADO_ALUMNOS = "codigos_alumnos";
+	public final static String PAR_LISTADO_USUARIOS = "codigo_usuarios";
 	
 	public final static String PAR_USERNAME = "username";
 	public final static String PAR_PASSWORD = "password";
+	public final static String PAR_REMEMBER = "recuerda";
+	
+	public final static String COOKIE_USERNAME = "username";
+	public final static String COOKIE_PASSWORD = "password";
+	public final static String COOKIE_NICKNAME = "nickname";
 	
 	public final static String PAR_APELLIDOS ="apellidos";
 	public final static String PAR_DNI ="dni";
@@ -42,6 +50,8 @@ public class Constantes {
 	public final static String PAR_MODULO = "modulo";
 	public final static String PAR_REFERENCIA = "referencia";
 	
+	public final static String PAR_SESSIONID = "sessionid";
+	
 	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
 	
 	public final static String PAR_OPERACION = "operacion";	
@@ -53,15 +63,20 @@ public class Constantes {
 	public final static String SERVLET_LOGOUT = "logout.do";
 	public final static String SERVLET_INDEX = "index.do";
 	
-	public final static String JSP_BASE_URL_CURSO ="curso";
-	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
-	public final static String JSP_CURSO ="/cursos/curso.jsp";
+	public final static String SERVLET_USUARIOS = "administracion.do";
 	
-	public final static String JSP_LISTADO_ALUMNOS ="/alumnos/listadoAlumnos.jsp";
-	public final static String JSP_ALUMNO ="/alumnos/alumno.jsp";
+	public final static String JSP_BASE_URL_CURSO = "curso";
+	public final static String JSP_LISTADO_CURSOS = "/cursos/listado.jsp";
+	public final static String JSP_CURSO = "/cursos/curso.jsp";
 	
-	public final static String JSP_LISTADO_MODULOS ="/modulos/listadoModulos.jsp";
-	public final static String JSP_MODULO ="/modulos/modulo.jsp";
+	public final static String JSP_LISTADO_ALUMNOS = "/alumnos/listadoAlumnos.jsp";
+	public final static String JSP_ALUMNO =" /alumnos/alumno.jsp";
+	
+	public final static String JSP_LISTADO_MODULOS = "/modulos/listadoModulos.jsp";
+	public final static String JSP_MODULO = "/modulos/modulo.jsp";
+	
+	public final static String JSP_LISTADO_USUARIOS = "/administracion/listadoUsuarios.jsp";
+	public final static String JSP_USUARIO = "/administracion/usuario.jsp";
 	
 	public final static String JSP_INDEX = "index.jsp";
 	

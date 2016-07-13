@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
@@ -19,6 +22,8 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher rd = null;
 	HttpSession session = null;
+	
+	private static final Logger log = Logger.getLogger(LoginServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,15 +33,47 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies != null){
+			String nUsuario="", passWord="", nickName="";
+			for(Cookie cookie: cookies){
+				if(cookie.getName().equals(Constantes.COOKIE_USERNAME)){
+					nUsuario = cookie.getValue();
+				} else{
+					if(cookie.getName().equals(Constantes.COOKIE_PASSWORD)){
+						passWord = cookie.getValue();
+					} else{
+						if(cookie.getName().equals(Constantes.COOKIE_NICKNAME)){
+							nickName = cookie.getValue();
+						}
+					}
+				}	
+			}
+			
+			if(!"".equals(nUsuario) && !"".equals(passWord) && !"".equals(nickName)){
+				createSession(request);
+				
+				// CON ESTAS DOS LINEAS NO FUNCIONA
+				rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+				rd.forward(request, response);
+			}
+		}
+				
 		Usuario usuario = null;
 		
 		String username = request.getParameter(Constantes.PAR_USERNAME);		
 		String password = request.getParameter(Constantes.PAR_PASSWORD);
+		String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
 		
 		String user = "Tamasco";
 		String pass = "123456";
 		
-		if(user.equals(username) && pass.equals(password)){
+		String user2 = "admin";
+		String pass2 = "654321";
+		
+		if(user.equals(username) && pass.equals(password) || user2.equals(username) && pass2.equals(password)){
 			createSession(request);
 			
 			usuario = new Usuario();
@@ -44,8 +81,22 @@ public class LoginServlet extends HttpServlet {
 			usuario.setUserPassword(password);
 			usuario.setNickname("Alumno");
 			usuario.setSessionid(session.getId());
-			
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
+			
+			if(checkboxes != null && checkboxes.length==1){
+				// En la cookie se guardara el nombre, contraseña y nickname
+				Cookie cookieUserName = new Cookie(Constantes.COOKIE_USERNAME, usuario.getUserName());
+				Cookie cookiePassword = new Cookie(Constantes.COOKIE_PASSWORD, usuario.getUserPassword());
+				Cookie cookieNickName = new Cookie(Constantes.COOKIE_NICKNAME, usuario.getNickname());
+				
+				cookieUserName.setMaxAge(24*60*60);
+				cookiePassword.setMaxAge(24*60*60);
+				cookieNickName.setMaxAge(24*60*60);
+				
+				response.addCookie(cookieUserName);
+				response.addCookie(cookiePassword);
+				response.addCookie(cookieNickName);
+			}
 			
 			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 			rd.forward(request, response);

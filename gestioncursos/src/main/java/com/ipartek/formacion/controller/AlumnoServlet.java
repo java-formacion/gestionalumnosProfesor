@@ -79,7 +79,7 @@ public class AlumnoServlet extends HttpServlet {
 	
 	private void getAll(HttpServletRequest request) {
 		alumnos = aService.getAll();
-		request.setAttribute("listado_alumnos", alumnos);
+		request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, alumnos);
 		rwd = request.getRequestDispatcher("/alumnos/listadoAlumnos.jsp");
 	}
 

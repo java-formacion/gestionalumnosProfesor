@@ -112,9 +112,7 @@ public class AlumnoServiceImp implements AlumnoService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return alumno;
 	}
 
@@ -131,6 +129,7 @@ public class AlumnoServiceImp implements AlumnoService{
 		
 		
 	}
+	
 	private int getIndex(int codigo) throws AlumnoServiceException{
 		int index = -1;
 		int i = 0,len= this.alumnos.size();
@@ -153,6 +152,7 @@ public class AlumnoServiceImp implements AlumnoService{
 	public List<Alumno> getAll() {
 		return this.alumnos;
 	}
+	
 	@Override
 	public Alumno update(Alumno alumno) {
 		int index;

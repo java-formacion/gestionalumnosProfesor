@@ -87,7 +87,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="">Ver todos los usuarios</a>
+									<a href="<%= Constantes.SERVLET_USUARIOS %>">Ver Usuarios Conectados</a>
 								</li>
 							</ul>
 						</li>
@@ -97,7 +97,7 @@
 							if(session != null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
 							%>
 								<li>
-									<a href="logout.do">Logout</a>
+									<a href="<%= Constantes.SERVLET_LOGOUT %>">Logout</a>
 								</li>
 							<%
 							} 

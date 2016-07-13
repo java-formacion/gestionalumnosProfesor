@@ -24,6 +24,8 @@
 		       	
 		       	
 		       	<%
+		       		
+		       	
 					session = request.getSession();
 					if(session == null || session.getAttribute(Constantes.ATT_USUARIO)==null){
 					%>
@@ -47,7 +49,7 @@
 											</div>
 											
 											<label class="checkbox">
-												<input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Recordarme
+												<input type="checkbox" value="1" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>"> Recordarme
 											</label>
 											
 											<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   

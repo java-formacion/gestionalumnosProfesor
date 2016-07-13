@@ -1,16 +1,20 @@
 package com.ipartek.formacion.pojo;
 
+import java.util.Date;
+
 public class Usuario {
 	private String userName;
 	private String userPassword;
 	private String nickname;
 	private String sessionid;
+	private Date fConexion;
 	
 	public Usuario(){
 		setSessionid("");
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
+		this.setfConexion(new Date());
 	}
 	
 	public String getUserName() {
@@ -43,5 +47,13 @@ public class Usuario {
 
 	public void setSessionid(String sessionid) {
 		this.sessionid = sessionid;
+	}
+
+	public Date getfConexion() {
+		return fConexion;
+	}
+
+	public void setfConexion(Date fConexion) {
+		this.fConexion = fConexion;
 	}
 }
