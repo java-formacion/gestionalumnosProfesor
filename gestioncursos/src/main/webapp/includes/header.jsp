@@ -26,7 +26,12 @@
 </head>
 <body class="container-fluid">
 	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1></header>
-	
+	<% Usuario usuario = (Usuario) request.getAttribute(Constantes.ATT_USUARIO);
+			if(usuario==null){
+				usuario = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+			
+		}
+		%>
 	<nav class="navbar navbar-inverse" role="navigation">
 		  <!-- El logotipo y el icono que despliega el menú se agrupan
 		       para mostrarlos mejor en los dispositivos móviles -->
@@ -60,13 +65,19 @@
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
 					</ul>
 				</li>
-			</ul>
-		<% Usuario usuario = (Usuario) request.getAttribute(Constantes.ATT_USUARIO);
-			if(usuario==null){
-				usuario = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
-		}
-		%>
+				<%if (usuario != null) { %>
+				<li class="dropdown">
+					<a href="<%=Constantes.SERVLET_ADMINISTRACION%>">
+						Administracion
+					</a>
+				</li>
+				<%} %>
+				</ul>
+			
+		
+		
 		<% if (usuario != null) { %>
+				
 			   <ul class="nav navbar-top-links navbar-right">
                  <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
