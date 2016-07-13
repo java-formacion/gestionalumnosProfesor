@@ -8,7 +8,7 @@ public class Alumno extends Candidato implements Comparable<Alumno>{
 	public Alumno() throws CandidatoException {
 		super();
 		this.curso = new Curso();
-	}
+	} 
 
 	public Curso getCurso() {
 		return curso;
