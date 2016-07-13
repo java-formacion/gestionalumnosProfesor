@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /**
  * Servlet implementation class ModuloServlet
  */
@@ -28,6 +30,8 @@ public class ModuloServlet extends HttpServlet {
     private ModuloService mService = new ModuloServiceImp();
     private List<Modulo> modulos = null;
     private Modulo modulo = null;
+	private static final Logger log = Logger.getLogger(ModuloServlet.class);
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -78,9 +82,6 @@ public class ModuloServlet extends HttpServlet {
 	}
 
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		try{

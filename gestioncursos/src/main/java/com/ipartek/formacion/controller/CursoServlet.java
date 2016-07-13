@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Modulo;
@@ -36,6 +38,8 @@ public class CursoServlet extends HttpServlet {
 	private ModuloService  mService = new ModuloServiceImp();
 	private List<Curso> cursos = null;
 	private Curso curso = null;
+	private static final Logger log = Logger.getLogger(CursoServlet.class);
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

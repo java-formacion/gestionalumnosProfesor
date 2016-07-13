@@ -60,7 +60,7 @@ if(session == null || session.getAttribute(Constantes.ATT_USUARIO)==null)
 				
 			    <div class="form-group">
 					<div class="col-xs-12 controls">
-						<a class="btn btn-info" href="logout.do">
+						<a class="btn btn-info" href="<%=Constantes.SERVLET_LOGOUT%>">
 						<span class="fa fa-sign-out" aria-hidden="true"></span>
 						Desconectar
 						</a>

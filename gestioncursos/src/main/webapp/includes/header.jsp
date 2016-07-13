@@ -46,10 +46,9 @@
 		  </div>
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
     		<ul class="nav navbar-nav">
+    		
     			<li class="dropdown">
-					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_CURSOS%>">
-						Cursos
-					</a>
+					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_CURSOS%>">Cursos</a>
 					<ul>
 						<li>
 							<a href="<%=Constantes.SERVLET_CURSOS%>">
@@ -63,34 +62,39 @@
 						</li>
 					</ul>
 				</li>
+				
 				<li class="dropdown">
-					<a href="<%=Constantes.SERVLET_ALUMNOS%>">
-						Alumnos
-					</a>
+					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_ALUMNOS%>">Alumnos</a>
 					<ul>
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>">
-								Todos los alumnos
-							</a>
+							<a href="<%=Constantes.SERVLET_ALUMNOS%>"> Todos los alumnos </a>
 						</li>
 						<li>
-							<a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear Alumno Nuevo</a></li>
+							<a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear Alumno Nuevo</a>
 						</li>
 					</ul>
 				</li>
+				
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Modulos
-					</a>
-					<ul class="dropdown-menu">
+					<a class="dropdown-toggle" href="<%=Constantes.SERVLET_MODULOS%>">Modulos</a>
+					<ul>
 						<li>
-							<a href="<%=Constantes.SERVLET_MODULOS%>">
-								Ver Modulos
-							</a>
+							<a href="<%=Constantes.SERVLET_MODULOS%>">Ver Modulos</a>
 						</li>
-						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
+						<li>
+							<a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a>
+						</li>
 					</ul>
 				</li>
+					<%session = request.getSession();
+					if(session != null && session.getAttribute(Constantes.ATT_USUARIO)!=null){%>
+				<li>
+					<a href="<%=Constantes.SERVLET_ADMIN %>">Admin</a>
+				</li>
+				<li>
+					<a href="<%=Constantes.SERVLET_LOGOUT%>">Logout</a>
+				</li>
+				<%}%>
 			</ul>
 			</div>
 		</nav>
