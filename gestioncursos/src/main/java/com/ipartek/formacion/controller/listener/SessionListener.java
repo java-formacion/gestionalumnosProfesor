@@ -3,7 +3,9 @@ package com.ipartek.formacion.controller.listener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -98,22 +100,37 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 			}
         	totalUsuarios++;
         	addUsuario(sbe);
+        	addSession(sbe);
         	 
 			log.info("Se ha logueado "+usr.getUser()+"desde la IP: "+ip);
 		}
     	
     }
 
+	private void addSession(HttpSessionBindingEvent sbe) {
+		Map<String,HttpSession>sesiones=null;
+		if (sesiones==null) {
+			sesiones=new HashMap<String,HttpSession>();
+		}
+		HttpSession session=sbe.getSession();
+		ServletContext context=session.getServletContext();
+		sesiones.put(session.getId(), session);
+		context.getAttribute(Constantes.ATT_LISTADO_SESIONES);
+	}
+
+
 	private void addUsuario(HttpSessionBindingEvent sbe) {
 		Usuario usr=null;
 		List<Usuario> usrList=null;
 		HttpSession session=sbe.getSession();
 		ServletContext sC=session.getServletContext();
+		
 		usrList=(List<Usuario>)sC.getAttribute(Constantes.ATT_LIST_USUARIO);
 		//primer login
 		if (usrList==null) {
 			usrList=new ArrayList<Usuario>();
 		}
+		
 		usr=(Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 		usrList.add(usr);
 		log.info(usr.getUser());

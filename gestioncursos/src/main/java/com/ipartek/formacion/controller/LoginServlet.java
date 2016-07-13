@@ -44,15 +44,17 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		dummy=new Usuario();
 		dummy.setPassword("asdfqwer");
 		dummy.setUser("admin");
 		usr=new Usuario();
 		
-		usr.setSessionId(session.getId());
+		
 		usr.setUser(request.getParameter(Constantes.PAR_USER));
 		usr.setPassword(request.getParameter(Constantes.PAR_PASSWORD));
 		usr.setNickname("General");
-		if(dummy.getPassword().equals(usr.getPassword())&&dummy.getUser().equals(usr.getPassword())){
+		//usr.setSessionId(session.getId());
+		if(dummy.getPassword().equals(usr.getPassword())&&dummy.getUser().equals(usr.getUser())){
 			createSession(request);
 			session.setAttribute(Constantes.ATT_USUARIO, usr);
 			rwd=request.getRequestDispatcher(Constantes.SERVLET_CURSOS);

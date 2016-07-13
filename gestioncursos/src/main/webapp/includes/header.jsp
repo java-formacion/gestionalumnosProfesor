@@ -29,7 +29,13 @@
 	boolean lAdmin=false;
 	
 	%>
-	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1></header>
+	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1>
+	
+	<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
+			<span class="fa fa-sign-out" aria-hidden="true"></span>
+			Desconectar
+		</a>
+	</header>
 	<nav class="navbar navbar-inverse" role="navigation">
 		  <!-- El logotipo y el icono que despliega el menú se agrupan
 		       para mostrarlos mejor en los dispositivos móviles -->
@@ -65,8 +71,18 @@
 				</li>
 				<li class="dropdown">
 					<a href="<%=Constantes.SERVLET_LOGOUT%>">
-						 <button type="<%=lOutS %>" id="btn-login"  class="btn btn-success">LogOut  </button>
+						 <button type="submit" id="btn-login"  class="btn btn-success">LogOut  </button>
 					</a>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ADMIN%>">
+						ver Usuarios
+					</a>
+					<ul class="dropdown-menu">
+<%-- 						<li><a href="<%=Constantes.SERVLET_ADMIN%>">Crear Modulo Nuevo</a></li> --%>
+
+							<%  %>
+					</ul>
 				</li>
 			</ul>
 			</div>
