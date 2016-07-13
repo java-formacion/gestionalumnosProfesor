@@ -17,10 +17,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.controller.Constantes;
 import com.ipartek.formacion.pojo.Usuario;
 
-/**
- * Application Lifecycle Listener implementation class SessionListener
- *
- */
+
 public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener, HttpSessionActivationListener, HttpSessionBindingListener {
 	private final static Logger log = Logger.getLogger("ACCESOS");
 	private static int totalUsuarios = 0;
@@ -28,41 +25,31 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 	public static int getTotalUsiarios(){
 		return totalUsuarios;
 	}
-	/**
-	 * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
-	 */
+
 	@Override
 	public void sessionCreated(HttpSessionEvent arg0)  {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see HttpSessionBindingListener#valueBound(HttpSessionBindingEvent)
-	 */
+
 	@Override
 	public void valueBound(HttpSessionBindingEvent arg0)  {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
-	 */
+
 	@Override
 	public void sessionDestroyed(HttpSessionEvent arg0)  {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see HttpSessionActivationListener#sessionDidActivate(HttpSessionEvent)
-	 */
+
 	@Override
 	public void sessionDidActivate(HttpSessionEvent arg0)  {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
-	 */
+
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent se)  {
 		HttpSession session = se.getSession();
@@ -91,9 +78,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		context.setAttribute(Constantes.ATT_LIST_USUARIOS, usuarios);
 		log.info(user.getUserName());
 	}
-	/**
-	 * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
-	 */
+
 	@Override
 	public void attributeRemoved(HttpSessionBindingEvent se)  {
 		if(se.getName().equals(Constantes.ATT_USUARIO)){

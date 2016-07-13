@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 <main>
-		<a class="btn btn-warning" href="index.jsp">Atras</a> 
+		<a class="btn btn-warning" href="<%=Constantes.JSP_INDEX%>">Atras</a> 
 		<a class="btn btn-success"
 				href="<%=Constantes.SERVLET_ALUMNOS+"?"+
 						Constantes.PAR_CODIGO+"="+

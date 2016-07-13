@@ -53,7 +53,7 @@ public class ServletFilter implements Filter {
 				chain.doFilter(request, response);
 			}else{//no tiene una session valida
 				//
-				res.sendRedirect("index.jsp");
+				res.sendRedirect(Constantes.JSP_INDEX);
 			}
 			// pass the request along the filter chain
 		}else{

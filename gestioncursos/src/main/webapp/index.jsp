@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.controller.listener.SessionListener"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,37 +22,60 @@
        		<div class="panel-title"><h2>Login</h2></div>
        
    			</div>     
+<% 
+session = request.getSession();
+if(session == null || session.getAttribute(Constantes.ATT_USUARIO)==null)
 
+{ %>  
    			<div class="panel-body">
        			<form class="form-horizontal" action="<%=Constantes.SERVLET_LOGIN %>" method="post" role="form">
-           			<div class="input-group">
-           				<label class="sr-only" for="<%=Constantes.PAR_USERNAME %>">Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
-           			
-           			</div>
-		           <div class="input-group">
-		           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
-		            </div>
-		           <div class="input-group">
-						<div class="checkbox">
-			            	<label>  </label>
-								<input type="checkbox" value="1"> Recuerdame
+          	 			<div class="input-group">
+	           				<label class="sr-only" for="<%=Constantes.PAR_USERNAME %>">Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
+	           			
+	           			</div>
+			           <div class="input-group">
+			           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
 			            </div>
-                   </div>
+			           <div class="input-group">
+							<div class="checkbox">
+				            	<label>  </label>
+									<input type="checkbox" value="1"> Recuerdame
+				            </div>
+	                   </div>
+	
+	
+		               <div class="form-group">
+		                   <div class="col-xs-12 controls">
+		                     <button type="submit" id="btn-login" class="btn btn-success">Aceptar  </button> 
+		                   </div>
+		               </div>   
+        	   </form>     
+    	 	</div><!--panel-body-->     
+       <% }else{ %>                
+ 			<div class="panel-body">
 
-
-               <div class="form-group">
-                   <div class="col-xs-12 controls">
-                     <button type="submit" id="btn-login" class="btn btn-success">Aceptar  </button>
-                    
-
-                   </div>
+				
+			    <div class="form-group">
+					<div class="col-xs-12 controls">
+						<a class="btn btn-info" href="logout.do">
+						<span class="fa fa-sign-out" aria-hidden="true"></span>
+						Desconectar
+						</a>
+					</div>
                </div>   
-           </form>     
-       </div><!--panel-body-->                     
+				
+				
+ 		  </div>
+   <% } %>
    </div>
+
+
+
+
+
 	</aside> 
 	</div>
 </main>

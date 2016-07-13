@@ -28,10 +28,7 @@
 <body class="container-fluid">
 	<header class="row">
 		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
-		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
-			<span class="fa fa-sign-out" aria-hidden="true"></span>
-			Desconectar
-		</a>
+	
 	</header>
 	
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -45,7 +42,7 @@
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		    </button>
-		    <a class="navbar-brand" href="index.jsp">Página Principal</a>
+		    <a class="navbar-brand" href="<%=Constantes.JSP_INDEX%>">Página Principal</a>
 		  </div>
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
     		<ul class="nav navbar-nav">

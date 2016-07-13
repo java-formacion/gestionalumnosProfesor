@@ -41,25 +41,25 @@ public class LoginServlet extends HttpServlet {
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
-		if("urko".equals(userName)&&"urko".equals(pass)){
+		if(Constantes.LOGIN_NAME.equals(userName)&&Constantes.LOGIN_PASS.equals(pass)){
 			createSession(request);
 			usuario = new Usuario();
 			usuario.setUserName(userName);
 			usuario.setUserPassword(pass);
-			usuario.setNickname("Profe");
+			usuario.setNickname(Constantes.LOGIN_NICK);
 			usuario.setSessionid(session.getId());
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);
-			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+			rd = request.getRequestDispatcher(Constantes.JSP_INDEX);
 			rd.forward(request, response);
 		}else{
 			createSession(request);
-			//	rd = request.getRequestDispatcher("index.jsp");
+			//	rd = request.getRequestDispatcher(Constantes.JSP_INDEX);
 			Mensaje mensaje = new Mensaje();
 			mensaje.setMsg("Usuario y/o contraseña incorrectos");
 			mensaje.setType(Mensaje.MSG_TYPE_DANGER);
 			//request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect(Constantes.JSP_INDEX);
 		}
 
 	}

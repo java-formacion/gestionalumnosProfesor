@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp"/> 
 <main>
-	<a class="btn btn-warning" href="index.jsp">Atras</a>
+	<a class="btn btn-warning" href="<%=Constantes.JSP_INDEX%>">Atras</a>
 	<a class="btn btn-success" href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Añadir Modulo Nuevo</a> 
 		<%		
 			List<Modulo> modulos = (List<Modulo>) request.getAttribute(Constantes.ATT_LISTADO_MODULOS);

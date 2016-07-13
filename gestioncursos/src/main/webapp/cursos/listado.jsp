@@ -13,7 +13,7 @@ succes  -> verde
 default -> blanco
 primary -> Azul oscuro
  -->
-		<a class="btn btn-warning" href="index.jsp">Atras</a>
+		<a class="btn btn-warning" href="<%=Constantes.JSP_INDEX%>">Atras</a>
 		<a class="btn btn-success" href="<%=Constantes.SERVLET_CURSOS+"?"+Constantes.PAR_CODIGO+"="+Curso.CODIGO_CURSO%>">
 			<span class="fa fa-plus fblack" aria-hidden="true"></span>
 			Curso
