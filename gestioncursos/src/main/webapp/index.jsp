@@ -37,16 +37,13 @@
 		           <div class="input-group">
 						<div class="checkbox">
 			            	<label>  </label>
-								<input type="checkbox" value="1"> Recuerdame
+								<input id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"> 
+								<label for="<%=Constantes.PAR_REMEMBER %>" >Recuerdame </label>
 			            </div>
                    </div>
-
-
                <div class="form-group">
                    <div class="col-xs-12 controls">
                      <button type="submit" id="btn-login" class="btn btn-success">Aceptar  </button>
-                    
-
                    </div>
                </div>   
            </form>     
