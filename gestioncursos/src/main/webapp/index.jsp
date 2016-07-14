@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
-
+<%@page import="com.ipartek.formacion.services.Idioma"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.control.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,7 +24,16 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<p>Esta apliación ha sido en conjunto de....</p>
 		
 	</section>
-	
+<%
+if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
+%>
+		<div name="logout" id="logout" class="col-xs-12 col-md-5">
+        	<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-lg btn-primary btn-block btn-logout">Logout</a>
+        </div>
+                
+		<%
+	}
+%>
 
     <div class="container">
     
@@ -38,6 +47,12 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
                 <span id="reauth-email" ></span>
                 <input name="<%=Constantes.PAR_USER %>" type="email" id="<%=Constantes.PAR_USER %>" placeholder="Email address" class="form-control" required autofocus>
                 <input name="<%=Constantes.PAR_PASSWORD %>" type="password" id="<%=Constantes.PAR_PASSWORD %>" class="form-control" placeholder="Password" required>
+                <c:set var="idiomas" value="<%=Idioma.values() %>" />
+				<select class="grade" title="Grade Obtained">
+				    <c:forEach items="${idiomas}" var="idioma">
+				        <option value="${idioma.codigo}">${idioma.nombre}</option>
+				    </c:forEach>
+				</select>
                 <div id="remember" class="checkbox">
                     <label>
                         <input name="<%=Constantes.PAR_REMEMBER %>" id="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"> Remember me
