@@ -56,6 +56,8 @@ public class LoginServlet extends HttpServlet {
 					}
 				}
 			}
+			
+			
 			if(!"".equals(nUsuario) && !"".equals(nPass)){
 				createSession(request);
 				//falta hacer la redireccion
