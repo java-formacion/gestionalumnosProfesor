@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="includes/header.jsp"/>
@@ -29,7 +31,7 @@
 		           <div class="input-group">
 						<div class="checkbox">
 			            	<label>  </label>
-								<input type="checkbox" value="1"> Recuerdame
+								<input type="checkbox" name="<%=Constantes.PAR_REMEMBER %>" id="<%=Constantes.PAR_REMEMBER %>" value="1"> Recuerdame
 			            </div>
                    </div>
 

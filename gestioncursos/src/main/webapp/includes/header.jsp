@@ -1,8 +1,21 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="localCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18mesages"/>
+
+
 <!DOCTYPE html>
-<html>
+<html lang="${language} ">
 	<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -29,11 +42,21 @@
 	boolean lAdmin=false;
 	
 	%>
-	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1>
+	<header class="row">
+	<h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1>
+	
+	<%
+		Usuario user=(Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+		if(user!=null){
+			user=new Usuario();
+		}
+	
+	%>
+	
 	
 	<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
 			<span class="fa fa-sign-out" aria-hidden="true"></span>
-			Desconectar
+			<fmt:message key="header.desconectar"/>
 		</a>
 	</header>
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -69,20 +92,27 @@
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
 					</ul>
 				</li>
-				<li class="dropdown">
-					<a href="<%=Constantes.SERVLET_LOGOUT%>">
-						 <button type="submit" id="btn-login"  class="btn btn-success">LogOut  </button>
-					</a>
-				</li>
+			
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ADMIN%>">
-						ver Usuarios
+						ver Usuarios Conectados
 					</a>
 					<ul class="dropdown-menu">
-<%-- 						<li><a href="<%=Constantes.SERVLET_ADMIN%>">Crear Modulo Nuevo</a></li> --%>
+ 						<li><a href="<%=Constantes.SERVLET_ADMIN%>">Crear Modulo Nuevo</a></li> 
 
 							<%  %>
 					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
+						Ver todos los modulos
+					</a>
+					<ul class="dropdown-menu">
+						<li>a</li>
+						<li>g</li>
+						<li>d</li>
+					</ul>
+					
 				</li>
 			</ul>
 			</div>

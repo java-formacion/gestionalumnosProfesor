@@ -46,6 +46,8 @@ public class Constantes {
 	public final static String PAR_PASSWORD="password";
 	public final static String PAR_SESSIONID="sessionId";
 	
+	public final static String PAR_REMEMBER="remember";
+	
 	
 	public final static Duracion[] LISTA_DURACION = {Duracion.QUINCE,Duracion.VEINTE,Duracion.CUARENTAYCINCO,Duracion.OCHENTA,Duracion.NOVENTA};
 

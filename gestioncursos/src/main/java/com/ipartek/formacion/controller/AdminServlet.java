@@ -32,10 +32,13 @@ public class AdminServlet extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//cargar dispatcher
+		
 		cargarListUsr(request);
 		
 		//redirigir a la jsp
+		if(request.getParameter(Constantes.PAR_SESSIONID)!=null){
 		kickUser(request);
+		}
 		rwd.forward(request, response);
 	}
 
