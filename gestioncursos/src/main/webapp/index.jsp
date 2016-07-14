@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.control.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
