@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %><!-- JSTL -->
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

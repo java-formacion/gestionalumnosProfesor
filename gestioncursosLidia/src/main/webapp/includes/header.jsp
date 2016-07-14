@@ -1,15 +1,24 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
-	<title>Gestion de Cursos </title>
+	<title>Gestión de Cursos </title>
 	<!-- BOOSTRAP BASE STYLES -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<!-- FONTAWASONE -->
@@ -69,6 +78,7 @@
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
 						Alumnos
+						<span class="caret"></span><!-- flecha invertida menú dropdown -->
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -84,6 +94,7 @@
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
 						Modulos
+						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -97,6 +108,7 @@
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
 						Admin
+						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -109,7 +121,8 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" align="right">
-        		<li><a href="index.jsp"><i class="glyphicon glyphicon-off"></i>Log Out</a></li>
+        		<li><a href="index.jsp"><i class="glyphicon glyphicon-off"></i></a></li>
+        		<fmt:message key="header.desconectar"/>
       		</ul>
 			</div>
 		</nav>

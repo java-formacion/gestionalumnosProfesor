@@ -28,6 +28,13 @@
 		    <groupId>log4j</groupId>
 		    <artifactId>log4j</artifactId>
 		    <version>${log4java.version}</version>
+		
+		</dependency>
+		<!-- JSTL para sustituir scriptles,multilenguaje -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
 		</dependency>
  	 </dependencies>
   	<build>
