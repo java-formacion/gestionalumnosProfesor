@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String user= request.getParameter(Constantes.PAR_USER);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
+		//String idioma = request.getParameter();
 
 			if ("password".equals(pass) && "Josu@josu.es".equals(user)){
 				

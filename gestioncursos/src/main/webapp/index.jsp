@@ -48,7 +48,7 @@ if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
                 <input name="<%=Constantes.PAR_USER %>" type="email" id="<%=Constantes.PAR_USER %>" placeholder="Email address" class="form-control" required autofocus>
                 <input name="<%=Constantes.PAR_PASSWORD %>" type="password" id="<%=Constantes.PAR_PASSWORD %>" class="form-control" placeholder="Password" required>
                 <c:set var="idiomas" value="<%=Idioma.values() %>" />
-				<select class="grade" title="Grade Obtained">
+				<select class="select" title="idiomas">
 				    <c:forEach items="${idiomas}" var="idioma">
 				        <option value="${idioma.codigo}">${idioma.nombre}</option>
 				    </c:forEach>

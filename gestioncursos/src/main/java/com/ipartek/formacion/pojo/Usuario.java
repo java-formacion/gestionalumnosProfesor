@@ -5,6 +5,14 @@ public class Usuario {
 	private String pass=null;
 	private String nick=null;
 	private String sessionId=null;
+	private String idioma=null;
+	
+	public String getIdioma() {
+		return idioma;
+	}
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
 	public String getUser() {
 		return user;
 	}
@@ -34,14 +42,16 @@ public class Usuario {
 		setUser("");
 		setPass("");
 		setSessionId("");
+		setIdioma("");
 	}
 	
-	public Usuario(String user, String pass, String nick, String sessionId) {
+	public Usuario(String user, String pass, String nick, String sessionId, String idioma) {
 		super();
 		setNick(nick);
 		setUser(user);
 		setPass(pass);
 		setSessionId(sessionId);
+		setIdioma(idioma);
 	}
 	public String getSessionId() {
 		return sessionId;
