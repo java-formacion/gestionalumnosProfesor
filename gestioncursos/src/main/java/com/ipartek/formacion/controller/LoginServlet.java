@@ -26,6 +26,8 @@ public class LoginServlet extends HttpServlet {
 	private Usuario user = null;
 	private String nUsuario = "";
 	private String passWord = "";
+	Cookie cookieNombre = null;
+	Cookie cookiePass = null;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -51,34 +53,42 @@ public class LoginServlet extends HttpServlet {
 			if(request.getParameter(Constantes.PAR_USERNAME)!=null){
 				cargarParametros(request);
 
+			} else {
+				response.sendRedirect(Constantes.JSP_HOME);
 			}
 		}
 		if(user!=null && "urko".equals(user.getUserName())&&"urko".equals(user.getUserPassword())){
+			generarCookies(response);
+
+
 			String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
 			if(checkboxes!=null && checkboxes.length==1){
-				generarCookies(response);
+				cookieNombre.setMaxAge(60*60*24);
+				cookiePass.setMaxAge(24*60*60);
+			}else{
+				cookieNombre.setMaxAge(0);
+				cookiePass.setMaxAge(0);
 			}
+			response.addCookie(cookieNombre);
+			response.addCookie(cookiePass);
 			procesarLogin(request);
 			rd.forward(request, response);
 		}else{
-			if(user!=null && "urko".equals(user.getUserName())&&"urko".equals(user.getUserPassword())){
-				Mensaje mensaje = new Mensaje();
-				mensaje.setMsg("Usuario y/o contraseña incorrectos");
-				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
-				session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			}
+
+			Mensaje mensaje = new Mensaje();
+			mensaje.setMsg("Usuario y/o contraseña incorrectos");
+			mensaje.setType(Mensaje.MSG_TYPE_DANGER);
+			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+
 			response.sendRedirect(Constantes.JSP_HOME);
 		}
 
 	}
 	private void generarCookies(HttpServletResponse response) {
-		Cookie cookieNombre = new Cookie("usuario",user.getUserName());
-		Cookie cookiePass = new Cookie("password",user.getUserPassword());
+		cookieNombre = new Cookie("usuario",user.getUserName());
+		cookiePass = new Cookie("password",user.getUserPassword());
 
-		cookieNombre.setMaxAge(24*60*60);
-		cookiePass.setMaxAge(60*24*60);
-		response.addCookie(cookiePass);
-		response.addCookie(cookieNombre);
+
 	}
 
 
@@ -115,6 +125,7 @@ public class LoginServlet extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null){
 			for(Cookie cookie: cookies){
+
 				if(cookie.getName().equals("usuario")){
 					nUsuario = cookie.getValue();
 				}else{
