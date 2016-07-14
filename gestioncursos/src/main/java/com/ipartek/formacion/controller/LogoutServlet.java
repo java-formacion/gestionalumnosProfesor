@@ -35,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
 			mensaje.setType(Mensaje.MSG_TYPE_SUCCESS);
 			//request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			response.sendRedirect(Constantes.JSP_INDEX);
+			response.sendRedirect(Constantes.JSP_HOME);
   
             
            

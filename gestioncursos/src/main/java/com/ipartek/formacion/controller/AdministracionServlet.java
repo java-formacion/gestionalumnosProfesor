@@ -32,7 +32,7 @@ public class AdministracionServlet extends HttpServlet {
 	}
 	private void expulsarUsuario(HttpServletRequest request) {
 		String sesionId = request.getParameter(Constantes.PAR_SESSIONID);
-		System.out.println(sesionId);
+	
 		ServletContext context = getServletContext();
 		Map<String,HttpSession> sesiones =(Map<String, HttpSession>) context.getAttribute(Constantes.ATT_LISTA_SESIONES);
 		HttpSession session = sesiones.get(sesionId);

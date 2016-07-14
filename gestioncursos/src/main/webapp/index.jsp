@@ -40,7 +40,7 @@
 		           <div class="input-group">
 						<div class="checkbox">
 			            	<label>  </label>
-								<input type="checkbox" value="1"> Recuerdame
+								<input type="checkbox" name="<%=Constantes.PAR_REMEMBER %>"  value="1"/> Recuerdame
 			            </div>
                    </div>
                   <div class="input-group"> 

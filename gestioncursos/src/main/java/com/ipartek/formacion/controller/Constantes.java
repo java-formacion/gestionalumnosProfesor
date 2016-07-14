@@ -43,6 +43,7 @@ public class Constantes {
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
 	public final static String PAR_SESSIONID ="sessionId";
+	public final static String PAR_REMEMBER ="remember";
 
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";
@@ -54,7 +55,7 @@ public class Constantes {
 	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
 	public final static Idioma[] LISTA_IDIOMAS = {Idioma.CASTELLANO,Idioma.INGLES,Idioma.EUSKERA};
 	
-	public final static String JSP_INDEX="index.jsp";
+	public final static String JSP_HOME="index.jsp";
 	
 	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
 	public final static String JSP_CURSO ="/cursos/curso.jsp";
