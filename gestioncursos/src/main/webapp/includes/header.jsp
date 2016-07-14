@@ -1,8 +1,20 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
+
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 	<head>
 		<meta charset="UTF-8">
 		<title>Ipartek - Gestion de Cursos</title>
@@ -53,56 +65,58 @@
 			
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 			   		<ul class="nav navbar-nav">					
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="<%= Constantes.SERVLET_CURSOS %>">
-								Cursos <b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="<%= Constantes.SERVLET_CURSOS %>">
-										Ver todos los cursos
-									</a>
-								</li>
-							
-								<li>
-									<a href="<%= Constantes.SERVLET_CURSOS+"?"+Constantes.PAR_CODIGO + "=" + Curso.CODIGO_CURSO %>">
-										<span class="fa fa-plus fblack" aria-hidden="true"></span>
-										Curso
-									</a>
-								</li>
-							</ul>
-						</li>
-						
-						<li>
-							<a href="<%= Constantes.SERVLET_ALUMNOS %>">Alumnos</a>
-						</li>
-						
-						<li>
-							<a href="<%= Constantes.SERVLET_MODULOS %>">Modulos</a>
-						</li>
-						
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="">
-								Administracion <b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="<%= Constantes.SERVLET_USUARIOS %>">Ver Usuarios Conectados</a>
-								</li>
-							</ul>
-						</li>
-						
 						<%
 							session = request.getSession();
 							if(session != null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
 							%>
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="<%= Constantes.SERVLET_CURSOS %>">
+										Cursos <b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="<%= Constantes.SERVLET_CURSOS %>">
+												Ver todos los cursos
+											</a>
+										</li>
+									
+										<li>
+											<a href="<%= Constantes.SERVLET_CURSOS+"?"+Constantes.PAR_CODIGO + "=" + Curso.CODIGO_CURSO %>">
+												<span class="fa fa-plus fblack" aria-hidden="true"></span>
+												Curso
+											</a>
+										</li>
+									</ul>
+								</li>
+								
 								<li>
-									<a href="<%= Constantes.SERVLET_LOGOUT %>">Logout</a>
+									<a href="<%= Constantes.SERVLET_ALUMNOS %>">Alumnos</a>
+								</li>
+								
+								<li>
+									<a href="<%= Constantes.SERVLET_MODULOS %>">Modulos</a>
+								</li>
+								
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="">
+										Administracion <b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="<%= Constantes.SERVLET_USUARIOS %>">Ver Usuarios Conectados</a>
+										</li>
+									</ul>
+								</li>
+							
+								<li>
+									<%
+										ServletContext context = getServletContext();
+									%>
+									<a href="<%= Constantes.SERVLET_LOGOUT %>"><fmt:message key="header.desconectar"/> (<%= context.getAttribute(Constantes.ATT_USUARIO) %>)</a>
 								</li>
 							<%
 							} 
 						%>
-						
 					</ul>
 				</div>
 			</nav>

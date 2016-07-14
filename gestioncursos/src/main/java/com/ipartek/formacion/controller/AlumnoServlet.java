@@ -53,14 +53,11 @@ public class AlumnoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		try{
 			//id = Integer.parseInt(request.getParameter("id"));
-			recogerId(request);
 			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
+			recogerId(request);
 			
 			if(id < 0){
 				// Se redirige para realizar un CREATE
@@ -98,8 +95,6 @@ public class AlumnoServlet extends HttpServlet {
 		try {
 			if(Util.tryParseInt(op)){
 				operacion = Integer.parseInt(op);
-			} else{
-				
 			}
 
 			recogerId(request);

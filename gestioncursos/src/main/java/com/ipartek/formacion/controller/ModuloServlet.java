@@ -29,8 +29,8 @@ public class ModuloServlet extends HttpServlet {
 	private int operacion = -1;
 
 	public ModuloServlet() {
-	        super();
-	        // TODO Auto-generated constructor stub
+		super();
+	    // TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -76,9 +76,12 @@ public class ModuloServlet extends HttpServlet {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		
 		try {
-			operacion = Integer.parseInt(op);
+			if(Util.tryParseInt(op)){
+				operacion = Integer.parseInt(op);
+			}
+			
 			// 1- recoger los datos del objeto curso
-			recogerDatosModulo(request);
+			//recogerDatosModulo(request);
 			recogerId(request);
 			
 			// 2- diferencias la create de las demas

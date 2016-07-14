@@ -38,7 +38,7 @@
 					formulario += "<input type ='hidden' name='" + Constantes.PAR_CODIGO + "' value='"+ alumno.getCodigo() +"' />";
 					
 					// boton de borrar
-					formulario += "<button type='submit' class='btn btn-danger'>Borrar</button>";
+					formulario += "<button type='submit' class='btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'> </span> Borrar</button>";
 					formulario += "</form>";
 					
 		%>

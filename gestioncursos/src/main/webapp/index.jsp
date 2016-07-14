@@ -1,3 +1,7 @@
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 	
 <jsp:include page="/includes/header.jsp" />
@@ -18,14 +22,19 @@
 		<div class="container">
 		    <div class="row">
 		        <div class="col-md-8">
-		        	<h2>Bienvenido</h2>
+		        	<%
+						ServletContext context = getServletContext();
+		        		String username = (String) context.getAttribute(Constantes.ATT_USUARIO);
+		        		if(username==null){
+		        			username = "Invitado";
+		        		}
+					%>
+		        
+		        	<h2>Bienvenido <%= username %></h2>
 		           	Bienvenidos a la pagina de Gestion de Alumnos de Ipartek
 		        </div>
-		       	
-		       	
+
 		       	<%
-		       		
-		       	
 					session = request.getSession();
 					if(session == null || session.getAttribute(Constantes.ATT_USUARIO)==null){
 					%>
@@ -48,9 +57,25 @@
 												<input type="password" class="form-control" name="<%= Constantes.PAR_PASSWORD %>" placeholder="Contrase&ntilde;a" required=""/>  
 											</div>
 											
-											<label class="checkbox">
-												<input type="checkbox" value="1" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>"> Recordarme
-											</label>
+											<div class="input-group">
+												<span class="input-group-addon"><i class="fa fa-language"></i></span>
+												<select class="form-control" name="<%= Constantes.PAR_LANGUAGE %>">
+													<%
+														Idioma[] idioma = Idioma.values();
+														for(Idioma idiomas: idioma){
+															%>
+																<option value="<%= idiomas.getLocale() %>"><%= idiomas.getNombre() %></option>
+															<%
+														}
+													%>
+												</select>
+											</div>
+											
+											<div class="input-group">
+												<label class="checkbox">
+													<input type="checkbox" value="1" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>"> Recordarme
+												</label>
+											</div>
 											
 											<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
 										</form>

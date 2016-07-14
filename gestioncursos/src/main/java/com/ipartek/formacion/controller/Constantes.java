@@ -32,6 +32,7 @@ public class Constantes {
 	public final static String PAR_USERNAME = "username";
 	public final static String PAR_PASSWORD = "password";
 	public final static String PAR_REMEMBER = "recuerda";
+	public final static String PAR_LANGUAGE = "language";
 	
 	public final static String COOKIE_USERNAME = "username";
 	public final static String COOKIE_PASSWORD = "password";
