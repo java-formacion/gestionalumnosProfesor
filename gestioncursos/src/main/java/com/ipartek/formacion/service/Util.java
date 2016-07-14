@@ -59,6 +59,7 @@ public class Util {
 
 		return d;
 	}
+	
 	public static TipoCurso parseTipoCurso(String codigo){
 		TipoCurso tipo = TipoCurso.LANBIDE;
 		int cod = Integer.parseInt(codigo);
@@ -73,6 +74,22 @@ public class Util {
 
 		return tipo;
 	}
+	
+	public static Idioma parseIdioma(String codigo){
+		Idioma idioma = Idioma.INGLES;
+		int cod = Integer.parseInt(codigo);
+		if(Idioma.EUSKERA.getCodigo()==cod){
+			idioma = Idioma.EUSKERA;
+		}else {
+			if(Idioma.CASTELLANO.getCodigo()==cod){
+				idioma = Idioma.CASTELLANO;
+			}
+		}
+
+
+		return idioma;
+	}
+	
 	public static List<Idioma> parseIdioma(String[] idiomas){
 		List<Idioma> aux = null;
 		aux = new ArrayList<Idioma>();

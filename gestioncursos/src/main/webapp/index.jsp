@@ -1,3 +1,8 @@
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -34,6 +39,18 @@
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
 		            </div>
+		            <div class="input-group">
+						<label>Idioma: </label>
+						<select name="<%=Constantes.PAR_DURACION%>">
+							<c:set var="idiomas" value="<%=request.getAttribute(Constantes.ATT_LISTA_DURACION_MODULO)%>"/>
+							<c:if test="${idiomas!=null}">
+								<c:forEach var="i" begin="0" end="${idiomas.length}">
+									<option value="${i.getCodigo()}">
+										i.getNombre()
+									</option>
+								</c:forEach>
+							</c:if>	
+						</div>
 		           <div class="input-group">
 						<div class="checkbox">
 			            	<label>  </label>
@@ -53,8 +70,6 @@
 	</div>
 </main>
 <%@ include file="includes/footer.jsp" %>
-
-
 
 
 

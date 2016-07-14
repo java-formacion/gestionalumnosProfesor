@@ -4,44 +4,37 @@ import java.util.Date;
 
 public class Usuario {
 	private String sessionid;
-	public String getSessionid() {
-		return sessionid;
-	}
-
-
-
-
-	public void setSessionid(String sessionid) {
-		this.sessionid = sessionid;
-	}
 	private String userName;
 	private String userPassword;
 	private String nickname;
 	private Date fConexion;
+	private Idioma idioma;
+	
+	public String getSessionid() {
+		return sessionid;
+	}
+
+	public void setSessionid(String sessionid) {
+		this.sessionid = sessionid;
+	}
+	
 	public Usuario(){
 		setSessionid("");
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
 		this.fConexion = new Date();
+		setIdioma(Idioma.CASTELLANO);
 	}
-
-
-
 
 	public Date getfConexion() {
 		return fConexion;
 	}
 
 
-
-
 	public void setfConexion(Date fConexion) {
 		this.fConexion = fConexion;
 	}
-
-
-
 
 	public String getUserName() {
 		return userName;
@@ -61,4 +54,13 @@ public class Usuario {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
+	}
+	
 }

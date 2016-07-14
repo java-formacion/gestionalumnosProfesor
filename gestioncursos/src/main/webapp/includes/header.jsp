@@ -1,11 +1,21 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}]"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -28,10 +38,17 @@
 <body class="container-fluid">
 	<header class="row">
 		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
-		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
+		<%
+		Usuario user=(Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+		if(user!=null){
+			%>	
+			<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
 			<span class="fa fa-sign-out" aria-hidden="true"></span>
-			Desconectar
+			<fmt:message key="header.desconectar"/>
 		</a>
+		<% 
+		}
+		%>	
 	</header>
 	
 	<nav class="navbar navbar-inverse" role="navigation">
