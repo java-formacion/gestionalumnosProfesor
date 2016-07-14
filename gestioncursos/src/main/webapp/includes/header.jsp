@@ -1,11 +1,21 @@
+<%@page import="com.ipartek.formacion.services.I18n.I18n"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="com.ipartek.formacion.control.Constantes"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.services.I18n.i18nmesages"/>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -27,7 +37,16 @@
 </head>
 <body class="container-fluid">
 	<header class="row"><h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1></header>
-	
+	<%
+	if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
+		%>
+		<div name="logout" id="logout" class="col-xs-12 col-md-2">
+        	<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-lg btn-primary btn-block btn-logout">Logout</a>
+        </div>
+                
+		<%
+	}
+	%>
 	<nav class="navbar navbar-inverse" role="navigation">
 		  <!-- El logotipo y el icono que despliega el menú se agrupan
 		       para mostrarlos mejor en los dispositivos móviles -->
@@ -45,7 +64,7 @@
     		<ul class="nav navbar-nav">
     			<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_CURSOS%>">
-						Cursos
+						<fmt:message key="header.cursos"/>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_CURSOS%>?<%=Constantes.PAR_CODIGO%>=<%=Curso.CODIGO_CURSO%>">Crear Curso Nuevo</a></li>

@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
+
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.control.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,16 +24,7 @@ Esto hace que tarde más en cargar, pero puede ser interesante a la larga -->
 		<p>Esta apliación ha sido en conjunto de....</p>
 		
 	</section>
-	<%
-	if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
-		%>
-		<div name="logout" id="logout" class="col-xs-12 col-md-5">
-        	<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-lg btn-primary btn-block btn-logout">Logout</a>
-        </div>
-                
-		<%
-	}
-	%>
+	
 
     <div class="container">
     

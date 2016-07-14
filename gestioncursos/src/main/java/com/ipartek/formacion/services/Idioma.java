@@ -3,7 +3,7 @@ package com.ipartek.formacion.services;
 public enum Idioma {
 	CASTELLANO(1,"castellano","es_ES","es"),
 	INGLES(2,"English","en_EN","en"),
-	EUSKERA(3,"euskera","es_EU","eu");
+	EUSKERA(3,"euskera","eu_ES","eu");
 	
 	private int codigo;
 	private String nombre;

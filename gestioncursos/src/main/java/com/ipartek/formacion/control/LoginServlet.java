@@ -100,26 +100,9 @@ public class LoginServlet extends HttpServlet {
 				mensaje.setType(Mensaje.MSG_TYPE_ERROR);
 				//request.setAttribute(Constantes.ATT_MENSAJE,mensaje);
 				session.setAttribute(Constantes.ATT_MENSAJE,mensaje);
-				try {
-					response.sendRedirect(Constantes.JSP_HOME);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					log.error(e.getMessage());
-				}
+				response.sendRedirect(Constantes.JSP_HOME);
+				
 			}
-
-			
-			//try {
-				//rd.forward(request, response);
-			//} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-			//} catch (IOException e) {
-				// TODO Auto-generated catch block
-			//	e.printStackTrace();
-			//}
-			
 		
 	}
 	private void createSession(HttpServletRequest request){
