@@ -1,9 +1,26 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="language" value="en_EN" />
+<c:set var="selectedLanguage" value="<%=session.getAttribute(Constantes.ATT_USUARIO)%>" />
+<c:choose>
+	<c:when test="${!empty selectedLanguage }">
+		<c:set var="language" value="${selectedLanguage.idioma.locale }" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="language " value="<%=I18n.getBrowserLocale(response.getLocale())%>" />
+	</c:otherwise>
+</c:choose>
+
+<c:set var="localeCode" value="${response.locale}" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages" />
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 
 <title>Gestion de Cursos</title>
@@ -25,6 +42,7 @@
 <script src="js/bootstrap.min.js"></script>
 
 </head>
+
 <body class="container-fluid">
 	<header class="row">
 		<h1 class="col-xs-6">Gestion de Cursos Ipartek</h1>
@@ -90,7 +108,9 @@
 					<p class="navbar-text">
 						Identificado como <strong><%=user.getAlias()%></strong>
 					</p>
-					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn">Cerrar Sesion</a>
+					<a href="<%=Constantes.SERVLET_LOGOUT%>" class="btn btn-danger navbar-btn"> <fmt:message
+							key="header.cerrarSesion" />
+					</a>
 				</ul>
 				<%
 					}

@@ -82,7 +82,7 @@ public class Util {
 		return tipo;
 	}
 
-	public static List<Idioma> parseIdioma(String[] idiomas) {
+	public static List<Idioma> parseIdiomas(String[] idiomas) {
 		List<Idioma> aux = null;
 		aux = new ArrayList<Idioma>();
 		for (int i = 0; i < idiomas.length; i++) {
@@ -103,11 +103,29 @@ public class Util {
 		return aux;
 	}
 
+	public static Idioma parseIdioma(String codIdiomas) {
+		Idioma idioma = null;
+		if (tryParseInt(codIdiomas)) {
+			idioma = Idioma.CASTELLANO;
+			int codigoIdioma = Integer.parseInt(codIdiomas);
+			if (codigoIdioma == Idioma.EUSKERA.getCodigo()) {
+				idioma = Idioma.EUSKERA;
+			} else {
+				if (codigoIdioma == Idioma.INGLES.getCodigo()) {
+
+					idioma = Idioma.INGLES;
+				}
+			}
+		}
+
+		return idioma;
+	}
+
 	public static Map<String, Alumno> parseAlumnos(String[] alumnos) {
 		Map<String, Alumno> aux = null;
 		aux = new HashMap<String, Alumno>();
 		if (alumnos != null) {
-			for (String codAlumno: alumnos) {
+			for (String codAlumno : alumnos) {
 				if (tryParseInt(codAlumno)) {
 					int codigo = Integer.parseInt(codAlumno);
 					Alumno alumno = null;

@@ -147,7 +147,7 @@ public class AlumnosServlet extends HttpServlet {
 		alError.setfNacimiento(fecha);
 		alError.setGenero(Util.parseGenero(request
 				.getParameter(Constantes.PAR_GENERO)));
-		alError.setIdiomas(Util.parseIdioma(request
+		alError.setIdiomas(Util.parseIdiomas(request
 				.getParameterValues(Constantes.PAR_IDIOMA)));
 		String idCurso = request.getParameter(Constantes.PAR_CURSO);
 		Curso curso = new Curso();
@@ -194,7 +194,7 @@ public class AlumnosServlet extends HttpServlet {
 		// Curso curso = cService.getById(cursoId);
 		// alumno.setCurso(curso);
 		// }
-		List<Idioma> idi = Util.parseIdioma(idiomas);
+		List<Idioma> idi = Util.parseIdiomas(idiomas);
 
 		alumno.setNombre(nombre);
 		alumno.setApellidos(apellidos);

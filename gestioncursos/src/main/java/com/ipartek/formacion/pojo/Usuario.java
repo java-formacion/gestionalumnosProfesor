@@ -7,6 +7,8 @@ public class Usuario {
 	private String sessionId;
 	private String alias;
 	private String password;
+	private Idioma idioma;
+
 	private Date fechaConexion;
 
 	public Usuario() {
@@ -14,7 +16,15 @@ public class Usuario {
 		setAlias("");
 		setPassword("");
 		setFechaConexion(new Date());
+		setIdioma(Idioma.CASTELLANO);
+	}
 
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
 	}
 
 	public Date getFechaConexion() {

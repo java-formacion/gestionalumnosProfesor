@@ -34,6 +34,8 @@ public class Constantes {
 	public final static String PAR_REFERENCIA = "referencia";
 	public final static String PAR_DURACION = "duracion";
 	
+	public final static String PAR_LOCALE = "locale";
+	
 	public final static String PAR_TIPO = "tipo";
 	public final static String PAR_ALUMNOS = "alumnos";
 	public final static String PAR_MODULOS = "modulos";
