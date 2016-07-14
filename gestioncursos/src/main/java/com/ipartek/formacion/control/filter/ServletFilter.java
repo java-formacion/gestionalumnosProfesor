@@ -44,7 +44,7 @@ public class ServletFilter implements Filter {
 			if(checkSession(req)){
 				chain.doFilter(request, response);
 			} else{
-				res.sendRedirect("index.jsp");
+				res.sendRedirect(Constantes.JSP_HOME);
 			}
 		}else{
 			chain.doFilter(request, response);

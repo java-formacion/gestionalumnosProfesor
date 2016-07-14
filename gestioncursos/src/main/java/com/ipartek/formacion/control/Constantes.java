@@ -72,6 +72,7 @@ public class Constantes {
 	public final static String JSP_MODULO ="/modulos/modulo.jsp";
 	
 	public final static String JSP_ADMIN ="/administracion/admin.jsp";
+	public final static String JSP_HOME ="index.jsp";
 	
 	public final static int OP_CREATE = 0;
 	public final static int OP_READ = 1;
