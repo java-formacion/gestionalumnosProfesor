@@ -35,9 +35,9 @@
 						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
 		            </div>
 		           <div class="input-group">
-						<div class="checkbox">
-			            	<label>  </label>
-								<input type="checkbox" value="1"> Recuérdame
+						<div class="checkbox">			            	
+							<input name="<%=Constantes.PAR_RECUERDAME %>" id="<%=Constantes.PAR_RECUERDAME %>" 
+							type="checkbox" value="1"><label>Recuérdame</label> 
 			            </div>
                    </div>
 
