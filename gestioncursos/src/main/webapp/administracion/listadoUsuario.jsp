@@ -16,16 +16,16 @@ ServletContext contexto = session.getServletContext();
  <jsp:include page ="../includes/mensaje.jsp"/>
  
 	 <div class="row"> Usuarios conectados </div> <%
-  for(Usuario user: usuarios){ 
+  for(Usuario usu: usuarios){ 
     
   %>
 
 		<div class="row"> 
 		
-			<div class="col-xs-4"> <%= user.getUserName()%></div> 
-			<div class="col-xs-4"> <%=user.getNickname()%> </div> 
-			<div class="col-xs-4"> <%=user.getSessionId()%> </div>
-			<div class="col-xs-4"> <a class="btn btn-info" href="<%=Constantes.SERVLET_ADMINISTRACION %>?<%=Constantes.PAR_SESIONID %>=<%=user.getSessionId()%>">Expulsar Usuario</a> </div>
+			<div class="col-xs-2"> <%= usu.getUserName()%></div> 
+			<div class="col-xs-2"> <%=usu.getNickname()%> </div> 
+			<div class="col-xs-2"> <%=usu.getSessionId()%> </div>
+			<div class="col-xs-2"> <a class="btn btn-info" href="<%=Constantes.SERVLET_ADMINISTRACION %>?<%=Constantes.PAR_SESIONID %>=<%=usu.getSessionId()%>">Expulsar Usuario</a> </div>
 		</div> <%
 	}
 }
