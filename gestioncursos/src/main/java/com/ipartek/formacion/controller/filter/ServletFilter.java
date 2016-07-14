@@ -44,6 +44,7 @@ public class ServletFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
+		
 		req.setCharacterEncoding("UTF-8");
 		String uri = req.getServletPath();
 		
