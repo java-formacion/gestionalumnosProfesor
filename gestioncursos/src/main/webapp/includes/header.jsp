@@ -1,10 +1,21 @@
+
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" 
+           uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <c:set var="language" value="en_EN"/>
+ <c:set var="language" value="<%= I18n.getBrowserLocale(response.getLocale())%>"/>
+ <c:set var="localeCode" value="${response.locale}"/>
+ <fmt:setLocale value="${language}"/>
+ <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -87,7 +98,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Ajustes</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="logout.do"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="logout.do"><i class="fa fa-sign-out fa-fw"></i> <fmt:message key="header.desconectar"/></a>
                         </li>
                     </ul>
                 </li>

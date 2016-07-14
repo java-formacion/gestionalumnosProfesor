@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import com.ipartek.formacion.pojo.DuracionModulo;
+import com.ipartek.formacion.pojo.Idioma;
 
 public class Constantes {
 	private Constantes() {}
@@ -51,6 +52,7 @@ public class Constantes {
 	
 
 	public final static DuracionModulo[] LISTA_DURACION = {DuracionModulo.HORAS15,DuracionModulo.HORAS20,DuracionModulo.HORAS45,DuracionModulo.HORAS80,DuracionModulo.HORAS90};
+	public final static Idioma[] LISTA_IDIOMAS = {Idioma.CASTELLANO,Idioma.INGLES,Idioma.EUSKERA};
 	
 	public final static String JSP_INDEX="index.jsp";
 	

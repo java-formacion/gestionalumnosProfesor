@@ -1,3 +1,6 @@
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,7 +24,7 @@
        		<div class="panel-title"><h2>Login</h2></div>
        
    			</div>     
-
+<% %>
    			<div class="panel-body">
        			<form class="form-horizontal" action="<%=Constantes.SERVLET_LOGIN %>" method="post" role="form">
            			<div class="input-group">
@@ -40,7 +43,14 @@
 								<input type="checkbox" value="1"> Recuerdame
 			            </div>
                    </div>
-
+                  <div class="input-group"> 
+					<select class="c-select">
+  						<option selected>Selecciona un idioma</option>
+  						 <c:forEach items="<%=Idioma.values() %>" var="idioma">
+  						<option value="${idioma.codigo}">${idioma.nombre}</option>
+  						</c:forEach>
+					</select>
+				</div>
 
                <div class="form-group">
                    <div class="col-xs-12 controls">
