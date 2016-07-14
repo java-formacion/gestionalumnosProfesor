@@ -73,7 +73,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		ServletContext context = session.getServletContext();
 		
 		sesiones.put(session.getId(), session);
-		context.getAttribute(Constantes.ATT_LIST_SESIONES);
+		context.setAttribute(Constantes.ATT_LIST_SESIONES,sesiones);
 
 	}
 

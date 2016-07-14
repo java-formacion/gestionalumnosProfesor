@@ -14,8 +14,9 @@ public class Constantes {
 	public final static String ATT_LISTA_DURACION_MODULO="listado_duracion";
 	public final static String ATT_MENSAJE ="mensaje";
 	public final static String ATT_USUARIO = "usuario";
-	public final static String ATT_LIST_USUARIOS ="lista_usuarios";
-	public final static String ATT_LIST_SESIONES ="lista_sesiones";
+	public final static String ATT_LIST_USUARIOS ="listado_usuarios";
+	public final static String ATT_LIST_SESIONES ="listado_sesiones";
+	public final static String ATT_IDIOMA = "idioma";
 
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
@@ -35,7 +36,7 @@ public class Constantes {
 	public final static String PAR_REFERENCIA="referencia";
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
-	public final static String PAR_SESSIONID ="sesionid";
+	public final static String PAR_SESSIONID ="sessionid";
 	public final static String PAR_REMEMBER = "recuerda";
 
 

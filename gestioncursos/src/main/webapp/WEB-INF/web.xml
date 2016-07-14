@@ -86,6 +86,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminServlet</servlet-name>
-    <url-pattern>/AdminServlet</url-pattern>
+    <url-pattern>/admin.do</url-pattern>
   </servlet-mapping>
 </web-app>

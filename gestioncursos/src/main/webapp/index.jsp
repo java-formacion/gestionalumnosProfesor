@@ -1,7 +1,9 @@
+
 <%@page import="com.ipartek.formacion.controller.listener.SessionListener"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <jsp:include page="includes/header.jsp"/> 	
 <main class="container-fluid">
 	<div class="row">	 

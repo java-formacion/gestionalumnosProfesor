@@ -15,53 +15,61 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.pojo.Mensaje;
 
+/**
+ * Servlet implementation class AdminServlet
+ */
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
 	private static final Logger log = Logger.getLogger(AdminServlet.class);
 
-	protected void doGet(HttpServletRequest request,
-		HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter(Constantes.PAR_SESSIONID)!=null)	{ 		
-		patearUsuario(request);
-	}
-		cargarListaUsuarios(request);
-		// REDIRIGIR a JSP
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter(Constantes.PAR_SESSIONID)!=null){
+			expulsarUsuario(request);
+		}
+
+		cargarListadoUsuarios(request);
+
 		rd.forward(request, response);
 	}
 
-	private void patearUsuario(HttpServletRequest request) {
-		String sessionId = request.getParameter(Constantes.PAR_SESSIONID);
+
+
+	private void expulsarUsuario(HttpServletRequest request) {
+		String sesionId = request.getParameter(Constantes.PAR_SESSIONID);
 		ServletContext context = getServletContext();
-		Map<String,HttpSession> sesiones= (Map<String, HttpSession>) context.getAttribute(Constantes.ATT_LIST_SESIONES);
-		HttpSession session = sesiones.get(sessionId);
+		Map<String,HttpSession> sesiones =(Map<String, HttpSession>) context.getAttribute(Constantes.ATT_LIST_SESIONES);
+		HttpSession session = sesiones.get(sesionId);
 		Mensaje m = new Mensaje();
-
-		if(session != null)
-			{
-				session.invalidate();
-				sesiones.remove(sessionId);
-				context.setAttribute(Constantes.ATT_LIST_SESIONES, sesiones);
-				m.setMsg("Usuario Pateado");
-				m.setType(Mensaje.MSG_TYPE_SUCCESS);
-			}
-		else
-			{
-				m.setMsg("La Operacion 65412589x00 no ha resultado existosa, porfavor contacte al administrador");
-				m.setType(Mensaje.MSG_TYPE_SUCCESS);
-				log.info("Error al patear usuario, SessionId enviada: "+sessionId);
-			}
-		request.setAttribute(Constantes.ATT_MENSAJE, m);
-
+		if(session !=null){
+			session.invalidate();
+			m.setMsg("Usuario Expulsado");
+			m.setType(Mensaje.MSG_TYPE_SUCCESS);
+		}else{
+			m.setMsg("La operación no ha podido ser realizada con éxito contacte con el administrador del sistema");
+			m.setType(Mensaje.MSG_TYPE_DANGER);
+			log.info("error al expulsar "+sesionId);
+		}
+		request.setAttribute(Constantes.ATT_MENSAJE, m );
 	}
 
-	private void cargarListaUsuarios(HttpServletRequest request) {
+
+
+	private void cargarListadoUsuarios(HttpServletRequest request) {
 		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ADMIN);
+
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }

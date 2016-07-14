@@ -26,13 +26,22 @@ public class Usuario {
 		this.fConexion = new Date();
 	}
 
+
+
+
 	public Date getfConexion() {
 		return fConexion;
 	}
 
+
+
+
 	public void setfConexion(Date fConexion) {
 		this.fConexion = fConexion;
 	}
+
+
+
 
 	public String getUserName() {
 		return userName;
