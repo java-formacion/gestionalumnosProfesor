@@ -60,6 +60,7 @@ public class Constantes {
 	//session id
 	public final static String PAR_SESSIONID ="sessionid";
 	
+	
 	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
 	public final static String JSP_CURSO ="/cursos/curso.jsp";
 	

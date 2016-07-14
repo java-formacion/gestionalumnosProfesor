@@ -42,5 +42,20 @@ public class Usuario {
 	public void setSessionid(String sessionid) {
 		this.sessionid = sessionid;
 	}
+    //idiomas
+
+
+
+
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+
+
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
+	}
 	
 }
