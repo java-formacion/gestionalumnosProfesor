@@ -2,7 +2,7 @@ package com.ipartek.formacion.pojo;
 
 public enum Idioma {
 	CASTELLANO(1,"castellano","es_ES","es"),
-	EUSKERA(2,"euskera","es_EU","eu"),
+	EUSKERA(2,"euskera","eu_ES","eu"),
 	INGLES(3,"english","en_EN","en");
 	private int codigo;
 	private String nombre;
@@ -38,5 +38,5 @@ public enum Idioma {
 	public void setCodIdioma(String codIdioma) {
 		this.codIdioma = codIdioma;
 	}
-	
+
 }

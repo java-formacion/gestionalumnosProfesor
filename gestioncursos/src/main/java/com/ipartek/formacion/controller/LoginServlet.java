@@ -53,8 +53,6 @@ public class LoginServlet extends HttpServlet {
 			if(request.getParameter(Constantes.PAR_USERNAME)!=null){
 				cargarParametros(request);
 
-			} else {
-				response.sendRedirect(Constantes.JSP_HOME);
 			}
 		}
 		if(user!=null && "urko".equals(user.getUserName())&&"urko".equals(user.getUserPassword())){
@@ -72,14 +70,16 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(cookieNombre);
 			response.addCookie(cookiePass);
 			procesarLogin(request);
+			session.setAttribute(Constantes.ATT_USUARIO, user);
 			rd.forward(request, response);
 		}else{
-
-			Mensaje mensaje = new Mensaje();
-			mensaje.setMsg("Usuario y/o contraseña incorrectos");
-			mensaje.setType(Mensaje.MSG_TYPE_DANGER);
-			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-
+			if(user!=null){
+				createSession(request);
+				Mensaje mensaje = new Mensaje();
+				mensaje.setMsg("Usuario y/o contraseña incorrectos");
+				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
+				session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+			}
 			response.sendRedirect(Constantes.JSP_HOME);
 		}
 

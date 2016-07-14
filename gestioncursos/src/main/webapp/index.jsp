@@ -1,3 +1,7 @@
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,12 +9,14 @@
 <main class="container-fluid">
 	<div class="row">	 
 	<section class="col-xs-12 col-md-7">
-		<header> <h2>Bienvenido</h2></header>
+
+		
+		<header> <h2>Bienvenido </h2></header>
 		<p>
 			Bienvenidos a la pagina de Gestion de Alumnos de <span>Ipartek</span>.
 
 		</p>
-		<p>Esta apliación ha sido en conjunto de....</p>
+		<p>Esta aplicación ha sido en conjunto de....</p>
 		
 	</section>
 	<aside class="col-xs-12 col-md-5 panel">
