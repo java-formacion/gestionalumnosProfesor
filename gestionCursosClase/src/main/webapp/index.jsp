@@ -1,4 +1,7 @@
 <!-- Si no es necesario compilar utilizar la version del footer -->
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
+<%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -28,11 +31,23 @@
       			
       			<label class="checkbox">
       			
-        		<input type="checkbox" value="remember-me" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" value = "1"> Recuerdame
-        		
-      			</label>
+        		<input type="checkbox" value="remember-me" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" value = "1"> Recuerdame </label>
+        
+        				
+        		<div>
+				    <select>
+				   	
+				   			<c:forEach items="<%=Idioma.values() %>" var="idioma">
+   								<option value="${idioma.codigo}">${idioma.nombre}</option>
+							</c:forEach>
+					   	
+						
+					</select>
+      			</div>
+        	<div>
       			<button id ="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
-   			</form>
+   			
+   			</div></form>
   		</div>
     </div>
     <% } %>

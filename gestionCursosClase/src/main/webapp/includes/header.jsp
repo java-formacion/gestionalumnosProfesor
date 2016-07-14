@@ -1,8 +1,15 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
-
+<%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="eu_ES" />
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
 <!DOCTYPE html >
-<html>
+<html lang = "${language}">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset = "UTF-8">
@@ -28,8 +35,7 @@
 		  <!-- El logotipo y el icono que despliega el menú se agrupan
 		       para mostrarlos mejor en los dispositivos móviles -->
 		  <div class="navbar-header">
-		    <button type="button" class="navbar-toggle" data-toggle="collapse"
-		            data-target=".navbar-ex1-collapse">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 		      <span class="sr-only">Desplegar navegación</span>
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
@@ -54,6 +60,9 @@
 	          				<li><a href="<%=Constantes.SERVLET_MODULOS%>"> Ver todos los Modulos</a></li>
 	          			</ul> 
 					</li>
+				</ul>
+			
+				<ul class="nav navbar-nav navbar-right">
 					<%
 						if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null)
 						{
@@ -65,10 +74,9 @@
 					%>
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_LOGOUT%>"><%= nombreUser %></a>
 						<ul class="dropdown-menu">
-	          				<li><a href="<%=Constantes.SERVLET_LOGOUT%>">Logout</a></li>
+	          				<li><a href="<%=Constantes.SERVLET_LOGOUT%>"><fmt:message key="header.desconectar"/></a></li>
 	          				<li><a href="<%=Constantes.SERVLET_ADMINISTRACION%>">Administración</a></li>
-	          			</ul>
-	          			
+	          			</ul>	          			
 					</li>
 					<%	} %>
 				</ul>
