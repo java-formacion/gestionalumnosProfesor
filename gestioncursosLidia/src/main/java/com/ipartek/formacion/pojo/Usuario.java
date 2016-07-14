@@ -5,6 +5,8 @@ public class Usuario {
 	private String userPassword;
 	private String nickname;
 	private String sessionid;//id para luego echar al usuario
+	//idioma
+	private Idioma idioma;
 	public Usuario(){
 		setUserName("");
 		setUserPassword("");

@@ -121,8 +121,8 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" align="right">
-        		<li><a href="index.jsp"><i class="glyphicon glyphicon-off"></i></a></li>
-        		<fmt:message key="header.desconectar"/>
+        		<li><a href="index.jsp"><i class="glyphicon glyphicon-off"><fmt:message key="header.desconectar"/></i></a></li>
+        		
       		</ul>
 			</div>
 		</nav>
