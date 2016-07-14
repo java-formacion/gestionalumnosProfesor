@@ -38,6 +38,8 @@ public class Constantes {
 	public final static String PAR_ALIAS="alias";
 	public final static String PAR_PASSWORD="password";
 	public final static String PAR_SESSION_ID="idSession";
+	public final static String PAR_REMEMBER="recuerda";
+	public final static String PAR_LOCALE="locale";
 	
 	public final static String SERVLET_CURSOS = "cursos.do";
 	public final static String SERVLET_ALUMNOS = "alumnos.do";

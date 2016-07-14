@@ -79,7 +79,6 @@ public class Util {
 	}
 	
 	
-	
 	public static List<Idiomas> parseIdioma(String[] idiomas){
 		List<Idiomas> aux = null;
 		aux = new ArrayList<Idiomas>();
@@ -103,7 +102,7 @@ public class Util {
 		return aux;
 	}
 	
-	
+
 	
 	
 	//método para saber si al hacer parseint da error

@@ -1,5 +1,6 @@
 package com.ipartek.formacion.pojo;
 
+import com.ipartek.formacion.service.Idiomas;
 
 public class Usuario {
 	public static final int CODIGO_USU = -1;
@@ -8,6 +9,7 @@ public class Usuario {
 	private String alias;
 	private String password;
 	private String idSession;
+	private Idiomas idioma;
 	
 	public Usuario() {
 		super();
@@ -15,7 +17,7 @@ public class Usuario {
 		setAlias("");
 		setPassword("");
 		setIdSession("");
-		
+		setIdioma(idioma);
 	}
 	
 	
@@ -54,6 +56,18 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+
+	public Idiomas getIdioma() {
+		return idioma;
+	}
+
+
+
+	public void setIdioma(Idiomas idioma) {
+		this.idioma = idioma;
 	}
 	
 	

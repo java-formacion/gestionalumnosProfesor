@@ -1,4 +1,7 @@
-
+<%@page import="com.ipartek.formacion.service.Util"%>
+<%@page import="com.ipartek.formacion.service.Idiomas"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -8,9 +11,9 @@
 	<h3>Bienvenidos a la página de gestión de Alumnos de Ipartek</h3>
 	
 	<%
-	Usuario usuario = new Usuario();
+	Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 	
-	if(session.getAttribute("usuario")==null){
+	if(usuario==null){
 	%>
 	
 	<div class="row">
@@ -29,7 +32,7 @@
 				<input type="text" class="form-control" 
 					id="<%=Constantes.PAR_ALIAS%>" 
 					name="<%=Constantes.PAR_ALIAS%>" 
-					value="<%=usuario.getAlias()%>"/>
+					value=""/>
 				</div>
 			</div>
 			
@@ -41,8 +44,31 @@
 				<input type="text" class="form-control" 
 					id="<%=Constantes.PAR_PASSWORD%>" 
 					name="<%=Constantes.PAR_PASSWORD%>" 
-					value="<%=usuario.getPassword()%>"/>
+					value=""/>
 				</div>
+			</div>
+			
+			<div class="form-group">
+			<div class="col-sm-3">	
+				<label for="<%=Constantes.PAR_LOCALE%>">IDIOMA:</label>
+			</div>
+				<div class="col-sm-7">
+				<select class="form-control" name="<%=Constantes.PAR_LOCALE %>">
+						<c:set var="idiomas" value="<%=Idiomas.values() %>"/>
+			     		 <c:forEach items="${idiomas}" var="idioma">
+				        <c:if test="${idioma != selected}">
+				            <option value="${idioma}">${idioma}</option>
+				        </c:if>
+				    </c:forEach>
+			    </select>
+				</div>
+			</div>
+			
+			
+			<div class="input-form">
+				<input id="<%=Constantes.PAR_REMEMBER%>" 
+					name="<%=Constantes.PAR_REMEMBER%>" 
+					type="checkbox" value="1"><label for="<%=Constantes.PAR_REMEMBER%>">Recuerdame</label> 
 			</div>
 			
 			<div class="form-group">

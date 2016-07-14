@@ -1,8 +1,17 @@
+<%@page import="com.ipartek.formacion.service.i18n.i18n"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:set var="language" value="es_ES"/>
+<c:set var="language" value="<%=i18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="localeCode" value="${response.locale}" />
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages" /> 
+
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -73,7 +82,8 @@
         		</li>
     		</ul>
     	<%
-	if(session.getAttribute("usuario")!=null){
+    Usuario usu = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+	if(usu!=null){
 	%>	
 		<div class="row">
 				<div class="pull-right">
@@ -82,7 +92,7 @@
 	 	</div>
 	 	<div class="row">
 				<div class="pull-right">
-					<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-success">Salir</a>
+					<a href="<%=Constantes.SERVLET_LOGOUT %>" class="btn btn-success"><fmt:message key="header.desconectar"/></a>
 				</div>
 	 	</div>
 	<% 
