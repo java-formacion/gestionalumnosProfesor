@@ -45,10 +45,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="<%=Constantes.PAR_LOCALE%>">Idioma:</label>
 						<c:set var="idiomas" value="<%=Idioma.values()%>" />
 						<select name="<%=Constantes.PAR_LOCALE%>" id="<%=Constantes.PAR_LOCALE%>" class="form-control">
-							<option selected>Por defecto</option>
+							<option selected>Idioma (Por defecto)</option>
 							<c:forEach items="${idiomas}" var="idioma">
 								<option value="${idioma.codigo}">${idioma.nombre}</option>
 							</c:forEach>
