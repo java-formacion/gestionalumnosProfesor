@@ -28,7 +28,7 @@
 <body class="container-fluid">
 	<header class="row">
 		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
-		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
+		<a class="btn col-xs-offset-2 col-xs-2 btn-info" href="<%=Constantes.SERVLET_LOGOUT%>">
 			<span class="fa fa-sign-out" aria-hidden="true"></span>
 			Desconectar
 		</a>
