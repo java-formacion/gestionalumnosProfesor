@@ -36,6 +36,8 @@ public class Constantes {
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
 	public final static String PAR_SESSIONID ="sesionid";
+	public final static String PAR_REMEMBER = "recuerda";
+
 
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";
@@ -65,4 +67,9 @@ public class Constantes {
 	public final static String LOGIN_NAME ="Admin";
 	public final static String LOGIN_PASS ="1234";
 	public final static String LOGIN_NICK ="Triqui";
+	
+	public final static String COOKIE_USERNAME ="usuario";
+	public final static String COOKIE_PASSWORD ="password";
+	public final static String COOKIE_NICKNAME ="nickname";
+
 }
