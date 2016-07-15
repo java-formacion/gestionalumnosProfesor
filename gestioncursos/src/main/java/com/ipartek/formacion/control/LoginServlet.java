@@ -18,91 +18,98 @@ import com.ipartek.formacion.pojo.Usuario;
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
-	
+
 	HttpSession session = null;
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
-	private final static Logger log = Logger.getLogger(LoginServlet.class);
-	
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	private final static Logger logger = Logger.getLogger(LoginServlet.class);
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
-		
-		Usuario usuario = null;
-		
-		String user= request.getParameter(Constantes.PAR_USER);
-		String pass = request.getParameter(Constantes.PAR_PASSWORD);
-		//String idioma = request.getParameter();
 
-			if ("password".equals(pass) && "Josu@josu.es".equals(user)){
-				
-				createSession(request);
-				usuario = new Usuario();
-				usuario.setPass(pass);
-				usuario.setUser(user);
-				usuario.setNick("Stukov");
-				usuario.setSessionId(session.getId());
-				session.setAttribute(Constantes.ATT_USUARIO, usuario);
-				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
-				try {
-					rd.forward(request, response);
-				} catch (ServletException e) {
+		Usuario usuario = null;
+
+		String user = request.getParameter(Constantes.PAR_USER);
+		String pass = request.getParameter(Constantes.PAR_PASSWORD);
+		String idioma = request.getParameter(Constantes.PAR_IDIOMA);
+
+		if ("password".equals(pass) && "Josu@josu.es".equals(user)) {
+
+			createSession(request);
+			usuario = new Usuario();
+			usuario.setPass(pass);
+			usuario.setUser(user);
+			usuario.setNick("Stukov");
+			usuario.setSessionId(session.getId());
+			usuario.setIdioma(idioma);
+			session.setAttribute(Constantes.ATT_USUARIO, usuario);
+			rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_CURSOS);
+			try {
+				rd.forward(request, response);
+			} catch (ServletException e) {
 				// TODO Auto-generated catch block
-					e.printStackTrace();
-					log.error(e.getMessage());
-				} catch (IOException e) {
+				e.printStackTrace();
+				logger.error(e.getMessage());
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
-					e.printStackTrace();
-					log.error(e.getMessage());
-				}
-			} else {
-				createSession(request);
-				//rd  = request.getRequestDispatcher("index.jsp");
-				Mensaje mensaje = new Mensaje();
-				mensaje.setMsg("Usuario y/o contraseña incorrecta");
-				mensaje.setType(Mensaje.MSG_TYPE_ERROR);
-				//request.setAttribute(Constantes.ATT_MENSAJE,mensaje);
-				session.setAttribute(Constantes.ATT_MENSAJE,mensaje);
-				try {
-					response.sendRedirect("index.jsp");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					log.error(e.getMessage());
-				}
+				e.printStackTrace();
+				logger.error(e.getMessage());
 			}
+		} else {
+			createSession(request);
+			// rd = request.getRequestDispatcher("index.jsp");
+			Mensaje mensaje = new Mensaje();
+			mensaje.setMsg("Usuario y/o contraseña incorrecta");
+			mensaje.setType(Mensaje.MSG_TYPE_ERROR);
+			// request.setAttribute(Constantes.ATT_MENSAJE,mensaje);
+			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+			try {
+				response.sendRedirect("index.jsp");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				logger.error(e.getMessage());
+			}
+		}
 
 	}
-	private void createSession(HttpServletRequest request){
+
+	private void createSession(HttpServletRequest request) {
 		session = request.getSession(true);
-		/* 
+		/*
 		 * getSession(True) Si la sesion no existe la crea, si existe te la coge
-		 * getSession(false) Te coge la session activa, no crea una nueva. Si no existe sigues sin session
+		 * getSession(false) Te coge la session activa, no crea una nueva. Si no
+		 * existe sigues sin session
 		 */
-		session.setMaxInactiveInterval(60*60*15);// en milisegundos, 15 minutos. Es un autologout
+		session.setMaxInactiveInterval(60 * 60 * 15);// en milisegundos, 15
+														// minutos. Es un
+														// autologout
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doProcess(request,response);
-		
-		
-		
-		
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doProcess(request, response);
+
 	}
 
 }

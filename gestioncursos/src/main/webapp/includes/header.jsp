@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.services.I18n.I18n"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -9,8 +10,10 @@
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <c:set var="language" value="en_EN"/>
 <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="${usuario.idioma}"/>
 <c:set var="localeCode" value="${response.locale}"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.services.I18n.i18nmesages"/>
@@ -58,7 +61,7 @@
 		      <span class="icon-bar"></span>
 		      <span class="icon-bar"></span>
 		    </button>
-		    <a class="navbar-brand" href="index.jsp">Página Principal</a>
+		    <a class="navbar-brand" href="index.jsp"><fmt:message key="header.paginappal"/></a>
 		  </div>
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
     		<ul class="nav navbar-nav">
@@ -73,7 +76,7 @@
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
-						Alumnos
+						<fmt:message key="header.alumnos"/>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_ALUMNOS%>?<%=Constantes.PAR_CODIGO%>=<%=Alumno.CODIGO_ALUMNO%>">Crear alumno Nuevo</a></li>
@@ -82,7 +85,7 @@
 				</li>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Modulos
+						<fmt:message key="header.modulos"/>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_MODULOS%>?<%=Constantes.PAR_CODIGO%>=<%=Modulo.CODIGO_MODULO%>">Crear Modulo Nuevo</a></li>
@@ -92,7 +95,7 @@
 				<%if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){ %>
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_ADMIN%>">
-						Administración
+						<fmt:message key="header.administracion"/>
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_ADMIN%>">Lista de usuarios conectados</a></li>

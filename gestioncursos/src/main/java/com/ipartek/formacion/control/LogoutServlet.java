@@ -1,6 +1,7 @@
 package com.ipartek.formacion.control;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,37 +15,38 @@ import org.apache.log4j.Logger;
  */
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = Logger.getLogger(LogoutServlet.class);
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    
+	private final static Logger logger = Logger.getLogger(LogoutServlet.class);
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
-
-
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
-		if (session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){
+		if (session != null && session.getAttribute(Constantes.ATT_USUARIO) != null) {
 			session.invalidate();
-		} 
+		}
 		response.sendRedirect("index.jsp");
 	}
 
-
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 
 }

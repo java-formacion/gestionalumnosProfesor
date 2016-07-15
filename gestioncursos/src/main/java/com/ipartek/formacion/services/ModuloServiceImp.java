@@ -6,36 +6,41 @@ import java.util.List;
 import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.pojo.excepciones.ModuloServiceException;
 
-public class ModuloServiceImp implements ModuloService{
+public final class ModuloServiceImp implements ModuloService {
 	private static ModuloServiceImp INSTANCE = null;
 	private List<Modulo> modulos;
-	private static int i=1;
-	private void init(){
+	private static int numero = 1;
+
+	private void init() {
 		modulos = new ArrayList<Modulo>();
 		Modulo modulo = new Modulo();
 		modulo.setNombre("Modulo programación");
 		createModulo(modulo);
 	}
-	private ModuloServiceImp(){
+
+	private ModuloServiceImp() {
 		init();
 	}
-	public static ModuloServiceImp getInstance(){
-		if (INSTANCE==null){
-			createInstance();			
+
+	public static ModuloServiceImp getInstance() {
+		if (INSTANCE == null) {
+			createInstance();
 		}
 		return INSTANCE;
 	}
+
 	private synchronized static void createInstance() {
-		if(INSTANCE == null)
+		if (INSTANCE == null)
 			INSTANCE = new ModuloServiceImp();
-		
+
 	}
+
 	@Override
 	public Modulo createModulo(Modulo modulo) {
 
-		modulo.setCodigo(i);
+		modulo.setCodigo(numero);
 		modulos.add(modulo);
-		i++;
+		numero++;
 		return modulo;
 	}
 
@@ -45,27 +50,27 @@ public class ModuloServiceImp implements ModuloService{
 		int index;
 		try {
 			index = getIndex(codigo);
-			modulo= modulos.get(index);
+			modulo = modulos.get(index);
 		} catch (ModuloServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return modulo;
 	}
 
 	@Override
-	public void delete(int codigo){
+	public void delete(int codigo) {
 		try {
 			int index = getIndex(codigo);
-			this.modulos.remove(index); // Es mejor no ahorrar lineas para que sea más claro a la hora de debugear
+			this.modulos.remove(index); // Es mejor no ahorrar lineas para que
+										// sea más claro a la hora de debugear
 			// si no hariamos asi this.alumnos.remove(getIndex(codigo));
 		} catch (ModuloServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		
+		}
+
 	}
 
 	@Override
@@ -83,44 +88,45 @@ public class ModuloServiceImp implements ModuloService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return modulo;
 	}
 
 	private int getIndex(int codigo) throws ModuloServiceException {
-		
+
 		int index = -1;
-		int i = 0,len=this.modulos.size();
+		int i = 0, len = this.modulos.size();
 		boolean encontrado = false;
-		while(i<len && encontrado== false){
-			
+		while (i < len && encontrado == false) {
+
 			Modulo aux = this.modulos.get(i); // Modulo [i]
-			if (aux.getCodigo()==codigo){
+			if (aux.getCodigo() == codigo) {
 				encontrado = true;
-				index=i;
+				index = i;
 			}
 			i++;
-			if(index < 0){
-				throw new ModuloServiceException(ModuloServiceException.CODIGO_ERROR_INDEX,ModuloServiceException.MSG_ERROR_INDEX);
+			if (index < 0) {
+				throw new ModuloServiceException(ModuloServiceException.CODIGO_ERROR_INDEX,
+						ModuloServiceException.MSG_ERROR_INDEX);
 			}
 		}
 		return index;
-		
+
 	}
 
 	public static Modulo getModulo() {
-		Modulo mod= null;
-		
+		Modulo mod = null;
+
 		mod = new Modulo();
-		mod.setCodigo(i);
+		mod.setCodigo(numero);
 		mod.setNombre("Desarrollo de Aplicaciones de Tecnologias Web");
-		i++;
+		numero++;
 		return mod;
 	}
+
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException(); 
+		throw new CloneNotSupportedException();
 	}
-	
 
 }
