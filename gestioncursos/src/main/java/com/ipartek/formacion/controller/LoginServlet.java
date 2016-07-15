@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class LoginServlet
@@ -115,6 +116,8 @@ public class LoginServlet extends HttpServlet {
 		user.setUserName(request.getParameter(Constantes.PAR_USERNAME));
 		user.setUserPassword(request.getParameter(Constantes.PAR_PASSWORD));
 		user.setNickname("Profe");
+		String codIdioma=request.getParameter(Constantes.PAR_IDIOMA);
+		user.setIdioma(Util.parseIdiomaUsuario(codIdioma));
 		//session.setAttribute(Constantes.ATT_USUARIO, usuario);
 		//	rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 	}

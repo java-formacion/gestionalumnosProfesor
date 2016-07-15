@@ -24,11 +24,12 @@
        		<div class="panel-title"><h2>Login</h2></div>
        
    			</div>     
-<% %>
+
    			<div class="panel-body">
        			<form class="form-horizontal" action="<%=Constantes.SERVLET_LOGIN %>" method="post" role="form">
            			<div class="input-group">
-           				<label class="sr-only" for="<%=Constantes.PAR_USERNAME %>">Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+           			<c:set var="userName" value="${cookie.c_usuario.value}"/>
+           				<label class="sr-only" for="<%=Constantes.PAR_USERNAME %>" >Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
            			
            			</div>
@@ -43,9 +44,9 @@
 								<input type="checkbox" name="<%=Constantes.PAR_REMEMBER %>"  value="1"/> Recuerdame
 			            </div>
                    </div>
-                  <div class="input-group"> 
-					<select class="c-select">
-  						<option selected>Selecciona un idioma</option>
+                 <div class="input-group"> 
+					<select class="c-select" name="<%=Constantes.PAR_IDIOMA%>">
+  						
   						 <c:forEach items="<%=Idioma.values() %>" var="idioma">
   						<option value="${idioma.codigo}">${idioma.nombre}</option>
   						</c:forEach>

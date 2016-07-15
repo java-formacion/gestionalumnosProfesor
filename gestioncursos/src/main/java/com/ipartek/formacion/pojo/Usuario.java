@@ -15,12 +15,14 @@ public class Usuario {
 	private String userName;
 	private String userPassword;
 	private String nickname;
-
+	private Idioma idioma;
+	
 	public Usuario(){
 		setSessionId("");
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
+		setIdioma(Idioma.INGLES);
 	}
 
 
@@ -44,4 +46,19 @@ public class Usuario {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
+
+
+
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+
+
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
+	}
+	
 }

@@ -36,6 +36,20 @@ public class Util {
 		}
 		return aux;
 	}
+	public static Idioma parseIdiomaUsuario(String idioma){
+		Idioma aux = Idioma.INGLES;
+		int codigo = Integer.parseInt(idioma);
+		if(codigo== Idioma.CASTELLANO.getCodigo()){
+			aux =Idioma.CASTELLANO;
+		}
+		else{
+			if(codigo== Idioma.EUSKERA.getCodigo()){
+				aux =Idioma.EUSKERA;
+			}
+		}
+	
+		return aux;
+	}
 	public static DuracionModulo parseDuracion(String duracion){
 		DuracionModulo d = DuracionModulo.HORAS15;
 		int codigo = Integer.parseInt(duracion);
