@@ -63,7 +63,7 @@ public class InitListener implements ServletContextListener,
 		try {
 			PropertyConfigurator.configure(ruta + PATH_LOG4J);
 			/* LOG */LOG.info("LOaded LOg");
-		} catch (Exception e) {
+		} catch (Exception e) { 
 
 		}
 	}
