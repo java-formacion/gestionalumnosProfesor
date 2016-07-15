@@ -169,13 +169,11 @@
 						</button>
 					</div>
 				</div>
-			</form>
-			
-			
-			
-			
+			</form>	
 			
 	<%	}
 		%>
 </main>
+
+
 <%@include file="../includes/footer.jsp" %>

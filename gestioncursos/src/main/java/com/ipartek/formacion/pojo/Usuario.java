@@ -3,61 +3,65 @@ package com.ipartek.formacion.pojo;
 import java.util.Date;
 
 public class Usuario {
-	private String sessionId;
-	private String userName;
-	private String userPassword;
-	private String nickname;
-	private Date fConexion;
+  private String sessionId;
+  private String userName;
+  private String userPassword;
+  private String nickname;
+  private Idioma idioma;
+  private Date fConexion;
 
-	public Usuario(){
-		setUserName("");
-		setUserPassword("");
-		setNickname("");
-		this.fConexion = new Date();
-	}
+  public Usuario() {
+    this.setUserName("");
+    this.setUserPassword("");
+    this.setNickname("");
+    this.fConexion = new Date();
+  }
 
-	
+  public Idioma getIdioma() {
+    return this.idioma;
+  }
 
-	public String getSessionId() {
-		return sessionId;
-	}
+  public void setIdioma(Idioma idioma) {
+    this.idioma = idioma;
+  }
 
+  public String getSessionId() {
+    return this.sessionId;
+  }
 
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
+  public void setSessionId(String sessionId) {
+    this.sessionId = sessionId;
+  }
 
+  public Date getfConexion() {
+    return this.fConexion;
+  }
 
+  public void setfConexion(Date fConexion) {
+    this.fConexion = fConexion;
+  }
 
+  public String getUserName() {
+    return this.userName;
+  }
 
-	public Date getfConexion() {
-		return fConexion;
-	}
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
 
+  public String getUserPassword() {
+    return this.userPassword;
+  }
 
+  public void setUserPassword(String userPassword) {
+    this.userPassword = userPassword;
+  }
 
-	public void setfConexion(Date fConexion) {
-		this.fConexion = fConexion;
-	}
+  public String getNickname() {
+    return this.nickname;
+  }
 
-
-
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getUserPassword() {
-		return userPassword;
-	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
 }

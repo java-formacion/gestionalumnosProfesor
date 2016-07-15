@@ -1,11 +1,21 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- Bibiliotecas de jsp, (API de java) para el cambio de formato de las app, por ejemplo el idioma-->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Curso"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<c:set var="language" value="en_EN"></c:set>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"></c:set> <!-- Metemos el valor que nos devuelve el UserAgent del idioma en la variable language  -->	
+<c:set var="LocaleCode" value="${response.locale}"/>
+<c:set var="language" value="${usuario.idioma.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages" /> 
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
@@ -31,9 +41,16 @@
 		<h1 class="col-xs-12">Ipartek - Gestion de Cursos</h1>
 
 
-		<a class="btn btn-info" href=<%=Constantes.SERVLET_LOGOUT%>> <span
-			class="fa fa-sign-out" aria-hidden="true"></span>Desconectar
-		</a>
+		<%
+			Usuario user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
+			if(user != null){
+				%>
+				<a class="btn btn-info" href=<%=Constantes.SERVLET_LOGOUT%>> 
+				<span class="fa fa-sign-out" aria-hidden="true"></span>
+				<fmt:message key="header.desconectar"></fmt:message> <!-- Llamamos a la cable que hemos asociado a desconetar -->
+				</a> <%
+				} %>
+
 	</header>
 
 	<nav class="navbar navbar-inverse" role="navigation">
@@ -46,12 +63,14 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">Página Principal</a>
+			<a class="navbar-brand" href="index.jsp"><fmt:message key="header.paginaprincipal"/></a>
+			
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="<%=Constantes.SERVLET_CURSOS%>"> Cursos </a>
+					data-toggle="dropdown" href="<%=Constantes.SERVLET_CURSOS%>">
+						Cursos </a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=Constantes.SERVLET_CURSOS%>"> Ver Cursos
 						</a></li>
@@ -59,7 +78,7 @@
 							href="<%=Constantes.SERVLET_CURSOS%>?<%=Constantes.PAR_CODIGO%>=<%=Curso.CODIGO_CURSO%>">
 								Crear Curso Nuevo </a></li>
 					</ul></li>
-					
+
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="<%=Constantes.SERVLET_ALUMNOS%>">
 						Alumnos </a>

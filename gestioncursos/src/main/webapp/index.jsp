@@ -1,3 +1,6 @@
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -46,6 +49,15 @@
 							id="<%=Constantes.PAR_PASSWORD%>" type="password"
 							class="form-control" placeholder="Introduzca su contraseña">
 					</div>
+					<div>
+						<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma</label>
+						<select name="<%=Constantes.PAR_IDIOMA%>" id="<%=Constantes.PAR_IDIOMA%>">
+						<c:set var="idiomas" value="<%=Idioma.values()%>"/> <!-- Declarar variable con JSTL -->
+							<c:forEach items="${idiomas}" var="idioma">
+								<option value="${idioma.codigo}">${idioma.nombre}</option>
+							</c:forEach>
+						</select>
+					</div>
 					<div class="input-group">
 						<div class="checkbox">
 							<input type="checkbox" value="1"
@@ -53,8 +65,6 @@
 								name="<%=Constantes.PAR_REMEMBER%>"><label for="">Recuerdame</label>
 						</div>
 					</div>
-
-
 					<div class="form-group">
 						<div class="col-xs-12 controls">
 							<button type="submit" id="btn-login" class="btn btn-success">Aceptar

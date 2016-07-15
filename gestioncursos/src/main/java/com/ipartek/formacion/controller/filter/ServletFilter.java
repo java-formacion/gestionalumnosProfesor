@@ -19,10 +19,17 @@ import com.ipartek.formacion.controller.Constantes;
  */
 public class ServletFilter implements Filter {
 
+	/**
+	 * Default constructor.
+	 */
+	public ServletFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
 	 */
+	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
@@ -30,34 +37,43 @@ public class ServletFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		// place your code here
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		String uri = req.getServletPath();
-		if(!uri.contains(Constantes.SERVLET_LOGIN)){
-			if(checkSession(req)){
+		String url = req.getServletPath();
+
+		url.equals("/"+Constantes.SERVLET_LOGIN);
+		if(!url.contains(Constantes.SERVLET_LOGIN))
+		{
+			if(checkSession(req)){//tiene una session valida
 				chain.doFilter(request, response);
-			}else{
+			}else{//no tiene una session valida
+				//
 				res.sendRedirect("index.jsp");
 			}
+			// pass the request along the filter chain
 		}else{
 			chain.doFilter(request, response);
 		}
+
+	}
+	private boolean checkSession(HttpServletRequest req) {
+		boolean correcto = false;
+		HttpSession session = req.getSession(false);
+		if(session !=null && session.getAttribute(Constantes.ATT_USUARIO)!=null) {
+			correcto = true;
+		}
+		return correcto;
 	}
 
-	private boolean checkSession(HttpServletRequest req) {
-		
-		boolean comprobar = false;
-		HttpSession session = req.getSession(false);
-		if(session != null && session.getAttribute(Constantes.ATT_USUARIO) != null){
-			comprobar = true;
-		}
-		return comprobar;
-	}
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
+	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}

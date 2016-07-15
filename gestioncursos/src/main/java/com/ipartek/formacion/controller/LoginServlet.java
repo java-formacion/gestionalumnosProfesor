@@ -10,105 +10,148 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	RequestDispatcher rd = null;
-	HttpSession session = null;
+  private static final long serialVersionUID = 1L;
+  private RequestDispatcher rd = null;
+  private HttpSession session = null;
+  private static final Logger log = Logger.getLogger(LoginServlet.class);
+  private Usuario user = null;
+  private String nUsuario = "";
+  private String passWord = "";
+  Cookie cookieNombre = null;
+  Cookie cookiePass = null;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request, response);
-	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request, response);
-	}
+  /**
+   * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+   */
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    this.doProcess(request, response);
+  }
 
-	private void doProcess(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+  /**
+   * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+   */
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    this.doProcess(request, response);
+  }
 
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			String nUsuario = "", nPass = "";
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("usuario")) {
-					nUsuario = cookie.getValue();
-				} else {
-					if (cookie.getName().equals("password")) {
-						nPass = cookie.getValue();
-					}
-				}
-			}
-			
-			
-			if(!"".equals(nUsuario) && !"".equals(nPass)){
-				createSession(request);
-				//falta hacer la redireccion
-				rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
-				rd.forward(request, response);
-			}
-			
-		}
-		Usuario usuario = null;
-		String userName = request.getParameter(Constantes.PAR_USERNAME);
-		String pass = request.getParameter(Constantes.PAR_PASSWORD);
-		String[] checkBoxes = request
-				.getParameterValues(Constantes.PAR_REMEMBER);
-		if (checkBoxes != null && checkBoxes.length == 1) {
-			Cookie cookieName = new Cookie("usuario", usuario.getUserName());// Cada uno de los parametros que queremos guardar, van a ir a una cookie diferente
-			Cookie cookiePass = new Cookie("pass", usuario.getUserPassword());
-			cookieName.setMaxAge(24 * 60 * 60);// tiempo de la cookie, hasta su
-												// eliminacion
-			cookiePass.setMaxAge(24 * 60 * 60);
-			response.addCookie(cookiePass);
-			response.addCookie(cookieName);
-		}
-		if ("anabel".equals(userName) && "anabel".equals(pass)
-				|| "violeta".equals(userName) && "violeta".equals(pass)) {
-			createSession(request);
-			usuario = new Usuario();
-			usuario.setUserName(userName);
-			usuario.setUserPassword(pass);
-			usuario.setNickname("Alumno");
-			usuario.setSessionId(session.getId());
-			session.setAttribute(Constantes.ATT_USUARIO, usuario);
-			rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
-			rd.forward(request, response);
-		} else {
-			createSession(request);
-			// rd = request.getRequestDispatcher("index.jsp");
-			Mensaje mensaje = new Mensaje();
-			mensaje.setMsg("Usuario y/o contraseña incorrectos");
-			mensaje.setType(Mensaje.MSG_TYPE_DANGER);
-			// request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
-			response.sendRedirect("index.jsp");
-		}
+  private void doProcess(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-	}
+    if (this.cargarCookies(request)) {
+      this.cargarDatosCookies();
 
-	private void createSession(HttpServletRequest request) {
-		session = request.getSession(true);
-		/*
-		 * getSession(true) ---> Si la session no existe te la crea
-		 * getSession(false) --> Te coge la session activa si no existe es null
-		 */
-		session.setMaxInactiveInterval(60 * 60 * 15);
-	}
+    } else {
+      if (request.getParameter(Constantes.PAR_USERNAME) != null) {
+        this.cargarParametros(request);
+
+      }
+    }
+
+    if (this.user != null && "anabel".equals(this.user.getUserName())
+        && "anabel".equals(this.user.getUserPassword())) {
+      this.generarCookies(response);
+
+      String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
+      if (checkboxes != null && checkboxes.length == 1) {
+        this.cookieNombre.setMaxAge(60 * 60 * 24);
+        this.cookiePass.setMaxAge(24 * 60 * 60);
+      } else {
+        cookieNombre.setMaxAge(0);
+        cookiePass.setMaxAge(0);
+      }
+      response.addCookie(cookieNombre);
+      response.addCookie(cookiePass);
+      procesarLogin(request);
+      session.setAttribute(Constantes.ATT_USUARIO, user);
+      rd.forward(request, response);
+    } else {
+      createSession(request);
+      Mensaje mensaje = new Mensaje();
+      mensaje.setMsg("Usuario y/o contraseña incorrectos");
+      mensaje.setType(Mensaje.MSG_TYPE_DANGER);
+      session.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+
+      response.sendRedirect(Constantes.JSP_INDEX);
+    }
+
+  }
+
+  private void generarCookies(HttpServletResponse response) {
+    cookieNombre = new Cookie("usuario", user.getUserName());
+    cookiePass = new Cookie("password", user.getUserPassword());
+
+  }
+
+  private void procesarLogin(HttpServletRequest request) {
+    createSession(request);
+    rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+
+    // request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
+  }
+
+  private void cargarDatosCookies() {
+    log.trace(nUsuario + " " + passWord);
+    user = new Usuario();
+    user.setUserName(nUsuario);
+    user.setUserPassword(passWord);
+    user.setNickname("Alumno");
+  }
+
+  private void cargarParametros(HttpServletRequest request) {
+    this.user = new Usuario();
+    String int1 = request.getParameter(Constantes.PAR_IDIOMA);
+    Idioma id = Util.parseIdioma(int1);
+    this.user.setUserName(request.getParameter(Constantes.PAR_USERNAME));
+    this.user.setUserPassword(request.getParameter(Constantes.PAR_PASSWORD));
+    this.user.setNickname("Alumno");
+    this.user.setIdioma(id);
+    // session.setAttribute(Constantes.ATT_USUARIO, usuario);
+    // rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+  }
+
+  private boolean cargarCookies(HttpServletRequest request) {
+    boolean cargado = false;
+
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+      for (Cookie cookie : cookies) {
+
+        if (cookie.getName().equals("usuario")) {
+          this.nUsuario = cookie.getValue();
+        } else {
+          if (cookie.getName().equals("password")) {
+            this.passWord = cookie.getValue();
+          }
+        }
+      }
+      if (!"".equals(this.nUsuario) && !"".equals(this.passWord)) {
+        cargado = true;
+      }
+    }
+    return cargado;
+  }
+
+  private void createSession(HttpServletRequest request) {
+    this.session = request.getSession(true);
+    /*
+     * getSession(true) ---> Si la session no existe te la crea getSession(false) --> Te coge la
+     * session activa si no existe es null
+     */
+    session.setMaxInactiveInterval(60 * 60 * 15);
+  }
 }
