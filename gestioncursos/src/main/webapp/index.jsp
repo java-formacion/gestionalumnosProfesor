@@ -33,6 +33,7 @@
            			
            			</div>
 		           <div class="input-group">
+		           	<c:set var="username" value="${coockie.cookieNombre.value}" />
 		           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
@@ -42,10 +43,11 @@
 								<input id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" type="checkbox" value="1"><label for="<%=Constantes.PAR_REMEMBER %>">Recuerdame</label> 
 			            </div>
                    </div>
+                   
 		           <div class="input-group">
-							<select>
+							<select name="<%=Constantes.PAR_IDIOMA %>"  id="<%=Constantes.PAR_IDIOMA %>">
 								<c:forEach items="<%=Idioma.values() %>" var="idioma">
-									<option value="${idioma.codigo}">${idioma.nombre}</option>
+									<option value="${idioma.codigo}" >${idioma.nombre}</option>
 								</c:forEach>
 							</select>
                    </div>

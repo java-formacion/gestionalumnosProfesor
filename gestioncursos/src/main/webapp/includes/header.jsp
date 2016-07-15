@@ -11,10 +11,13 @@
 
 <c:set var="language" value="en_EN" />
 <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>" />
-<fmt:setLocale value="${language}" />
-<fmt:bundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page" />
 
-<c:set var="localeCode" value="${response.locale }"/>
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
+
+
 
 <!DOCTYPE html>
 <html lang="${language} ">
