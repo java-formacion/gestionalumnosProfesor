@@ -141,13 +141,14 @@ public class LoginServlet extends HttpServlet {
 		return cargado;
 	}
 	private void createSession(HttpServletRequest request){
+		int duracion = 60*60*15;
 		session = request.getSession(true);
 		/*
 		 * getSession(true) ---> Si la session no existe te la crea
 		 * getSession(false) --> Te coge la session activa si no existe es null
 		 *
 		 */
-		session.setMaxInactiveInterval(60*60*15);
+		session.setMaxInactiveInterval(duracion);
 	}
 }
 

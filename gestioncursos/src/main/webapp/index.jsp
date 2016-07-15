@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -39,6 +40,14 @@
 		           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
+		            </div>
+		           <div class="input-group">
+		           		<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma:</label>
+						<select name="<%=Constantes.PAR_IDIOMA %>" id="<%=Constantes.PAR_IDIOMA %>">
+						<c:forEach items="<%=Idioma.values() %>" var="idioma">
+							<option value="${idioma.codigo}">${idioma.nombre}</option>
+						</c:forEach>
+						</select>
 		            </div>
 		           <div class="input-group">
 						<div class="checkbox">

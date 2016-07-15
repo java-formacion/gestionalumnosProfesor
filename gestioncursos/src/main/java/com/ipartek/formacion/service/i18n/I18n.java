@@ -7,7 +7,7 @@ import java.util.MissingResourceException;
 import com.ipartek.formacion.pojo.Idioma;
 
 public class I18n {
-
+	private I18n() {}
 	public static final String getBrowserLocale(Locale localeBrowser){
 		Locale localeEuskera = new Locale(Idioma.EUSKERA.getCodIdioma());
 		//	Locale localeIngles = new Locale(Idioma.INGLES.getCodIdioma());
