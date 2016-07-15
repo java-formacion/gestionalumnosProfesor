@@ -20,7 +20,7 @@ import com.ipartek.formacion.pojo.Mensaje;
  */
 public class AdministracionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final static Logger logger = Logger.getLogger(AdministracionServlet.class);
+	private final static Logger Log = Logger.getLogger(AdministracionServlet.class);
 	private RequestDispatcher rd = null;
 
 	/**
@@ -61,7 +61,7 @@ public class AdministracionServlet extends HttpServlet {
 		} else {
 			mensaje.setMsg("La operación no se ha realizado con exito, contacte con el administrador");
 			mensaje.setType(Mensaje.MSG_TYPE_ERROR);
-			logger.info("Error al expulsar la sessionID" + sesionId);
+			Log.info("Error al expulsar la sessionID" + sesionId);
 		}
 		request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 	}

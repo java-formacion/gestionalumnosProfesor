@@ -67,7 +67,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		loadLog4j(arg0);
-		loadProperties(arg0);
+		// loadProperties(arg0);
 	}
 
 	private void loadProperties(ServletContextEvent arg0) {
@@ -76,6 +76,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 		Properties props = new Properties();
 		try {
 			props.load(input);
+			Log.info("Se ha cargado correctamente las constantes desde el properties");
 		} catch (IOException e) {
 			Log.error("No se ha cargado correctamente las constantes desde el properties");
 		}

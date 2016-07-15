@@ -34,7 +34,7 @@ public class AlumnoServlet extends HttpServlet {
 	private List<Alumno> alumnos = null;
 	private Alumno alumno = null;
 	private int operacion = -1;
-	private final static Logger logger = Logger.getLogger(AlumnoServlet.class);
+	private final static Logger Log = Logger.getLogger(AlumnoServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -104,12 +104,12 @@ public class AlumnoServlet extends HttpServlet {
 			}
 			getAll(request);
 		} catch (NumberFormatException e) {
-			logger.error(e.getMessage());
+			Log.error(e.getMessage());
 		} catch (NullPointerException e) {
-			logger.error(e.getMessage());
+			Log.error(e.getMessage());
 		} catch (CandidatoException e) {
 			try {
-				logger.error(e.getMessage());
+				Log.error(e.getMessage());
 				AlumnoError alumnoError = new AlumnoError();
 				alumnoError = recogerDatosError(request);
 				alumnoError.setMensaje(e.getMessage());
@@ -118,11 +118,11 @@ public class AlumnoServlet extends HttpServlet {
 			} catch (CandidatoException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				logger.error(e1.getMessage());
+				Log.error(e1.getMessage());
 			}
 
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			Log.error(e.getMessage());
 
 		}
 		rd.forward(request, response);

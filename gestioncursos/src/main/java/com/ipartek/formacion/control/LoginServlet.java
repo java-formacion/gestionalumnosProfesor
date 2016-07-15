@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 	HttpSession session = null;
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
-	private final static Logger logger = Logger.getLogger(LoginServlet.class);
+	private final static Logger Log = Logger.getLogger(LoginServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -62,11 +62,11 @@ public class LoginServlet extends HttpServlet {
 			} catch (ServletException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				logger.error(e.getMessage());
+				Log.error(e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				logger.error(e.getMessage());
+				Log.error(e.getMessage());
 			}
 		} else {
 			createSession(request);
@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				logger.error(e.getMessage());
+				Log.error(e.getMessage());
 			}
 		}
 
