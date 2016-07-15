@@ -71,7 +71,7 @@ public class Constantes {
 	public final static String JSP_CURSO = "/cursos/curso.jsp";
 	
 	public final static String JSP_LISTADO_ALUMNOS = "/alumnos/listadoAlumnos.jsp";
-	public final static String JSP_ALUMNO =" /alumnos/alumno.jsp";
+	public final static String JSP_ALUMNO = "/alumnos/alumno.jsp";
 	
 	public final static String JSP_LISTADO_MODULOS = "/modulos/listadoModulos.jsp";
 	public final static String JSP_MODULO = "/modulos/modulo.jsp";

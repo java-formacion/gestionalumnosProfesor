@@ -77,7 +77,7 @@ public class AlumnoServlet extends HttpServlet {
 	private void getAll(HttpServletRequest request) {
 		alumnos = aService.getAll();
 		request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, alumnos);
-		rwd = request.getRequestDispatcher("/alumnos/listadoAlumnos.jsp");
+		rwd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ALUMNOS);
 	}
 
 	private void getById(HttpServletRequest request) {
@@ -116,10 +116,6 @@ public class AlumnoServlet extends HttpServlet {
 					recogerDatosAlumno(request);
 					aService.update(alumno);
 					break;
-					
-				case Constantes.OP_READ:
-				
-					break;
 				
 				default:
 					break;
@@ -132,6 +128,7 @@ public class AlumnoServlet extends HttpServlet {
 			try {
 				AlumnoError alumnoError = new AlumnoError();
 				alumnoError = recogerDatosError(request);
+				alumnoError.setMensaje(e.getMessage());
 				request.setAttribute(Constantes.ATT_ALUMNO, alumnoError);
 				rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
 			} catch (CandidatoException e1) {
@@ -141,8 +138,8 @@ public class AlumnoServlet extends HttpServlet {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.error(e.getMessage());
 		}
-		getAll(request);
 		rwd.forward(request, response);
 	}
 

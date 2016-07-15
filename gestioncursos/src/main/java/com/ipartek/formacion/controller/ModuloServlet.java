@@ -81,7 +81,6 @@ public class ModuloServlet extends HttpServlet {
 			}
 			
 			// 1- recoger los datos del objeto curso
-			//recogerDatosModulo(request);
 			recogerId(request);
 			
 			// 2- diferencias la create de las demas
