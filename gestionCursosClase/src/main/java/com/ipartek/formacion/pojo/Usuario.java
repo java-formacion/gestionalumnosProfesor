@@ -6,14 +6,22 @@ public class Usuario {
 	private String userPassword;
 	private String nickname;
 	public String sessionID;
-	public String Idioma;
+	public Idioma idioma;
+
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
+	}
 
 	public Usuario(){
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
 		setSessionID("");
-		setIdioma("");
+		setIdioma(idioma.CASTELLANO);
 	}
 	
 	public String getUserName() {
@@ -43,11 +51,5 @@ public class Usuario {
 		this.sessionID = sessionID;
 	}
 	
-	public String getIdioma() {
-		return Idioma;
-	}
-
-	public void setIdioma(String idioma) {
-		Idioma = idioma;
-	}
+	
 }

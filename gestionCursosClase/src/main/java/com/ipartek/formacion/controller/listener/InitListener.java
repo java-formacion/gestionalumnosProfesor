@@ -1,5 +1,9 @@
 package com.ipartek.formacion.controller.listener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
@@ -41,7 +45,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
-    public void contextDestroyed(ServletContextEvent arg0)  { 
+    public void contextDestroyed(ServletContextEvent arg0){ 
          // TODO Auto-generated method stub
     }
 
@@ -58,7 +62,25 @@ public class InitListener implements ServletContextListener, ServletContextAttri
     public void contextInitialized(ServletContextEvent arg0)  {
          // TODO Auto-generated method stub
     	loadLog4j(arg0);
+    	loadConstantes(arg0);
     }
+
+	private void loadConstantes(ServletContextEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		InputStream inputStream = classloader.getResourceAsStream("constantes.properties");
+		
+		Properties proper = new Properties();
+		try {
+			proper.load(inputStream);
+			log.info("se han cargado las properties");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.error("no se han cargado las constantes properties");
+		}
+		
+	}
 
 	private void loadLog4j(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -72,7 +94,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 			//}
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+				log.error("Error al cargar el log de log4j");
 		}
 	}
 	

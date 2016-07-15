@@ -110,6 +110,24 @@ public class Util {
 		return aux;
 	}
 	
+	public static Idioma parseIdioma(String idiomas){
+			
+			Idioma idioma = Idioma.CASTELLANO;
+			int codigoIdioma = Integer.parseInt(idiomas);
+			if(codigoIdioma == Idioma.EUSKERA.getCodigo())
+			{
+				idioma = Idioma.EUSKERA;
+			}
+			else
+			{
+				if(codigoIdioma==Idioma.INGLES.getCodigo())
+				{
+					idioma = Idioma.INGLES;
+				}
+			}
+		return idioma;
+	}
+	
 	public static boolean tryParseInt(String cadena){
 		boolean exito = true;
 

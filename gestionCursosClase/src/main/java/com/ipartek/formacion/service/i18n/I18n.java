@@ -33,8 +33,7 @@ public class I18n {
 	}
 	
 	public static String getString(String cadenaMensaje, Object... params){
-		String msg = "";
-		
+		String msg="";
 		try {
 			
 			

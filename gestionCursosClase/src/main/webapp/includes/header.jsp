@@ -5,6 +5,7 @@
 <%@taglib prefix="fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="language" value="eu_ES" />
 <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="${usuario.idioma.locale}"/>
 <c:set var="localeCode" value="${response.locale}"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>

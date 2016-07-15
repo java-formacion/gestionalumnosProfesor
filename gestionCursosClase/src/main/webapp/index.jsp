@@ -3,9 +3,8 @@
 <%@taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri= "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <fmt:setLocale value="${language}"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
 <jsp:include page="includes/header.jsp"/>
 	<jsp:include page="includes/error.jsp"/>
@@ -27,17 +26,16 @@
     		<form class="form-signin" action="<%=Constantes.SERVLET_LOGIN%>" method="post" role="form">       
       			<h2 class="form-signin-heading"><fmt:message key="login.pleaselogin"/></h2>
       			
-      			<input id="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" name="<%=Constantes.PAR_USERNAME %>" placeholder="<fmt:message key="usuario"/>" required="" autofocus="" />
+      			<input id="<%=Constantes.PAR_USERNAME %>" value="${cookie.usuario.value}" type="text" class="form-control" name="<%=Constantes.PAR_USERNAME %>" placeholder="<fmt:message key="usuario"/>" required="" autofocus="" />
       			
-      			<input id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>" placeholder="<fmt:message key="password"/>" required=""/>      
+      			<input id="<%=Constantes.PAR_PASSWORD%>" value="${cookie.password.value}" type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>" placeholder="<fmt:message key="password"/>" required=""/>      
       			
       			<label class="checkbox">
       			
         		<input type="checkbox" value="remember-me" id="<%=Constantes.PAR_REMEMBER %>" name="<%=Constantes.PAR_REMEMBER %>" value = "1"> Recuerdame </label>
-        
-        				
+        		
         		<div>
-				    <select>
+				    <select name="<%=Constantes.PAR_IDIOMA%>">
 				   			<c:forEach items="<%=Idioma.values() %>" var="idioma">
    								<option value="${idioma.codigo}">${idioma.nombre}</option>
 							</c:forEach>
