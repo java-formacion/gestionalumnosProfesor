@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,15 +43,17 @@ public class LoginServlet extends HttpServlet {
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
 		String pass = request.getParameter(Constantes.PAR_PASSWORD);
-		String idioma = request.getParameter(Constantes.PAR_IDIOMA);
+		//String codIdioma = request.getParameter(Constantes.PAR_IDIOMA);
 		if("lidia".equals(userName)&&"lidia".equals(pass)){
 			createSession(request);
 			usuario = new Usuario();
 			usuario.setUserName(userName);
 			usuario.setUserPassword(pass);
 			usuario.setNickname("alumna");
-			//recoger el idioma
-			//usuario.setIdioma(idioma).;
+			String codIdioma=request.getParameter(Constantes.PAR_IDIOMA);//añadir el idioma al usuario,hacer el parse de idioma tb
+			
+			Idioma idioma = Util.parseIdioma(codIdioma);
+			usuario.setIdioma(idioma);
 			//añadir el id de la sesión
 			usuario.setSessionid(session.getId());//si es null no puede expulsar de la sesión
 			session.setAttribute(Constantes.ATT_USUARIO, usuario);

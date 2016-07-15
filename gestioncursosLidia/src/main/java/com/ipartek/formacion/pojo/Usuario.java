@@ -11,10 +11,8 @@ public class Usuario {
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
+		idioma=Idioma.CASTELLANO;
 	}
-
-    
-
 
 	public String getUserName() {
 		return userName;

@@ -46,6 +46,23 @@ public class Util {
 		}
 		return aux;
 	}
+	//parsear un idioma, no la lista entera
+	public static Idioma parseIdioma(String idioma) {
+
+		Idioma auxiliar = Idioma.CASTELLANO;
+		int codigoIdioma = Integer.parseInt(idioma);
+		if (codigoIdioma == Idioma.EUSKERA.getCodigo()) {
+			auxiliar = Idioma.EUSKERA;
+		} else {
+			if (codigoIdioma == Idioma.INGLES.getCodigo()) {
+				auxiliar = Idioma.INGLES;
+			}
+		}
+
+		return auxiliar;
+	}
+
+	
 	public static Genero parseGenero(String genero){
 		Genero aux=Genero.MASCULINO;
 		int codigo=Integer.parseInt(genero);

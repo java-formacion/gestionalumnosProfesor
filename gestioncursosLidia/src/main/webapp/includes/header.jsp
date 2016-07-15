@@ -8,8 +8,9 @@
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<c:set var="language" value="en_EN"/>
-<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="en_EN" />
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/><!-- recoger de la sesión no del navegador -->
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/><!-- va buscando la variable por pág,request,session y app(en este orden) scope,ámbito-->
 <c:set var="localeCode" value="${response.locale}"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
@@ -36,7 +37,7 @@
 </head>
 <body class="container-fluid">
 	<header class="row">
-		<h1 class="col-xs-8">Ipartek - Gestion de Cursos</h1>
+		<h1 class="col-xs-8">Ipartek - Gestión de Cursos</h1>
 		<!--  <a class="btn col-xs-offset-2 col-xs-2 btn-info" href="#">
 			<span class="fa fa-sign-out" aria-hidden="true"></span>
 			Desconectar

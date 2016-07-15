@@ -49,11 +49,12 @@
                    <div class="input-group">
                    <span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
   						
- 						<select class="form-control" id="sel1">
-    						<option><%=Idioma.CASTELLANO %></option>
-    						<option><%=Idioma.EUSKERA %></option>
-    						<option><%=Idioma.INGLES %></option>
-  						</select>
+ 						<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma:</label>
+						<select name="<%=Constantes.PAR_IDIOMA %>" id="<%=Constantes.PAR_IDIOMA %>">
+						<c:forEach items="<%=Idioma.values() %>" var="idioma">
+							<option value="${idioma.codigo}">${idioma.nombre}</option>
+						</c:forEach>
+						</select>
 </div>
    			  <p></p>
 
