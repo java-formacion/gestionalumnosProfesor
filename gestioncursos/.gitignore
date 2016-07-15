@@ -1,1 +1,4 @@
 /target/
+
+/main/resources/db.properties
+/main/resources/
