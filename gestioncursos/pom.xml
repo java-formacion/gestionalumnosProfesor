@@ -10,7 +10,21 @@
    		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    		<log4java.version>1.2.17</log4java.version>
  	</properties>
+ 	
+ 	
+ 	
+ 	
 	<dependencies>
+	
+			<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+			<!--MYSQL DRIVER -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.18</version>
+		</dependency>
+			
+	
 			<!-- JSTL -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>

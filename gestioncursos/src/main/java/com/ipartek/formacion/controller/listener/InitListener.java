@@ -61,9 +61,10 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 		loadProperties(sce);
 	}
 
+	
+	
 	private void loadProperties(ServletContextEvent sce) {
-    
-	  ClassLoader classLoader=Thread.currentThread().getContextClassLoader();
+    ClassLoader classLoader=Thread.currentThread().getContextClassLoader();
 	  InputStream input=classLoader.getResourceAsStream("constantes.properties");
 	    Properties props=new Properties();
 	    try {
