@@ -28,12 +28,14 @@
 
 				<form method="POST" action="<%=Constantes.SERVLET_LOGIN%>">
 					<div class="form-group">
+					<c:set var="userName" value="${cookie.usuario }"/>
 						<input type="text" class="form-control" name="<%=Constantes.PAR_USUARIO%>"
-							placeholder="Usuario" value="imanol" />
+							placeholder="Usuario" value="${userName.value }" />
 					</div>
 					<div class="form-group">
+					<c:set var="password" value="${cookie.password }"/>
 						<input type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>"
-							placeholder="Contraseña" value="1111" />
+							placeholder="Contraseña" value="${password.value }" />
 					</div>
 					<jsp:include page="includes/error.jsp" />
 

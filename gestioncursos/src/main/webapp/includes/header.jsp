@@ -6,10 +6,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="language" value="en_EN" />
-<c:set var="selectedLanguage" value="<%=session.getAttribute(Constantes.ATT_USUARIO)%>" />
+<c:set var="selectedLanguage" value="${usuario.idioma }" />
 <c:choose>
 	<c:when test="${!empty selectedLanguage }">
-		<c:set var="language" value="${selectedLanguage.idioma.locale }" />
+		<c:set var="language" value="${selectedLanguage.locale}" />
 	</c:when>
 	<c:otherwise>
 		<c:set var="language " value="<%=I18n.getBrowserLocale(response.getLocale())%>" />

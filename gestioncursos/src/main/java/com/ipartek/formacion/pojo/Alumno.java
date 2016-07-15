@@ -2,46 +2,67 @@ package com.ipartek.formacion.pojo;
 
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
 
+/**
+ * 
+ * @author Curso
+ *
+ */
 public class Alumno extends Candidato implements Comparable<Alumno> {
-	private Curso curso;
+  private Curso curso;
 
-	/**
-	 * @throws CandidatoException
-	 * 
-	 */
-	public Alumno() throws CandidatoException {
-		super();
-		this.curso = new Curso();
-	}
+  /**
+   * @throws CandidatoException
+   *           excepcion al crear alumno
+   */
 
-	public Curso getCurso() {
-		return curso;
-	}
+  public Alumno() throws CandidatoException {
+    super();
+    this.curso = new Curso();
+  }
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
+  /**
+   * 
+   * @return curso
+   */
+  public Curso getCurso() {
+    return curso;
+  }
 
-	public String mostrarDatos() {
-		return super.mostrarDatos() + " " + this.curso.getNombre();
-	}
+  /**
+   * 
+   * @param curso
+   *          curso
+   */
+  public void setCurso(Curso curso) {
+    this.curso = curso;
+  }
 
-	@Override
-	public int compareTo(Alumno o) {
-		int igual = 0;
-		if (o.getCodigo() == this.getCodigo()) {
-			igual = 0;
-		} else {
-			if (o.getApellidos().compareToIgnoreCase(this.getApellidos()) > 0) {
-				igual = 1;
-			} else {
-				igual = -1;
-			}
-		}
-		return igual;
+  /**
+   * @return datos
+   */
+  public String mostrarDatos() {
+    return super.mostrarDatos() + " " + this.curso.getNombre();
+  }
 
-	}
-	
+  /**
+   * @Override
+   * @param o
+   *          objeto Alumno a comparar
+   * @return igual
+   */
+  public int compareTo(Alumno o) {
+    int igual = 0;
+    if (o.getCodigo() == this.getCodigo()) {
+      igual = 0;
+    } else {
+      if (o.getApellidos().compareToIgnoreCase(this.getApellidos()) > 0) {
+        igual = 1;
+      } else {
+        igual = -1;
+      }
+    }
+    return igual;
 
+  }
 
 }
