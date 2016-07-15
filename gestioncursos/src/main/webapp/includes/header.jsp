@@ -10,7 +10,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <c:set var="language" value="en_EN"/>
     <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>" />
-    <c:set var="localCode" value="${response.locale}" />
+	<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
+    <c:set var="localeCode" value="${response.locale}" />
     <fmt:setLocale value="${language}"/>
     <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18messages" />
     
