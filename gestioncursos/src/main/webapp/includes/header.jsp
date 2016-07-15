@@ -5,6 +5,7 @@
 <%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <c:set var="language" value="en_EN"/>
@@ -100,20 +101,17 @@
 					<ul class="dropdown-menu">
  						<li><a href="<%=Constantes.SERVLET_ADMIN%>">Crear Modulo Nuevo</a></li> 
 
-							<%  %>
+							
 					</ul>
 				</li>
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%=Constantes.SERVLET_MODULOS%>">
-						Ver todos los modulos
-					</a>
-					<ul class="dropdown-menu">
-						<li>a</li>
-						<li>g</li>
-						<li>d</li>
-					</ul>
-					
-				</li>
+				<%Idioma [] ids=Idioma.values(); %>
+				<li> 
+				<select name="<%=Constantes.PAR_IDIOMA %>" id="<%=Constantes.PAR_IDIOMA %>">
+						<c:forEach items="<%=Idioma.values() %>" var="idioma">
+							<option value="${idioma.codigo}">${idioma.nombre}</option>
+						</c:forEach>
+						</select>
+ 				 </li>
 			</ul>
 			</div>
 		</nav>

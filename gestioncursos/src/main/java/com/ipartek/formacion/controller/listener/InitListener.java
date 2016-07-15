@@ -1,5 +1,6 @@
 package com.ipartek.formacion.controller.listener;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
@@ -19,16 +20,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	
 	
 
-    /**
-     * Default constructor. 
-     */
-    public InitListener() {
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-     * @see ServletContextListener#contextInitialized(ServletContextEvent)
-     */
+   
     public void contextInitialized(ServletContextEvent sce)  { 
         loadLog4j(sce);
     }
@@ -76,6 +68,11 @@ public class InitListener implements ServletContextListener, ServletContextAttri
      */
     public void contextDestroyed(ServletContextEvent arg0)  { 
          // TODO Auto-generated method stub
+    }
+    private void loadProperties(ServletContext sC){
+    	
+    	
+    	
     }
 	
 }
