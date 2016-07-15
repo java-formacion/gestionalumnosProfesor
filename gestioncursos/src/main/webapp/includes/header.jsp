@@ -10,9 +10,9 @@
     pageEncoding="UTF-8"%>
 <c:set var="language" value="en_EN"/>
 <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
-
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/> <!-- scope equivale a request.setattribute (mejor no usarlo) -->
 <c:set var="localeCode" value="${response.locale}"/>
-<fmt:setLocale value="${language}]"/>
+<fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
 <!DOCTYPE html>
 <html lang="${language}">
