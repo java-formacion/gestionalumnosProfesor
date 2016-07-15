@@ -1,8 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 	
 <jsp:include page="/includes/header.jsp" />
@@ -62,15 +62,11 @@
 											
 											<div class="input-group">
 												<span class="input-group-addon"><i class="fa fa-language"></i></span>
-												<select class="form-control" name="<%= Constantes.PAR_LANGUAGE %>">
-													<%
-														Idioma[] idioma = Idioma.values();
-														for(Idioma idiomas: idioma){
-															%>
-																<option value="<%= idiomas.getLocale() %>"><%= idiomas.getNombre() %></option>
-															<%
-														}
-													%>
+									
+												<select class="form-control" name="<%=Constantes.PAR_LANGUAGE %>" id="<%=Constantes.PAR_LANGUAGE %>">
+													<c:forEach items="<%=Idioma.values() %>" var="idioma">
+														<option value="${idioma.codigo}">${idioma.nombre}</option>
+													</c:forEach>
 												</select>
 											</div>
 											

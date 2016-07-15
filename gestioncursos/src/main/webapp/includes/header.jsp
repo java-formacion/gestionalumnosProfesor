@@ -9,6 +9,9 @@
 
 <c:set var="language" value="en_EN"/>
 <c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
+
 <c:set var="localeCode" value="${response.locale}"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
@@ -60,7 +63,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<%= Constantes.JSP_INDEX %>">Inicio</a>
+					<a class="navbar-brand" href="<%= Constantes.JSP_INDEX %>"><fmt:message key="header.inicio"/></a>
 				</div>
 			
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -71,39 +74,39 @@
 							%>
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="<%= Constantes.SERVLET_CURSOS %>">
-										Cursos <b class="caret"></b>
+										<fmt:message key="header.cursos"/> <b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
 										<li>
 											<a href="<%= Constantes.SERVLET_CURSOS %>">
-												Ver todos los cursos
+												<fmt:message key="header.vercursos"/>
 											</a>
 										</li>
 									
 										<li>
 											<a href="<%= Constantes.SERVLET_CURSOS+"?"+Constantes.PAR_CODIGO + "=" + Curso.CODIGO_CURSO %>">
 												<span class="fa fa-plus fblack" aria-hidden="true"></span>
-												Curso
+												<fmt:message key="header.curso"/>
 											</a>
 										</li>
 									</ul>
 								</li>
 								
 								<li>
-									<a href="<%= Constantes.SERVLET_ALUMNOS %>">Alumnos</a>
+									<a href="<%= Constantes.SERVLET_ALUMNOS %>"><fmt:message key="header.alumnos"/></a>
 								</li>
 								
 								<li>
-									<a href="<%= Constantes.SERVLET_MODULOS %>">Modulos</a>
+									<a href="<%= Constantes.SERVLET_MODULOS %>"><fmt:message key="header.modulos"/></a>
 								</li>
 								
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="">
-										Administracion <b class="caret"></b>
+										<fmt:message key="header.administracion"/> <b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">
 										<li>
-											<a href="<%= Constantes.SERVLET_USUARIOS %>">Ver Usuarios Conectados</a>
+											<a href="<%= Constantes.SERVLET_USUARIOS %>"><fmt:message key="header.verusuarios"/></a>
 										</li>
 									</ul>
 								</li>

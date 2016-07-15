@@ -1,5 +1,10 @@
 package com.ipartek.formacion.controller.listener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
@@ -16,6 +21,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 
 	private final static Logger log = Logger.getLogger(InitListener.class);
 	private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
+	private final static String PROPS_NAME = "properties";
 	
 	
 	/**
@@ -51,7 +57,22 @@ public class InitListener implements ServletContextListener, ServletContextAttri
      */
     public void contextInitialized(ServletContextEvent sce)  { 
     	loadLog4j(sce);
+    	loadProperties(sce);
     }
+
+	private void loadProperties(ServletContextEvent sce) {
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		InputStream input = classloader.getResourceAsStream("constantes.properties");
+		Properties props = new Properties();
+		
+		try{
+			props.load(input);
+		} catch(IOException e){
+			log.error("No se han cargado las properties");
+		}
+		
+		sce.getServletContext().setAttribute(PROPS_NAME, props);
+	}
 
 	private void loadLog4j(ServletContextEvent sce) {
 		String ruta = sce.getServletContext().getRealPath("/");

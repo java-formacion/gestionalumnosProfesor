@@ -38,6 +38,7 @@
 						<td>Session Id</td>
 						<td>UserName</td>
 						<td>NickName</td>
+						<td>Language</td>
 						<td></td>
 					</tr>
 				<%
@@ -56,6 +57,10 @@
 						
 						<td>
 							<%=user.getNickname() %>
+						</td>
+						
+						<td>
+							
 						</td>
 						
 						<td>

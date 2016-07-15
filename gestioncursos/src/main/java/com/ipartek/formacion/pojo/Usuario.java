@@ -8,6 +8,7 @@ public class Usuario {
 	private String nickname;
 	private String sessionid;
 	private Date fConexion;
+	private Idioma idioma;
 	
 	public Usuario(){
 		setSessionid("");
@@ -15,6 +16,7 @@ public class Usuario {
 		setUserPassword("");
 		setNickname("");
 		this.setfConexion(new Date());
+		setIdioma(Idioma.CASTELLANO);
 	}
 	
 	public String getUserName() {
@@ -55,5 +57,13 @@ public class Usuario {
 
 	public void setfConexion(Date fConexion) {
 		this.fConexion = fConexion;
+	}
+
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
 	}
 }

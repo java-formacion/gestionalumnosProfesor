@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class LoginServlet
@@ -63,8 +65,15 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter(Constantes.PAR_USERNAME);
 		String password = request.getParameter(Constantes.PAR_PASSWORD);
 		String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
-		// Recogemos el idioma seleccionado por el usuario en el ComboBox del login
-		String[] language = request.getParameterValues(Constantes.PAR_LANGUAGE);
+		
+		Idioma idioma = null;
+		try{
+			String codIdioma = request.getParameter(Constantes.PAR_LANGUAGE);
+			idioma = Util.parseIdioma(codIdioma);
+		} catch(Exception e){
+			System.out.println("Algo pasa aqui");
+		}
+		
 		
 		String user = "Tamasco";
 		String pass = "123456";
@@ -86,6 +95,9 @@ public class LoginServlet extends HttpServlet {
 				usuario.setUserPassword(password);
 				usuario.setNickname("Alumno");
 				usuario.setSessionid(session.getId());
+				
+				usuario.setIdioma(idioma);
+				
 				session.setAttribute(Constantes.ATT_USUARIO, usuario);
 				
 				if(checkboxes != null && checkboxes.length==1){
