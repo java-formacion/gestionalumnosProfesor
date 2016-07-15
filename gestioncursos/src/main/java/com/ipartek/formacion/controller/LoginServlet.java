@@ -61,13 +61,8 @@ public class LoginServlet extends HttpServlet {
 		Usuario usuario = null;
 		
 		String username = request.getParameter(Constantes.PAR_USERNAME);
-		ServletContext context = getServletContext();
-		// Linea añadida para el Bienvenido (USUARIO) del HEADER
-		context.setAttribute(Constantes.ATT_USUARIO, username);
-		
 		String password = request.getParameter(Constantes.PAR_PASSWORD);
 		String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
-		
 		// Recogemos el idioma seleccionado por el usuario en el ComboBox del login
 		String[] language = request.getParameterValues(Constantes.PAR_LANGUAGE);
 		
@@ -77,8 +72,13 @@ public class LoginServlet extends HttpServlet {
 		String user2 = "admin";
 		String pass2 = "654321";
 		
+		String user3= "Borja";
+		String pass3 = "1990";
+		
 		if(username!=null && password!=null){
-			if(user.equals(username) && pass.equals(password) || user2.equals(username) && pass2.equals(password)){
+			if(user.equals(username) && pass.equals(password) || 
+					user2.equals(username) && pass2.equals(password) || 
+					user3.equals(username) && pass3.equals(password)){
 				createSession(request);
 				
 				usuario = new Usuario();

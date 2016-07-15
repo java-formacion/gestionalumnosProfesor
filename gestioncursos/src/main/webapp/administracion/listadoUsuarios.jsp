@@ -26,10 +26,9 @@
 		
 		<jsp:include page="../includes/mensaje.jsp" />
 		
-		<%
-			List<Usuario> usuarios = null;
+		<%			
 			ServletContext context = session.getServletContext();
-			usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LIST_USUARIOS);	
+			List<Usuario> usuarios = (List<Usuario>)context.getAttribute(Constantes.ATT_LIST_USUARIOS);
 			
 			if(usuarios!=null){
 				%>
@@ -71,8 +70,6 @@
 				</table>
 				</form>
 				<%
-				
-				
 			}else{
 				%>
 				<p >No hay usuarios conectados</p>

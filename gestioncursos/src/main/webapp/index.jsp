@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
@@ -23,9 +24,11 @@
 		    <div class="row">
 		        <div class="col-md-8">
 		        	<%
-						ServletContext context = getServletContext();
-		        		String username = (String) context.getAttribute(Constantes.ATT_USUARIO);
-		        		if(username==null){
+		        		String username = "";
+		        		try{
+		        			Usuario usuario = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+		        			username = usuario.getUserName();
+		        		} catch(Exception e){
 		        			username = "Invitado";
 		        		}
 					%>

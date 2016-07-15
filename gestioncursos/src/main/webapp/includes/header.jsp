@@ -110,9 +110,15 @@
 							
 								<li>
 									<%
-										ServletContext context = getServletContext();
+										String username = "";
+						        		try{
+						        			Usuario usuario = (Usuario) session.getAttribute(Constantes.ATT_USUARIO);
+						        			username = usuario.getUserName();
+						        		} catch(Exception e){
+						        			username = "Invitado";
+						        		}
 									%>
-									<a href="<%= Constantes.SERVLET_LOGOUT %>"><fmt:message key="header.desconectar"/> (<%= context.getAttribute(Constantes.ATT_USUARIO) %>)</a>
+									<a href="<%= Constantes.SERVLET_LOGOUT %>"><fmt:message key="header.desconectar"/> (<%= username %>)</a>
 								</li>
 							<%
 							} 
