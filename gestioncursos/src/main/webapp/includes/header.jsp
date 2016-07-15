@@ -5,7 +5,26 @@
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <c:set var="language" value="es_ES"/>
+
+<%-- <c:set var="idiomaSelec" value="<%=session.getAttribute(Constantes.ATT_USUARIO) %>" /> --%>
+
+<%--
+<c:set var="idiomaSelec"value="${usuario.idioma}" />
+<c:choose>
+    <c:when test="${empty idiomaSelec}">
+    	<c:set var="language" value="<%=i18n.getBrowserLocale(response.getLocale()) %>"/>
+    </c:when>
+    <c:otherwise>
+    	<c:set var="language" value="${idiomaSelec.locale} "/>
+    </c:otherwise>
+</c:choose>
+--%>
+
 <c:set var="language" value="<%=i18n.getBrowserLocale(response.getLocale()) %>"/>
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
+
+
+
 <c:set var="localeCode" value="${response.locale}" />
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages" /> 

@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.pojo.Mensaje;
 import com.ipartek.formacion.pojo.Usuario;
+import com.ipartek.formacion.service.Util;
 
 public class LoginServlet extends HttpServlet {
 	 private static final long serialVersionUID = 1L;  
@@ -49,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			cargarDatosCookies();
 
 		}else{
-			if(request.getParameter(Constantes.PAR_ALIAS)!=null){
+			if(request.getParameter(Constantes.PAR_USUARIO)!=null){
 				cargarParametros(request);
 
 			}
@@ -68,14 +70,21 @@ public class LoginServlet extends HttpServlet {
 			response.addCookie(cookieAlias);
 			response.addCookie(cookiePass);
 			procesarLogin(request);
+			session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			rwd.forward(request, response);
 			
 		}else{
-			if(usuario!=null && "marta".equals(usuario.getAlias())&&"urko".equals(usuario.getPassword())){
-				String mensaje="Datos incorrectos";
+			if(usuario!=null){
+				createSession(request);
+				Mensaje mensaje = new Mensaje();
+				mensaje.setMsg("Usuario y/o contraseña incorrectos");
+				mensaje.setType(Mensaje.MSG_TYPE_DANGER);
 				session.setAttribute(Constantes.ERROR_LOGIN, mensaje);
+				System.out.println("hola");
 			}
+			
 			response.sendRedirect(Constantes.JSP_INDEX);
+		 
 		}
 		
 	}
@@ -109,7 +118,7 @@ public class LoginServlet extends HttpServlet {
 		usuario = new Usuario();
 		usuario.setAlias(request.getParameter(Constantes.PAR_ALIAS));
 		usuario.setPassword(request.getParameter(Constantes.PAR_PASSWORD));
-		
+		usuario.setIdioma(Util.parseIdi(request.getParameter(Constantes.PAR_IDIOMA)));
 		//session.setAttribute(Constantes.ATT_USUARIO, usuario);
 		//	rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 	}
@@ -120,7 +129,7 @@ public class LoginServlet extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null){
 			for(Cookie cookie: cookies){
-				if(cookie.getName().equals("usuario")){
+				if(cookie.getName().equals("alias")){
 					nUsuario = cookie.getValue();
 				}else{
 					if(cookie.getName().equals("password")){

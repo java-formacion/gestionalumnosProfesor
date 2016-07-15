@@ -85,7 +85,7 @@ public class Util {
 		for(int i=0;i<idiomas.length;i++)
 		{
 			Idiomas idioma = Idiomas.CASTELLANO;
-			int codigoIdioma = Integer.parseInt(idiomas[i]); //hago un parseInt, porque el switch no acepta strings
+			int codigoIdioma = Integer.parseInt(idiomas[i]); 
 			if(codigoIdioma == Idiomas.EUSKERA.getCodigo())
 			{
 				idioma = Idiomas.EUSKERA;
@@ -99,6 +99,25 @@ public class Util {
 		}
 		
 		}
+		return aux;
+	}
+	
+	public static Idiomas parseIdi(String idioma){
+		Idiomas aux = null;
+		aux = Idiomas.CASTELLANO;
+		int cod = Integer.parseInt(idioma); 
+		//System.out.println(codigoIdioma);
+		
+			if(cod == Idiomas.EUSKERA.getCodigo())
+			{
+				aux = Idiomas.EUSKERA;
+			}else{
+				if(cod == Idiomas.INGLES.getCodigo())
+			{
+					aux = Idiomas.INGLES;
+			}
+			}
+		
 		return aux;
 	}
 	

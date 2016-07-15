@@ -29,10 +29,11 @@
 				<label for="<%=Constantes.PAR_ALIAS%>">USUARIO:</label>
 				</div>
 				<div class="col-sm-7">
+				<c:set var="userName" value="${cookie.alias}" />
 				<input type="text" class="form-control" 
 					id="<%=Constantes.PAR_ALIAS%>" 
 					name="<%=Constantes.PAR_ALIAS%>" 
-					value=""/>
+					value="${userName.value} "/>
 				</div>
 			</div>
 			
@@ -50,14 +51,15 @@
 			
 			<div class="form-group">
 			<div class="col-sm-3">	
-				<label for="<%=Constantes.PAR_LOCALE%>">IDIOMA:</label>
+				<label for="<%=Constantes.PAR_IDIOMA%>">IDIOMA:</label>
 			</div>
 				<div class="col-sm-7">
-				<select class="form-control" name="<%=Constantes.PAR_LOCALE %>">
+				<select class="form-control" name="<%=Constantes.PAR_IDIOMA%>">
 						<c:set var="idiomas" value="<%=Idiomas.values() %>"/>
+						<option>Selecciona un idioma</option>
 			     		 <c:forEach items="${idiomas}" var="idioma">
 				        <c:if test="${idioma != selected}">
-				            <option value="${idioma}">${idioma}</option>
+				            <option value="${idioma.codigo}">${idioma.nombre}</option>
 				        </c:if>
 				    </c:forEach>
 			    </select>

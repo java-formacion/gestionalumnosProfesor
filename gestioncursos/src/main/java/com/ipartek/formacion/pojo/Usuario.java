@@ -17,7 +17,7 @@ public class Usuario {
 		setAlias("");
 		setPassword("");
 		setIdSession("");
-		setIdioma(idioma);
+		setIdioma(Idiomas.CASTELLANO);
 	}
 	
 	
