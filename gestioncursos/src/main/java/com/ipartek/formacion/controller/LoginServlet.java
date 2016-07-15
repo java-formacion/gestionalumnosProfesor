@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher rd = null;
 	private HttpSession session = null;
-	private static final Logger log = Logger.getLogger(LoginServlet.class);
+	private static final Logger LOG = Logger.getLogger(LoginServlet.class);
 	private Usuario user = null;
 	private String nUsuario = "";
 	private String passWord = "";
@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 			rd.forward(request, response);
 
 			}
-			log.trace("Hay galletas");
+			LOG.trace("Hay galletas");
 		}
 		Usuario usuario = null;
 		String userName = request.getParameter(Constantes.PAR_USERNAME);
@@ -152,7 +152,7 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void cargarDatosCookies() {
-		log.trace(nUsuario+" "+passWord);
+		LOG.trace(nUsuario+" "+passWord);
 		user = new Usuario();
 		user.setUserName(Constantes.LOGIN_NAME);
 		user.setUserPassword(Constantes.LOGIN_PASS);

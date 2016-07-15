@@ -38,7 +38,7 @@ public class CursoServlet extends HttpServlet {
 	private ModuloService  mService = new ModuloServiceImp();
 	private List<Curso> cursos = null;
 	private Curso curso = null;
-	private static final Logger log = Logger.getLogger(CursoServlet.class);
+	private static final Logger LOG = Logger.getLogger(CursoServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

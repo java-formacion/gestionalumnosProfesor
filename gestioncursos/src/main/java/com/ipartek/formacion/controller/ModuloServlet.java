@@ -30,7 +30,7 @@ public class ModuloServlet extends HttpServlet {
     private ModuloService mService = new ModuloServiceImp();
     private List<Modulo> modulos = null;
     private Modulo modulo = null;
-	private static final Logger log = Logger.getLogger(ModuloServlet.class);
+	private static final Logger LOG = Logger.getLogger(ModuloServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
