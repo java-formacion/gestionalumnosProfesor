@@ -12,7 +12,7 @@
 	<section class="col-xs-12 col-md-7">
 
 		
-		<header> <h2>Bienvenido </h2></header>
+		<header > <h2>Bienvenido </h2></header>
 		<p>
 			Bienvenidos a la pagina de Gestion de Alumnos de <span>Ipartek</span>.
 
@@ -32,14 +32,15 @@
    			<div class="panel-body">
        			<form class="form-horizontal" action="<%=Constantes.SERVLET_LOGIN %>" method="post" role="form">
            			<div class="input-group">
+           				<c:set var="userName" value="${cookie.c_usuario.value}" />
            				<label class="sr-only" for="<%=Constantes.PAR_USERNAME %>">Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
+						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="${userName}" placeholder="Introduzca su usuario">                                        
            			
            			</div>
 		           <div class="input-group">
 		           		<label class="sr-only" for="<%=Constantes.PAR_PASSWORD%>">Contraseña:</label>
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
+						<input value="${cookie.c_password.value}" name="<%=Constantes.PAR_PASSWORD%>" id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" placeholder="Introduzca su contraseña">
 		            </div>
 		           <div class="input-group">
 		           		<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma:</label>

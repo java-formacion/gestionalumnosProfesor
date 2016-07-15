@@ -30,6 +30,7 @@ public class LoginServlet extends HttpServlet {
 	private String passWord = "";
 	Cookie cookieNombre = null;
 	Cookie cookiePass = null;
+	Cookie cookieIdioma = null;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -94,9 +95,8 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void generarCookies(HttpServletResponse response) {
-		cookieNombre = new Cookie("usuario", user.getUserName());
-		cookiePass = new Cookie("password", user.getUserPassword());
-
+		cookieNombre = new Cookie("c_usuario", user.getUserName());
+		cookiePass = new Cookie("c_password", user.getUserPassword());
 	}
 
 	private void procesarLogin(HttpServletRequest request) {
