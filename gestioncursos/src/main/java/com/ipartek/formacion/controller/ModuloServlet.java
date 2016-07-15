@@ -1,10 +1,7 @@
 package com.ipartek.formacion.controller;
 
-import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.DuracionModulo;
 import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.service.CursoService;
-import com.ipartek.formacion.service.CursoServiceImp;
 import com.ipartek.formacion.service.ModuloService;
 import com.ipartek.formacion.service.ModuloServiceImp;
 import com.ipartek.formacion.service.Util;
@@ -17,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 
 /**
  * Servlet implementation class ModuloServlet
@@ -31,6 +30,7 @@ public class ModuloServlet extends HttpServlet {
     private ModuloService mService = new ModuloServiceImp();
     private List<Modulo> modulos = null;
     private Modulo modulo = null;
+    private final static Logger log = Logger.getLogger(ModuloServlet.class);
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

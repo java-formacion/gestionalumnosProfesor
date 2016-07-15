@@ -34,7 +34,7 @@ public class AlumnoServlet extends HttpServlet {
 	 private List<Alumno> alumnos = null;
 	 private Alumno alumno = null;   
 	 private int operacion = -1;
-	 private final static Logger log = Logger.getLogger(AlumnoServlet.class);
+	 private final static Logger LOG = Logger.getLogger(AlumnoServlet.class); // NOPMD by Curso on 15/07/16 9:46
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -120,7 +120,7 @@ public class AlumnoServlet extends HttpServlet {
 			
 		}
 		catch(Exception e){
-			log.error(e.getMessage());
+			LOG.error(e.getMessage());
 			
 		}
 		rd.forward(request, response);

@@ -13,7 +13,7 @@ import org.apache.log4j.PropertyConfigurator;
  *
  */
 public class InitListener implements ServletContextListener, ServletContextAttributeListener {
-	private final static Logger log = Logger.getLogger(InitListener.class);
+	private final static Logger LOG = Logger.getLogger(InitListener.class); // NOPMD by Curso on 15/07/16 9:40
 	private final static String PATH_LOG4J ="WEB-INF/conf/log4j.properties";
 	/**
 	 * @see ServletContextAttributeListener#attributeAdded(ServletContextAttributeEvent)
@@ -53,7 +53,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 
 		try{
 			PropertyConfigurator.configure(ruta+PATH_LOG4J);
-			log.info("LOG CARGADO");
+			LOG.info("LOG CARGADO");
 		}catch(Exception e){
 
 		}

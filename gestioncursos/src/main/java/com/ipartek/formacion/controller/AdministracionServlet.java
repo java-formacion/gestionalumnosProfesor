@@ -16,13 +16,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.pojo.Mensaje;
-import com.ipartek.formacion.pojo.Usuario;
+
 
 public class AdministracionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	 private int id = -1;
+	 private final int ID = -1;
 	 private RequestDispatcher rd = null;
-	 private static final Logger log = Logger.getLogger(AdministracionServlet.class);
+	 private static final Logger LOG = Logger.getLogger(AdministracionServlet.class);
 	
 	
     /**
@@ -54,7 +54,7 @@ public class AdministracionServlet extends HttpServlet {
 			m.setType(Mensaje.MSG_TYPE_SUCCESS);	
 			
 		}else{
-			log.info("error al expulsar " + sesionId);
+			LOG.info("error al expulsar " + sesionId);
 			m.setMsg("No se ha podido realizar la operación");
 			m.setType(Mensaje.MSG_TYPE_SUCCESS);			
 		}
