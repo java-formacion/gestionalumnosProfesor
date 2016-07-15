@@ -14,14 +14,15 @@ public class Modulo implements Serializable {
 	private String nombre;
 	private String referencia;
 	private Horas duracion;
+
 	public Modulo() {
 		super();
 		setCodigo(CODIGO_MODULO);
 		setNombre("");
 		setReferencia("");
-		setDuracion(Horas.OCHENTA);
+		this.duracion = Horas.OCHENTA;
 	}
-	
+
 	public String getReferencia() {
 		return referencia;
 	}
@@ -41,15 +42,17 @@ public class Modulo implements Serializable {
 	public int getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	
+
 }

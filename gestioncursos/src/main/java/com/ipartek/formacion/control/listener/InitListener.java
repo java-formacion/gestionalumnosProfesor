@@ -1,5 +1,9 @@
 package com.ipartek.formacion.control.listener;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
@@ -14,7 +18,8 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class InitListener implements ServletContextListener, ServletContextAttributeListener {
 
-	private final static Logger logger = Logger.getLogger(InitListener.class);
+	private final static String PROPS_NAME = "properties";
+	private final static Logger Log = Logger.getLogger(InitListener.class);
 	private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
 
 	/**
@@ -62,6 +67,19 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		loadLog4j(arg0);
+		loadProperties(arg0);
+	}
+
+	private void loadProperties(ServletContextEvent arg0) {
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		InputStream input = classLoader.getResourceAsStream("main/resources/Constantes.properties");
+		Properties props = new Properties();
+		try {
+			props.load(input);
+		} catch (IOException e) {
+			Log.error("No se ha cargado correctamente las constantes desde el properties");
+		}
+		arg0.getServletContext().setAttribute(PROPS_NAME, props);
 	}
 
 	private void loadLog4j(ServletContextEvent arg0) {
@@ -69,7 +87,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 
 		try {
 			PropertyConfigurator.configure(ruta + PATH_LOG4J);
-			logger.info("Log cargado");
+			Log.info("Log cargado");
 
 		} catch (Exception e) {
 

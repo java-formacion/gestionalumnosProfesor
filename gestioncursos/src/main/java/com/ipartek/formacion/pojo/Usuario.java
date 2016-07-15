@@ -7,6 +7,28 @@ public class Usuario {
 	private String sessionId = null;
 	private String idioma = null;
 
+	public Usuario(String user, String pass, String nick, String sessionId, String idioma) {
+		super();
+		this.nick = nick;
+		this.user = user;
+		this.pass = pass;
+		this.sessionId = sessionId;
+		this.idioma = idioma;
+	}
+
+	/**
+	 * @param user
+	 * @param pass
+	 */
+	public Usuario() {
+		super();
+		setNick("");
+		setUser("");
+		setPass("");
+		setSessionId("");
+		setIdioma("");
+	}
+
 	public String getIdioma() {
 		return idioma;
 	}
@@ -39,34 +61,11 @@ public class Usuario {
 		this.nick = nick;
 	}
 
-	/**
-	 * @param user
-	 * @param pass
-	 */
-	public Usuario() {
-		super();
-		setNick("");
-		setUser("");
-		setPass("");
-		setSessionId("");
-		setIdioma("");
-	}
-
-	public Usuario(String user, String pass, String nick, String sessionId, String idioma) {
-		super();
-		this.nick = nick;
-		this.user = user;
-		this.pass = pass;
+	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
-		this.idioma = idioma;
 	}
 
 	public String getSessionId() {
 		return sessionId;
 	}
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-
 }

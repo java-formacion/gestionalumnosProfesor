@@ -15,10 +15,9 @@ public final class AlumnoServiceImp implements AlumnoService {
 	private static int i = 1;
 
 	private void init() {
-		Alumno alumno = null;
 
 		try {
-			alumno = new Alumno();
+			Alumno alumno = new Alumno();
 			alumno.setCodigo(1);
 			alumno.setNombre("Josu");
 			alumno.setApellidos("Asua");
@@ -26,12 +25,6 @@ public final class AlumnoServiceImp implements AlumnoService {
 			alumno.setfNacimiento(new Date());
 			alumnos.add(alumno);
 			i++;
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
 			alumno = new Alumno();
 			alumno.setCodigo(2);
 			alumno.setNombre("Imanol");
@@ -40,12 +33,6 @@ public final class AlumnoServiceImp implements AlumnoService {
 			alumno.setfNacimiento(new Date());
 			alumnos.add(alumno);
 			i++;
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
 			alumno = new Alumno();
 			alumno.setCodigo(3);
 			alumno.setNombre("Alvaro");
@@ -80,8 +67,7 @@ public final class AlumnoServiceImp implements AlumnoService {
 	}
 
 	private static Curso crearCursoAlumno() {
-		Curso curso = null;
-		curso = new Curso();
+		Curso curso = new Curso();
 		curso.setCodigo(1);
 		curso.setNombre("Desarrollo de Aplicaciones con Tecnologias Web");
 		return curso;
