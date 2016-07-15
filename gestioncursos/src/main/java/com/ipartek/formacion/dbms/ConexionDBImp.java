@@ -1,10 +1,18 @@
 package com.ipartek.formacion.dbms;
 
+import java.sql.Connection;
+
 public class ConexionDBImp implements ConexionDB{
 
+	private Connection conexion;
+	
 	@Override
 	public void conectar() {
-		// TODO Auto-generated method stub
+		
+		String driver="com.mysql.jdbc.Driver";
+		if (conexion!=null) {
+			
+		}
 		
 	}
 
