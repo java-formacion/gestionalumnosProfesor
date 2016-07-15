@@ -1,7 +1,6 @@
 package com.ipartek.formacion.control;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -15,16 +14,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.pojo.Mensaje;
-import com.ipartek.formacion.pojo.Usuario;
 
 /**
  * Servlet implementation class AdministracionServlet
  */
 public class AdministracionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private int id = -1;
-	private int operacion = -1;
-	private List<Usuario> usuarios = null;
 	private final static Logger logger = Logger.getLogger(AdministracionServlet.class);
 	private RequestDispatcher rd = null;
 

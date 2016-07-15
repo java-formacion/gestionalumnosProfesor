@@ -5,18 +5,17 @@ public class Mensaje {
 	public static final String MSG_TYPE_INFO = "info";
 	public static final String MSG_TYPE_WARNING = "warning";
 	public static final String MSG_TYPE_ERROR = "error";
-	
-	
-	
+	public static final int QUINIENTOS = 500;
+
 	String msg;
 	String type;
 	int code;
-	
-	public Mensaje(){
+
+	public Mensaje() {
 		super();
-		setCode(500);
+		setCode(QUINIENTOS);
 		setMsg("");
-		setType(MSG_TYPE_WARNING);
+		type = MSG_TYPE_WARNING;
 	}
 
 	public String getMsg() {
@@ -42,5 +41,5 @@ public class Mensaje {
 	public void setCode(int code) {
 		this.code = code;
 	}
-	
+
 }

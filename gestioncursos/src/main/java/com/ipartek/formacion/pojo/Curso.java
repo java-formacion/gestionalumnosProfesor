@@ -1,11 +1,8 @@
 package com.ipartek.formacion.pojo;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.ipartek.formacion.services.Genero;
-import com.ipartek.formacion.services.Idioma;
 import com.ipartek.formacion.services.TipoCurso;
 
 public class Curso {
@@ -13,11 +10,13 @@ public class Curso {
 	protected int codigo;
 	protected String nombre, referencia;
 	protected TipoCurso tc;
-	private Map<Integer,Modulo>modulos;
-	private Map<String,Alumno>alumnos;
-	/*Mapa de Alumnos dni (String)
-	 * ServiceCurso(I) ---> Imp darDeAlta (int codigo,Alumno alumno) void
-	 * 					---> Imp darDeBaja	(int codigo,String dni) void
+	private Map<Integer, Modulo> modulos;
+	private Map<String, Alumno> alumnos;
+
+	/*
+	 * Mapa de Alumnos dni (String) ServiceCurso(I) ---> Imp darDeAlta (int
+	 * codigo,Alumno alumno) void ---> Imp darDeBaja (int codigo,String dni)
+	 * void
 	 * 
 	 */
 	public Curso() {
@@ -29,14 +28,14 @@ public class Curso {
 		modulos = new HashMap<Integer, Modulo>();
 		alumnos = new HashMap<String, Alumno>();
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		boolean bool=false;
-		if (obj instanceof Curso){
+		boolean bool = false;
+		if (obj instanceof Curso) {
 			Curso c = (Curso) obj;
-			if (c.getCodigo()==this.codigo){
-				bool=true;
+			if (c.getCodigo() == this.codigo) {
+				bool = true;
 			}
 		}
 		return bool;
@@ -77,12 +76,15 @@ public class Curso {
 	public int getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
