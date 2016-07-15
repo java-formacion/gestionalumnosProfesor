@@ -16,13 +16,30 @@ public class Usuario {
 	}
 	private String userName;
 	private String userPassword;
-	private String nickname;
+	private String userNickname;
 	private Date fConexion;
+	private Idioma idioma;
+	
+	public Idioma getIdioma() {
+		return idioma;
+	}
+
+
+
+
+	public void setIdioma(Idioma idioma) {
+		this.idioma = idioma;
+	}
+
+
+
+
 	public Usuario(){
 		setSessionid("");
 		setUserName("");
 		setUserPassword("");
-		setNickname("");
+		setUserNickname("");
+		idioma= Idioma.CASTELLANO;
 		this.fConexion = new Date();
 	}
 
@@ -55,10 +72,10 @@ public class Usuario {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUserNickname() {
+		return userNickname;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
 	}
 }

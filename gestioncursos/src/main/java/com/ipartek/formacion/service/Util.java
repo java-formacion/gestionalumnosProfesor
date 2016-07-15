@@ -77,6 +77,22 @@ public class Util {
 
 		return tipo;
 	}
+	
+	public static Idioma parseIdioma(String idioma) {
+		 
+		 		Idioma auxiliar = Idioma.CASTELLANO;
+		 		int codigoIdioma = Integer.parseInt(idioma);
+		 		if (codigoIdioma == Idioma.EUSKERA.getCodigo()) {
+		 			auxiliar = Idioma.EUSKERA;
+		 		} else {
+		 			if (codigoIdioma == Idioma.INGLES.getCodigo()) {
+		 				auxiliar = Idioma.INGLES;
+		 			}
+		 		}
+		 
+		 		return auxiliar;
+		 	}
+	
 	public static List<Idioma> parseIdioma(String[] idiomas){
 		List<Idioma> aux = null;
 		aux = new ArrayList<Idioma>();
@@ -104,7 +120,6 @@ public class Util {
 		}
 		return exito;
 	}
-	
 }
 
 

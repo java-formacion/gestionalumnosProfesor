@@ -36,6 +36,7 @@ public class Constantes {
 	public final static String PAR_REFERENCIA="referencia";
 	public final static String PAR_USERNAME ="username";
 	public final static String PAR_PASSWORD ="password";
+	public final static String PAR_NICKNAME = "nickname";
 	public final static String PAR_SESSIONID ="sessionid";
 	public final static String PAR_REMEMBER = "recuerda";
 

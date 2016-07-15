@@ -30,7 +30,7 @@
  			<div  class="row">
  				<div class="col-xs-4"><%=user.getSessionid() %></div>
  				<div class="col-xs-3"><%=user.getUserName() %></div>
- 				<div class="col-xs-3"><%=user.getNickname() %></div>
+ 				<div class="col-xs-3"><%=user.getUserNickname() %></div>
  				<div class="col-xs-2"><a class="btn btn-info" href="<%=Constantes.SERVLET_ADMIN %>?<%=Constantes.PAR_SESSIONID %>=<%=user.getSessionid()%>">Expulsar Usuario</a></div>
  			</div>
  			<%
