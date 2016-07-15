@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher rd = null;
 	HttpSession session = null;
-
+            
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

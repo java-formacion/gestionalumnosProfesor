@@ -43,15 +43,19 @@
 								<input type="checkbox" value="1"> Recuérdame
 			            </div>
                    </div>
+                   <p></p>
+                    Selecciona idioma
+                    <p></p>
                    <div class="input-group">
-  						<i class="fa fa-globe" aria-hidden="true"></i><label>Selecciona idioma</label>
+                   <span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+  						
  						<select class="form-control" id="sel1">
     						<option><%=Idioma.CASTELLANO %></option>
     						<option><%=Idioma.EUSKERA %></option>
     						<option><%=Idioma.INGLES %></option>
   						</select>
 </div>
-
+   			  <p></p>
 
                <div class="form-group">
                    <div class="col-xs-12 controls">
