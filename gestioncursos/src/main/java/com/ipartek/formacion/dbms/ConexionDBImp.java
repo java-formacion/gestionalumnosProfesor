@@ -11,7 +11,11 @@ public class ConexionDBImp implements ConexionDB{
 		
 		String driver="com.mysql.jdbc.Driver";
 		if (conexion!=null) {
-			
+			try {
+				Class.forName(driver);
+			} catch (ClassNotFoundException e) {
+				// TODO: handle exception
+			}
 		}
 		
 	}
