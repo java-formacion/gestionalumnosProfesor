@@ -46,7 +46,7 @@ public class ServletFilter implements Filter {
 		req.setCharacterEncoding("UTF-8");
 		
 		String url = req.getServletPath(); //devuelve la ruta donde esta el contexto de la aplicacion (en el servidor)
-		System.out.println(url);
+		//System.out.println(url);
 		if(!url.contains(Constantes.SERVLET_LOGIN)) //o url.equals("/"+Constantes.SERVLET_LOGIN)
 		{
 			if(checkSession(req))//sesion valida, continuar hacia delante

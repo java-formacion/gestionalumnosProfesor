@@ -5,6 +5,8 @@
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmessages"/>
 <jsp:include page="includes/header.jsp"/>
 	<jsp:include page="includes/error.jsp"/>
 <!-- Comentarios -->
@@ -23,11 +25,11 @@
 	<div class="col-xs-12 col-md-5 container ">
         <div class="wrapper">
     		<form class="form-signin" action="<%=Constantes.SERVLET_LOGIN%>" method="post" role="form">       
-      			<h2 class="form-signin-heading">Please login</h2>
+      			<h2 class="form-signin-heading"><fmt:message key="login.pleaselogin"/></h2>
       			
-      			<input id="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" name="<%=Constantes.PAR_USERNAME %>" placeholder="Usuario" required="" autofocus="" />
+      			<input id="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" name="<%=Constantes.PAR_USERNAME %>" placeholder="<fmt:message key="usuario"/>" required="" autofocus="" />
       			
-      			<input id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>" placeholder="Password" required=""/>      
+      			<input id="<%=Constantes.PAR_PASSWORD%>" type="password" class="form-control" name="<%=Constantes.PAR_PASSWORD%>" placeholder="<fmt:message key="password"/>" required=""/>      
       			
       			<label class="checkbox">
       			
@@ -36,16 +38,13 @@
         				
         		<div>
 				    <select>
-				   	
 				   			<c:forEach items="<%=Idioma.values() %>" var="idioma">
    								<option value="${idioma.codigo}">${idioma.nombre}</option>
 							</c:forEach>
-					   	
-						
 					</select>
       			</div>
         	<div>
-      			<button id ="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+      			<button id ="btn-login" class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login.login"/></button>   
    			
    			</div></form>
   		</div>

@@ -7,15 +7,6 @@ public class Usuario {
 	private String nickname;
 	public String sessionID;
 	public String Idioma;
-	
-
-	public String getIdioma() {
-		return Idioma;
-	}
-
-	public void setIdioma(String idioma) {
-		Idioma = idioma;
-	}
 
 	public Usuario(){
 		setUserName("");
@@ -50,5 +41,13 @@ public class Usuario {
 
 	public void setSessionID(String sessionID) {
 		this.sessionID = sessionID;
+	}
+	
+	public String getIdioma() {
+		return Idioma;
+	}
+
+	public void setIdioma(String idioma) {
+		Idioma = idioma;
 	}
 }
