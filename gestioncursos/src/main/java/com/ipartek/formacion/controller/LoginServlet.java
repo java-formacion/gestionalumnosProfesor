@@ -88,7 +88,6 @@ public class LoginServlet extends HttpServlet {
 		cookieNombre = new Cookie("usuario",user.getUserName());
 		cookiePass = new Cookie("password",user.getUserPassword());
 
-
 	}
 
 
@@ -115,6 +114,7 @@ public class LoginServlet extends HttpServlet {
 		user.setUserName(request.getParameter(Constantes.PAR_USERNAME));
 		user.setUserPassword(request.getParameter(Constantes.PAR_PASSWORD));
 		user.setNickname("Profe");
+		user.setIdioma(request.getParameter(Constantes.PAR_IDIOMA));
 		//session.setAttribute(Constantes.ATT_USUARIO, usuario);
 		//	rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 	}

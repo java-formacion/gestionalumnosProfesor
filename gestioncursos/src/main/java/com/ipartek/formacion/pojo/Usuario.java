@@ -5,12 +5,24 @@ public class Usuario {
 	private String userPassword;
 	private String nickname;
 	private String sessionId;
+	private String idioma;
 
 	public Usuario(){
 		setUserName("");
 		setUserPassword("");
 		setNickname("");
 		setSessionId("");
+		setIdioma("");
+	}
+
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
 	}
 
 

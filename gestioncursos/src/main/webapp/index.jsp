@@ -1,6 +1,9 @@
+<%@page import="com.ipartek.formacion.pojo.Idioma"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
@@ -19,7 +22,10 @@
 	<aside class="col-xs-12 col-md-5 panel">
 		<jsp:include page="includes/mensaje.jsp" />
 		<div class="panel panel-success">
-   
+		
+		
+       		
+			
    		<div class="panel-heading">
        		<div class="panel-title"><h2>Login</h2></div>
        
@@ -43,13 +49,22 @@
 							type="checkbox" value="1"><label>Recuérdame</label> 
 			            </div>
                    </div>
-
+                   
+                   <div class="form-group">
+						<label class="col-xs-2">Idioma:</label>
+						<div class="col-xs-10">
+							<select name="<%=Constantes.PAR_IDIOMA%>">
+					  			<c:set var="idiomas" value="<%=Idioma.values()%>"/> 
+								<c:forEach var="idioma" items="${idiomas}" >
+									<option value="${idioma.codigo}"> ${idioma.nombre} </option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
 
                <div class="form-group">
                    <div class="col-xs-12 controls">
                      <button type="submit" id="btn-login" class="btn btn-success">Aceptar  </button>
-                    
-
                    </div>
                </div>   
            </form>     
