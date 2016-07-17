@@ -16,16 +16,17 @@ import org.apache.log4j.PropertyConfigurator;
  * Application Lifecycle Listener implementation class InitListener
  *
  */
-public class InitListener implements ServletContextListener, ServletContextAttributeListener {
-	public final static String PROPS_NAME="properties";
-	private final static Logger log = Logger.getLogger(InitListener.class);
-	private final static String PATH_LOG4J ="WEB-INF/conf/log4j.properties";
-	private final static String PATH_CONSTANTES="constantes.properties";
+public class InitListener implements ServletContextListener,
+		ServletContextAttributeListener {
+	public final static String PROPS_NAME = "properties";
+	private final static Logger LOG = Logger.getLogger(InitListener.class);
+	private final static String PATH_LOG4J = "WEB-INF/conf/log4j.properties";
+
 	/**
 	 * @see ServletContextAttributeListener#attributeAdded(ServletContextAttributeEvent)
 	 */
 	@Override
-	public void attributeAdded(ServletContextAttributeEvent arg0)  {
+	public void attributeAdded(ServletContextAttributeEvent arg0) {
 		// TODO Auto-generated method stub
 	}
 
@@ -33,7 +34,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	 * @see ServletContextAttributeListener#attributeRemoved(ServletContextAttributeEvent)
 	 */
 	@Override
-	public void attributeRemoved(ServletContextAttributeEvent arg0)  {
+	public void attributeRemoved(ServletContextAttributeEvent arg0) {
 		// TODO Auto-generated method stub
 	}
 
@@ -41,7 +42,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
 	 */
 	@Override
-	public void contextDestroyed(ServletContextEvent arg0)  {
+	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
 	}
 
@@ -49,7 +50,7 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	 * @see ServletContextAttributeListener#attributeReplaced(ServletContextAttributeEvent)
 	 */
 	@Override
-	public void attributeReplaced(ServletContextAttributeEvent arg0)  {
+	public void attributeReplaced(ServletContextAttributeEvent arg0) {
 		// TODO Auto-generated method stub
 	}
 
@@ -57,37 +58,37 @@ public class InitListener implements ServletContextListener, ServletContextAttri
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	@Override
-	public void contextInitialized(ServletContextEvent sce)  {
+	public void contextInitialized(ServletContextEvent sce) {
 		loadLog4j(sce);
 		loadProperties(sce);
 	}
 
 	private void loadProperties(ServletContextEvent sce) {
-		
-		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		InputStream input = classloader.getSystemResourceAsStream(PATH_CONSTANTES);
+		ClassLoader classloader = Thread.currentThread()
+				.getContextClassLoader();
+		InputStream input = classloader
+				.getResourceAsStream("constantes.properties");
+
 		Properties props = new Properties();
 		try {
 			props.load(input);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			log.error("no se han cargado las properties");
+			LOG.error("no se han cargado las properties");
 		}
+
 		sce.getServletContext().setAttribute(PROPS_NAME, props);
+
 	}
 
 	private void loadLog4j(ServletContextEvent sce) {
 		String ruta = sce.getServletContext().getRealPath("/");
 
-		try{
-			PropertyConfigurator.configure(ruta+PATH_LOG4J);
-			log.info("LOG CARGADO");
-		}catch(Exception e){
-			log.error("FALLO EN LA CARGA DE LOGS");
+		try {
+			PropertyConfigurator.configure(ruta + PATH_LOG4J);
+			LOG.info("LOG CARGADO");
+		} catch (Exception e) {
+
 		}
-
-
 
 	}
 

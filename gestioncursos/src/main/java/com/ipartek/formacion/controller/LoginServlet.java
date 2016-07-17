@@ -117,6 +117,7 @@ public class LoginServlet extends HttpServlet {
 		user.setUserPassword(request.getParameter(Constantes.PAR_PASSWORD));
 		user.setNickname("Profe");
 		String codIdioma=request.getParameter(Constantes.PAR_IDIOMA);
+		System.out.println(Util.parseIdiomaUsuario(codIdioma).getLocale());
 		user.setIdioma(Util.parseIdiomaUsuario(codIdioma));
 		//session.setAttribute(Constantes.ATT_USUARIO, usuario);
 		//	rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);

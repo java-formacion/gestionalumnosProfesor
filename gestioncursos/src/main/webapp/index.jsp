@@ -30,7 +30,7 @@
            			<div class="input-group">
            			<c:set var="userName" value="${cookie.c_usuario.value}"/>
            				<label class="sr-only" for="<%=Constantes.PAR_USERNAME %>" >Usuario</label><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
+						<input id="<%=Constantes.PAR_USERNAME %>" name="<%=Constantes.PAR_USERNAME %>" value="${sessionScope.username}"type="text" class="form-control" value="" placeholder="Introduzca su usuario">                                        
            			
            			</div>
 		           <div class="input-group">
