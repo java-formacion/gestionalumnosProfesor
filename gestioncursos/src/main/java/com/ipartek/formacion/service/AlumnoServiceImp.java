@@ -1,7 +1,6 @@
 package com.ipartek.formacion.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.ipartek.formacion.pojo.Alumno;
@@ -9,7 +8,7 @@ import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.exceptions.AlumnoServiceException;
 
-public class AlumnoServiceImp implements AlumnoService{
+public class AlumnoServiceImp implements AlumnoService {
 	private static AlumnoServiceImp INSTANCE = null;
 	private List<Alumno> alumnos;
 	private static int i = 1;
@@ -28,8 +27,6 @@ public class AlumnoServiceImp implements AlumnoService{
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
-		
-
 
 		try {
 			alumno = new Alumno();
@@ -44,7 +41,6 @@ public class AlumnoServiceImp implements AlumnoService{
 			e.printStackTrace();
 		}
 
-
 		try {
 			alumno = new Alumno();
 			alumno.setCodigo(3);
@@ -52,30 +48,33 @@ public class AlumnoServiceImp implements AlumnoService{
 			alumno.setApellidos("Rodriguez Miguel");
 			alumnos.add(alumno);
 			i++;
-		} catch (CandidatoException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	private AlumnoServiceImp(){
+
+	private AlumnoServiceImp() {
 		this.alumnos = new ArrayList<Alumno>();
 		init();
 	}
-	public static AlumnoServiceImp getInstance(){
-		if(INSTANCE == null){
+
+	public static AlumnoServiceImp getInstance() {
+		if (INSTANCE == null) {
 			createInstance();
 		}
 		return INSTANCE;
 	}
-	
+
 	private synchronized static void createInstance() {
-		if(INSTANCE == null){
+		if (INSTANCE == null) {
 			INSTANCE = new AlumnoServiceImp();
 		}
-		
+
 	}
-	private static Curso crearCursoAlumno(){
+
+	private static Curso crearCursoAlumno() {
 		Curso curso = null;
 		curso = new Curso();
 		curso.setCodigo(1);
@@ -115,31 +114,33 @@ public class AlumnoServiceImp implements AlumnoService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
-	private int getIndex(int codigo) throws AlumnoServiceException{
+
+	private int getIndex(int codigo) throws AlumnoServiceException {
 		int index = -1;
-		int i = 0,len= this.alumnos.size();
+		int i = 0, len = this.alumnos.size();
 		boolean encontrado = false;
-		while(i< len && encontrado ==false){
-			Alumno aux = this.alumnos.get(i);//alumnos[i];
-			if(aux.getCodigo()==codigo){
+		while (i < len && encontrado == false) {
+			Alumno aux = this.alumnos.get(i);// alumnos[i];
+			if (aux.getCodigo() == codigo) {
 				encontrado = true;
 				index = i;
 			}
 			i++;
 		}
-		if(i == -1){
-			throw new AlumnoServiceException(AlumnoServiceException.CODIGO_ALUMNO_NO_ECONTRADO,AlumnoServiceException.MSG_ALUMNO_NO_ENCONTRADO);
+		if (i == -1) {
+			throw new AlumnoServiceException(AlumnoServiceException.CODIGO_ALUMNO_NO_ECONTRADO,
+					AlumnoServiceException.MSG_ALUMNO_NO_ENCONTRADO);
 		}
 		return index;
 	}
-	
+
 	@Override
 	public List<Alumno> getAll() {
 		return this.alumnos;
 	}
+
 	@Override
 	public Alumno update(Alumno alumno) {
 		int index;
@@ -150,23 +151,14 @@ public class AlumnoServiceImp implements AlumnoService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return alumno;
 	}
+
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		
-		throw new  CloneNotSupportedException();
+
+		throw new CloneNotSupportedException();
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
