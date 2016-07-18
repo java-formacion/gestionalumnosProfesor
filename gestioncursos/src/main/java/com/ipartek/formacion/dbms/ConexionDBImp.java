@@ -64,9 +64,9 @@ public class ConexionDBImp implements ConexionDB {
 			}
 		}
 	}
-
+	
 	@Override
 	public Connection getConexion() {
-		return this.conexion;
+		return conexion;
 	}
 }

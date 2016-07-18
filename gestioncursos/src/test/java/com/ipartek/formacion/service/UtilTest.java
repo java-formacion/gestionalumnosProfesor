@@ -3,8 +3,6 @@
  */
 package com.ipartek.formacion.service;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ipartek.formacion.pojo.Candidato;
-import com.ipartek.formacion.pojo.exception.CandidatoException;
 
 import junit.framework.Assert;
 
@@ -76,12 +73,7 @@ public class UtilTest {
 			Assert.assertEquals(Util.validarDni(dni), false);
 		}
 		Candidato candidato = null;
-		try {
-			candidato = new Candidato();
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		candidato = new Candidato();
 		
 		/*
 		 * alumnosservice testar metodos

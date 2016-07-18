@@ -27,6 +27,9 @@ public class Candidato {
 	protected String apellidos;
 	protected Date fNacimiento;
 	protected String dni;
+	protected String email;
+	protected String telefono;
+	
 	protected Double nota;
 	protected Genero genero;
 	protected List<Idioma> idiomas;
@@ -35,13 +38,13 @@ public class Candidato {
 	 * @throws CandidatoException 
 	 * 
 	 */
-	public Candidato() throws CandidatoException {
+	public Candidato() {
 		super();
 		setCodigo(CODIGO_ALUMNO);
 		setNombre("");
 		setApellidos("");
 		this.dni ="";
-		setfNacimiento(new Date());
+		this.fNacimiento = new Date();
 		setNota(0.0);
 		
 		setGenero(Genero.MASCULINO);
