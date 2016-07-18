@@ -15,7 +15,7 @@ public class Alumno extends Candidato implements Comparable<Alumno> {
    *           excepcion al crear alumno
    */
 
-  public Alumno() throws CandidatoException {
+  public Alumno() {
     super();
     this.curso = new Curso();
   }

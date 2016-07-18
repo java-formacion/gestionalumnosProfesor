@@ -29,7 +29,7 @@ public class Candidato {
    * @throws CandidatoException
    *           excepcion al crear candidato
    */
-  public Candidato() throws CandidatoException {
+  public Candidato() {
     super();
     setCodigo(CODIGO_ALUMNO);
     setNombre("");
