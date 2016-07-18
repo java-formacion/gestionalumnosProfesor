@@ -33,13 +33,13 @@ public class Candidato {
 	 * @throws CandidatoException 
 	 * 
 	 */
-	public Candidato() throws CandidatoException {
+	public Candidato()  {
 		super();
 		setCodigo(CODIGO_ALUMNO);
 		setNombre("");
 		setApellidos("");
 		this.dni ="";
-		setfNacimiento(new Date());
+		this.fNacimiento=new Date();
 		setNota(0.0);
 		setGenero(Genero.MASCULINO);
 		List<Idioma>auxIdiomas = new ArrayList<Idioma>();
