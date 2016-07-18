@@ -38,13 +38,18 @@ public class Candidato {
 	 * @throws CandidatoException
 	 * 
 	 */
-	public Candidato() throws CandidatoException {
+	public Candidato() {
 		super();
 		setCodigo(CODIGO_ALUMNO);
 		setNombre("");
 		setApellidos("");
 		this.dni = "";
-		setfNacimiento(new Date());
+		try {
+			setfNacimiento(new Date());
+		} catch (CandidatoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setNota(0.0);
 		setGenero(Genero.OTROS);
 		List<Idioma> auxIdiomas = new ArrayList<Idioma>();
