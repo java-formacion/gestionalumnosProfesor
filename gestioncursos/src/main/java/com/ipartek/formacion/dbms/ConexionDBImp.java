@@ -1,6 +1,7 @@
 package com.ipartek.formacion.dbms;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
@@ -37,22 +38,35 @@ public class ConexionDBImp implements ConexionDB {
 	@Override
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/gestioncursos";
+		String user = "curso";
+		String password = "curso";
+		
 		if(conexion!=null){
 			try {
 				Class.forName(driver);
+				conexion = DriverManager.getConnection(url, user, password);
 			} catch (ClassNotFoundException e) {
-				LOG.error("Error en ConexionDBImp.java - conectar(): " + e.getMessage());
+				LOG.error("Error en ConexionDBImp.java - ClassNotFoundException - conectar(): " + e.getMessage());
+			} catch (SQLException e) {
+				LOG.error("Error en ConexionDBImp.java - SQLException - conectar(): " + e.getMessage());
 			}
 		}
 	}
 
 	@Override
 	public void desconectar() {
-		try {
-			conexion.close();
-		} catch (SQLException e) {
-			LOG.error("Error en ConexionDBImp.java - desconectar(): " + e.getMessage());
+		if(conexion!=null){
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				LOG.error("Error en ConexionDBImp.java - SQLException - desconectar(): " + e.getMessage());
+			}
 		}
 	}
 
+	@Override
+	public Connection getConexion() {
+		return this.conexion;
+	}
 }
