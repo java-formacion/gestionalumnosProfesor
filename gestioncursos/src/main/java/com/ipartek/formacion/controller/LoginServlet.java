@@ -103,12 +103,13 @@ public class LoginServlet extends HttpServlet {
       rwd.forward(request, response);
     } else {
       if (user != null) {
+        createSession(request);
         Mensaje mensaje = new Mensaje();
         mensaje.setMsg("Usuario y/o contraseña incorrectos");
         mensaje.setTipo(Mensaje.MSG_TYPE_ERROR);
         session.setAttribute(Constantes.MSG_ERROR, mensaje);
       }
-      response.sendRedirect(Constantes.JSP_INDEX);
+      response.sendRedirect("index.jsp");
     }
 
   }

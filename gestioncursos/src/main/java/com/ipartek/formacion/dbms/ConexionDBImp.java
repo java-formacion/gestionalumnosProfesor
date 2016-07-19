@@ -22,6 +22,7 @@ public class ConexionDBImp implements ConexionDB {
  */
   private ConexionDBImp() {
     conexion = null;
+    conectar();
   }
 
   /**
@@ -32,6 +33,7 @@ public class ConexionDBImp implements ConexionDB {
     if (INSTANCE == null) {
       createInstance();
     }
+
     return INSTANCE;
   }
 
@@ -63,7 +65,7 @@ public class ConexionDBImp implements ConexionDB {
     String url = "jdbc:mysql://localhost:3306/gestioncursos";
     String user = "usuario";
     String password = "usuario";
-    if (conexion != null) {
+    if (conexion == null) {
       try {
         Class.forName(driver);
         conexion = DriverManager.getConnection(url, user, password);
@@ -83,6 +85,7 @@ public class ConexionDBImp implements ConexionDB {
     if (conexion != null) {
       try {
         conexion.close();
+        conexion = null;
       } catch (SQLException e) {
         LOG.error(e.getMessage());
       }
@@ -94,6 +97,7 @@ public class ConexionDBImp implements ConexionDB {
    * @return conexion
    */
   public Connection getConexion() {
+    conectar();
     return conexion;
   }
 

@@ -50,7 +50,7 @@ public class Constantes {
 
   public final static String PAR_SESSION_ID = "idSession";
 
-  public final static String PAR_USUARIO = "usuario";
+  public final static String PAR_USUARIO = "alias";
   public final static String PAR_PASSWORD = "password";
   public final static String PAR_RECUERDA = "recuerda";
 

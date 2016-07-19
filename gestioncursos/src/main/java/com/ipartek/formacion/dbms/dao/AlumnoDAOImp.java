@@ -2,6 +2,7 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +24,46 @@ import com.ipartek.formacion.service.Util;
  */
 public class AlumnoDAOImp implements AlumnoDAO {
   private final static Logger LOG = Logger.getLogger(AlumnoDAOImp.class);
+  private static AlumnoDAOImp INSTANCE = null;
+  private static ConexionDB myConexion;
+  private Connection conexion;
+
+  /**
+ * 
+ */
+  private AlumnoDAOImp() {
+    myConexion = ConexionDBImp.getInstance();
+  }
+
+  /**
+   * 
+   * @return INSTANCE
+   */
+  public static AlumnoDAOImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
+
+  /**
+ * 
+ */
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new AlumnoDAOImp();
+    }
+  }
+
+  /**
+   * @Override
+   * @return nada
+   * @throws CloneNotSupportedException
+   *           no se puede cñlonar
+   */
+  protected Object clone() throws CloneNotSupportedException {
+    throw new CloneNotSupportedException();
+  }
 
   /**
    * @Override
@@ -36,9 +77,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
         + "FROM alumno a INNERJOIN genero g ON g.codGenero = a.codGenero"
         + "WHERE codAlumno = "
         + codigo;
-    ConexionDB dbConnection = ConexionDBImp.getInstance();
-    dbConnection.conectar();
-    Connection conexion = dbConnection.getConexion();
+    conexion = myConexion.getConexion();
     try {
       PreparedStatement pSmt = conexion.prepareStatement(sql);
       ResultSet rs = pSmt.executeQuery();
@@ -49,7 +88,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
     } catch (SQLException e) {
       LOG.error(e.getMessage());
     } finally {
-      dbConnection.desconectar();
+      myConexion.desconectar();
     }
 
     return alumno;
@@ -86,8 +125,28 @@ public class AlumnoDAOImp implements AlumnoDAO {
    * @return alumno
    */
   public Alumno update(Alumno alumno) {
-    // TODO Auto-generated method stub
-    return null;
+    Alumno alum = null;
+    String sql = "{call updateAlumno(?,?,?,?,?,?,?,?)}";
+
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", alumno.getCodigo());
+      cSmt.setString("nombre", alumno.getNombre());
+      cSmt.setString("apellidos", alumno.getApellidos());
+      cSmt.setString("dni", alumno.getDni());
+      cSmt.setDate("fecha", new Date(alumno.getfNacimiento().getTime()));
+      cSmt.setString("email", alumno.getEmail());
+      cSmt.setString("telefono", alumno.getTelefono());
+      cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
+      cSmt.executeUpdate();
+      alum = alumno;
+    } catch (SQLException e) {
+      alum = getById(alumno.getCodigo());
+      LOG.fatal(e.getMessage() + " -- Error al actualizar");
+    } finally {
+      myConexion.desconectar();
+    }
+    return alum;
   }
 
   /**
@@ -97,8 +156,27 @@ public class AlumnoDAOImp implements AlumnoDAO {
    * @return alumno
    */
   public Alumno create(Alumno alumno) {
-    // TODO Auto-generated method stub
-    return null;
+    Alumno alum = null;
+    String sql = "{call insertAlumno(?,?,?,?,?,?,?,?)}";
+
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setString("nombre", alumno.getNombre());
+      cSmt.setString("apellidos", alumno.getApellidos());
+      cSmt.setString("dni", alumno.getDni());
+      cSmt.setDate("fecha", new Date(alumno.getfNacimiento().getTime()));
+      cSmt.setString("email", alumno.getEmail());
+      cSmt.setString("telefono", alumno.getTelefono());
+      cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
+      cSmt.executeUpdate();
+      alum = alumno;
+      alum.setCodigo(cSmt.getInt("codAlumno"));
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + " -- Error al insertar alumno");
+    } finally {
+      myConexion.desconectar();
+    }
+    return alum;
   }
 
   /**
@@ -107,7 +185,21 @@ public class AlumnoDAOImp implements AlumnoDAO {
    *          int
    */
   public void delete(int codigo) {
-    // TODO Auto-generated method stub
+    String sql = "{call deleteAlumno(?)}";
+    conexion = myConexion.getConexion();
+    try {
+      CallableStatement cSmt = conexion.prepareCall(sql);
+      cSmt.setInt("codigo", codigo);
+      // int nFilas =
+      cSmt.executeUpdate();
+      // if (nFilas < 1) {
+      //
+      // }
+    } catch (SQLException e) {
+      LOG.fatal(e.getMessage() + " -- Error al borrar");
+    } finally {
+      myConexion.desconectar();
+    }
 
   }
 
@@ -118,9 +210,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
   public List<Alumno> getAll() {
     List<Alumno> alumnos = null;
     String sql = "{call getAllAlumno()}";
-    ConexionDB dbConnection = ConexionDBImp.getInstance();
-    dbConnection.conectar();
-    Connection conexion = dbConnection.getConexion();
+    conexion = myConexion.getConexion();
     try {
       Alumno alumno = null;
       CallableStatement cSmt = conexion.prepareCall(sql);
@@ -128,9 +218,13 @@ public class AlumnoDAOImp implements AlumnoDAO {
       alumnos = new ArrayList<Alumno>();
       while (rs.next()) {
         alumno = parseAlumno(rs);
+        alumnos.add(alumno);
       }
+
     } catch (SQLException e) {
       LOG.error(e.getMessage());
+    } finally {
+      myConexion.desconectar();
     }
     return alumnos;
   }

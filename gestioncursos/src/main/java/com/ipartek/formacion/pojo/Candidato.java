@@ -21,6 +21,8 @@ public class Candidato {
   private String apellidos;
   protected Date fNacimiento;
   protected String dni;
+  private String email;
+  private String telefono;
   private Double nota;
   private Genero genero;
   private List<Idioma> idiomas;
@@ -38,6 +40,8 @@ public class Candidato {
     this.fNacimiento = new Date();
     setGenero(Genero.OTROS);
     setNota(0.0);
+    setEmail("");
+    setTelefono("");
     List<Idioma> aux = new ArrayList<Idioma>();
     aux.add(Idioma.CASTELLANO);
     setIdiomas(aux);
@@ -193,6 +197,22 @@ public class Candidato {
    */
   public void setGenero(Genero genero) {
     this.genero = genero;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getTelefono() {
+    return telefono;
+  }
+
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
   }
 
   /**

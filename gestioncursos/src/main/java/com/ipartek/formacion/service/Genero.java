@@ -1,33 +1,57 @@
 package com.ipartek.formacion.service;
 
+/**
+ * 
+ * @author Curso
+ *
+ */
 public enum Genero {
-	MASCULINO(1, "Hombre"), FEMENINO(2, "Mujer"), OTROS(3, "Otros");
-	private int codigo;
-	private String valor;
+  MASCULINO(1, "Hombre"), FEMENINO(2, "Mujer"), OTROS(3, "Otros");
+  private int codigo;
+  private String valor;
 
-	/**
-	 * @param codigo
-	 * @param valor
-	 */
-	Genero(int codigo, String valor) {
-		this.codigo = codigo;
-		this.valor = valor;
-	}
+  /**
+   * @param codigo
+   *          int
+   * @param valor
+   *          String
+   */
+  Genero(int codigo, String valor) {
+    this.codigo = codigo;
+    this.valor = valor;
+  }
 
-	public int getCodigo() {
-		return codigo;
-	}
+  /**
+   * 
+   * @return codigo
+   */
+  public int getCodigo() {
+    return codigo;
+  }
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+  /**
+   * 
+   * @param codigo
+   *          int
+   */
+  public void setCodigo(int codigo) {
+    this.codigo = codigo;
+  }
 
-	public String getValor() {
-		return valor;
-	}
+  /**
+   * 
+   * @return valor
+   */
+  public String getValor() {
+    return valor;
+  }
 
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
+  /**
+   * @param valor
+   *          String
+   */
+  public void setValor(String valor) {
+    this.valor = valor;
+  }
 
 }
