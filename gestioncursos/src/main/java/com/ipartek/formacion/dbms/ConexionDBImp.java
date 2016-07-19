@@ -43,7 +43,7 @@ public class ConexionDBImp implements ConexionDB {
 		String user = "Stukov";
 		String password = "pass";
 
-		if (conexion != null) {
+		if (conexion == null) {
 			try {
 				Class.forName(driver);// registramos el driver que tiene que
 										// usar para conectarse
@@ -62,6 +62,7 @@ public class ConexionDBImp implements ConexionDB {
 		if (conexion != null) {
 			try {
 				conexion.close();
+				conexion = null;
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());
 			}
@@ -71,7 +72,7 @@ public class ConexionDBImp implements ConexionDB {
 
 	@Override
 	public Connection getConexion() {
-		// TODO Auto-generated method stub
+		conectar();
 		return this.conexion;
 	}
 

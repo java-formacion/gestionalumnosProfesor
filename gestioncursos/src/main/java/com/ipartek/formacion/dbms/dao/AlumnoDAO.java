@@ -12,7 +12,7 @@ public interface AlumnoDAO {
 
 	public Alumno insert(Alumno alumno);
 
-	public Alumno delete(int codigo);
+	public void delete(int codigo);
 
 	public List<Alumno> getAll();
 

@@ -32,6 +32,8 @@ public class Candidato {
 	protected String dni;
 	protected Double nota;
 	protected Genero genero;
+	protected String email;
+	protected String telefono;
 	protected List<Idioma> idiomas;
 
 	/**
@@ -51,6 +53,8 @@ public class Candidato {
 			e.printStackTrace();
 		}
 		setNota(0.0);
+		setTelefono("");
+		setEmail("");
 		setGenero(Genero.OTROS);
 		List<Idioma> auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
@@ -124,6 +128,22 @@ public class Candidato {
 			this.dni = dni;
 		}
 
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	public Double getNota() {
