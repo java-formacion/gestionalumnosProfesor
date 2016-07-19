@@ -22,6 +22,7 @@ public class ConexionDBImp implements ConexionDB {
 	
 	private ConexionDBImp(){
 		conexion = null;
+		conectar();
 	}
 	
 	private synchronized static void createInstance() {
@@ -39,17 +40,17 @@ public class ConexionDBImp implements ConexionDB {
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/gestioncursos";
-		String user = "curso";
-		String password = "curso";
+		String user = "root";
+		String password = "";
 		
-		if(conexion!=null){
+		if(conexion==null){
 			try {
 				Class.forName(driver);
 				conexion = DriverManager.getConnection(url, user, password);
 			} catch (ClassNotFoundException e) {
-				LOG.error("Error en ConexionDBImp.java - ClassNotFoundException - conectar(): " + e.getMessage());
+				LOG.error("Error - ClassNotFoundException: " + e.getMessage());
 			} catch (SQLException e) {
-				LOG.error("Error en ConexionDBImp.java - SQLException - conectar(): " + e.getMessage());
+				LOG.error("Error - SQLException : " + e.getMessage());
 			}
 		}
 	}
@@ -59,14 +60,16 @@ public class ConexionDBImp implements ConexionDB {
 		if(conexion!=null){
 			try {
 				conexion.close();
+				conexion = null;
 			} catch (SQLException e) {
-				LOG.error("Error en ConexionDBImp.java - SQLException - desconectar(): " + e.getMessage());
+				LOG.error("Error - SQLException: " + e.getMessage());
 			}
 		}
 	}
 	
 	@Override
 	public Connection getConexion() {
+		conectar();
 		return conexion;
 	}
 }

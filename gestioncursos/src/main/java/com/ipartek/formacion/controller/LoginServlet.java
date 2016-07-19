@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		/*
 		Cookie[] cookies = request.getCookies();
 		
 		if(cookies != null){
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 				createSession(request);
 			}
 		}
-				
+		*/		
 		Usuario usuario = null;
 		
 		String username = request.getParameter(Constantes.PAR_USERNAME);
@@ -69,9 +69,10 @@ public class LoginServlet extends HttpServlet {
 		Idioma idioma = null;
 		try{
 			String codIdioma = request.getParameter(Constantes.PAR_LANGUAGE);
+			log.trace(codIdioma);
 			idioma = Util.parseIdioma(codIdioma);
 		} catch(Exception e){
-			System.out.println("Algo pasa aqui");
+			log.error(e.getMessage());
 		}
 		
 		

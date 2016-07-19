@@ -16,13 +16,8 @@ public class Candidato {
 	Integer numero;
 	
 	int n1;
-	/**
-	 * 
-	 */
+
 	protected int codigo;
-	/**
-	 * 
-	 */
 	protected String nombre;
 	protected String apellidos;
 	protected Date fNacimiento;
@@ -46,15 +41,14 @@ public class Candidato {
 		this.dni ="";
 		this.fNacimiento = new Date();
 		setNota(0.0);
-		
+		setEmail("");
+		setTelefono("");
 		setGenero(Genero.MASCULINO);
 		
 		List<Idioma>auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
 		setIdiomas(auxIdiomas);
 	}
-	
-	
 
 	public Genero getGenero() {
 		return genero;
@@ -75,36 +69,43 @@ public class Candidato {
 	public int getCodigo() {
 		return codigo;
 	}
+	
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
 	public String getApellidos() {
 		return apellidos;
 	}
+	
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+	
 	public Date getfNacimiento() {
 		return fNacimiento;
 	}
+	
 	public void setfNacimiento(Date fNacimiento) throws CandidatoException {
 		if(fNacimiento.compareTo(new Date())>0){
 			throw new CandidatoException(CandidatoException.CODIGO_ERROR_FECHA_NACIMIENTO,CandidatoException.MSG_ERROR_FECHA_NACIMIENTO);
 		}else{
 			this.fNacimiento = fNacimiento;
 		}
-		
-		
 	}
+	
 	public String getDni() {
 		return dni;
 	}
+	
 	public void setDni(String dni) throws CandidatoException {
 		//!Util.validarDni(dni)
 		if(false){
@@ -115,11 +116,9 @@ public class Candidato {
 		
 	}
 
-
 	public Double getNota() {
 		return nota;
 	}
-
 
 	public void setNota(Double nota) {
 		this.nota = nota;
@@ -129,5 +128,19 @@ public class Candidato {
 		return this.apellidos +", "+ this.nombre;
 	}
 
-	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 }
