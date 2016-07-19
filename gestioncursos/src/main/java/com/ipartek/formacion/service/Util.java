@@ -36,6 +36,12 @@ public class Util {
 		}
 		return aux;
 	}
+	 public static Genero parseGenero(int codigo){
+	    Genero aux = Genero.MASCULINO;
+
+	    aux.setCodigo(codigo);
+	    return aux;
+	  }
 	public static DuracionModulo parseDuracion(String duracion){
 		DuracionModulo d = DuracionModulo.HORAS15;
 		int codigo = Integer.parseInt(duracion);

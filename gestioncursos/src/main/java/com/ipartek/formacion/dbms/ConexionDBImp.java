@@ -17,6 +17,7 @@ public class ConexionDBImp implements ConexionDB{
   ;
   private ConexionDBImp(){
     conexion=null;
+    conectar();
   }
   
 
@@ -26,7 +27,9 @@ public class ConexionDBImp implements ConexionDB{
     }
 }
   public static ConexionDBImp getInstance() {
-    if (INSTANCE == null) createInstance();
+    if (INSTANCE == null){
+      createInstance();
+    } 
     return INSTANCE;
 }
   @Override
@@ -59,6 +62,7 @@ public class ConexionDBImp implements ConexionDB{
     if (conexion!=null) {
       try {
         conexion.close();
+        conexion=null;
       } catch (SQLException e) {
         
         LOG.error(e.getMessage());
@@ -68,6 +72,7 @@ public class ConexionDBImp implements ConexionDB{
   }
 
     public  Connection getConexion() {
+      conectar();
       return conexion;
   }
 

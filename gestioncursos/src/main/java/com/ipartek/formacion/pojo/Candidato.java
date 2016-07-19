@@ -29,7 +29,20 @@ public class Candidato {
 	protected Double nota;
 	protected Genero genero;
 	protected List<Idioma> idiomas;
-	/**
+	protected String telefono;
+	protected String email;
+	
+	public String getEmail() {
+    return email;
+  }
+
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+
+  /**
 	 * @throws CandidatoException 
 	 * 
 	 */
@@ -45,10 +58,22 @@ public class Candidato {
 		List<Idioma>auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
 		setIdiomas(auxIdiomas);
+	  this.telefono="";
+	  this.email="";
 	}
 	
 
-	public List<Idioma> getIdiomas() {
+	public String getTelefono() {
+    return telefono;
+  }
+
+
+  public void setTelefono(String telefono) {
+    this.telefono = telefono;
+  }
+
+
+  public List<Idioma> getIdiomas() {
 		return idiomas;
 	}
 
