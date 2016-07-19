@@ -3,6 +3,8 @@
  */
 package com.ipartek.formacion.pojo;
 
+import java.sql.ResultSet;
+
 import com.ipartek.formacion.pojo.exception.CandidatoException;
 
 /**
@@ -17,7 +19,7 @@ public class Alumno extends Candidato implements Comparable<Alumno> {
 	 * @throws CandidatoException 
 	 * 
 	 */
-	public Alumno() throws CandidatoException {
+	public Alumno() {
 		super();
 		this.cursoMat=new Curso();
 	}
@@ -61,6 +63,8 @@ public class Alumno extends Candidato implements Comparable<Alumno> {
 		
 		return igual;
 	}
+
+	
 	
 	
 	

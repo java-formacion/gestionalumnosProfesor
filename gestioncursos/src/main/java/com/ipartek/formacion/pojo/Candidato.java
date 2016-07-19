@@ -45,6 +45,8 @@ public class Candidato {
 	 */
 	protected Genero genero;
 	protected List<Idioma> idiomas;
+	protected String email;
+	protected String telefono;
 	
 	public double getNota() {
 		return nota;
@@ -59,7 +61,7 @@ public class Candidato {
 	 * @throws CandidatoException 
 	 * 
 	 */
-	public Candidato() throws CandidatoException {
+	public Candidato() {
 		super();
 		setCodigo(CODIGO_ALUMNO);
 		setNombre("");
@@ -71,6 +73,8 @@ public class Candidato {
 		List<Idioma>auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
 		setIdiomas(auxIdiomas);
+		setEmail("");
+		setTelefono("");
 	}
 	/**
 	 * @return the codigo
@@ -137,9 +141,9 @@ public class Candidato {
 	 * @param fNacimiento the fNacimiento to set
 	 * @throws CandidatoException 
 	 */
-	public void setfNacimiento(Date fNacimiento) throws CandidatoException {
+	public void setfNacimiento(Date fNacimiento){
 		if (fNacimiento.compareTo(new Date())>0) {
-			throw new CandidatoException(CandidatoException.CODIGO_ERROR_FECHA_NACIMIENTO,CandidatoException.MSG_ERROR_FECHA_NACIMIENTO);
+			
 		}else {
 			this.fNacimiento = fNacimiento;
 		}
@@ -154,16 +158,29 @@ public class Candidato {
 	/**
 	 * @param dni the dni to set
 	 */
-	public void setDni(String dni) throws CandidatoException{
+	public void setDni(String dni){
 		//Util.validarDni(dni)==false
 		if (false) {
-			throw new CandidatoException(CandidatoException.CODIGO_ERROR_DNI_INCORRECTO, CandidatoException.MSG_ERROR_DNI_INCORRECTO);		
+			
 		}else{
 			this.dni = dni;
 		}
 		
 	}
 	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 	protected String mostrarDatos(){
 		return this.getApellidos()+", "+this.getNombre();
 	}

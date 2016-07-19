@@ -4,7 +4,7 @@ public enum TipoCurso {
 
 	LANBIDE(1,"Lanbide"),
 	HOBETUZ(2,"Hobetuz"),
-	FTRIPARTITA(3,"FormacionTripartita");
+	FTRIPARTITA(3,"FundacionTripartita");
 	
 	private int codigo;
 	private String valor;

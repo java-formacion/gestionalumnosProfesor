@@ -6,7 +6,7 @@ import com.ipartek.formacion.pojo.exception.CandidatoException;
 
 public class AlumnoError extends Alumno{
 	private String mensaje;
-	public AlumnoError() throws CandidatoException {
+	public AlumnoError(){
 		super();
 		this.mensaje="";
 	}
@@ -28,7 +28,7 @@ public class AlumnoError extends Alumno{
 	}
 
 	@Override
-	public void setDni(String dni) throws CandidatoException {
+	public void setDni(String dni){
 		
 		//super.setDni(dni);
 		this.dni=dni;

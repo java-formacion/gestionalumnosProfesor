@@ -28,7 +28,7 @@ public class AlumnoServiceImp implements AlumnoService {
 			alumno1.setDni(Util.generaDni());
 			createAlumno(alumno1);
 			
-		} catch (CandidatoException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
@@ -42,7 +42,7 @@ public class AlumnoServiceImp implements AlumnoService {
 			alumno2.setDni(Util.generaDni());
 			createAlumno(alumno2);
 			
-		} catch (CandidatoException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
@@ -56,7 +56,7 @@ public class AlumnoServiceImp implements AlumnoService {
 			alumno3.setDni(Util.generaDni());
 			createAlumno(alumno3);
 			
-		} catch (CandidatoException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
@@ -70,7 +70,7 @@ public class AlumnoServiceImp implements AlumnoService {
 			alumno4.setApellidos("Richards");
 			alumno4.setDni(Util.generaDni());
 			createAlumno(alumno4);
-		} catch (CandidatoException e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}	
 		
