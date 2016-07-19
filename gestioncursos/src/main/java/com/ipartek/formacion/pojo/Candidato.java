@@ -33,13 +33,13 @@ public class Candidato {
 	 * @throws CandidatoException 
 	 * 
 	 */
-	public Candidato() throws CandidatoException {
+	public Candidato() {
 		super();
 		setCodigo(CODIGO_ALUMNO);
 		setNombre("");
 		setApellidos("");
 		this.dni ="";
-		setfNacimiento(new Date());
+		this.fNacimiento=new Date();
 		setNota(0.0);
 		setGenero(Genero.MASCULINO);
 		List<Idioma>auxIdiomas = new ArrayList<Idioma>();
@@ -102,12 +102,9 @@ public class Candidato {
 		return dni;
 	}
 	public void setDni(String dni) throws CandidatoException {
-		//Util.validarDni(dni)
-		if(false){
-		 throw new CandidatoException(CandidatoException.CODIGO_ERROR_DNI_INCORRECTO, CandidatoException.MSG_ERROR_DNI_INCORRECTO);	
-		}else{
+	
 			this.dni = dni;
-		}
+		
 		
 	}
 

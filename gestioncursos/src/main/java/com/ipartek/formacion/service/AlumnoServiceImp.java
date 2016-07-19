@@ -45,17 +45,14 @@ public class AlumnoServiceImp implements AlumnoService{
 		}
 
 
-		try {
+	
 			alumno = new Alumno();
 			alumno.setCodigo(3);
 			alumno.setNombre("Alvaro");
 			alumno.setApellidos("Rodriguez Miguel");
 			alumnos.add(alumno);
 			i++;
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 
 	}
 	private AlumnoServiceImp(){
