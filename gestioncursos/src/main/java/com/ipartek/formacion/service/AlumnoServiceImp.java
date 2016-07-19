@@ -1,172 +1,120 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.AlumnoDAO;
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.pojo.exception.CandidatoException;
-import com.ipartek.formacion.service.exceptions.AlumnoServiceException;
 
-public class AlumnoServiceImp implements AlumnoService{
-	private static AlumnoServiceImp INSTANCE = null;
-	private List<Alumno> alumnos;
-	private static int i = 1;
+public class AlumnoServiceImp implements AlumnoService {
+  private static AlumnoServiceImp INSTANCE = null;
+  private AlumnoDAO alumDAO;
+  // private List<Alumno> alumnos;
+  // private static int i = 1;
 
-	private void init() {
-		Alumno alumno = null;
-		try {
-			alumno = new Alumno();
-			alumno.setCodigo(1);
-			alumno.setDni("68925141y");
-			alumno.setNombre("Imanol");
-			alumno.setApellidos("Jimenez Lopez");
-			alumnos.add(alumno);
-			i++;
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-		
+  /**
+   * private void init() { Alumno alumno = null; alumno = new Alumno(); alumno.setCodigo(1);
+   * alumno.setDni("68925141y"); alumno.setNombre("Imanol"); alumno.setApellidos("Jimenez Lopez");
+   * alumnos.add(alumno); i++;
+   * 
+   * alumno = new Alumno(); alumno.setCodigo(2); alumno.setNombre("Josu");
+   * alumno.setDni("68925142z"); alumno.setApellidos("Asua Gallego"); alumnos.add(alumno); i++;
+   * 
+   * alumno = new Alumno(); alumno.setCodigo(3); alumno.setNombre("Alvaro"); alumno.setApellidos(
+   * "Rodriguez Miguel"); alumnos.add(alumno); i++;
+   * 
+   * }
+   * 
+   */
+  private AlumnoServiceImp() {
+    // this.alumnos = new ArrayList<Alumno>();
+    // init();
+    /**
+     * con BBDD, se elimnan las listas y accesos a ellas.
+     */
+    alumDAO = AlumnoDAOImp.getInstance();
+  }
 
+  public static AlumnoServiceImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
 
-		try {
-			alumno = new Alumno();
-			alumno.setCodigo(2);
-			alumno.setNombre("Josu");
-			alumno.setDni("68925142z");
-			alumno.setApellidos("Asua Gallego");
-			alumnos.add(alumno);
-			i++;
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new AlumnoServiceImp();
+    }
+  }
 
+  private static Curso crearCursoAlumno() {
+    Curso curso = null;
+    curso = new Curso();
+    curso.setCodigo(1);
+    curso.setNombre("Desarrollo de Aplicaciones con Tecnologias Web");
+    return curso;
+  }
 
-		try {
-			alumno = new Alumno();
-			alumno.setCodigo(3);
-			alumno.setNombre("Alvaro");
-			alumno.setApellidos("Rodriguez Miguel");
-			alumnos.add(alumno);
-			i++;
-		} catch (CandidatoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+  @Override
+  public Alumno createAlumno(Alumno alumno) {
+    /**
+     * alumno.setCodigo(i); alumnos.add(alumno); i++; return alumno;
+     */
+    Alumno alum = alumDAO.create(alumno);
+    return alum;
+  }
 
-	}
-	private AlumnoServiceImp(){
-		this.alumnos = new ArrayList<Alumno>();
-		init();
-	}
-	public static AlumnoServiceImp getInstance(){
-		if(INSTANCE == null){
-			createInstance();
-		}
-		return INSTANCE;
-	}
-	
-	private synchronized static void createInstance() {
-		if(INSTANCE == null){
-			INSTANCE = new AlumnoServiceImp();
-		}
-		
-	}
-	private static Curso crearCursoAlumno(){
-		Curso curso = null;
-		curso = new Curso();
-		curso.setCodigo(1);
-		curso.setNombre("Desarrollo de Aplicaciones con Tecnologias Web");
-		return curso;
-	}
+  @Override
+  public Alumno getById(int codigo) {
+    /**
+     * Alumno alumno = null; int index; index = getIndex(codigo); alumno = alumnos.get(index);
+     * return alumno;
+     */
+    Alumno alum = alumDAO.getById(codigo);
+    return alum;
+  }
 
-	@Override
-	public Alumno createAlumno(Alumno alumno) {
-		alumno.setCodigo(i);
-		alumnos.add(alumno);
-		i++;
-		return alumno;
-	}
+  @Override
+  public void delete(int codigo) {
+    /**
+     * int index; index = getIndex(codigo); this.alumnos.remove(index);
+     */
+    alumDAO.delete(codigo);
+  }
 
-	@Override
-	public Alumno getById(int codigo) {
-		Alumno alumno = null;
-		int index;
-		try {
-			index = getIndex(codigo);
-			alumno = alumnos.get(index);
-		} catch (AlumnoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return alumno;
-	}
+  /**
+   * private int getIndex(int codigo) { int index = -1; int i = 0, len = this.alumnos.size();
+   * boolean encontrado = false; while (i < len && encontrado == false) { Alumno aux =
+   * this.alumnos.get(i);// alumnos[i]; if (aux.getCodigo() == codigo) { encontrado = true; index =
+   * i; } i++; } if (i == -1) {
+   * 
+   * } return index; }
+   */
+  @Override
+  public List<Alumno> getAll() {
 
-	@Override
-	public void delete(int codigo) {
-		int index;
-		try {
-			index = getIndex(codigo);
-			this.alumnos.remove(index);
-		} catch (AlumnoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
-	private int getIndex(int codigo) throws AlumnoServiceException{
-		int index = -1;
-		int i = 0,len= this.alumnos.size();
-		boolean encontrado = false;
-		while(i< len && encontrado ==false){
-			Alumno aux = this.alumnos.get(i);//alumnos[i];
-			if(aux.getCodigo()==codigo){
-				encontrado = true;
-				index = i;
-			}
-			i++;
-		}
-		if(i == -1){
-			throw new AlumnoServiceException(AlumnoServiceException.CODIGO_ALUMNO_NO_ECONTRADO,AlumnoServiceException.MSG_ALUMNO_NO_ENCONTRADO);
-		}
-		return index;
-	}
-	
-	@Override
-	public List<Alumno> getAll() {
-		return this.alumnos;
-	}
-	@Override
-	public Alumno update(Alumno alumno) {
-		int index;
-		try {
-			index = getIndex(alumno.getCodigo());
-			this.alumnos.set(index, alumno);
-		} catch (AlumnoServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return alumno;
-	}
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		
-		throw new  CloneNotSupportedException();
-	}
-	
+    // return this.alumnos;
+
+    return alumDAO.getAll();
+  }
+
+  @Override
+  public Alumno update(Alumno alumno) {
+    /**
+     * int index; index = getIndex(alumno.getCodigo()); this.alumnos.set(index, alumno); return
+     * alumno;
+     */
+
+    Alumno alum = alumDAO.update(alumno);
+    return alum;
+  }
+
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+
+    throw new CloneNotSupportedException();
+  }
+
 }
-
-
-
-
-
-
-
-
-
-
