@@ -13,11 +13,12 @@ import org.apache.log4j.Logger;
  */
 public class ConexionDBImp implements ConexionDB {
 	private static final Logger LOG = Logger.getLogger(ConexionDBImp.class);
-	private static Connection conexion;
+	private Connection conexion;
 	private static ConexionDBImp INSTANCE = null;
 
 	private ConexionDBImp() {
 		conexion = null;
+		conectar();
 	}
 
 	public static ConexionDBImp getInstance() {
@@ -40,14 +41,14 @@ public class ConexionDBImp implements ConexionDB {
 		String url = "jdbc:mysql://localhost:3306/gestioncursos";
 		String user = "ususario";
 		String password = "bd_usuario";
-		if (conexion != null) {
+		if (conexion == null) {
 			try {
 				Class.forName(driver);// registra la libreria de la bbdd
 				conexion = DriverManager.getConnection(url);
 			} catch (ClassNotFoundException e) {
 				LOG.error(e.getMessage());
 			} catch (SQLException e) {
-				LOG.error(e.getMessage() + "error conexion BBDD");
+				LOG.error(e.getMessage() + " error conexion BBDD");
 			}
 		}
 
@@ -58,6 +59,7 @@ public class ConexionDBImp implements ConexionDB {
 		if (conexion != null) {
 			try {
 				conexion.close();
+				conexion = null;
 
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());
@@ -69,6 +71,7 @@ public class ConexionDBImp implements ConexionDB {
 
 	@Override
 	public Connection getConexion() {
+		conectar();
 		return this.conexion;
 	}
 
