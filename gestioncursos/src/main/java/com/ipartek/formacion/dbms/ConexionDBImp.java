@@ -1,6 +1,7 @@
 package com.ipartek.formacion.dbms;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
@@ -36,12 +37,19 @@ public class ConexionDBImp implements ConexionDB {
 	@Override
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/gestioncursos";
+		String user = "usuario";
+		String password = "usuario";
 		if (conexion != null) {
 			try {
 				Class.forName(driver);
+				conexion = DriverManager.getConnection(url, user, password);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				LOG.error(e.getMessage());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				LOG.error(e.getMessage() + " error conexion BBDD");
 			}
 		}
 
@@ -57,6 +65,12 @@ public class ConexionDBImp implements ConexionDB {
 			}
 		}
 
+	}
+
+	@Override
+	public Connection getConexion() {
+		// TODO Auto-generated method stub
+		return conexion;
 	}
 
 }
