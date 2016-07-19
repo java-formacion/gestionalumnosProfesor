@@ -2,7 +2,6 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,7 +77,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			LOG.error(e.getMessage() + "Error en la fecha");
 		}
 
-		return null;
+		return alumno;
 	}
 
 	@Override
@@ -94,7 +93,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());
-			cSmt.setDate("fNacimiento", (Date) alumno.getfNacimiento());
+			cSmt.setDate("fNacimiento", new java.sql.Date(alumno.getfNacimiento().getTime()));
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
@@ -125,7 +124,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());
-			cSmt.setDate("fNacimiento", (Date) alumno.getfNacimiento());
+			cSmt.setDate("fNacimiento", new java.sql.Date(alumno.getfNacimiento().getTime()));
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
