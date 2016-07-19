@@ -18,12 +18,13 @@ import com.mysql.jdbc.Driver;
 // Esta clase sera la encargada de implementar las conexiones y desconexiones a base de datos.
 public class ConexionDBImp implements ConexionDB {
 	private static final Logger LOG = Logger.getLogger(ConexionDBImp.class);
-	private Connection conexion;
 
 	// SINGLETON
+	private Connection conexion;
 	private static ConexionDBImp INSTANCE = null;
-
-	private ConexionDBImp() {
+	
+	private ConexionDBImp(){
+		conexion =null;
 	}
 
 	private synchronized static void createInstance() {
@@ -34,7 +35,7 @@ public class ConexionDBImp implements ConexionDB {
 
 	public static ConexionDBImp getInstance() {
 		if (INSTANCE == null)
-			createInstance();
+			{createInstance();}
 		return INSTANCE;
 	}
 
@@ -46,7 +47,7 @@ String driver = "com.mysql.jdbc.Driver";
 String url="jdbc:mysql://192.168.0.8:3306/gestioncursos";
 String user="usuario";
 String password="1234";
-		if (conexion != null) {
+		if (conexion == null) {
 try {
 	Class.forName(driver);
 	conexion = DriverManager.getConnection(url,user,password);
@@ -63,6 +64,7 @@ try {
 		if (conexion != null) {
 			try {
 				conexion.close();
+				conexion = null;
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());
 			}
