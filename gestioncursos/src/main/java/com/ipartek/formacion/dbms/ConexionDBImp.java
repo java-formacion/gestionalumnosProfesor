@@ -19,6 +19,7 @@ public class ConexionDBImp implements ConexionDB {
 
 	private ConexionDBImp() {
 		conexion = null;
+		conectar();
 	}
 
 	private synchronized static void createInstance() {
@@ -40,7 +41,7 @@ public class ConexionDBImp implements ConexionDB {
 		String url = "jdbc:mysql://localhost:3306/gestioncursos";
 		String user = "usuario";
 		String password = "usuario";
-		if (conexion != null) {
+		if (conexion == null) {
 			try {
 				Class.forName(driver);
 				conexion = DriverManager.getConnection(url, user, password);
@@ -60,6 +61,7 @@ public class ConexionDBImp implements ConexionDB {
 		if (conexion != null) {
 			try {
 				conexion.close();
+				conexion = null;
 			} catch (SQLException e) {
 				LOG.error(e.getMessage());
 			}
@@ -69,7 +71,7 @@ public class ConexionDBImp implements ConexionDB {
 
 	@Override
 	public Connection getConexion() {
-		// TODO Auto-generated method stub
+		conectar();
 		return conexion;
 	}
 

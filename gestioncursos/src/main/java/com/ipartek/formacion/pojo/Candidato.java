@@ -27,12 +27,11 @@ public class Candidato {
 	protected String dni;
 	protected Double nota;
 	protected Genero genero;
+	protected String telefono;
+	protected String email;
+
 	protected List<Idioma> idiomas;
 
-	/**
-	 * @throws CandidatoException
-	 *
-	 */
 	public Candidato() {
 		super();
 		setCodigo(CODIGO_ALUMNO);
@@ -45,6 +44,24 @@ public class Candidato {
 		List<Idioma> auxIdiomas = new ArrayList<Idioma>();
 		auxIdiomas.add(Idioma.CASTELLANO);
 		setIdiomas(auxIdiomas);
+		setEmail("");
+		setTelefono("");
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public List<Idioma> getIdiomas() {
