@@ -3,6 +3,7 @@
  */
 package com.ipartek.formacion.pojo;
 
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,8 @@ public class Curso {
 	private Map<String,Alumno>alumnos;
 	private TipoCurso tipoCurso;
 	private int duracionCurso;
-	private String refCurso;
+	private String codPatrocinador;
+	
 	
 	/**
 	 * Mapa de alumnos dni(String)
@@ -33,6 +35,7 @@ public class Curso {
 		setNombre("");
 		modulos=new HashMap<Integer,Modulo>();
 		alumnos=new HashMap<String,Alumno>();
+		
 	}
 	public TipoCurso getTipoCurso() {
 		return tipoCurso;
@@ -47,11 +50,11 @@ public class Curso {
 		
 		this.duracionCurso = duracionCurso;
 	}
-	public String getRefCurso() {
-		return refCurso;
+	public String getCodPatrocinador() {
+		return codPatrocinador;
 	}
-	public void setRefCurso(String refCurso) {
-		this.refCurso = refCurso;
+	public void setCodPatrocinador(String codPatrocinador) {
+		this.codPatrocinador = codPatrocinador;
 	}
 	/**
 	 * @return the alumnos
@@ -112,6 +115,7 @@ public class Curso {
 		}
 		return igual;
 	}
+	
 	
 	
 }

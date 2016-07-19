@@ -3,6 +3,7 @@ package com.ipartek.formacion.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.exception.AlumnoException;
@@ -12,7 +13,7 @@ import com.ipartek.formacion.service.exceptions.AlumnoServiceException;
 public class AlumnoServiceImp implements AlumnoService {
 
 	private static AlumnoServiceImp INSTANCE=null;
-	
+	private  AlumnoDAOImp alumnoDAO=null;
 	private List<Alumno> alumnos;
 	private static int aCounter = 1;
 	
@@ -78,8 +79,10 @@ public class AlumnoServiceImp implements AlumnoService {
 	}
 
 	private AlumnoServiceImp(){
-		this.alumnos = new ArrayList<Alumno>();
-		init();
+		//this.alumnos = new ArrayList<Alumno>();
+		//init();
+		alumnoDAO=AlumnoDAOImp.getInstance();
+		
 	}
 	public static AlumnoServiceImp getInstance(){
 		if (INSTANCE==null) { 
@@ -116,26 +119,28 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public Alumno createAlumno(Alumno alumno) {
-		alumno.setCodigo(aCounter);
-		this.alumnos.add(alumno);
-		aCounter++;
-		return alumno;
+//		alumno.setCodigo(aCounter);
+//		this.alumnos.add(alumno);
+//		aCounter++;
+		Alumno aux=alumnoDAO.createAlumno(alumno);
+		
+		return aux;
 
 	}
 
 	@Override
 	public Alumno getById(int codigo){
 		Alumno aux = null;	
-		int index;
-					
-		try {
-			index = getIndex(codigo);
-			aux = this.alumnos.get(index);
-		} catch (AlumnoServiceException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
+//		int index;
+//					
+//		try {
+//			index = getIndex(codigo);
+//			aux = this.alumnos.get(index);
+//		} catch (AlumnoServiceException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+		aux=alumnoDAO.getById(codigo);
 		
 		
 		return aux;
@@ -143,22 +148,22 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public void deleteAlumno(int codigo) {
-		int index;
-		try {
-			index=getIndex(codigo);
-			this.alumnos.remove(index);
-		} catch (AlumnoServiceException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
+//		int index;
+//		try {
+//			index=getIndex(codigo);
+//			this.alumnos.remove(index);
+//		} catch (AlumnoServiceException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+		alumnoDAO.deleteAlumno(codigo);
 		
 	}
 
 	@Override
 	public List<Alumno> getAll() {
-		// TODO Auto-generated method stub
-		return this.alumnos;
+		
+		return alumnoDAO.getAll();
 	}
 
 	private int getIndex(int codigo) throws AlumnoServiceException {
