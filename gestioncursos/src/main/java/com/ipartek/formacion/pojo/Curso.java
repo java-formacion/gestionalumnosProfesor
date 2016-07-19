@@ -11,6 +11,7 @@ public class Curso {
 	private int codigo;
 	private String nombre;
 	private TipoCurso tipo;
+	private String referencia;
 	
 	private Map<Integer,Modulo>modulos; //el indice no puede ser int, suele ser Integer o String
 	private Map<String, Alumno>alumnos; //mapa de alumnos con tipo de clave String que será el DNI
@@ -27,6 +28,7 @@ public class Curso {
 		super();
 		setCodigo(CODIGO_CURSO);
 		setNombre("");
+		setReferencia("");
 		modulos = new HashMap<Integer, Modulo>(); //definimos el TIPO (HashMap) de mapa que queremos
 		alumnos = new HashMap<String, Alumno>(); //definimos el TIPO (HashMap) de mapa que queremos
 	}
@@ -68,6 +70,16 @@ public class Curso {
 
 	public void setTipo(TipoCurso tipo) {
 		this.tipo = tipo;
+	}
+	
+	
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
 	@Override //método para comparar dos objetos según lo que queramos

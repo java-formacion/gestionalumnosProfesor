@@ -19,6 +19,8 @@ public class Candidato {
 	protected String apellidos;
 	protected Date fNacimiento;
 	protected String dni;
+	protected String email;
+	protected String telefono;
 	protected Double nota;
 	protected Genero genero;
 	protected List <Idiomas> idiomas;
@@ -26,18 +28,20 @@ public class Candidato {
 	 * @throws CandidatoException 
 	 * 
 	 */
-	public Candidato() throws CandidatoException {
+	public Candidato(){
 		super();
-		setCodigo(-1);
-		setNombre("");
-		setApellidos("");
+		this.setCodigo(-1);
+		this.setNombre("");
+		this.setApellidos("");
 		this.dni="";
-		setfNacimiento(new Date());
-		setNota(0.0);
-		setGenero(Genero.MASCULINO);
+		this.email="";
+		this.telefono="";
+		this.fNacimiento=new Date();
+		this.setNota(0.0);
+		this.setGenero(Genero.MASCULINO);
 		List<Idiomas>auxIdiomas = new ArrayList<Idiomas>();
 		auxIdiomas.add(Idiomas.CASTELLANO);
-		setIdiomas(auxIdiomas);
+		this.setIdiomas(auxIdiomas);
 		
 	}
 	public int getCodigo() {
@@ -61,6 +65,11 @@ public class Candidato {
 	public Date getfNacimiento() {
 		return fNacimiento;
 	}
+	
+	public void setfNacimiento(Date fNacimiento) {
+		this.fNacimiento = fNacimiento;
+	}
+	/*
 	public void setfNacimiento(Date fNacimiento) throws CandidatoException {
 		
 		if(fNacimiento.compareTo(new Date())>0){
@@ -71,16 +80,16 @@ public class Candidato {
 	
 		this.fNacimiento = fNacimiento;
 		}
-	}
+	}*/
 	public String getDni() {
 		
 		return dni;
 	}
-	public void setDni(String dni) throws CandidatoException {
+	public void setDni(String dni){
 		
 		if(!Util.validarDni(dni)){
 			
-			throw new CandidatoException(CandidatoException.CODIGO_ERROR_DNI,CandidatoException.MSG_ERROR_DNI);
+			//throw new CandidatoException(CandidatoException.CODIGO_ERROR_DNI,CandidatoException.MSG_ERROR_DNI);
 			
 		}
 		
@@ -103,6 +112,18 @@ public class Candidato {
 	
 	
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 	public List<Idiomas> getIdiomas() {
 		return idiomas;
 	}

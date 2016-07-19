@@ -1,10 +1,10 @@
 <%@page import="com.ipartek.formacion.service.Util"%>
 <%@page import="com.ipartek.formacion.service.Idiomas"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="includes/header.jsp"/>
 	
 <main>
@@ -14,6 +14,7 @@
 	Usuario usuario = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 	
 	if(usuario==null){
+		
 	%>
 	
 	<div class="row">

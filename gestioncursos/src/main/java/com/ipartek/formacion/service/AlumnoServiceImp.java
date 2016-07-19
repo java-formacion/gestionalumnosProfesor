@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.AlumnoDAO;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
@@ -15,25 +16,24 @@ public class AlumnoServiceImp implements AlumnoService {
 	private static AlumnoServiceImp INSTANCE = null;
 	private List<Alumno> alumnos;
 	private static int i = 1; //para contar los objetos que añadimos
+	private AlumnoDAO alumDAO;
 	
 	
 	private void init(){
 		Alumno alumno;
-		try {
+		
 			alumno = new Alumno();
 		
 		alumno.setCodigo(i);
 		alumno.setNombre("Marta");
 		alumno.setApellidos("Rivera del Amo");
 		alumno.setDni("16087431N");
-		alumno.setfNacimiento(new Date());
+		//alumno.fNacimiento=new Date();
 		alumnos.add(alumno);
 		i++;
-		} catch (CandidatoException e) {
-			System.out.println(e.getMessage());
-		}
 		
-		try {
+		
+		
 			alumno = new Alumno();
 		
 		alumno.setCodigo(i);
@@ -42,9 +42,7 @@ public class AlumnoServiceImp implements AlumnoService {
 		alumno.setDni("45751880G");
 		alumnos.add(alumno);
 		i++;
-		} catch (CandidatoException e) {
-			System.out.println(e.getMessage());
-		}
+		
 		/*
 		try {
 		alumno = new Alumno();
@@ -112,23 +110,15 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public Alumno createAlumno(Alumno alumno) {
-		alumno.setCodigo(i);
-		this.alumnos.add(alumno);
-		i++;
-		return alumno;
+		Alumno alum = alumDAO.create(alumno);
+		
+		return alum;
 	}
 
 	@Override
 	public Alumno getById(int codigo) {
 		
-		Alumno alumno = null;
-		
-		try {
-			alumno = this.alumnos.get(getIndex(codigo));
-		} catch (AlumnoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Alumno alumno = alumDAO.getById(codigo);
 		
 		return alumno;
 	}
@@ -136,56 +126,24 @@ public class AlumnoServiceImp implements AlumnoService {
 	@Override
 	public void deleteAlumno(int codigo) {
 		
-		try {
-			this.alumnos.remove(getIndex(codigo));
-		} catch (AlumnoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		alumDAO.delete(codigo);
 		
 	}
 	
-	private int getIndex(int codigo) throws AlumnoException{
-		int index = -1;
-		int i = 0;
-		boolean encontrado = false;
+	@Override
+	public Alumno update(Alumno alumno) {
+		Alumno alum = alumDAO.update(alumno);
 		
-		while(i < this.alumnos.size() && encontrado ==false){
-			Alumno aux = this.alumnos.get(i); //alumnos[i]
-			if(aux.getCodigo()==codigo){
-				encontrado=true;
-				index=i;
-			}
-				
-			i++;
-		}
-		
-		if(index==-1){
-			throw new AlumnoException(AlumnoException.CODIGO_ERROR_ALUMNO_INDEX,AlumnoException.MSG_ERROR_ALUMNO_INDEX);	
-		}
-		
-		return index;
+		return alum;
 	}
 
 	@Override
 	public List<Alumno> getAll() {
 		
-		return this.alumnos;
+		return alumDAO.getAll();
 	}
-	@Override
-	public Alumno update(Alumno alumno) {
-		int index;
-		try {
-			index = getIndex(alumno.getCodigo());
-			this.alumnos.set(index,alumno);
-		} catch (AlumnoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		return alumno;
-	}
+	
+	
 	
 	//Entonces, se debería impedir la clonación sobreescribiendo el método "clone" de la siguiente manera:
 	@Override

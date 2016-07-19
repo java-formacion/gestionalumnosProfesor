@@ -27,7 +27,7 @@ public class AlumnoError extends Alumno{
 	}
 
 	@Override //sobrecargando el método del padre
-	public void setDni(String dni) throws CandidatoException {
+	public void setDni(String dni) {
 		//accedo al atributo con dni porque ha heredado los atributos de candidato como protected
 		//super.setDni(dni);
 		this.dni = dni;

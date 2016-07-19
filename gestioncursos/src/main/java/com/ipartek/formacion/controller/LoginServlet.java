@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 	 private HttpSession session = null;
 	 private Usuario usuario = null;
 	 private String nUsuario = "";
-	 private String passWord = "";
+	 private String pass = "";
 	 Cookie cookieAlias = null;
 	 Cookie cookiePass = null;
 	 private static final Logger log = Logger.getLogger(LoginServlet.class);
@@ -56,10 +56,10 @@ public class LoginServlet extends HttpServlet {
 
 			}
 		}
-		if(usuario!=null && "marta".equals(usuario.getAlias())&&"marta".equals(usuario.getPassword())){
-			generarCookies(response);
-			
+		
+		if(usuario != null && "marta".equals(usuario.getAlias()) && "marta".equals(usuario.getPassword())){
 			String[] checkboxes = request.getParameterValues(Constantes.PAR_REMEMBER);
+			generarCookies(response);
 			if(checkboxes!=null && checkboxes.length==1){
 				cookieAlias.setMaxAge(60*60*24);
 				cookiePass.setMaxAge(24*60*60);
@@ -69,8 +69,9 @@ public class LoginServlet extends HttpServlet {
 			}
 			response.addCookie(cookieAlias);
 			response.addCookie(cookiePass);
+			
 			procesarLogin(request);
-			session.setAttribute(Constantes.ATT_USUARIO, usuario);
+			//session.setAttribute(Constantes.ATT_USUARIO, usuario);
 			rwd.forward(request, response);
 			
 		}else{
@@ -83,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 				System.out.println("hola");
 			}
 			
-			response.sendRedirect(Constantes.JSP_INDEX);
+			response.sendRedirect("index.jsp");
 		 
 		}
 		
@@ -100,10 +101,10 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void cargarDatosCookies() {
-		log.trace(nUsuario+" "+passWord);
+		log.trace(nUsuario+" "+pass);
 		usuario = new Usuario();
 		usuario.setAlias(nUsuario);
-		usuario.setPassword(passWord);
+		usuario.setPassword(pass);
 	}
 	
 
@@ -133,11 +134,11 @@ public class LoginServlet extends HttpServlet {
 					nUsuario = cookie.getValue();
 				}else{
 					if(cookie.getName().equals("password")){
-						passWord = cookie.getValue();
+						pass = cookie.getValue();
 					}
 				}
 			}
-			if(!"".equals(nUsuario)&&!"".equals(passWord)){
+			if(!"".equals(nUsuario)&&!"".equals(pass)){
 				cargado = true;
 			}
 		}
