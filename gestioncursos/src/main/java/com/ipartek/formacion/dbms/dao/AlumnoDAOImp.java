@@ -40,7 +40,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		
 		Alumno alumno = null;
 
-		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, dni_nie, fNacimiento, email, telefono, codGenero, g.nombre as 'nGenero'"
+		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, dni_nie, fNacimiento, email, telefono, g.codGenero as 'codGenero', g.nombre as 'nGenero'"
 				+ "		FROM alumno a "
 				+ "		INNER JOIN genero g ON g.codGenero=a.codGenero"
 				+ "		WHERE codAlumno = " + codigo;
