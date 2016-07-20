@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.AlumnoDAO;
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.exception.CandidatoException;
@@ -13,7 +15,8 @@ public class AlumnoServiceImp implements AlumnoService{
 	/*SINGLETON:Patrón para controlar q sólo existe una instancia de esa clase, en toda la ejecución.
 	 generalmente sin atributos. Ej:tener una sola conex de bbdd y que todo el mundo tire de ella.*/
 	private static AlumnoServiceImp INSTANCE =null;
-	private List<Alumno> alumnos;
+	private AlumnoDAO alumDAO;
+	/*private List<Alumno> alumnos;
 	private static int i = 1;
 	private void init() {
 		Alumno alumno = null;
@@ -58,11 +61,12 @@ public class AlumnoServiceImp implements AlumnoService{
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 	//SINGLETON
 		private AlumnoServiceImp(){
-			this.alumnos = new ArrayList<Alumno>();
-			init();
+			/*this.alumnos = new ArrayList<Alumno>();
+			init();*/
+			alumDAO = AlumnoDAOImp.getInstance();
 		}
 		public static AlumnoServiceImp getInstance(){
 			if(INSTANCE==null){
@@ -94,15 +98,17 @@ public class AlumnoServiceImp implements AlumnoService{
 
 	@Override
 	public Alumno createAlumno(Alumno alumno) {
-		alumno.setCodigo(i);
+		/*alumno.setCodigo(i);
 		alumnos.add(alumno);
 		i++;
-		return alumno;
+		return alumno;*/
+		Alumno alum = alumDAO.create(alumno);
+		return alum;
 	}
 
 	@Override
 	public Alumno getById(int codigo) {
-		Alumno alumno = null;
+		/*Alumno alumno = null;
 		int index;
 		try {
 			index = getIndex(codigo);
@@ -111,23 +117,26 @@ public class AlumnoServiceImp implements AlumnoService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return alumno;*/
+		Alumno alumno = alumDAO.getById(codigo);
+
 		return alumno;
 	}
 
 	@Override
 	public void delete(int codigo) {
-		int index;
+		/*int index;
 		try {
 			index = getIndex(codigo);
 			this.alumnos.remove(index);
 		} catch (AlumnoServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}*/
+		alumDAO.delete(codigo);
 		
 	}
-	private int getIndex(int codigo) throws AlumnoServiceException{
+	/*private int getIndex(int codigo) throws AlumnoServiceException{
 		int index = -1;
 		int i = 0,len= this.alumnos.size();
 		boolean encontrado = false;
@@ -143,15 +152,17 @@ public class AlumnoServiceImp implements AlumnoService{
 			throw new AlumnoServiceException(AlumnoServiceException.CODIGO_ALUMNO_NO_ECONTRADO,AlumnoServiceException.MSG_ALUMNO_NO_ENCONTRADO);
 		}
 		return index;
-	}
+	}*/
 	
 	@Override
 	public List<Alumno> getAll() {
-		return this.alumnos;
+		//return this.alumnos;
+		List<Alumno> alumnos = alumDAO.getAll();
+		return alumnos;
 	}
 	@Override
 	public Alumno update(Alumno alumno) {
-		int index;
+		/*int index;
 		try {
 			index = getIndex(alumno.getCodigo());
 			this.alumnos.set(index, alumno);
@@ -160,7 +171,8 @@ public class AlumnoServiceImp implements AlumnoService{
 			e.printStackTrace();
 		}
 		
-		return alumno;
+		return alumno*/
+		return alumDAO.update(alumno);
 	}
 	//para no dejar clonar cosas
 		@Override
