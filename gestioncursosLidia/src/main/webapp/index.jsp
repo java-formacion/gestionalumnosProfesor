@@ -44,19 +44,15 @@
 			            </div>
                    </div>
                    <p></p>
-                    Selecciona idioma
-                    <p></p>
+                   <p>Selecciona idioma</p>
                    <div class="input-group">
-                   <span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
-  						
- 						<label class="sr-only" for="<%=Constantes.PAR_IDIOMA%>">Idioma:</label>
-						<select name="<%=Constantes.PAR_IDIOMA %>" id="<%=Constantes.PAR_IDIOMA %>">
-						<c:forEach items="<%=Idioma.values() %>" var="idioma">
-							<option value="${idioma.codigo}">${idioma.nombre}</option>
-						</c:forEach>
+                   
+  						<span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+ 						<select name="<%=Constantes.PAR_IDIOMA %>" id="<%=Constantes.PAR_IDIOMA %>">
+						
 						</select>
-</div>
-   			  <p></p>
+				  </div>
+                  <p></p>
 
                <div class="form-group">
                    <div class="col-xs-12 controls">
@@ -72,11 +68,3 @@
 	</div>
 </main>
 <%@ include file="includes/footer.jsp" %>
-
-
-
-
-
-
-
-

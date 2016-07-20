@@ -85,7 +85,6 @@
 					<label class="col-xs-2">Fecha:</label>
 					<div class="col-xs-10">
 				<%
-
 				GregorianCalendar calendar = new GregorianCalendar();
 				calendar.setTime(alumno.getfNacimiento());
 											

@@ -19,16 +19,17 @@ import com.ipartek.formacion.controller.Constantes;
  */
 public class ServletFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public ServletFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public ServletFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
 	 */
+	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
@@ -36,35 +37,35 @@ public class ServletFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	//método de filtrado
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//el response y request no son HTTpsERVLET,hay que hacer casting
-		HttpServletRequest req=(HttpServletRequest)request;
-		HttpServletResponse res=(HttpServletResponse)response;
-		//todas las peticiones sean UTF-8
+		// TODO Auto-generated method stub
+		// place your code here
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
 		req.setCharacterEncoding("UTF-8");
-		//vamos a coger la URL
-		String uri=req.getServletPath();//webapp
-		if(!uri.contains(Constantes.SERVLET_LOGIN)){//si no contiene esto q no lo ejecute
-			
-		
-		//saber si hay una sesión,creamos método checksession
-		if(checkSession(req)){//sesión válida
-			chain.doFilter(request, response);//si todo va bien,sigue para delante
-		}else{//no tiene sesión válida
-			res.sendRedirect("index.jsp");//con esto no se ve nada de la app,login.do no se ejecuta
-		}
-		
-		}else{
-		chain.doFilter(request, response);
-		}
-	}
+		String url = req.getServletPath();
 
+		url.equals("/"+Constantes.SERVLET_LOGIN);
+		if(!url.contains(Constantes.SERVLET_LOGIN))
+		{
+			if(checkSession(req)){//tiene una session valida
+				chain.doFilter(request, response);
+			}else{//no tiene una session valida
+				//
+				res.sendRedirect("index.jsp");
+			}
+			// pass the request along the filter chain
+		}else{
+			chain.doFilter(request, response);
+		}
+
+	}
 	private boolean checkSession(HttpServletRequest req) {
-		boolean correcto=false;
-		HttpSession session=req.getSession(false);
-		if(session!=null && session.getAttribute(Constantes.ATT_USUARIO)!=null){//si la sesión es nula 
-			correcto=true;
+		boolean correcto = false;
+		HttpSession session = req.getSession(false);
+		if(session !=null && session.getAttribute(Constantes.ATT_USUARIO)!=null) {
+			correcto = true;
 		}
 		return correcto;
 	}
@@ -72,6 +73,7 @@ public class ServletFilter implements Filter {
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
+	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}

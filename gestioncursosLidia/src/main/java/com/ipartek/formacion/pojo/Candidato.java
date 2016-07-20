@@ -28,6 +28,8 @@ public class Candidato {
 	protected String dni;
 	protected Double nota;
 	protected Genero genero;
+	protected String telefono;
+	protected String email;
 	protected List<Idioma> idiomas;
 	/**
 	 * @throws CandidatoException 
@@ -121,6 +123,26 @@ public class Candidato {
 
 	protected String mostrarDatos(){
 		return this.apellidos +", "+ this.nombre;
+	}
+
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
