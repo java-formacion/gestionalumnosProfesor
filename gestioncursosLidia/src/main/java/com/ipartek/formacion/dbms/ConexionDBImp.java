@@ -43,8 +43,8 @@ public class ConexionDBImp implements ConexionDB {
 		String password = "usuario";
 		if (conexion == null) {
 			try {
-				Class.forName(driver);
-				conexion = DriverManager.getConnection(url, user, password);
+				Class.forName(driver);//cargar el driver
+				conexion = DriverManager.getConnection(url, user, password);//establecer conex con la bbdd
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				LOG.error(e.getMessage());
