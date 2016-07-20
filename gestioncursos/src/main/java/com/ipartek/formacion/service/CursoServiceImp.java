@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Modulo;
@@ -23,10 +24,12 @@ public class CursoServiceImp implements CursoService {
 	private static CursoServiceImp INSTANCE=null;
 	private List<Curso> cursos;
 	private static int aCounter=0;
+	private CursoDAOImp cursoDAO=null;
 	
 	private CursoServiceImp(){
-		this.cursos=new ArrayList<Curso>();
-		init();
+//		this.cursos=new ArrayList<Curso>();
+//		init();
+		cursoDAO=CursoDAOImp.getInstance();
 	}
 	
 	public static CursoServiceImp getInstance(){
@@ -43,60 +46,63 @@ public class CursoServiceImp implements CursoService {
 	}
 	
 	
-	public void init(){
-		Curso c1=new Curso();
-		Curso c2=new Curso();
-		Curso c3=new Curso();
-		Curso c4=new Curso();
-		
-		
-		c1.setNombre("Curso qwer");
-		
-		c2.setNombre("Curso asdf");
-		
-		c3.setNombre("Curso zxcv");
-		
-		c4.setNombre("Curso uiop");
-		
-		
-		createCurso(c1);
-		createCurso(c2);
-		createCurso(c3);
-		createCurso(c4);
-		
-	}
+//	public void init(){
+//		Curso c1=new Curso();
+//		Curso c2=new Curso();
+//		Curso c3=new Curso();
+//		Curso c4=new Curso();
+//		
+//		
+//		c1.setNombre("Curso qwer");
+//		
+//		c2.setNombre("Curso asdf");
+//		
+//		c3.setNombre("Curso zxcv");
+//		
+//		c4.setNombre("Curso uiop");
+//		
+//		
+//		createCurso(c1);
+//		createCurso(c2);
+//		createCurso(c3);
+//		createCurso(c4);
+//		
+//	}
 
 	@Override
 	public Curso createCurso(Curso curso) {
-		curso.setCodigo(aCounter);
-		aCounter++;
-		this.cursos.add(curso);
-		
-		return curso;
+//		curso.setCodigo(aCounter);
+//		aCounter++;
+//		this.cursos.add(curso);
+		Curso aux=cursoDAO.createCurso(curso);
+		return aux;
 	}
 
 	@Override
 	public void deleteCurso(int codigo) {
-		int index=this.getIndex(codigo);
-		this.cursos.remove(index);
+//		int index=this.getIndex(codigo);
+//		this.cursos.remove(index);
+		cursoDAO.deleteCurso(codigo);
 		
 	}
 
 	@Override
 	public Curso updateCurso(Curso curso) {
-		int index=this.getIndex(curso.getCodigo());
-		this.cursos.set(index, curso);
-		return curso;
+//		int index=this.getIndex(curso.getCodigo());
+//		this.cursos.set(index, curso);
+		Curso aux=cursoDAO.updateCurso(curso);
+		return aux;
 	}
 
 	@Override
 	public Curso getById(int codigo) throws CursoException {
 		Curso aux=null;
-		int index=this.getIndex(codigo);
-		if (index <0) {
-			throw new CursoException(CursoException.CODIGO_ERROR_INDEX_CURSO, CursoException.MSG_ERROR_INDEX_CURSO);
-		}
-		aux=this.cursos.get(index);
+//		int index=this.getIndex(codigo);
+//		if (index <0) {
+//			throw new CursoException(CursoException.CODIGO_ERROR_INDEX_CURSO, CursoException.MSG_ERROR_INDEX_CURSO);
+//		}
+//		aux=this.cursos.get(index);
+		aux=cursoDAO.getById(codigo);
 		
 		return aux;
 	}
@@ -104,7 +110,7 @@ public class CursoServiceImp implements CursoService {
 	@Override
 	public List<Curso> getAll() {
 		
-		return this.cursos;
+		return cursoDAO.getAll();
 	}
 	
 	private int getIndex(int codigo) {

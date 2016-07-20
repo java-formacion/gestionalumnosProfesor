@@ -18,65 +18,65 @@ public class AlumnoServiceImp implements AlumnoService {
 	private static int aCounter = 1;
 	
 
-	private void init()  {
-		
-		Alumno alumno1 = null;
-		try {
-			alumno1 = new Alumno();
-			alumno1.setCodigo(1);
-			alumno1.setNombre("Angus");
-			alumno1.setApellidos("Young");
-			alumno1.setDni(Util.generaDni());
-			createAlumno(alumno1);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
-		
-		Alumno alumno2 = null;
-		try {
-			alumno2 = new Alumno();
-			alumno2.setCodigo(2);
-			alumno2.setNombre("Zakk");
-			alumno2.setApellidos("Wylde");
-			alumno2.setDni(Util.generaDni());
-			createAlumno(alumno2);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		Alumno alumno3 = null;
-		
-		try {
-			alumno3 = new Alumno();
-			alumno3.setCodigo(3);
-			alumno3.setNombre("Robert");
-			alumno3.setApellidos("Johnson");
-			alumno3.setDni(Util.generaDni());
-			createAlumno(alumno3);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		Alumno alumno4 = null;
-
-		try {
-			
-			alumno4 = new Alumno();
-			alumno4.setCodigo(4);
-			alumno4.setNombre("Keith");
-			alumno4.setApellidos("Richards");
-			alumno4.setDni(Util.generaDni());
-			createAlumno(alumno4);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}	
-		
-
-	}
+//	private void init()  {
+//		
+//		Alumno alumno1 = null;
+//		try {
+//			alumno1 = new Alumno();
+//			alumno1.setCodigo(1);
+//			alumno1.setNombre("Angus");
+//			alumno1.setApellidos("Young");
+//			alumno1.setDni(Util.generaDni());
+//			createAlumno(alumno1);
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			System.out.println(e.getMessage());
+//		}
+//		
+//		Alumno alumno2 = null;
+//		try {
+//			alumno2 = new Alumno();
+//			alumno2.setCodigo(2);
+//			alumno2.setNombre("Zakk");
+//			alumno2.setApellidos("Wylde");
+//			alumno2.setDni(Util.generaDni());
+//			createAlumno(alumno2);
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		
+//		Alumno alumno3 = null;
+//		
+//		try {
+//			alumno3 = new Alumno();
+//			alumno3.setCodigo(3);
+//			alumno3.setNombre("Robert");
+//			alumno3.setApellidos("Johnson");
+//			alumno3.setDni(Util.generaDni());
+//			createAlumno(alumno3);
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		
+//		Alumno alumno4 = null;
+//
+//		try {
+//			
+//			alumno4 = new Alumno();
+//			alumno4.setCodigo(4);
+//			alumno4.setNombre("Keith");
+//			alumno4.setApellidos("Richards");
+//			alumno4.setDni(Util.generaDni());
+//			createAlumno(alumno4);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}	
+//		
+//
+//	}
 
 	private AlumnoServiceImp(){
 		//this.alumnos = new ArrayList<Alumno>();
@@ -188,18 +188,18 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public Alumno updateAlumno(Alumno alumno) {
-		int index ;
-		
-		try {
-			index = getIndex(alumno.getCodigo());
-			this.alumnos.set(index, alumno);
-		} catch (AlumnoServiceException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+//		int index ;
+//		
+//		try {
+//			index = getIndex(alumno.getCodigo());
+//			this.alumnos.set(index, alumno);
+//		} catch (AlumnoServiceException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+		Alumno aux=alumnoDAO.updateAlumno(alumno);
 
-
-		return alumno;
+		return aux;
 	}
 
 	@Override

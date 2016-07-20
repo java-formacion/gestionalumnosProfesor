@@ -45,11 +45,18 @@ public class CursoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String codigo  = request.getParameter(Constantes.PAR_CODIGO);	
+		//String codigo  = request.getParameter(Constantes.PAR_CODIGO);	
 		
 		try {
-			id = Integer.parseInt(codigo);
-			getById(request);
+			recogerId(request);
+			request.setAttribute(Constantes.ATT_LISTADO_MODULOS, mService.getAll());
+			request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, aService.getAll());
+			//id = Integer.parseInt(codigo);
+			if(id<0){
+				rwd = request.getRequestDispatcher(Constantes.JSP_CURSO);
+			}else{
+				getById(request);
+			}
 			
 		}catch (Exception e) {
 			getAll(request);
