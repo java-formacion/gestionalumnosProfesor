@@ -120,9 +120,8 @@ public class AlumnoServlet extends HttpServlet {
 				default:
 					break;
 			}
-			
 		} catch(NumberFormatException e){
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch(CandidatoException e){
 			// Hay un error en los datos que se nos envia
 			try {
@@ -132,10 +131,9 @@ public class AlumnoServlet extends HttpServlet {
 				request.setAttribute(Constantes.ATT_ALUMNO, alumnoError);
 				rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
 			} catch (CandidatoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				log.error(e1.getMessage());
 			}
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage());

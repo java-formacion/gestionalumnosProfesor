@@ -136,7 +136,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	public Alumno insert(Alumno alumno) {
 		Alumno alum = null;
 		
-		String sql = "{insertAlumno(?, ?, ?, ?, ?, ?, ?, ?)}";
+		String sql = "{call insertAlumno(?, ?, ?, ?, ?, ?, ?, ?)}";
 		Connection conection = myConexion.getConexion();
 		
 		try {
@@ -155,9 +155,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.executeUpdate();
 			alum = alumno;
 			alum.setCodigo(cSmt.getInt("codigo"));
-			
-			LOG.trace(alumno.toString());
-			
 		} catch (SQLException e) {
 			LOG.fatal("Error - SQLException: " + e.getMessage());
 		} catch (NullPointerException e){
@@ -167,14 +164,14 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			myConexion.desconectar();
 		}
 		
-		return null;
+		return alum;
 	}
 
 	@Override
 	public Alumno update(Alumno alumno) {
 		Alumno alum = null;
 		
-		String sql = "{updateAlumno(?, ?, ?, ?, ?, ?, ?, ?)}";
+		String sql = "{call updateAlumno(?, ?, ?, ?, ?, ?, ?, ?)}";
 		Connection conection = myConexion.getConexion();
 		
 		try {

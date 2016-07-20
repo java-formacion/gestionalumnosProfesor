@@ -24,7 +24,7 @@
 		</a>
 		<br/>
 		
-		<%		
+		<%	
 			List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado_alumnos");
 			if(alumnos!=null){
 				int i=1;
