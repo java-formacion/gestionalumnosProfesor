@@ -2,7 +2,6 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +30,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		}
 	}
 
-	public AlumnoDAOImp getInstance() {
+	public static AlumnoDAOImp getInstance() {
 		if (INSTANCE == null) {
 			createInstance();
 		}
@@ -92,7 +91,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());
-			cSmt.setDate("fecha", (Date) alumno.getfNacimiento());
+			cSmt.setDate("fecha", new java.sql.Date(alumno.getfNacimiento()
+							.getTime()));
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setInt("codigoGenero", alumno.getGenero().getCodigo());
