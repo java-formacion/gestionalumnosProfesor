@@ -1,8 +1,6 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.service.Util;
 
 /**
  * 
@@ -23,7 +22,6 @@ public class CursoDAOImp implements CursoDAO {
   private final static Logger LOG = Logger.getLogger(CursoDAOImp.class);
   private static CursoDAOImp INSTANCE = null;
   private static ConexionDB myConexion;
-  private Connection conexion;
 
   /**
  * 
@@ -71,13 +69,13 @@ public class CursoDAOImp implements CursoDAO {
   public Curso getById(int codigo) {
     Curso curso = null;
     String sql = "{call getCursoById(?)}";
-    conexion = myConexion.getConexion();
     try {
-      PreparedStatement pSmt = conexion.prepareStatement(sql);
-      ResultSet rs = pSmt.executeQuery();
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", codigo);
+
+      ResultSet rs = cSmt.executeQuery();
       while (rs.next()) {
         curso = parseCurso(rs);
-
       }
     } catch (SQLException e) {
       LOG.error(e.getMessage());
@@ -101,6 +99,8 @@ public class CursoDAOImp implements CursoDAO {
     try {
       curso.setCodigo(rs.getInt("codCurso"));
       curso.setNombre(rs.getString("nCurso"));
+      curso.setCodigoPatrocinador(rs.getString("codPatrocinador"));
+      curso.setTipo(Util.parseTipo(rs.getInt("codTipoCurso")));
     } catch (SQLException e) {
       LOG.error(e.getMessage());
     }
@@ -115,11 +115,14 @@ public class CursoDAOImp implements CursoDAO {
    */
   public Curso update(Curso curso) {
     Curso alum = null;
-    String sql = "{call updateCurso(?,?,?,?,?,?,?,?)}";
+    String sql = "{call updateCurso(?,?,?,?)}";
 
     try {
       CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
-      // TODO Update curso
+      cSmt.setInt("codigo", curso.getCodigo());
+      cSmt.setString("nombre", curso.getNombre());
+      cSmt.setString("codPatrocinador", curso.getCodigoPatrocinador());
+      cSmt.setInt("codTipo", curso.getTipo().getCodigo());
       cSmt.executeUpdate();
       alum = curso;
     } catch (SQLException e) {
@@ -138,21 +141,23 @@ public class CursoDAOImp implements CursoDAO {
    * @return curso
    */
   public Curso create(Curso curso) {
-    Curso alum = null;
-    String sql = "{call insertCurso(?,?,?,?,?,?,?,?)}";
+    Curso cur = null;
+    String sql = "{call insertCurso(?,?,?,?)}";
 
     try {
       CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
-      // TODO create curso
+      cSmt.setString("nombre", curso.getNombre());
+      cSmt.setString("codPatrocinador", curso.getCodigoPatrocinador());
+      cSmt.setInt("codTipoCurso", curso.getTipo().getCodigo());
       cSmt.executeUpdate();
-      alum = curso;
-      alum.setCodigo(cSmt.getInt("codCurso"));
+      cur = curso;
+      cur.setCodigo(cSmt.getInt("codCurso"));
     } catch (SQLException e) {
       LOG.fatal(e.getMessage() + " -- Error al insertar curso");
     } finally {
       myConexion.desconectar();
     }
-    return alum;
+    return cur;
   }
 
   /**
@@ -162,15 +167,10 @@ public class CursoDAOImp implements CursoDAO {
    */
   public void delete(int codigo) {
     String sql = "{call deleteCurso(?)}";
-    conexion = myConexion.getConexion();
     try {
-      CallableStatement cSmt = conexion.prepareCall(sql);
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
       cSmt.setInt("codigo", codigo);
-      // int nFilas =
       cSmt.executeUpdate();
-      // if (nFilas < 1) {
-      //
-      // }
     } catch (SQLException e) {
       LOG.fatal(e.getMessage() + " -- Error al borrar");
     } finally {
@@ -186,10 +186,9 @@ public class CursoDAOImp implements CursoDAO {
   public List<Curso> getAll() {
     List<Curso> cursos = null;
     String sql = "{call getAllCurso()}";
-    conexion = myConexion.getConexion();
     try {
       Curso curso = null;
-      CallableStatement cSmt = conexion.prepareCall(sql);
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
       ResultSet rs = cSmt.executeQuery();
       cursos = new ArrayList<Curso>();
       while (rs.next()) {

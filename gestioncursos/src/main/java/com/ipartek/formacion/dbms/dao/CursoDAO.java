@@ -12,7 +12,7 @@ import com.ipartek.formacion.pojo.Curso;
 public interface CursoDAO {
   /**
    * @param codigo
-   *          int codigoAlumno
+   *          int codigoCurso
    * @return curso
    */
   public Curso getById(int codigo);

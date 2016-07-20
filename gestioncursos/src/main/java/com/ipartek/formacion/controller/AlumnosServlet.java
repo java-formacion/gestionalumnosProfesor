@@ -44,7 +44,6 @@ public class AlumnosServlet extends HttpServlet {
    */
   public AlumnosServlet() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   /**
@@ -155,7 +154,6 @@ public class AlumnosServlet extends HttpServlet {
         cargarListadoCursos(request);
         request.setAttribute(Constantes.ATT_ALUMNO, aError);
       } catch (CandidatoException e1) {
-        System.out.println("Null Exception");
       }
 
       rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
@@ -241,12 +239,6 @@ public class AlumnosServlet extends HttpServlet {
     String idCurso = request.getParameter(Constantes.PAR_CURSO);
     Curso curso = new Curso();
     curso.setCodigo(Integer.parseInt(idCurso));
-    // String idCurso = request.getParameter(Constantes.PAR_CURSO);
-    // if (Util.tryParseInt(idCurso)) {
-    // int cursoId = Integer.parseInt(idCurso);
-    // Curso curso = cService.getById(cursoId);
-    // alumno.setCurso(curso);
-    // }
     List<Idioma> idi = Util.parseIdiomas(idiomas);
 
     alumno.setNombre(nombre);

@@ -99,6 +99,32 @@ public class Util {
 
   /**
    * 
+   * @param codDuracion
+   *          codigo de duracion
+   * @return duracion
+   */
+  public static Duracion parseDuracion(int codDuracion) {
+    Duracion duracion = Duracion.H15;
+    if (codDuracion == Duracion.H20.getCodigo()) {
+      duracion = Duracion.H20;
+    } else {
+      if (codDuracion == Duracion.H45.getCodigo()) {
+        duracion = Duracion.H45;
+      } else {
+        if (codDuracion == Duracion.H80.getCodigo()) {
+          duracion = Duracion.H80;
+        } else {
+          if (codDuracion == Duracion.H90.getCodigo()) {
+            duracion = Duracion.H90;
+          }
+        }
+      }
+    }
+    return duracion;
+  }
+
+  /**
+   * 
    * @param codTipo
    *          codigo de tipo
    * @return tipo
@@ -110,6 +136,25 @@ public class Util {
       tipo = TipoCurso.HOBETUZ;
     } else {
       if (codigo == TipoCurso.FUNDACION.getCodigo()) {
+        tipo = TipoCurso.FUNDACION;
+      }
+    }
+
+    return tipo;
+  }
+
+  /**
+   * 
+   * @param codTipo
+   *          int
+   * @return tipo de curso
+   */
+  public static TipoCurso parseTipo(int codTipo) {
+    TipoCurso tipo = TipoCurso.LANBIDE;
+    if (codTipo == TipoCurso.HOBETUZ.getCodigo()) {
+      tipo = TipoCurso.HOBETUZ;
+    } else {
+      if (codTipo == TipoCurso.FUNDACION.getCodigo()) {
         tipo = TipoCurso.FUNDACION;
       }
     }

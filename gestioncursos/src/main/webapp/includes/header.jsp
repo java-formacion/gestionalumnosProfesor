@@ -1,3 +1,6 @@
+<%@page import="com.ipartek.formacion.pojo.Curso"%>
+<%@page import="com.ipartek.formacion.pojo.Alumno"%>
+<%@page import="com.ipartek.formacion.service.AlumnoServiceImp"%>
 <%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@page import="com.ipartek.formacion.pojo.Usuario"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
@@ -61,23 +64,14 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-						role="button">MODULOS <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="<%=Constantes.SERVLET_MODULOS%>">Ver Modulos </a></li>
-							<li><a
-								href="<%=Constantes.SERVLET_MODULOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Modulo.CODIGO_MODULO%>">Crear
-									Modulo </a></li>
-						</ul></li>
+				<ul class="nav navbar-nav">			
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
 						role="button" aria-haspopup="true" aria-expanded="false">ALUMNOS <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="<%=Constantes.SERVLET_ALUMNOS%>">Ver Alumnos </a></li>
 							<li><a
 								href="<%=Constantes.SERVLET_ALUMNOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Modulo.CODIGO_MODULO%>">Crear
+					+ "=" + Alumno.CODIGO_ALUMNO%>">Crear
 									Alumno </a></li>
 						</ul></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -86,8 +80,17 @@
 							<li><a href="<%=Constantes.SERVLET_CURSOS%>">Ver Cursos </a></li>
 							<li><a
 								href="<%=Constantes.SERVLET_CURSOS + "?" + Constantes.PAR_CODIGO
-					+ "=" + Modulo.CODIGO_MODULO%>">Crear
+					+ "=" + Curso.CODIGO_CURSO%>">Crear
 									Curso </a></li>
+						</ul></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+						role="button">MODULOS <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="<%=Constantes.SERVLET_MODULOS%>">Ver Modulos </a></li>
+							<li><a
+								href="<%=Constantes.SERVLET_MODULOS + "?" + Constantes.PAR_CODIGO
+					+ "=" + Modulo.CODIGO_MODULO%>">Crear
+									Modulo </a></li>
 						</ul></li>
 					<%
 						Usuario user = (Usuario) session

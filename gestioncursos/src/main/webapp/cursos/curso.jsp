@@ -96,7 +96,7 @@
 									boolean esta = false;
 									if (curso.getModulos().containsKey(modulo.getCodigo())) {
 										esta = true;
-										nHoras += modulo.getDuracion().getDuracion();
+										nHoras += modulo.getDuracion();
 									}
 						%>
 

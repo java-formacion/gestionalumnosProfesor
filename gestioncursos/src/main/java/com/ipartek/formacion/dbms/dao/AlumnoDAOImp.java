@@ -3,7 +3,6 @@ package com.ipartek.formacion.dbms.dao;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,17 +72,13 @@ public class AlumnoDAOImp implements AlumnoDAO {
    */
   public Alumno getById(int codigo) {
     Alumno alumno = null;
-    String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, telefono, dni_nie, fNacimiento, a.codGenero, g.nombre as 'nGenero' "
-        + "FROM alumno a INNERJOIN genero g ON g.codGenero = a.codGenero"
-        + "WHERE codAlumno = "
-        + codigo;
-    conexion = myConexion.getConexion();
+    String sql = "{call getAlumnoById(?)}";
     try {
-      PreparedStatement pSmt = conexion.prepareStatement(sql);
-      ResultSet rs = pSmt.executeQuery();
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      cSmt.setInt("codigo", codigo);
+      ResultSet rs = cSmt.executeQuery();
       while (rs.next()) {
         alumno = parseAlumno(rs);
-
       }
     } catch (SQLException e) {
       LOG.error(e.getMessage());
@@ -109,6 +104,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
       alumno.setNombre(rs.getString("nAlumno"));
       alumno.setApellidos(rs.getString("apellidos"));
       alumno.setDni(rs.getString("dni_nie"));
+      alumno.setEmail(rs.getString("email"));
+      alumno.setTelefono(rs.getString("telefono"));
+      alumno.setfNacimiento(new java.util.Date(rs.getDate("fNacimiento").getTime()));
       alumno.setGenero(Util.parseGenero(rs.getString("a.codGenero")));
     } catch (SQLException e) {
       LOG.error(e.getMessage());

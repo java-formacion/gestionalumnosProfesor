@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.service.ModuloService;
 import com.ipartek.formacion.service.ModuloServiceImp;
-import com.ipartek.formacion.service.Util;
 
 /**
  * @author Curso Servlet implementation class ModuloServlet
@@ -152,7 +151,7 @@ public class ModuloServlet extends HttpServlet {
     String nombre = request.getParameter(Constantes.PAR_NOMBRE);
     String duracion = request.getParameter(Constantes.PAR_DURACION);
     modulo.setNombre(nombre);
-    modulo.setDuracion(Util.parseDuracion(duracion));
+    modulo.setDuracion(Integer.parseInt(duracion));
     modulo.setReferencia(referencia);
 
   }

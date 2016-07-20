@@ -12,6 +12,7 @@ public class Curso {
   public static final int CODIGO_CURSO = -1;
   private int codigo;
   private String nombre;
+  private String codigoPatrocinador;
   private Map<Integer, Modulo> modulos;
   private Map<String, Alumno> alumnos;
   private TipoCurso tipo;
@@ -29,6 +30,7 @@ public class Curso {
     setNombre("");
     setTipo(TipoCurso.LANBIDE);
     setReferencia("");
+    setCodigoPatrocinador("");
     modulos = new HashMap<Integer, Modulo>();
     alumnos = new HashMap<String, Alumno>();
   }
@@ -161,6 +163,23 @@ public class Curso {
    */
   public int hashCode() {
     return super.hashCode();
+  }
+
+  /**
+   * 
+   * @return codigo patrocinador
+   */
+  public String getCodigoPatrocinador() {
+    return codigoPatrocinador;
+  }
+
+  /**
+   * 
+   * @param codigoPatrocinador
+   *          String
+   */
+  public void setCodigoPatrocinador(String codigoPatrocinador) {
+    this.codigoPatrocinador = codigoPatrocinador;
   }
 
 }

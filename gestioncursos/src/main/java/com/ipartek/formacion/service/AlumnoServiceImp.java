@@ -2,6 +2,8 @@ package com.ipartek.formacion.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.dbms.dao.AlumnoDAO;
 import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
@@ -12,6 +14,7 @@ import com.ipartek.formacion.pojo.Alumno;
  *
  */
 public class AlumnoServiceImp implements AlumnoService {
+  private final static Logger LOG = Logger.getLogger(AlumnoServiceImp.class);
   private static AlumnoServiceImp INSTANCE = null;
   private AlumnoDAO alumDao;
 
@@ -50,6 +53,7 @@ public class AlumnoServiceImp implements AlumnoService {
    * 
    */
   protected Object clone() throws CloneNotSupportedException {
+    LOG.error("Error al clonar");
     throw new CloneNotSupportedException();
   }
 

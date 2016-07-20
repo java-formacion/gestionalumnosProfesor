@@ -1,157 +1,151 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ipartek.formacion.pojo.Alumno;
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.dbms.dao.CursoDAO;
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.service.excepciones.CursoServiceImpException;
 
+/**
+ * 
+ * @author Curso
+ *
+ */
 public class CursoServiceImp implements CursoService {
-	private static CursoServiceImp INSTANCE = null;
-	private List<Curso> cursos;
-	private static int i = 1;
 
-	private void init() {
-		Curso curso = new Curso();
-		curso.setCodigo(i);
-		curso.setNombre("Programacion");
-		cursos.add(curso);
-		i++;
+  private final static Logger LOG = Logger.getLogger(CursoServiceImp.class);
+  private static CursoServiceImp INSTANCE = null;
+  private CursoDAO cursoDao;
 
-		curso = new Curso();
-		curso.setCodigo(i);
-		curso.setNombre("Diseño");
-		cursos.add(curso);
-		i++;
+  /**
+ * 
+ */
+  private CursoServiceImp() {
+    cursoDao = CursoDAOImp.getInstance();
+  }
 
-		curso = new Curso();
-		curso.setCodigo(i);
-		curso.setNombre("Base de Datos");
-		cursos.add(curso);
-		i++;
-	}
+  /**
+   * 
+   * @return intance
+   */
+  public static CursoServiceImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
 
-	private CursoServiceImp() {
-		this.cursos = new ArrayList<Curso>();
-		init();
-	}
-	public static CursoServiceImp getInstance() {
-		if (INSTANCE == null) {
-			createInstance();
-		}
-		return INSTANCE;
-	}
+  /**
+ * 
+ */
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new CursoServiceImp();
+    }
+  }
 
-	private synchronized static void createInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new CursoServiceImp();
-		}
-	}
+  /**
+   * @Override
+   * @return no devuelve nada
+   * @throws CloneNotSupportedException
+   *           no se puede clonar el objeto
+   */
+  protected Object clone() throws CloneNotSupportedException {
+    LOG.error("Error al clonar");
+    throw new CloneNotSupportedException();
+  }
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		throw new CloneNotSupportedException();
-	}
+  /**
+   * @Override
+   * @param curso
+   *          Curso
+   * @return curso
+   */
+  public Curso createCurso(Curso curso) {
+    Curso cur = cursoDao.create(curso);
+    return cur;
+  }
 
-	@Override
-	public Curso createCurso(Curso curso) {
-		curso.setCodigo(i);
-		cursos.add(curso);
-		i++;
-		return curso;
-	}
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   * @return curso
+   */
+  public Curso getById(int codigo) {
+    Curso curso = cursoDao.getById(codigo);
+    return curso;
+  }
 
-	private int getIndex(int codigo) throws CursoServiceImpException {
-		int index = -1;
-		int i = 0;
-		boolean encontrado = false;
-		while (i < this.cursos.size() && !encontrado) {
-			Curso aux = cursos.get(i);
-			if (aux.getCodigo() == codigo) {
-				index = i;
-				encontrado = true;
-			}
-			i++;
-		}
-		if (index == -1)
-			throw new CursoServiceImpException(
-					CursoServiceImpException.CODIGO_ERROR_INDEX_INVALIDO,
-					CursoServiceImpException.MSG_ERROR_INDEX_INVALIDO);
-		return index;
-	}
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   */
+  public void delete(int codigo) {
+    cursoDao.delete(codigo);
+  }
 
-	@Override
-	public Curso getById(int codigo) {
-		Curso curso = null;
-		try {
-			curso = this.cursos.get(getIndex(codigo));
-		} catch (CursoServiceImpException e) {
-			System.out.println(e.getMessage());
-		}
-		return curso;
-	}
+  /**
+   * @Override
+   * @return lista de cursos
+   */
+  public List<Curso> getAll() {
+    return cursoDao.getAll();
+  }
 
-	@Override
-	public void delete(int codigo) {
-		int index;
-		try {
-			index = getIndex(codigo);
-			this.cursos.remove(index);
-		} catch (CursoServiceImpException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+  /**
+   * @Override
+   * @param curso
+   *          Curso
+   * @return curso
+   */
+  public Curso update(Curso curso) {
+    Curso cur = cursoDao.update(curso);
+    return cur;
+  }
 
-	@Override
-	public List<Curso> getAll() {
-		return this.cursos;
-	}
+  // /**
+  // * @Override
+  // *
+  // */
+  // public void darDeAlta(Alumno alumno, int codigo) {
+  // Curso curso = getById(codigo);
+  // curso.getAlumnos().put(alumno.getDni(), alumno);
+  // update(curso);
+  //
+  // }
 
-	@Override
-	public Curso update(Curso curso) {
-		int index;
-		try {
-			index = getIndex(curso.getCodigo());
-			this.cursos.set(index, curso);
-		} catch (CursoServiceImpException e) {
-			System.out.println(e.getMessage());
-		}
+  // /**
+  // * @Override
+  // */
+  // public void darDeBaja(String dni, int codigo) {
+  // Curso curso = getById(codigo);
+  // curso.getAlumnos().remove(dni);
+  // update(curso);
+  //
+  // }
 
-		return curso;
-	}
+  // /**
+  // * @Override
+  // */
+  // public void darDeAlta(Alumno alumno) {
+  // Curso curso = getById(alumno.getCurso().getCodigo());
+  // curso.getAlumnos().put(alumno.getDni(), alumno);
+  // update(curso);
+  //
+  // }
 
-	@Override
-	public void darDeAlta(Alumno alumno, int codigo) {
-		Curso curso = getById(codigo);
-		curso.getAlumnos().put(alumno.getDni(), alumno);
-		update(curso);
-
-	}
-
-	@Override
-	public void darDeBaja(String dni, int codigo) {
-		Curso curso = getById(codigo);
-		curso.getAlumnos().remove(dni);
-		update(curso);
-
-	}
-
-	@Override
-	public void darDeAlta(Alumno alumno) {
-		Curso curso = getById(alumno.getCurso().getCodigo());
-		curso.getAlumnos().put(alumno.getDni(), alumno);
-		update(curso);
-
-	}
-
-	@Override
-	public void darDeBaja(Alumno alumno) {
-		Curso curso = getById(alumno.getCurso().getCodigo());
-		curso.getAlumnos().remove(alumno.getDni());
-		update(curso);
-
-	}
+  // /**
+  // * @Override
+  // */
+  // public void darDeBaja(Alumno alumno) {
+  // Curso curso = getById(alumno.getCurso().getCodigo());
+  // curso.getAlumnos().remove(alumno.getDni());
+  // update(curso);
+  //
+  // }
 
 }

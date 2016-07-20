@@ -1,129 +1,108 @@
 package com.ipartek.formacion.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ipartek.formacion.pojo.Duracion;
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.dbms.dao.ModuloDAO;
+import com.ipartek.formacion.dbms.dao.ModuloDAOImp;
 import com.ipartek.formacion.pojo.Modulo;
-import com.ipartek.formacion.service.excepciones.ModuloServiceImpException;
 
+/**
+ * 
+ * @author Curso
+ *
+ */
 public class ModuloServiceImp implements ModuloService {
-	private static ModuloServiceImp INSTANCE = null;
-	private List<Modulo> modulos;
-	private static int i = 1;
+  private final static Logger LOG = Logger.getLogger(ModuloServiceImp.class);
+  private static ModuloServiceImp INSTANCE = null;
+  private ModuloDAO moduloDao;
 
-	private void init() {
-		Modulo modulo = new Modulo();
-		modulo.setCodigo(1);
-		modulo.setReferencia("MF0491_3");
-		modulo.setNombre("Programación web en el entorno cliente");
-		modulo.setDuracion(Duracion.H80);
-		modulos.add(modulo);
-		i++;
+  /**
+ * 
+ */
+  private ModuloServiceImp() {
+    moduloDao = ModuloDAOImp.getInstance();
+  }
 
-		modulo = new Modulo();
-		modulo.setCodigo(2);
-		modulo.setReferencia("MF0492_3");
-		modulo.setNombre("Programación web en el entorno servidor");
-		modulo.setDuracion(Duracion.H45);
-		modulos.add(modulo);
-		i++;
+  /**
+   * 
+   * @return instancia
+   */
+  public static ModuloServiceImp getInstance() {
+    if (INSTANCE == null) {
+      createInstance();
+    }
+    return INSTANCE;
+  }
 
-		modulo = new Modulo();
-		modulo.setCodigo(3);
-		modulo.setReferencia("MF0493_3");
-		modulo.setNombre("Implantación de aplicaciones web en entornos internet, intranet y extranet");
-		modulo.setDuracion(Duracion.H90);
-		modulos.add(modulo);
-		i++;
-	}
+  /**
+ * 
+ */
+  private synchronized static void createInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new ModuloServiceImp();
+    }
+  }
 
-	private ModuloServiceImp() {
-		this.modulos = new ArrayList<Modulo>();
-		init();
-	}
+  /**
+   * @Override
+   * @return nada
+   * @throws CloneNotSupportedException
+   *           no se puede clonar
+   */
+  protected Object clone() throws CloneNotSupportedException {
+    LOG.error("Error al clonar");
+    throw new CloneNotSupportedException();
+  }
 
-	public static ModuloServiceImp getInstance() {
-		if (INSTANCE == null) {
-			createInstance();
-		}
-		return INSTANCE;
-	}
+  /**
+   * @Override
+   * @param modulo
+   *          Modulo
+   * @return modulo
+   */
+  public Modulo createModulo(Modulo modulo) {
+    Modulo mod = moduloDao.create(modulo);
+    return mod;
+  }
 
-	private synchronized static void createInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new ModuloServiceImp();
-		}
-	}
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   * @return modulo
+   */
+  public Modulo getById(int codigo) {
+    Modulo mod = moduloDao.getById(codigo);
+    return mod;
+  }
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		throw new CloneNotSupportedException();
-	}
-	@Override
-	public Modulo createModulo(Modulo modulo) {
-		modulo.setCodigo(i);
-		modulos.add(modulo);
-		i++;
-		return modulo;
-	}
+  /**
+   * @Override
+   * @param codigo
+   *          int
+   */
+  public void delete(int codigo) {
+    moduloDao.delete(codigo);
+  }
 
-	private int getIndex(int codigo) throws ModuloServiceImpException {
-		int index = -1;
-		int i = 0;
-		boolean encontrado = false;
-		while (i < this.modulos.size() && !encontrado) {
-			Modulo aux = modulos.get(i);
-			if (aux.getCodigo() == codigo) {
-				index = i;
-				encontrado = true;
-			}
-			i++;
-		}
-		if(index == -1){
-			throw new ModuloServiceImpException(ModuloServiceImpException.CODIGO_ERROR_INDEX_INVALIDO, ModuloServiceImpException.MSG_ERROR_INDEX_INVALIDO);
-		}
-		return index;
-	}
+  /**
+   * @Override
+   * @return lista de modulos
+   */
+  public List<Modulo> getAll() {
+    return moduloDao.getAll();
+  }
 
-	@Override
-	public Modulo getById(int codigo) {
-		Modulo modulo = null;
-		try {
-			modulo = this.modulos.get(getIndex(codigo));
-		} catch (ModuloServiceImpException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		return modulo;
-	}
-
-	@Override
-	public void delete(int codigo) {
-		int index;
-		try {
-			index = getIndex(codigo);
-			this.modulos.remove(index);
-		} catch (ModuloServiceImpException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	@Override
-	public List<Modulo> getAll() {
-		return this.modulos;
-	}
-
-	@Override
-	public Modulo update(Modulo modulo) {
-		int index;
-		try {
-			index = getIndex(modulo.getCodigo());
-			this.modulos.set(index, modulo);
-		} catch (ModuloServiceImpException e) {
-			System.out.println(e.getMessage());
-		}
-		return modulo;
-	}
+  /**
+   * @Override
+   * @param modulo
+   *          Modulo
+   * @return modulo
+   */
+  public Modulo update(Modulo modulo) {
+    Modulo mod = moduloDao.update(modulo);
+    return mod;
+  }
 }

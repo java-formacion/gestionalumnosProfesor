@@ -4,19 +4,18 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp" />
 <%
-	Modulo modulo = (Modulo) request
-			.getAttribute(Constantes.ATT_MODULO);
-	int op = -1;
-	if (modulo != null) {
-		op = Constantes.OP_UPDATE;
+  Modulo modulo = (Modulo) request.getAttribute(Constantes.ATT_MODULO);
+  int op = -1;
+  if (modulo != null) {
+    op = Constantes.OP_UPDATE;
 %><title>Modulo <%=modulo.getNombre()%></title>
 <%
-	} else {
+  } else {
 %><title>Modulo - Modulo nuevo</title>
 <%
-	modulo = new Modulo();
-		op = Constantes.OP_CREATE;
-	}
+  modulo = new Modulo();
+    op = Constantes.OP_CREATE;
+  }
 %>
 
 <main>
@@ -40,17 +39,10 @@
 				<div class="form-group">
 					<label for="<%=Constantes.PAR_DURACION%>">DURACIÓN: </label> <select class="form-control"
 						name="<%=Constantes.PAR_DURACION%>" id="<%=Constantes.PAR_DURACION%>">
-						<option value="<%=Modulo.CODIGO_MODULO%>">-- Seleccione la duración --</option>
-						<%
-							// 						DuracionModulo[] duraciones = request.getAttribute(Constante.ATT_LISTADO_DURACIONES);
-							for (Duracion duracion : Duracion.values()) {
-						%>
-						<option <%=(modulo.getDuracion() == duracion) ? "selected" : ""%>
-							value="<%=duracion.getCodigo()%>"><%=duracion.getDuracion()%> horas
-						</option>
-						<%
-							}
-						%>
+						<option <%=(modulo.getDuracion() == 20) ? "selected" : ""%> value="20">20</option>
+						<option <%=(modulo.getDuracion() == 45) ? "selected" : ""%> value="45">45</option>
+						<option <%=(modulo.getDuracion() == 80) ? "selected" : ""%> value="80">80</option>
+						<option <%=(modulo.getDuracion() == 90) ? "selected" : ""%> value="90">90</option>
 					</select>
 				</div>
 			</div>
