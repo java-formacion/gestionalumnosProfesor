@@ -18,7 +18,7 @@ import com.ipartek.formacion.pojo.exception.CandidatoException;
 import com.ipartek.formacion.service.Util;
 
 public class AlumnoDAOImp implements AlumnoDAO{
-  private static final Logger LOG=Logger.getLogger(AlumnoDAOImp.class);
+private static final Logger LOG=Logger.getLogger(AlumnoDAOImp.class);
 private ConexionDB myConexion;
 private static AlumnoDAOImp INSTANCE;
 

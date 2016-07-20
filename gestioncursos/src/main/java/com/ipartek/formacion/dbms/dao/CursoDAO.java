@@ -16,7 +16,7 @@ public interface CursoDAO {
    * */
   public Curso getById(int codigo);//read
   
-  public List<Curso> getAll(int codigo);
+  public List<Curso> getAll();
   
   public Curso update(Curso alumno);//update
   

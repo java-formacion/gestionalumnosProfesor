@@ -120,6 +120,13 @@ public class Util {
 		}
 		return exito;
 	}
+  public static TipoCurso parseTipo(int codTipoCurso) {
+    TipoCurso tipocurso=TipoCurso.LANBIDE;
+    
+    tipocurso.setCodigo(codTipoCurso);
+    return tipocurso;
+  }
+
 }
 
 

@@ -38,10 +38,11 @@ public class ConexionDBImp implements ConexionDB{
     String url="jdbc:mysql://localhost:3306/gestioncursos";
     String user="admin";
     String pass="admin";
-    if (conexion!=null) {
+    if (conexion==null) {
       try {
         Class.forName(driver);
         conexion=DriverManager.getConnection(url, user, pass);
+        LOG.trace("conectado a BBDD");
       } catch (ClassNotFoundException e) {
         // TODO Auto-generated catch block
         LOG.error(e.getMessage());

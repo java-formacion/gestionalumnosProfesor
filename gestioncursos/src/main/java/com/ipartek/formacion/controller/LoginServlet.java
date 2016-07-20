@@ -145,7 +145,9 @@ public class LoginServlet extends HttpServlet {
 		return cargado;
 	}
 	private void createSession(HttpServletRequest request){
-		session = request.getSession(true);
+		
+	  
+	  session = request.getSession(true);
 		/*
 		 * getSession(true) ---> Si la session no existe te la crea
 		 * getSession(false) --> Te coge la session activa si no existe es null

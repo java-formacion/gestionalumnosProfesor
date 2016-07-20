@@ -85,30 +85,46 @@ public class CursoServiceImp implements CursoService {
 	}
 	@Override
 	public void darDeAlta(Alumno alumno) {
-		//1. obtener el curso
-		int codigo = alumno.getCurso().getCodigo();
-		Curso curso = getById(codigo);
+	  
+	  int codigo = alumno.getCurso().getCodigo();
+	  Curso curso = getById(codigo);
+	  /*
+	   * 
+	   * 		//1. obtener el curso
+		    int codigo = alumno.getCurso().getCodigo();
+    Curso curso = getById(codigo);
+		
 		//2.obtener el Map
 		Map<String,Alumno> alumnos = curso.getAlumnos();
 		//3.meter el alumno en el Mapa
 		alumnos.put(alumno.getDni(), alumno);
 		//4.guardar/actualizar el curso 
 		curso.setAlumnos(alumnos);
+	   * */
+	  
+	  
+
+		
+		
 		update(curso);
 	}
 
 	@Override
 	public void darDeBaja(Alumno alumno) {
-		int codigo  = alumno.getCurso().getCodigo();
-		Curso curso1 = alumno.getCurso();
+	  	Curso curso1 = alumno.getCurso();
+	  /*
+	   * 		int codigo  = alumno.getCurso().getCodigo();
+	
 
 		Curso curso = getById(codigo);
 		Map<String, Alumno> alumnos = curso.getAlumnos();
 		alumnos.remove(alumno.getDni());
 		curso.setAlumnos(alumnos);
-		update(curso);
+	
+	   * */
+
 		
-		
+			update(curso1);
 		
 	}
 
