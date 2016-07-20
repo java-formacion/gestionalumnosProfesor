@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +93,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());
 			cSmt.setDate("fecha", new java.sql.Date(alumno.getfNacimiento()
-							.getTime()));
+					.getTime()));
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTelefono());
 			cSmt.setInt("codigoGenero", alumno.getGenero().getCodigo());
@@ -118,6 +119,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 		try {
 			CallableStatement cSmt = conexion.prepareCall(sql);
+			cSmt.registerOutParameter("codigo", Types.INTEGER);
 			cSmt.setString("", alumno.getNombre());
 
 			cSmt.executeUpdate();
