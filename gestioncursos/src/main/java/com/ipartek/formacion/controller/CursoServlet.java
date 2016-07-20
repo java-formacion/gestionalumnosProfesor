@@ -26,9 +26,9 @@ import com.ipartek.formacion.service.Util;
 
 public class CursoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static CursoService cService = new CursoServiceImp();  
+    private static CursoService cService = new CursoServiceImp().getInstance(); 
     private static ModuloService mService = new ModuloServiceImp();
-    private static AlumnoService aService = new AlumnoServiceImp();
+    private static AlumnoService aService = AlumnoServiceImp.getInstance();
     private List<Curso> cursos = null;
     private Curso curso = null;
     private RequestDispatcher rwd = null;
@@ -43,7 +43,7 @@ public class CursoServlet extends HttpServlet {
   			request.setAttribute(Constantes.ATT_LISTADO_MODULOS, mService.getAll()); //pasamos el listado de codigos de modulos 
   			request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, aService.getAll()); //pasamos el listado de codigos de alumnos
   			if(id<0){ //REDIRIGIMOS PARA UN CREATE
-  				rwd = request.getRequestDispatcher(Constantes.JSP_MODULO); //a jsp_alumno no le paso el alumno, xq en jsp_alumno si no recibe alumno lo que hace es create
+  				rwd = request.getRequestDispatcher(Constantes.JSP_CURSO); //a jsp_alumno no le paso el alumno, xq en jsp_alumno si no recibe alumno lo que hace es create
   			}else{ //REDIRIGIMOS PARA UNA UPDATE
   				getById(request); //si recibe un parametro (un id)hace getById
   			}

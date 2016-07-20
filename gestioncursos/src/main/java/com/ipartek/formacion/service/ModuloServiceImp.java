@@ -3,6 +3,11 @@ package com.ipartek.formacion.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.CursoDAO;
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
+import com.ipartek.formacion.dbms.dao.ModuloDAO;
+import com.ipartek.formacion.dbms.dao.ModuloDAOImp;
+import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Horas;
 import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.service.excepciones.ModuloException;
@@ -11,7 +16,9 @@ public class ModuloServiceImp implements ModuloService{
 	private static ModuloServiceImp INSTANCE = null;
 	private List<Modulo> modulos;
 	private static int i = 1; //para contar los objetos que añadimos y que cada objeto tenga un codigo distinto
+	private ModuloDAO modDAO;
 	
+	/*
 	private void init(){
 		Modulo modulo = new Modulo();
 		modulo.setNombre("Java");
@@ -24,7 +31,7 @@ public class ModuloServiceImp implements ModuloService{
 		modulo = new Modulo();
 		modulo.setNombre("ASP.NET");
 		createModulo(modulo);
-		/*
+		
 		modulo.setCodigo(i);
 		modulo.setNombre("Java");
 		modulos.add(modulo);
@@ -35,14 +42,14 @@ public class ModuloServiceImp implements ModuloService{
 		modulo.setNombre("ASP");
 		modulos.add(modulo);
 		i++;
-		*/
 		
-	}
+		
+	}*/
 	
 	//constructor
 	public ModuloServiceImp(){
-		this.modulos = new ArrayList<Modulo>();
-		init();
+		modDAO = ModuloDAOImp.getInstance();
+		//init();
 	}
 	
 	public ModuloServiceImp getInstance(){
@@ -62,30 +69,21 @@ public class ModuloServiceImp implements ModuloService{
 	@Override
 	public Modulo createModulo(Modulo modulo) {
 		
-		modulo.setCodigo(i); //le asignamos el codigo al modulo
-		this.modulos.add(modulo); //lo añadimos a la lista de modulos
-		i++;
+		Modulo mod = modDAO.create(modulo);
 		
-		return modulo;
+		return mod;
 	}
 
 	@Override
 	public Modulo getById(int codigo) {
 		
-		Modulo modulo = null;
-		
-		try {
-			modulo = this.modulos.get(getIndex(codigo));
-		} catch (ModuloException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Modulo modulo = modDAO.getById(codigo);
 		
 		return modulo;
 	}
 
 	
-	
+	/*
 	private int getIndex(int codigo) throws ModuloException{
 		int index = -1;
 		int i = 0;
@@ -113,30 +111,19 @@ public class ModuloServiceImp implements ModuloService{
 		
 		return this.modulos;
 	}
-	
+	*/
 	
 
 	@Override
 	public Modulo update(Modulo modulo) {
-		int index;
-		try {
-			index = getIndex(modulo.getCodigo());
-			this.modulos.set(index,modulo);
-		} catch (ModuloException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return modulo;
+		Modulo mod = modDAO.update(modulo);
+		
+		return mod;
 	}
 	
 	@Override
 	public void deleteModulo(int codigo) {
-		try {
-			this.modulos.remove(getIndex(codigo));
-		} catch (ModuloException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		modDAO.delete(codigo);
 		
 	}
 	
@@ -145,6 +132,11 @@ public class ModuloServiceImp implements ModuloService{
 		protected Object clone() throws CloneNotSupportedException {
 			
 			throw new CloneNotSupportedException(); 
+		}
+
+		@Override
+		public List<Modulo> getAll() {
+			return modDAO.getAll();
 		}
 
 		

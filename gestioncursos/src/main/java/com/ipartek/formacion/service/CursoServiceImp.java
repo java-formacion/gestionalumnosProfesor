@@ -3,6 +3,10 @@ package com.ipartek.formacion.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.dbms.dao.AlumnoDAO;
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
+import com.ipartek.formacion.dbms.dao.CursoDAO;
+import com.ipartek.formacion.dbms.dao.CursoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.service.excepciones.CursoException;
@@ -11,7 +15,8 @@ public class CursoServiceImp implements CursoService{
 	private static CursoServiceImp INSTANCE = null;
 	private List<Curso> cursos;
 	private static int i = 1; //para contar los objetos que añadimos
-	
+	private CursoDAO curDAO;
+	/*
 	private void init(){
 		Curso curso = new Curso();
 		curso.setCodigo(i);
@@ -26,13 +31,13 @@ public class CursoServiceImp implements CursoService{
 		i++;
 		
 	}
-	
+	*/
 	public CursoServiceImp(){
-		this.cursos = new ArrayList<Curso>();
-		init();
+		curDAO = CursoDAOImp.getInstance();
+		//init();
 	}
 	
-	public CursoServiceImp getInstance(){
+	public static CursoServiceImp getInstance(){
 		if(INSTANCE == null){
 			createInstance();
 		}
@@ -48,37 +53,24 @@ public class CursoServiceImp implements CursoService{
 
 	@Override
 	public Curso createCurso(Curso curso) {
-		curso.setCodigo(i);
-		this.cursos.add(curso);
-		i++;
-		return curso;
+	Curso cur = curDAO.create(curso);
+		
+		return cur;
 	}
 
 	@Override
 	public Curso getById(int codigo) {
-		Curso curso = null;
-		
-		try {
-			curso = this.cursos.get(getIndex(codigo));
-		} catch (CursoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Curso curso = curDAO.getById(codigo);
 		
 		return curso;
 	}
 
 	@Override
 	public void deleteCurso(int codigo) {
-		try {
-			this.cursos.remove(getIndex(codigo));
-		} catch (CursoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		curDAO.delete(codigo);
 		
 	}
-	
+	/*
 	private int getIndex(int codigo) throws CursoException{
 		int index = -1;
 		int i = 0;
@@ -100,26 +92,19 @@ public class CursoServiceImp implements CursoService{
 		
 			return index;
 		
-	}
+	}*/
 
 	@Override
 	public List<Curso> getAll() {
 		
-		return this.cursos;
+		return curDAO.getAll();
 	}
 
 	@Override
 	public Curso update(Curso curso) {
-		int index;
-		try {
-			index = getIndex(curso.getCodigo());
-			this.cursos.set(index,curso);
-			
-		} catch (CursoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return curso;
+		Curso cur = curDAO.update(curso);
+		
+		return cur;
 	}
 
 	@Override

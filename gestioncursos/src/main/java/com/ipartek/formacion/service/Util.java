@@ -78,6 +78,20 @@ public class Util {
 		return tipo;
 	}
 	
+	public static TipoCurso parseTipoCurso(int codigo) {
+		TipoCurso tipo = TipoCurso.LANBIDE;
+		
+		if(codigo == TipoCurso.HOBETUZ.getCodigo()){
+			tipo = TipoCurso.HOBETUZ;
+		}else{
+			if(codigo == TipoCurso.TRIPARTITA.getCodigo()){
+				tipo = TipoCurso.TRIPARTITA;
+			}
+		}
+		
+		return tipo;
+	}
+	
 	
 	public static List<Idiomas> parseIdioma(String[] idiomas){
 		List<Idiomas> aux = null;

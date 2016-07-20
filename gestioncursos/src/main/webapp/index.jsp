@@ -34,7 +34,7 @@
 				<input type="text" class="form-control" 
 					id="<%=Constantes.PAR_ALIAS%>" 
 					name="<%=Constantes.PAR_ALIAS%>" 
-					value="${userName.value} "/>
+					value="${userName.value}"/>
 				</div>
 			</div>
 			

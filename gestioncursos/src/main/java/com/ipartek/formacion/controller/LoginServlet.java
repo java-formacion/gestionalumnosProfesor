@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			cargarDatosCookies();
 
 		}else{
-			if(request.getParameter(Constantes.PAR_USUARIO)!=null){
+			if(request.getParameter(Constantes.PAR_ALIAS)!=null){
 				cargarParametros(request);
 
 			}
@@ -121,7 +121,7 @@ public class LoginServlet extends HttpServlet {
 		usuario.setPassword(request.getParameter(Constantes.PAR_PASSWORD));
 		usuario.setIdioma(Util.parseIdi(request.getParameter(Constantes.PAR_IDIOMA)));
 		//session.setAttribute(Constantes.ATT_USUARIO, usuario);
-		//	rd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
+			//rwd = request.getRequestDispatcher(Constantes.SERVLET_CURSOS);
 	}
 	
 	private boolean cargarCookies(HttpServletRequest request) {

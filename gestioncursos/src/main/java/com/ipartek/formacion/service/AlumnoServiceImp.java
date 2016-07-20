@@ -6,11 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.ipartek.formacion.dbms.dao.AlumnoDAO;
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
-import com.ipartek.formacion.pojo.excepciones.CandidatoException;
-import com.ipartek.formacion.service.excepciones.AlumnoException;
-import com.ipartek.formacion.service.excepciones.CursoException;
 
 public class AlumnoServiceImp implements AlumnoService {
 	private static AlumnoServiceImp INSTANCE = null;
@@ -18,7 +16,7 @@ public class AlumnoServiceImp implements AlumnoService {
 	private static int i = 1; //para contar los objetos que añadimos
 	private AlumnoDAO alumDAO;
 	
-	
+	/*
 	private void init(){
 		Alumno alumno;
 		
@@ -43,7 +41,7 @@ public class AlumnoServiceImp implements AlumnoService {
 		alumnos.add(alumno);
 		i++;
 		
-		/*
+		
 		try {
 		alumno = new Alumno();
 		alumno.setCodigo(i);
@@ -54,27 +52,29 @@ public class AlumnoServiceImp implements AlumnoService {
 		i++;
 		} catch (CandidatoException e) {
 			System.out.println(e.getMessage());
-		}*/
+		}
 		
+	}*/
+	private AlumnoServiceImp() {
+		// this.alumnos = new ArrayList<Alumno>();
+		// init();
+		alumDAO = AlumnoDAOImp.getInstance();
 	}
-	public AlumnoServiceImp(){
-		this.alumnos = new ArrayList<Alumno>();
-		init();
-	}
-	
-	public AlumnoServiceImp getInstance(){
-		if(INSTANCE == null){
+
+	public static AlumnoServiceImp getInstance() {
+		if (INSTANCE == null) {
 			createInstance();
 		}
 		return INSTANCE;
 	}
-	
+
 	private synchronized static void createInstance() {
-		if(INSTANCE == null){
+		if (INSTANCE == null) {
 			INSTANCE = new AlumnoServiceImp();
 		}
-	
+
 	}
+
 	
 	/*
 	public static  Alumno getAlumno(){
@@ -144,8 +144,6 @@ public class AlumnoServiceImp implements AlumnoService {
 	}
 	
 	
-	
-	//Entonces, se debería impedir la clonación sobreescribiendo el método "clone" de la siguiente manera:
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		

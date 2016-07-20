@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.controller.exception.AlumnoError;
 import com.ipartek.formacion.controller.listener.InitListener;
+import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.Modulo;
@@ -29,9 +30,10 @@ import com.ipartek.formacion.service.Util;
  * Servlet implementation class AlumnosServlet
  */
 public class AlumnosServlet extends HttpServlet {
+	private static final Logger LOG = Logger.getLogger(AlumnosServlet.class);
 	private static final long serialVersionUID = 1L;
-    private static AlumnoService aService = new AlumnoServiceImp().getInstance();  
-    private static CursoService cService = new CursoServiceImp().getInstance();
+    private static AlumnoService aService = AlumnoServiceImp.getInstance();  
+    private static CursoService cService = CursoServiceImp.getInstance();
     private List<Alumno> alumnos = null;
     private Alumno alumno = null;
     private RequestDispatcher rwd = null;
@@ -108,10 +110,11 @@ public class AlumnosServlet extends HttpServlet {
   				getAll(request);
   					
   			}catch(NumberFormatException e){
-  				
+  				LOG.error("number");
   			}catch(NullPointerException e){
-  				
+  				LOG.error("null");
   			}catch(CandidatoException e){	
+  				LOG.error("candidato");
   				//Hay un error en los datos que se nos envian
   				try {
 					AlumnoError alumnoError = new AlumnoError();
@@ -120,8 +123,7 @@ public class AlumnosServlet extends HttpServlet {
 					request.setAttribute(Constantes.ATT_ALUMNO, alumnoError);
 					rwd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
 				} catch (CandidatoException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					LOG.error(e.getMessage());
 				}
   			}catch(Exception e){
   				

@@ -117,7 +117,6 @@ public class AlumnoDAOImp implements AlumnoDAO{
 	public Alumno create(Alumno alumno) {
 		Alumno alum = null;
 		String sql = "{call insertAlumno(?,?,?,?,?,?,?,?)}"; 
-		myConexion.conectar();
 		Connection connection = myConexion.getConexion();
 		
 		try {
@@ -126,7 +125,7 @@ public class AlumnoDAOImp implements AlumnoDAO{
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setString("dni", alumno.getDni());
 			cSmt.setDate("fNacimiento", new java.sql.Date(alumno.getfNacimiento().getTime()));
-			cSmt.setString("telefono", alumno.getTelefono());
+			cSmt.setString("telef", alumno.getTelefono());
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
 			cSmt.executeUpdate();
