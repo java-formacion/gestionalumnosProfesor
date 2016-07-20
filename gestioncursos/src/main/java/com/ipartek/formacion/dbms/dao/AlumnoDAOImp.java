@@ -1,6 +1,7 @@
 package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -177,7 +178,13 @@ public class AlumnoDAOImp implements AlumnoDAO {
     // myConexion.conectar();
     try {
       Alumno alumno = null;
-      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      myConexion.conectar();
+      Connection conexion = myConexion.getConexion();
+
+      if (conexion == null) {
+        LOG.trace("es nula");
+      }
+      CallableStatement cSmt = conexion.prepareCall(sql);
       ResultSet rs = cSmt.executeQuery();
       alumnos = new ArrayList<Alumno>();
       while (rs.next()) {

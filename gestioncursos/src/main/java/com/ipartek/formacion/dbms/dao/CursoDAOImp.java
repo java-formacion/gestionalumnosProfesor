@@ -156,7 +156,35 @@ public class CursoDAOImp implements CursoDAO {
 
   @Override
   public void darDeAlta(Alumno alumno) {
-    // TODO Auto-generated method stub
+    /**
+     * //1. obtener el curso int codigo = alumno.getCurso().getCodigo(); Curso curso =
+     * getById(codigo); //2.obtener el Map Map<String,Alumno> alumnos = curso.getAlumnos();
+     * //3.meter el alumno en el Mapa alumnos.put(alumno.getDni(), alumno); //4.guardar/actualizar
+     * el curso curso.setAlumnos(alumnos); update(curso); Curso cur = null;
+     */
+
+    String sql = "{call insertAlumno(?,?,?,?)}";
+
+    try {
+      CallableStatement cSmt = myConexion.getConexion().prepareCall(sql);
+      ResultSet rs = cSmt.executeQuery();
+      Curso curso = parseCurso(rs);
+
+      cSmt.setInt("codigoCurso", curso.getCodigo());
+      cSmt.setString("nombre", curso.getNombre());
+      cSmt.setString("referencia", curso.getReferencia());
+      // cSmt.setDate("fInicio" );
+      // cSmt.setDate("fFin" );
+
+      cSmt.executeUpdate();
+
+    } catch (SQLException e) {
+
+      LOG.fatal(e.getMessage());
+
+    } finally {
+      myConexion.desconectar();
+    }
 
   }
 
