@@ -34,13 +34,13 @@ public class AdministracionServlet extends HttpServlet {
 		String sesionId = request.getParameter(Constantes.PAR_SESSIONID);
 	
 		ServletContext context = getServletContext();
-		Map<String,HttpSession> sesiones =(Map<String, HttpSession>) context.getAttribute(Constantes.ATT_LISTA_SESIONES);
+		Map<String,HttpSession> sesiones =(Map<String, HttpSession>) context.getAttribute(Constantes.ATT_LISTADO_SESIONES);
 		HttpSession session = sesiones.get(sesionId);
 		Mensaje m = new Mensaje();
 		if(session !=null){
 			session.invalidate();
 			sesiones.remove(sesionId);
-			context.setAttribute(Constantes.ATT_LISTA_SESIONES, sesiones);
+			context.setAttribute(Constantes.ATT_LISTADO_SESIONES, sesiones);
 			m.setMsg("Usuario Expulsado");
 			m.setType(Mensaje.MSG_TYPE_SUCCESS);
 		}else{

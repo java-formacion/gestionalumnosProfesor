@@ -23,7 +23,11 @@ public class AlumnoError extends Alumno{
 		super.setCodigo(codigo);
 
 	}
-
-	
+	@Override
+	public void setDni(String dni) throws CandidatoException {
+		// TODO Auto-generated method stub
+		//super.setDni(dni);
+		this.dni = dni;
+	}
 
 }

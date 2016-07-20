@@ -5,7 +5,7 @@ import com.ipartek.formacion.pojo.exception.CandidatoException;
 public class Alumno extends Candidato implements Comparable<Alumno>{
 	private Curso curso;
 
-	public Alumno() throws CandidatoException {
+	public Alumno()  {
 		super();
 		this.curso = new Curso();
 	}

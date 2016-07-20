@@ -14,7 +14,7 @@ public interface AlumnoService {
 	 * Delete
 	 * 
 	 */
-	 Alumno createAlumno(Alumno alumno);
+	public Alumno createAlumno(Alumno alumno);
 	
 	public Alumno getById(int codigo);
 	

@@ -83,7 +83,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		HttpSession session = se.getSession();
 		ServletContext context = session.getServletContext();
 
-		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTA_USUARIOS);
+		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LIST_USUARIOS);
 
 		//si es la primera vez que se loguea alguien
 		if(usuarios == null){
@@ -91,7 +91,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		}
 		user = (Usuario)session.getAttribute(Constantes.ATT_USUARIO);
 		usuarios.add(user);
-		context.setAttribute(Constantes.ATT_LISTA_USUARIOS, usuarios);
+		context.setAttribute(Constantes.ATT_LIST_USUARIOS, usuarios);
 		log.info(user.getUserName());
 	}
 	private void addSession(HttpSessionBindingEvent se) {
@@ -102,7 +102,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		HttpSession session = se.getSession();
 		ServletContext context = session.getServletContext();
 		sesiones.put(session.getId(), session);
-		context.setAttribute(Constantes.ATT_LISTA_SESIONES,sesiones);
+		context.setAttribute(Constantes.ATT_LISTADO_SESIONES,sesiones);
 	}
 	/**
 	 * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
@@ -120,7 +120,7 @@ public class SessionListener implements HttpSessionListener, HttpSessionAttribut
 		List<Usuario> usuarios = null;
 		HttpSession session = se.getSession();
 		ServletContext context = session.getServletContext();
-		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LISTA_USUARIOS);
+		usuarios = (List<Usuario>) context.getAttribute(Constantes.ATT_LIST_USUARIOS);
 		Usuario user = (Usuario) se.getValue();
 		if(removeList(usuarios,user)){
 			log.info("usuario deslogeado");
