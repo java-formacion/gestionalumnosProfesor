@@ -39,8 +39,8 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso getById(int codigo) {
-		String sql = "SELECT codCurso, c.nombre as 'nombreCurso', codPatrocinador, codTipoCurso, t.nombre as 'nombreTipoCurso' "
-				+ "FROM curso c INNER JOIN tipocurso t ON t.codTipoCurso=c.codTipoCurso " + "WHERE codCurso=codigo";
+		String sql = "SELECT codCurso, c.nombre as 'nCurso', codPatrocinador, c.codTipoCurso, t.nombre as 'nombreTipoCurso' "
+				+ "FROM curso c INNER JOIN tipocurso t ON t.codTipoCurso=c.codTipoCurso " + "WHERE codCurso=" + codigo;
 		Connection conexion = myConexion.getConexion();
 		Curso curso = null;
 		try {
@@ -54,7 +54,7 @@ public class CursoDAOImp implements CursoDAO {
 		} finally {
 			myConexion.desconectar();
 		}
-		return null;
+		return curso;
 	}
 
 	private Curso parseCurso(ResultSet rs) {
@@ -64,6 +64,7 @@ public class CursoDAOImp implements CursoDAO {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
 			curso.setReferencia(rs.getString("codPatrocinador"));
+			curso.getTipo().setCodigo(rs.getInt("codTipoCurso"));
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		}
@@ -108,7 +109,7 @@ public class CursoDAOImp implements CursoDAO {
 			// cSmt.setInt("codigo", alumno.getCodigo());//el codigo NO se
 			// pasa!!!
 			cSmt.setString("nombre", curso.getNombre());
-			cSmt.setString("codReferencia", curso.getReferencia());
+			cSmt.setString("codPatrocinador", curso.getReferencia());
 			cSmt.setInt("codTipoCurso", curso.getTipo().getCodigo());
 			cSmt.executeUpdate();
 			cur = curso;

@@ -2,7 +2,6 @@ package com.ipartek.formacion.dbms.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 	@Override
 	public Alumno getById(int codigo) {
 		// TODO es singleton pq va a tener el atributo q es la conexion
-		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, tfno, fechaNacim, dni_nie, codGenero, g.nombre as 'nGenero'"
+		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, telefono, fNacimiento, dni_nie, codGenero, g.nombre as 'nGenero'"
 				+ " FROM alumno a INNER JOIN genero g ON g.codGenero=a.codGenero WHERE codAlumno=" + codigo;
 		// ConexionDB dbConnection = ConexionDBImp.getInstance();
 		// myConexion.conectar();
@@ -70,6 +69,10 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			alumno.setNombre(rs.getString("nAlumno"));
 			alumno.setApellidos(rs.getString("apellidos"));
 			alumno.setDni(rs.getString("dni_nie"));
+			alumno.setTfno(rs.getString("telefono"));
+			alumno.setEmail(rs.getString("email"));
+			alumno.setfNacimiento(rs.getDate("fNacimiento"));
+			alumno.getGenero().setCodigo(rs.getInt("codGenero"));
 		} catch (SQLException e) {
 			LOG.fatal(e.getMessage());
 		} catch (CandidatoException e) {
@@ -90,8 +93,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			cSmt.setInt("codigo", alumno.getCodigo());
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
-			cSmt.setString("dni_nie", alumno.getDni());
-			cSmt.setDate("fNacimiento", new java.sql.Date(alumno.getfNacimiento().getTime()));
+			cSmt.setString("dni", alumno.getDni());
+			cSmt.setDate("fecha", new java.sql.Date(alumno.getfNacimiento().getTime()));
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTfno());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
@@ -120,8 +123,12 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			// pasa!!!
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
-			cSmt.setString("dni_nie", alumno.getDni());
-			cSmt.setDate("fNacimiento", (Date) alumno.getfNacimiento());
+			cSmt.setString("dni", alumno.getDni());
+			cSmt.setDate("fecha", new java.sql.Date(alumno.getfNacimiento().getTime()));// saca
+																						// la
+																						// fecha
+																						// de
+																						// hoy
 			cSmt.setString("email", alumno.getEmail());
 			cSmt.setString("telefono", alumno.getTfno());
 			cSmt.setInt("codGenero", alumno.getGenero().getCodigo());

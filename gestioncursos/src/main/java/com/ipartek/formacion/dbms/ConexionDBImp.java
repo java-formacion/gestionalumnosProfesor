@@ -39,12 +39,12 @@ public class ConexionDBImp implements ConexionDB {
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/gestioncursos";
-		String user = "ususario";
+		String user = "usuario";
 		String password = "bd_usuario";
 		if (conexion == null) {
 			try {
 				Class.forName(driver);// registra la libreria de la bbdd
-				conexion = DriverManager.getConnection(url);
+				conexion = DriverManager.getConnection(url, user, password);
 			} catch (ClassNotFoundException e) {
 				LOG.error(e.getMessage());
 			} catch (SQLException e) {

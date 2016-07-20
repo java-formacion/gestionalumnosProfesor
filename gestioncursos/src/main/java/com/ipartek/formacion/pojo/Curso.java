@@ -7,25 +7,27 @@ public class Curso {
 	public static final int CODIGO_CURSO = -1;
 	private int codigo;
 	private String nombre;
-	private Map<Integer,Modulo>modulos;
-	private Map<String,Alumno>alumnos;
+	private Map<Integer, Modulo> modulos;
+	private Map<String, Alumno> alumnos;
 	private TipoCurso tipo;
 	private String referencia;
-	/*Mapa de Alumnos dni (String)
-	 * ServiceCurso(I) ---> Imp darDeAlta (int codigo,Alumno alumno) void
-	 * 					---> Imp darDeBaja	(int codigo,String dni) void
+
+	/*
+	 * Mapa de Alumnos dni (String) ServiceCurso(I) ---> Imp darDeAlta (int
+	 * codigo,Alumno alumno) void ---> Imp darDeBaja (int codigo,String dni)
+	 * void
 	 * 
 	 */
 	public Curso() {
 		super();
 		setCodigo(CODIGO_CURSO);
 		setNombre("");
-		modulos = new HashMap<Integer,Modulo>();
+		modulos = new HashMap<Integer, Modulo>();
 		alumnos = new HashMap<String, Alumno>();
 		tipo = TipoCurso.LANBIDE;
 		setReferencia("");
 	}
-	
+
 	public Map<String, Alumno> getAlumnos() {
 		return alumnos;
 	}
@@ -61,12 +63,15 @@ public class Curso {
 	public int getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -74,14 +79,14 @@ public class Curso {
 	@Override
 	public boolean equals(Object obj) {
 		boolean igual = false;
-		if(obj instanceof Curso){
-			//Curso c = (Curso) obj;
-			if(((Curso) obj).getCodigo()==this.codigo){
+		if (obj instanceof Curso) {
+			// Curso c = (Curso) obj;
+			if (((Curso) obj).getCodigo() == this.codigo) {
 				igual = true;
 			}
-			
+
 		}
 		return igual;
 	}
-	
+
 }

@@ -9,47 +9,61 @@ import com.ipartek.formacion.pojo.Idioma;
 import com.ipartek.formacion.pojo.TipoCurso;
 
 public class Util {
+
+	/**
+	 * 
+	 */
+	private Util() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	private static final int LONGITUD_DNI = 9;
-	public static boolean validarDni(String dni){
+
+	public static boolean validarDni(String dni) {
 		boolean valido = false;
 		dni = dni.toUpperCase();
 
-		int nDni = Integer.parseInt(dni.substring(0, LONGITUD_DNI-1));
-		char lDni = dni.substring(dni.length()-2, dni.length()-1).charAt(0);
-		if(calcularLetra(nDni)==lDni){
+		int nDni = Integer.parseInt(dni.substring(0, LONGITUD_DNI - 1));
+		char lDni = dni.substring(dni.length() - 2, dni.length() - 1).charAt(0);
+		if (calcularLetra(nDni) == lDni) {
 			valido = true;
 		}
 
 		return valido;
 	}
-	private static char calcularLetra(int nDni){
+
+	private static char calcularLetra(int nDni) {
 		char letra = 0;
-		final char [] letras = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'};
+		final char[] letras = { 'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'Z', 'S', 'Q', 'V',
+				'H', 'L', 'C', 'K', 'E', 'T' };
 		letra = letras[nDni % letras.length];
 		return letra;
 	}
-	public static Genero parseGenero(String genero){
+
+	public static Genero parseGenero(String genero) {
 		Genero aux = Genero.MASCULINO;
 		int codigo = Integer.parseInt(genero);
-		if(codigo== Genero.FEMENINO.getCodigo()){
+		if (codigo == Genero.FEMENINO.getCodigo()) {
 			aux = Genero.FEMENINO;
 		}
 		return aux;
 	}
-	public static DuracionModulo parseDuracion(String duracion){
+
+	public static DuracionModulo parseDuracion(String duracion) {
 		DuracionModulo d = DuracionModulo.HORAS15;
 		int codigo = Integer.parseInt(duracion);
 
-		if(codigo==DuracionModulo.HORAS20.getCodigo()){
+		if (codigo == DuracionModulo.HORAS20.getCodigo()) {
 			d = DuracionModulo.HORAS20;
-		}else{
-			if(codigo== DuracionModulo.HORAS45.getCodigo()){
+		} else {
+			if (codigo == DuracionModulo.HORAS45.getCodigo()) {
 				d = DuracionModulo.HORAS45;
-			}else{
-				if(codigo== DuracionModulo.HORAS80.getCodigo()){
+			} else {
+				if (codigo == DuracionModulo.HORAS80.getCodigo()) {
 					d = DuracionModulo.HORAS80;
-				}else{
-					if(codigo== DuracionModulo.HORAS90.getCodigo()){
+				} else {
+					if (codigo == DuracionModulo.HORAS90.getCodigo()) {
 						d = DuracionModulo.HORAS90;
 					}
 
@@ -59,47 +73,45 @@ public class Util {
 
 		return d;
 	}
-	
-	public static TipoCurso parseTipoCurso(String codigo){
+
+	public static TipoCurso parseTipoCurso(String codigo) {
 		TipoCurso tipo = TipoCurso.LANBIDE;
 		int cod = Integer.parseInt(codigo);
-		if(TipoCurso.FUNDACION_TRIPARTITA.getCodigo()==cod){
+		if (TipoCurso.FUNDACION_TRIPARTITA.getCodigo() == cod) {
 			tipo = TipoCurso.FUNDACION_TRIPARTITA;
-		}else {
-			if(TipoCurso.HOBETUZ.getCodigo()==cod){
+		} else {
+			if (TipoCurso.HOBETUZ.getCodigo() == cod) {
 				tipo = TipoCurso.HOBETUZ;
 			}
 		}
 
-
 		return tipo;
 	}
-	
-	public static Idioma parseIdioma(String codigo){
+
+	public static Idioma parseIdioma(String codigo) {
 		Idioma idioma = Idioma.INGLES;
 		int cod = Integer.parseInt(codigo);
-		if(Idioma.EUSKERA.getCodigo()==cod){
+		if (Idioma.EUSKERA.getCodigo() == cod) {
 			idioma = Idioma.EUSKERA;
-		}else {
-			if(Idioma.CASTELLANO.getCodigo()==cod){
+		} else {
+			if (Idioma.CASTELLANO.getCodigo() == cod) {
 				idioma = Idioma.CASTELLANO;
 			}
 		}
 
-
 		return idioma;
 	}
-	
-	public static List<Idioma> parseIdioma(String[] idiomas){
+
+	public static List<Idioma> parseIdioma(String[] idiomas) {
 		List<Idioma> aux = null;
 		aux = new ArrayList<Idioma>();
 		for (String idioma2 : idiomas) {
 			Idioma idioma = Idioma.CASTELLANO;
 			int codigoIdioma = Integer.parseInt(idioma2);
-			if(codigoIdioma == Idioma.EUSKERA.getCodigo()){
+			if (codigoIdioma == Idioma.EUSKERA.getCodigo()) {
 				idioma = Idioma.EUSKERA;
-			}else{
-				if(codigoIdioma==Idioma.INGLES.getCodigo()){
+			} else {
+				if (codigoIdioma == Idioma.INGLES.getCodigo()) {
 					idioma = Idioma.INGLES;
 				}
 			}
@@ -107,15 +119,15 @@ public class Util {
 		}
 		return aux;
 	}
-	public static boolean tryParseInt(String cadena){
+
+	public static boolean tryParseInt(String cadena) {
 		boolean exito = true;
 
 		try {
 			Integer.parseInt(cadena);
-		} catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			exito = false;
 		}
 		return exito;
 	}
 }
-

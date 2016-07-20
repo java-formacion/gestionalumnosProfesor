@@ -30,36 +30,39 @@ public class AlumnoServlet extends HttpServlet {
 	private int id = -1;
 	private RequestDispatcher rd = null;
 	private AlumnoService aService = AlumnoServiceImp.getInstance();
-	private CursoService cService = new CursoServiceImp();
+	private CursoService cService = CursoServiceImp.getInstance();
 	private List<Alumno> alumnos = null;
 	private Alumno alumno = null;
 	private int operacion = -1;
 	private static final Logger log = Logger.getLogger(AlumnoServlet.class);
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
 
 			recogerId(request);
 			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
-			if(id < 0){//REDIGIRIMOS PARA UN CREATE
+			if (id < 0) {// REDIGIRIMOS PARA UN CREATE
 				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
-			}else{//REDIGIMOS PARA UNA UPDATE
+			} else {// REDIGIMOS PARA UNA UPDATE
 				getById(request);
 			}
 
-		}catch(Exception e){
+		} catch (Exception e) {
 			getAll(request);
 		}
 		rd.forward(request, response);
 	}
 
 	private void recogerId(HttpServletRequest request) {
-		//if(Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
+		// if(Util.tryParseInt(request.getParameter(Constantes.PAR_CODIGO))){
 		id = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
-		//}
+		// }
 
 	}
 
@@ -76,13 +79,15 @@ public class AlumnoServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String op = request.getParameter(Constantes.PAR_OPERACION);
 		try {
-			if(Util.tryParseInt(op)){
+			if (Util.tryParseInt(op)) {
 				operacion = Integer.parseInt(op);
 			}
 
@@ -103,11 +108,11 @@ public class AlumnoServlet extends HttpServlet {
 				break;
 			}
 			getAll(request);
-		} catch (NumberFormatException e){
+		} catch (NumberFormatException e) {
 
-		} catch(NullPointerException e){
+		} catch (NullPointerException e) {
 
-		} catch(CandidatoException e){
+		} catch (CandidatoException e) {
 			try {
 				AlumnoError alumnoError = new AlumnoError();
 				alumnoError = recogerDatosError(request);
@@ -119,9 +124,7 @@ public class AlumnoServlet extends HttpServlet {
 				e1.printStackTrace();
 			}
 
-
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			log.error(e.getMessage());
 
 		}
@@ -161,8 +164,3 @@ public class AlumnoServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-

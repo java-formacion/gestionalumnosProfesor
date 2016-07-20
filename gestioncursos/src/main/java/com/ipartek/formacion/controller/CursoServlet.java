@@ -31,28 +31,31 @@ public class CursoServlet extends HttpServlet {
 	private int id = -1;
 	private int operacion = -1;
 	private RequestDispatcher rd = null;
-	private CursoService cService = new CursoServiceImp();
+	private CursoService cService = CursoServiceImp.getInstance();
 	private AlumnoService aService = AlumnoServiceImp.getInstance();
-	private ModuloService  mService = new ModuloServiceImp();
+	private ModuloService mService = new ModuloServiceImp();
 	private List<Curso> cursos = null;
 	private Curso curso = null;
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		try{
+		try {
 			recogerId(request);
 			request.setAttribute(Constantes.ATT_LISTADO_MODULOS, mService.getAll());
 			request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, aService.getAll());
-			if(id<0){
+			if (id < 0) {
 				rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
-			}else{
+			} else {
 				getById(request);
 			}
 
-		} catch(Exception e){
+		} catch (Exception e) {
 			getAll(request);
 		}
 		rd.forward(request, response);
@@ -75,18 +78,20 @@ public class CursoServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Procesaremos el DELETE, UPDATE y CREATE
-		//1º recoger datos del objeto curso
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Procesaremos el DELETE, UPDATE y CREATE
+		// 1º recoger datos del objeto curso
 		String op = request.getParameter(Constantes.PAR_OPERACION);
-		try{
+		try {
 
 			operacion = Integer.parseInt(op);
 
-			switch(operacion){
+			switch (operacion) {
 			case Constantes.OP_CREATE:
 				recogerDatos(request);
 				cService.create(curso);
@@ -100,8 +105,8 @@ public class CursoServlet extends HttpServlet {
 				cService.update(curso);
 				break;
 			}
-		} catch (NumberFormatException e){
-			//TODO alguien nos toquetea los argumentos del form
+		} catch (NumberFormatException e) {
+			// TODO alguien nos toquetea los argumentos del form
 		}
 
 		getAll(request);
@@ -122,20 +127,27 @@ public class CursoServlet extends HttpServlet {
 		String codTipocurso = request.getParameter(Constantes.PAR_TIPOCURSO);
 		TipoCurso tipo = Util.parseTipoCurso(codTipocurso);
 		curso.setTipo(tipo);
-		//metodo para cargar el mapa de alumnos
+		// metodo para cargar el mapa de alumnos
 		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTADO_ALUMNOS);
-		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
+		Map<String, Alumno> alumnos = null;
+		if (codAlumnos != null) {
+			alumnos = getAlumnos(codAlumnos);
+		}
 		curso.setAlumnos(alumnos);
-		//metodo para cargar el mapa de modulos
+		// metodo para cargar el mapa de modulos
 		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTADO_MODULOS);
-		Map<Integer,Modulo> modulos = getModulos(codModulos);
+		Map<Integer, Modulo> modulos = null;
+		if (codModulos != null) {
+			modulos = getModulos(codModulos);
+		}
+
 		curso.setModulos(modulos);
 	}
 
 	private Map<Integer, Modulo> getModulos(String[] codModulos) {
-		Map<Integer,Modulo> modulos = null;
+		Map<Integer, Modulo> modulos = null;
 		modulos = new HashMap<Integer, Modulo>();
-		for(String codModulo: codModulos){
+		for (String codModulo : codModulos) {
 			Modulo modulo = null;
 			int codigo = Integer.parseInt(codModulo);
 			modulo = mService.getById(codigo);
