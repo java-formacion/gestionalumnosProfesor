@@ -10,6 +10,9 @@ import com.ipartek.formacion.pojo.TipoCurso;
 
 public class Util {
 
+  private Util() {
+  }
+
   private static final int LONGITUD_DNI = 9;
 
   public static boolean validarDni(String dni) {
