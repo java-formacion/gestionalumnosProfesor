@@ -1,6 +1,5 @@
 package com.ipartek.formacion.pojo;
 
-
 public class Alumno extends Candidato implements Comparable<Alumno> {
 	private Curso curso;
 
@@ -39,6 +38,15 @@ public class Alumno extends Candidato implements Comparable<Alumno> {
 			}
 		}
 		return igual;
+	}
+
+	@Override
+	public String toString() {
+		return "Alumno [curso=" + curso + ", codigo=" + codigo + ", nombre="
+				+ nombre + ", apellidos=" + apellidos + ", fNacimiento="
+				+ fNacimiento + ", dni=" + dni + ", nota=" + nota + ", genero="
+				+ genero + ", telefono=" + telefono + ", email=" + email
+				+ ", idiomas=" + idiomas + "]";
 	}
 
 }
