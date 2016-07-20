@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.service.i18n.I18n"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -12,6 +13,15 @@
 		
 <!-- JQUERY LIBRARY 1.11.3  -->
 <script src="js/jquery.min.js"></script>
+
+<c:set var="language" value="en_EN"/>
+<c:set var="language" value="<%=I18n.getBrowserLocale(response.getLocale()) %>"/>
+
+<c:set var="language" value="${sessionScope.usuario.idioma.locale}" scope="page"/>
+
+<c:set var="localeCode" value="${response.locale}"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.ipartek.formacion.service.i18n.i18nmesages"/>
 
 <main>
 		<!--  
@@ -33,8 +43,8 @@
 		        		}
 					%>
 		        
-		        	<h2>Bienvenido <%= username %></h2>
-		           	Bienvenidos a la pagina de Gestion de Alumnos de Ipartek
+		        	<h2><fmt:message key="index.bienvenido"/> <%= username %></h2>
+		           <fmt:message key="index.mensajebienvenida"/>
 		        </div>
 
 		       	<%

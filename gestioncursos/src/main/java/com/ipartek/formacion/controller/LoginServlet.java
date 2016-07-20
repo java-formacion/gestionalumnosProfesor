@@ -69,7 +69,6 @@ public class LoginServlet extends HttpServlet {
 		Idioma idioma = null;
 		try{
 			String codIdioma = request.getParameter(Constantes.PAR_LANGUAGE);
-			log.trace(codIdioma);
 			idioma = Util.parseIdioma(codIdioma);
 		} catch(Exception e){
 			log.error(e.getMessage());

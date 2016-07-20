@@ -40,5 +40,12 @@ public class Alumno extends Candidato implements Comparable<Alumno>{
 		}
 		return igual;
 	}
+
+	@Override
+	public String toString() {
+		return "Alumno [curso=" + curso + ", codigo=" + codigo + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", fNacimiento=" + fNacimiento + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono
+				+ ", nota=" + nota + ", genero=" + genero + ", idiomas=" + idiomas + "]";
+	}
 	
 }

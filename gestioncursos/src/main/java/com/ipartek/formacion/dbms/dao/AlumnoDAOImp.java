@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Alumno;
+import com.ipartek.formacion.pojo.Genero;
+import com.ipartek.formacion.pojo.exception.CandidatoException;
 
 public class AlumnoDAOImp implements AlumnoDAO {
 	
@@ -100,16 +103,30 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			alumno.setCodigo(rs.getInt("codAlumno"));
 			alumno.setNombre(rs.getString("nAlumno"));
 			alumno.setApellidos(rs.getString("apellidos"));
-			
-			/*
-			alumno.setDni(rs.getString("dni_nie"));
-			alumno.setfNacimiento(rs.getDate("fNacimiento"));
+			try {
+				alumno.setDni(rs.getString("dni_nie"));
+				alumno.setfNacimiento(rs.getDate("fNacimiento"));
+			} catch (CandidatoException e) {
+				LOG.fatal("Error " + e.getMessage());
+			}
 			alumno.setEmail(rs.getString("email"));
 			alumno.setTelefono(rs.getString("telefono"));
-			alumno.setGenero(rs.getInt("nGenero"));
-			*/
+			
+			int codGene = rs.getInt("codGenero");
+			
+			if(codGene == Genero.MASCULINO.getCodigo()){
+				alumno.setGenero(Genero.MASCULINO);
+			} else{
+				if(codGene == Genero.FEMENINO.getCodigo()){
+					alumno.setGenero(Genero.FEMENINO);
+				} else{
+					if(codGene == Genero.OTRO.getCodigo()){
+						alumno.setGenero(Genero.OTRO);
+					}
+				}
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.fatal("Error: " + e.getMessage());
 		} 
 		
 		return alumno;
@@ -125,6 +142,8 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
 			
+			LOG.trace(alumno.toString());
+			
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());
 			cSmt.setDate("fNacimiento", new java.sql.Date(alumno.getfNacimiento().getTime()));
@@ -137,9 +156,14 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			alum = alumno;
 			alum.setCodigo(cSmt.getInt("codigo"));
 			
+			LOG.trace(alumno.toString());
+			
 		} catch (SQLException e) {
 			LOG.fatal("Error - SQLException: " + e.getMessage());
-		} finally{
+		} catch (NullPointerException e){
+			LOG.fatal(e.getMessage());
+		}
+		finally{
 			myConexion.desconectar();
 		}
 		
@@ -155,7 +179,7 @@ public class AlumnoDAOImp implements AlumnoDAO {
 		
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			
+			LOG.trace(alumno.toString());
 			cSmt.setInt("codigo", alumno.getCodigo());
 			cSmt.setString("nombre", alumno.getNombre());
 			cSmt.setString("apellidos", alumno.getApellidos());

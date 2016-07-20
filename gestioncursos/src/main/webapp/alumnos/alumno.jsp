@@ -111,6 +111,32 @@
 					 />
 			</div>
 			
+			<div class="form-group">
+				<label for="<%= Constantes.PAR_EMAIL %>">Email: </label>
+					
+				<input type="text" 
+					name="<%= Constantes.PAR_EMAIL %>" 
+					id="<%= Constantes.PAR_EMAIL %>"
+					value="<%= alumno.getEmail() %>"
+					size="20"
+					class="form-control"
+					placeholder="Email del alumno"
+					 />
+			</div>	
+			
+			<div class="form-group">
+				<label for="<%= Constantes.PAR_TELEFONO %>">Telefono: </label>
+					
+				<input type="text" 
+					name="<%= Constantes.PAR_TELEFONO %>" 
+					id="<%= Constantes.PAR_TELEFONO %>"
+					value="<%= alumno.getTelefono() %>"
+					size="20"
+					class="form-control"
+					placeholder="Telefono del alumno"
+					 />
+			</div>
+			
 			<div class="form-group form-inline">
 				<label for="<%= Constantes.PAR_DNI %>">Fecha: </label>
 				

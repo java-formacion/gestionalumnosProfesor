@@ -50,6 +50,8 @@ public class Constantes {
 	public final static String PAR_TIPO_CURSO = "tipocurso";
 	public final static String PAR_MODULO = "modulo";
 	public final static String PAR_REFERENCIA = "referencia";
+	public final static String PAR_EMAIL = "email";
+	public final static String PAR_TELEFONO = "telefono";
 	
 	public final static String PAR_SESSIONID = "sessionid";
 	

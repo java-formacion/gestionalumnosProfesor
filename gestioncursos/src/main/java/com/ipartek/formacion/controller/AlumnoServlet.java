@@ -211,6 +211,12 @@ public class AlumnoServlet extends HttpServlet {
 		Curso curso = new Curso();
 		curso.setCodigo(Integer.parseInt(idCurso));
 		alumno.setCurso(curso);
+		
+		String email = request.getParameter(Constantes.PAR_EMAIL);
+		alumno.setEmail(email);
+		
+		String telefono = request.getParameter(Constantes.PAR_TELEFONO);
+		alumno.setTelefono(telefono);
 	}
 
 }
