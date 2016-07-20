@@ -10,15 +10,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
+
 <main>
 	<%
 		Alumno alumno = (Alumno) request.getAttribute(Constantes.ATT_ALUMNO);
 		int op = -1;
 		String tGuardar = "";
 		if(alumno!=null){
+			%><label class="col-xs-2"%>guardar:</label><%
 			tGuardar = "guardar";
 			op = Constantes.OP_UPDATE;
-		}else{
+		}else{%>
+		<label class="col-xs-2"%>crear:</label><% 
 			op = Constantes.OP_CREATE;
 			tGuardar ="crear nuevo";
 			alumno = new Alumno();

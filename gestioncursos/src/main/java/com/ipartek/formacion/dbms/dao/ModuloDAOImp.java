@@ -40,7 +40,7 @@ public class ModuloDAOImp implements ModuloDAO {
 
 	@Override
 	public Modulo getByID(int codigo) {
-		String sql = "SELECT codmodulo, nombre, uFormativa, duracion" + "FROM modulo" + "WHERE codModulo =" + codigo;
+		String sql = "SELECT codModulo, nombre, uFormativa, duracion " + "FROM modulo " + "WHERE codModulo =" + codigo;
 
 		myconexion.conectar();
 		Connection conexion = myconexion.getConexion();
@@ -69,15 +69,17 @@ public class ModuloDAOImp implements ModuloDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			cSmt.setString("nombre", mod.getNombre());
-			cSmt.setInt("duracion", mod.getDuracion().getDuracion());
-			cSmt.setString("uFormativa", mod.getReferencia());
+			LOG.trace(modulo.getCodigo());
+			cSmt.setInt("codigo", modulo.getCodigo());
+			cSmt.setString("nombre", modulo.getNombre());
+			cSmt.setString("uFormativa", modulo.getReferencia());
+			cSmt.setInt("duracion", modulo.getDuracion().getDuracion());
 
 			cSmt.executeUpdate();
 			mod = modulo;
 
 		} catch (SQLException e) {
-			mod = getByID(mod.getCodigo());
+			mod = getByID(modulo.getCodigo());
 			LOG.fatal(e.getMessage());
 		} finally {
 			myconexion.desconectar();
@@ -94,9 +96,9 @@ public class ModuloDAOImp implements ModuloDAO {
 
 		try {
 			CallableStatement cSmt = conection.prepareCall(sql);
-			cSmt.setString("nombre", mod.getNombre());
-			cSmt.setInt("duracion", mod.getDuracion().getDuracion());
-			cSmt.setString("uFormativa", mod.getReferencia());
+			cSmt.setString("nombre", modulo.getNombre());
+			cSmt.setInt("duracion", modulo.getDuracion().getDuracion());
+			cSmt.setString("uFormativa", modulo.getReferencia());
 
 			cSmt.executeUpdate();
 			modulo.setCodigo(cSmt.getInt("codigo"));
@@ -154,8 +156,20 @@ public class ModuloDAOImp implements ModuloDAO {
 	}
 
 	private Modulo parseModulo(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		Modulo modulo = null;
+		modulo = new Modulo();
+		try {
+			modulo.setCodigo(rs.getInt("codModulo"));
+			modulo.setNombre(rs.getString("nombre"));
+			modulo.setReferencia(rs.getString("uFormativa"));
+			int horas = rs.getInt("duracion");
+			// modulo.setDuracion(Horas);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			LOG.fatal(e.getMessage());
+		}
+
+		return modulo;
 	}
 
 }

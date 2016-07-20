@@ -39,9 +39,9 @@ public class CursoDAOImp implements CursoDAO {
 
 	@Override
 	public Curso getByID(int codigo) {
-		String sql = "SELECT codCurso, c.nombre as 'nCurso', p.nombre as'pNombre', tc.nombre as 'tcNombre'"
-				+ "FROM alumno c " + "INNER JOIN tipoCurso tc ON c.codTipoCurso=tc.codTipoCurso"
-				+ "INNER JOIN patrocinador p ON c.codPatrocinador=p.codPatrocinador" + "WHERE codCurso =" + codigo;
+		String sql = "SELECT codCurso, c.nombre as 'nCurso', codPatrocinador, tc.nombre as 'tcNombre'"
+				+ "FROM alumno c " + "INNER JOIN tipoCurso tc ON c.codTipoCurso=tc.codTipoCurso" + "WHERE codCurso ="
+				+ codigo;
 
 		myconexion.conectar();
 		Connection conexion = myconexion.getConexion();
@@ -68,7 +68,7 @@ public class CursoDAOImp implements CursoDAO {
 			curso.setCodigo(rs.getInt("codCurso"));
 			curso.setNombre(rs.getString("nCurso"));
 			// curso.setTc(rs.getInt("nTipoCurso"));
-			// curso.setPatrocinador(rs.getInt("nPatrocinador"));
+			curso.setReferencia(rs.getString("codPatrocinador"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			LOG.fatal(e.getMessage());

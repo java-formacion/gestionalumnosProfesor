@@ -40,8 +40,8 @@ public class ConexionDBImp implements ConexionDB {
 	public void conectar() {
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/gestioncursos";
-		String user = "Stukov";
-		String password = "pass";
+		String user = "josu";
+		String password = "josu";
 
 		if (conexion == null) {
 			try {

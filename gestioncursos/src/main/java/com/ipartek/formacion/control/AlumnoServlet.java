@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.control.exception.AlumnoError;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
@@ -28,13 +27,13 @@ import com.ipartek.formacion.services.Util;
 public class AlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
-	private CursoService cService = CursoServiceImp.getInstance();
 	private RequestDispatcher rd = null;
+	private CursoService cService = CursoServiceImp.getInstance();
 	private AlumnoService aService = AlumnoServiceImp.getInstance();
 	private List<Alumno> alumnos = null;
 	private Alumno alumno = null;
 	private int operacion = -1;
-	private final static Logger Log = Logger.getLogger(AlumnoServlet.class);
+	private final static Logger LOG = Logger.getLogger(AlumnoServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,12 +45,17 @@ public class AlumnoServlet extends HttpServlet {
 		try {
 
 			recogerId(request);
+			LOG.trace("primer id " + id);
+			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
+			LOG.trace("segundo id " + id);
 			if (id < 0) {// REDIGIRIMOS PARA UN CREATE
+
 				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
 			} else {// REDIGIMOS PARA UNA UPDATE
+				LOG.trace(id);
 				getById(request);
 			}
-			request.setAttribute(Constantes.ATT_LISTADO_CURSOS, cService.getAll());
+
 		} catch (Exception e) {
 			getAll(request);
 		}
@@ -73,6 +77,7 @@ public class AlumnoServlet extends HttpServlet {
 		alumno = aService.getById(id);
 		request.setAttribute(Constantes.ATT_ALUMNO, alumno);
 		rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
+		LOG.trace(id);
 	}
 
 	/**
@@ -91,6 +96,7 @@ public class AlumnoServlet extends HttpServlet {
 			case Constantes.OP_CREATE:
 				recogerDatosAlumno(request);
 				aService.createAlumno(alumno);
+				LOG.trace(alumno.toString());
 				break;
 			case Constantes.OP_DELETE:
 				aService.delete(id);
@@ -104,49 +110,14 @@ public class AlumnoServlet extends HttpServlet {
 			}
 			getAll(request);
 		} catch (NumberFormatException e) {
-			Log.error(e.getMessage());
+			LOG.error(e.getMessage());
 		} catch (NullPointerException e) {
-			Log.error(e.getMessage());
-		} catch (CandidatoException e) {
-			try {
-				Log.error(e.getMessage());
-				AlumnoError alumnoError = new AlumnoError();
-				alumnoError = recogerDatosError(request);
-				alumnoError.setMensaje(e.getMessage());
-				request.setAttribute(Constantes.ATT_ALUMNO, alumnoError);
-				rd = request.getRequestDispatcher(Constantes.JSP_ALUMNO);
-			} catch (CandidatoException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				Log.error(e1.getMessage());
-			}
-
+			LOG.error(e.getMessage());
 		} catch (Exception e) {
-			Log.error(e.getMessage());
+			LOG.error(e.getMessage());
 
 		}
 		rd.forward(request, response);
-	}
-
-	private AlumnoError recogerDatosError(HttpServletRequest request) throws CandidatoException {
-		AlumnoError alError = new AlumnoError();
-		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
-		String dni = request.getParameter(Constantes.PAR_DNI);
-		String apellidos = request.getParameter(Constantes.PAR_APELLIDOS);
-		String genero = request.getParameter(Constantes.PAR_GENERO);
-		String[] idiomas = request.getParameterValues(Constantes.PAR_IDIOMA);
-		String idCurso = request.getParameter(Constantes.PAR_CURSO);
-		List<Idioma> idi = Util.parseIdioma(idiomas);
-		Curso curso = new Curso();
-		curso.setCodigo(Integer.parseInt(idCurso));
-		alError.setCodigo(id);
-		alError.setNombre(nombre);
-		alError.setDni(dni);
-		alError.setApellidos(apellidos);
-		alError.setGenero(Util.parseGenero(genero));
-		alError.setIdiomas(idi);
-		alError.setCurso(curso);
-		return alError;
 	}
 
 	private void recogerDatosAlumno(HttpServletRequest request) throws CandidatoException {

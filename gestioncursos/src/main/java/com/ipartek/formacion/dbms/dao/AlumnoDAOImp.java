@@ -14,6 +14,7 @@ import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.excepciones.CandidatoException;
+import com.ipartek.formacion.services.Genero;
 
 public class AlumnoDAOImp implements AlumnoDAO {
 
@@ -41,9 +42,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 	@Override
 	public Alumno getByID(int codigo) {
-		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email, dni, fNacimiento, telefono, codGenero, g.nombre as 'nGenero'"
-				+ "FROM alumno a " + "INNER JOIN genero g ON g.codGenero=a.codGenero" + "WHERE codAlumno =" + codigo;
-
+		String sql = "SELECT codAlumno, a.nombre as 'nAlumno', apellidos, email,telefono,dni_nie,fNacimiento, codGenero, g.nombre as 'nGenero'"
+				+ " FROM alumno a " + "INNER JOIN genero g ON g.codGenero = a.codGenero" + " WHERE codAlumno ="
+				+ codigo;
 		myconexion.conectar();
 		Connection conexion = myconexion.getConexion();
 		Alumno alumno = null;
@@ -70,6 +71,9 @@ public class AlumnoDAOImp implements AlumnoDAO {
 			alumno.setNombre(rs.getString("nAlumno"));
 			alumno.setApellidos(rs.getString("apellidos"));
 			alumno.setfNacimiento(rs.getDate("fNacimiento"));
+			alumno.setDni(rs.getString("dni_nie"));
+			alumno.setGenero(Genero.MASCULINO);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			LOG.fatal(e.getMessage());
@@ -100,7 +104,6 @@ public class AlumnoDAOImp implements AlumnoDAO {
 
 			cSmt.executeUpdate();
 			alum = alumno;
-			// int nFilas = cSmt.executeUpdate();
 
 		} catch (SQLException e) {
 			alum = getByID(alumno.getCodigo());

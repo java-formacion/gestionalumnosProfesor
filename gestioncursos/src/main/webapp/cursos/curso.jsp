@@ -1,5 +1,5 @@
-<%@page import="java.util.Map"%>
 <%@page import="com.ipartek.formacion.pojo.Alumno"%>
+<%@page import="java.util.Map"%>
 <%@page import="com.ipartek.formacion.pojo.Modulo"%>
 <%@page import="com.ipartek.formacion.services.TipoCurso"%>
 <%@page import="com.ipartek.formacion.control.Constantes"%>
@@ -28,6 +28,7 @@
 		<%
 		if(curso!=null){
 		%>
+		<%=Constantes.SERVLET_CURSOS%>
 			<form name="formcurso" class="" id="formcurso" method='post' 
 				action="<%=Constantes.SERVLET_CURSOS%>">
 				<input type="hidden" 
@@ -45,95 +46,84 @@
 						name="<%=Constantes.PAR_NOMBRE%>" 
 						id="<%=Constantes.PAR_NOMBRE%>" 
 						value="<%=curso.getNombre() %>"
-						/>				
-				</div>
-				<div class="form-group">				
-				<label for="<%=Constantes.PAR_REFERENCIA%>">Referencia:</label>
-				<input type="text" 
-					name="<%=Constantes.PAR_REFERENCIA%>" 
-					id="<%=Constantes.PAR_REFERENCIA%>" 
-					value="<%=curso.getReferencia()%>"/>
+						/>
+					
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2">Tipo de curso</label>
-					<select name="<%=Constantes.PAR_TIPOCURSO%>">
-					<%
-					TipoCurso[] tipos = TipoCurso.values();
-					if(tipos!=null){
-						for(int i=0;i<tipos.length;i++){
+					<label class="col-xs-2">Tipo Curso:</label>
+					<div class="col-xs-10">
+						<select name="<%=Constantes.PAR_TIPOCURSO%>">
+						<% TipoCurso[] tipos = TipoCurso.values(); 
+						for(int i = 0; i < tipos.length; i++){
 							%>
-						<option <%= tipos[i].equals(curso.getTc()) ? "selected" : "" %> 
-						value="<%=tipos[i].getCodigo()%>"><%=tipos[i].getNombre() %></option>
+							<option <%=curso.getTc().equals(tipos[i]) ? "selected" : "" %> value="<%=tipos[i].getCodigo()%>">
+							<%=tipos[i].getNombre() %>
+							</option>
+							<%
+						}
+						
+						%>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-2">Modulos:</label>
+					<div class="col-xs-10">
+					<%
+					List<Modulo> modulos = (List<Modulo>)request.getAttribute(Constantes.ATT_LISTADO_MODULOS);
+					int nHoras = 0;
+					if(modulos!=null){
+						for(Modulo m: modulos){
+							Map<Integer,Modulo> mods = curso.getModulos();
+							String checked ="";
+							if(mods.containsKey(m.getCodigo())){
+								//esta = true;
+								checked= "checked";
+								nHoras += m.getDuracion().getDuracion();
+							}
+							
+							%>
+						<input type="checkbox" <%= checked %>name="<%=Constantes.PAR_LISTADO_MODULOS %>" value="<%=m.getCodigo()%>"/> <%=m.getNombre() %>
+						
 							<%
 						}
 					}
-					
 					%>
-					</select>
+					</div>
 				</div>
 				<div class="form-group">
-						<label class="col-xs-2">Seleccione modulos:</label>
-						<div class="col-xs-10">
-								<%
-								List<Modulo>modulos = (List<Modulo>) request.getAttribute(Constantes.ATT_LISTADO_MODULOS);
-								int nHoras = 0;
-								if (modulos!=null){
-									for (Modulo m: modulos){
-										Map <Integer,Modulo> mods =curso.getModulos();
-										boolean presente = false;
-										if (mods.containsKey(m.getCodigo())){
-											presente = true;
-											nHoras += m.getDuracion().getDuracion();
-										}%>
-										<input type="checkbox" name="<%=Constantes.PAR_LISTADO_MODULOS %>" id=""
-											<%= presente ? "checked" : "" %> 
-											 value="<%=m.getCodigo() %>"/> 
-											<%=m.getNombre() %>
-										<%
-									}
-								}else{%>
-									No hay modulos.
-								<%}
-								%>
-																			
-						</div>
+					<label class="col-xs-2">Alumnos:</label>
+					<div class="col-xs-10">
+					<%
+					List<Alumno>alumnos =  (List<Alumno>)request.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
+					if(alumnos!=null && alumnos.size()>0){
+						for(Alumno a: alumnos){
+							%>
+							<input <%= curso.getAlumnos().containsKey(a.getDni()) ? "checked" :""%> 
+								type="checkbox" name="<%=Constantes.PAR_LISTADO_ALUMNOS%>" 
+								value="<%=a.getCodigo()%>"
+								/> <%=a.getNombre() +" "+a.getApellidos() %>
+							<%
+						}
+					}else{
+						%>
+						No hay alumnos.
+						<%
+					}
+					%>
+					</div>
 				</div>
 				<div class="form-group">
-						<label class="col-xs-2">Seleccione alumnos:</label>
-						<div class="col-xs-10">
-							
-								
-								<%
-								List<Alumno>alumnos = (List<Alumno>) request.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
-								
-								if (alumnos!=null && alumnos.size()>0){
-									for (Alumno a: alumnos){
-										Map <String,Alumno> usuarios =curso.getAlumnos();
-										%>
-										<input type="checkbox" name="<%=Constantes.PAR_LISTADO_ALUMNOS %>" id=""
-											<%=curso.getAlumnos().containsKey(a.getDni()) ? "checked" : "" %> 
-											 value="<%=a.getCodigo() %>"/> 
-											<%=a.getNombre()+" "+ a.getApellidos() %>
-										<%
-									}
-								}else{%>
-									No hay alumnos.
-								<%}
-								%>
-																		
-						</div>
+					<label class="col-xs-2">Total Alumnos:</label>
+					<div class="col-xs-10">
+					<%=curso.getAlumnos().size() %> alumnos
+					</div>
 				</div>
 				<div class="form-group">
-						<label class="col-xs-2">Total alumnos:</label>
-						<div class="col-xs-10">
-						<%=curso.getAlumnos().size() %>
-						</div>
-				</div>
-				<div class="form-group">
-						<label class="col-xs-2">Total horas:</label>
-						<div class="col-xs-10">
-						<%=nHoras %>
-						</div>
+					<label class="col-xs-2">Total Horas:</label>
+					<div class="col-xs-10">
+					<%=nHoras %>
+					</div>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-success">
@@ -141,7 +131,10 @@
 					</button>
 				</div>
 			</form>
-
+			
+			
+			
+			
 			
 	<%	}
 		%>

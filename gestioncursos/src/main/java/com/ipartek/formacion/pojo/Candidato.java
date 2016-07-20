@@ -121,7 +121,7 @@ public class Candidato {
 	}
 
 	public void setDni(String dni) throws CandidatoException {
-		if (Util.validarDni(dni)) {
+		if (!Util.validarDni(dni)) {
 			throw new CandidatoException(CandidatoException.CODIGO_ERROR_DNI_INCORRECTO,
 					CandidatoException.MSG_ERROR_DNI_INCORRECTO);
 		} else {

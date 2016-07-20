@@ -2,6 +2,8 @@ package com.ipartek.formacion.services;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.dbms.dao.AlumnoDAO;
 import com.ipartek.formacion.dbms.dao.AlumnoDAOImp;
 import com.ipartek.formacion.pojo.Alumno;
@@ -9,6 +11,7 @@ import com.ipartek.formacion.pojo.Curso;
 
 public final class AlumnoServiceImp implements AlumnoService {
 	private static AlumnoServiceImp INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(AlumnoService.class);
 
 	private AlumnoDAO alumDAO;
 
@@ -40,7 +43,6 @@ public final class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public Alumno createAlumno(Alumno alumno) {
-
 		Alumno alum = alumDAO.insert(alumno);
 		return alum;
 	}

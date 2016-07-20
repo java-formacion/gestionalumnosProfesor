@@ -51,8 +51,9 @@ public final class CursoServiceImp implements CursoService {
 
 	@Override
 	public List<Curso> getAll() {
-
-		return curDAO.getAll();
+		List<Curso> cursos = null;
+		cursos = curDAO.getAll();
+		return cursos;
 	}
 
 	@Override
