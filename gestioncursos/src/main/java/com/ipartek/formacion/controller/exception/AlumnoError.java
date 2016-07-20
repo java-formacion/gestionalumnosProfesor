@@ -24,10 +24,9 @@ public class AlumnoError extends Alumno{
 
 	}
 	@Override
-	public void setDni(String dni) throws CandidatoException {
-		// TODO Auto-generated method stub
+public void setDni(String dni){
+		
 		//super.setDni(dni);
-		this.dni = dni;
+		this.dni=dni;
 	}
-
 }

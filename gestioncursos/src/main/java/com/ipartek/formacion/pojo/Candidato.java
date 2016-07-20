@@ -110,20 +110,14 @@ public class Candidato
 				return fNacimiento;
 			}
 		
-		public void setfNacimiento(Date fNacimiento) throws CandidatoException
-			{
-				if (fNacimiento.compareTo(new Date()) > 0)
-					{
-						throw new CandidatoException(
-								CandidatoException.CODIGO_ERROR_FECHA_NACIMIENTO,
-								CandidatoException.MSG_ERROR_FECHA_NACIMIENTO);
-					}
-				else
-					{
-						this.fNacimiento = fNacimiento;
-					}
+		public void setfNacimiento(Date fNacimiento){
+			if (fNacimiento.compareTo(new Date())>0) {
 				
+			}else {
+				this.fNacimiento = fNacimiento;
 			}
+			
+		}
 		
 		public String getTelefono()
 			{
@@ -145,17 +139,24 @@ public class Candidato
 				this.email = email;
 			}
 		
-		public String getDni()
-			{
-				return dni;
-			}
-		
-		public void setDni(String dni) throws CandidatoException
-			{
+		/**
+		 * @return the dni
+		 */
+		public String getDni() {
+			return dni;
+		}
+		/**
+		 * @param dni the dni to set
+		 */
+		public void setDni(String dni){
+			//Util.validarDni(dni)==false
+			if (false) {
 				
+			}else{
 				this.dni = dni;
-				
 			}
+			
+		}
 		
 		public Double getNota()
 			{

@@ -74,7 +74,7 @@ public class Constantes {
 	public final static String COOKIE_PASSWORD ="password";
 	public final static String COOKIE_NICKNAME ="nickname";
 	
-	public final static String DATABASE_NAME ="nombre";
-	public final static String DATABASE_PASS ="contraseña";
+	public final static String DATABASE_USER ="usuario";
+	public final static String DATABASE_PASS ="12345";
 
 }

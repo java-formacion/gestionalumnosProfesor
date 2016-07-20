@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.dbms.ConexionDB;
 import com.ipartek.formacion.dbms.ConexionDBImp;
 import com.ipartek.formacion.pojo.Alumno;
+import com.ipartek.formacion.pojo.Genero;
 
 public class AlumnoDAOImp implements AlumnoDAO
 	{
@@ -63,12 +64,13 @@ public class AlumnoDAOImp implements AlumnoDAO
 					{
 						CallableStatement cSmt = conexion.prepareCall(sql);
 						
-						cSmt.setInt("codigo", alumno.getCodigo());
-						cSmt.setString("", alumno.getNombre());
+						cSmt.setInt("codAlumno", alumno.getCodigo());
+						cSmt.setString("nomAlumno", alumno.getNombre());
 						cSmt.setString("apellidos", alumno.getApellidos());
 						cSmt.setString("dni_nie", alumno.getDni());
 						cSmt.setDate("fNacimiento",
-								new java.sql.Date(alumno.getfNacimiento().getTime()));
+								new java.sql.Date(alumno.getfNacimiento()
+										.getTime()));
 						cSmt.setString("email", alumno.getEmail());
 						cSmt.setString("telefono", alumno.getTelefono());
 						cSmt.setInt("codGenero", alumno.getGenero().getCodigo());
@@ -134,7 +136,16 @@ public class AlumnoDAOImp implements AlumnoDAO
 						alumno.setCodigo(rs.getInt("codAlumno"));
 						alumno.setNombre(rs.getString("nomAlumno"));
 						
-					}
+					
+						alumno.setApellidos(rs.getString("apellidos"));
+						alumno.setDni(rs.getString("dni_nie"));
+				            for (Genero g : Genero.values()) {
+				                if (g.getCodigo()==rs.getInt("codGenero")) {
+				                	alumno.setGenero(g);
+						
+						
+						
+					}}}
 				catch (SQLException e)
 					{
 						e.printStackTrace();
@@ -207,27 +218,23 @@ public class AlumnoDAOImp implements AlumnoDAO
 		@Override
 		public List<Alumno> getAll()
 			{
-				List<Alumno> alumnos = null;
+				List<Alumno> alumnos = new ArrayList<Alumno>();
 				String sql = "{call getAllAlumno()}";
-//				ConexionDB myConexion = ConexionDBImp.getInstance();
 				Connection conection = myConexion.getConexion();
 				try
 					{
-						Alumno alumno = null;
 						CallableStatement cSmt = conection.prepareCall(sql);
 						ResultSet rs = cSmt.executeQuery();
-						alumnos = new ArrayList<Alumno>();
+						
 						while (rs.next())
 							{
-								alumno = parseAlumno(rs);
-								alumnos.add(alumno);
+								alumnos.add(parseAlumno(rs));
 							}
-						
 					}
+				
 				catch (SQLException e)
 					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						LOG.fatal(e.getMessage());
 					}
 				finally
 					{
